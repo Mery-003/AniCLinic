@@ -10,16 +10,17 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
-    public partial class VerCarnet : Form
+    public partial class FormularioCarnet : Form
     {
-        public VerCarnet()
+        public FormularioCarnet()
         {
             InitializeComponent();
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnAggPaciente_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Carnet frm = new Carnet();
+            frm.Show();
         }
     }
 }

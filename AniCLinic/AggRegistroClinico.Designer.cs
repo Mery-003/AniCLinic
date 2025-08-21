@@ -292,6 +292,7 @@
             this.btnCancelar.Size = new System.Drawing.Size(91, 45);
             this.btnCancelar.TabIndex = 91;
             this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 

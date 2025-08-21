@@ -34,6 +34,7 @@
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -42,8 +43,9 @@
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.btnCerrar = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Elipse1
@@ -86,6 +88,14 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(518, 253);
             this.guna2Panel1.TabIndex = 56;
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.vScrollBar1.Location = new System.Drawing.Point(496, 2);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 251);
+            this.vScrollBar1.TabIndex = 63;
             // 
             // guna2HtmlLabel8
             // 
@@ -182,13 +192,18 @@
             this.guna2Button3.Size = new System.Drawing.Size(483, 238);
             this.guna2Button3.TabIndex = 55;
             // 
-            // vScrollBar1
+            // btnCerrar
             // 
-            this.vScrollBar1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.vScrollBar1.Location = new System.Drawing.Point(496, 2);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 251);
-            this.vScrollBar1.TabIndex = 63;
+            this.btnCerrar.BackColor = System.Drawing.Color.Transparent;
+            this.btnCerrar.Image = global::AniCLinic.Properties.Resources._9068699;
+            this.btnCerrar.ImageRotate = 0F;
+            this.btnCerrar.Location = new System.Drawing.Point(481, 20);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(24, 24);
+            this.btnCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnCerrar.TabIndex = 64;
+            this.btnCerrar.TabStop = false;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // VerHistorial
             // 
@@ -196,6 +211,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(542, 323);
+            this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -203,6 +219,7 @@
             this.Text = "VerHistorial";
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,5 +241,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private Guna.UI2.WinForms.Guna2PictureBox btnCerrar;
     }
 }

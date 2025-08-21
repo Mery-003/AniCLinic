@@ -10,16 +10,17 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
-    public partial class VerCarnet : Form
+    public partial class Historial : Form
     {
-        public VerCarnet()
+        public Historial()
         {
             InitializeComponent();
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnAggPaciente_Click(object sender, EventArgs e)
         {
-            this.Close();
+            VerHistorial frm = new VerHistorial();
+            frm.Show();
         }
     }
 }

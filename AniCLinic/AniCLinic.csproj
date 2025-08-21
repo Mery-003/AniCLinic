@@ -98,6 +98,12 @@
     <Compile Include="fCitas.Designer.cs">
       <DependentUpon>fCitas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormularioCarnet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularioCarnet.Designer.cs">
+      <DependentUpon>FormularioCarnet.cs</DependentUpon>
+    </Compile>
     <Compile Include="fPacientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,12 @@
     </Compile>
     <Compile Include="fRegistroClinico.Designer.cs">
       <DependentUpon>fRegistroClinico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Historial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial.Designer.cs">
+      <DependentUpon>Historial.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -151,11 +163,17 @@
     <EmbeddedResource Include="fCitas.resx">
       <DependentUpon>fCitas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormularioCarnet.resx">
+      <DependentUpon>FormularioCarnet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fPacientes.resx">
       <DependentUpon>fPacientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fRegistroClinico.resx">
       <DependentUpon>fRegistroClinico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial.resx">
+      <DependentUpon>Historial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

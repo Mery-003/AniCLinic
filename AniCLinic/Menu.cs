@@ -108,7 +108,7 @@ namespace AniCLinic
 
         private void btnReporteria_Click(object sender, EventArgs e)
         {
-            
+            panelReporteriaSubmenu.Visible = !panelReporteriaSubmenu.Visible;
         }
         private void PosicionarSubmenuJuntoA(Control anchor, Panel submenu)
         {
@@ -127,6 +127,11 @@ namespace AniCLinic
         private void btncarnet_Click(object sender, EventArgs e)
         {
             AbrirEnPanel(pnlMenu1, new Carnet());
+        }
+
+        private void btnhisto_Click_1(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new Historial());
         }
     }
 

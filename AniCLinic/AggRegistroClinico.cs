@@ -27,5 +27,10 @@ namespace AniCLinic
         {
             fechahistorial.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
+            Guna.UI2.AnimatorNS.Animation animation2 = new Guna.UI2.AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.PanelMenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.panelReporteriaSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnSalir = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -47,14 +50,11 @@
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
             this.pnlMenu1 = new System.Windows.Forms.Panel();
-            this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnMinimizarMenu = new Guna.UI2.WinForms.Guna2CircleButton();
             this.btnMaximizarMenu = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.pnlSubReporteria = new Guna.UI2.WinForms.Guna2Panel();
             this.PanelMenu.SuspendLayout();
+            this.panelReporteriaSubmenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
-            this.pnlSubReporteria.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Elipse1
@@ -65,7 +65,7 @@
             // PanelMenu
             // 
             this.PanelMenu.BackColor = System.Drawing.Color.CadetBlue;
-            this.PanelMenu.Controls.Add(this.pnlSubReporteria);
+            this.PanelMenu.Controls.Add(this.panelReporteriaSubmenu);
             this.PanelMenu.Controls.Add(this.btnSalir);
             this.PanelMenu.Controls.Add(this.guna2Separator2);
             this.PanelMenu.Controls.Add(this.guna2HtmlLabel2);
@@ -83,6 +83,72 @@
             this.PanelMenu.Size = new System.Drawing.Size(256, 663);
             this.PanelMenu.TabIndex = 0;
             this.PanelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelMenu_Paint);
+            // 
+            // panelReporteriaSubmenu
+            // 
+            this.panelReporteriaSubmenu.Controls.Add(this.btncarnet);
+            this.panelReporteriaSubmenu.Controls.Add(this.btnhisto);
+            this.guna2Transition1.SetDecoration(this.panelReporteriaSubmenu, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.panelReporteriaSubmenu.Location = new System.Drawing.Point(-3, 518);
+            this.panelReporteriaSubmenu.Name = "panelReporteriaSubmenu";
+            this.panelReporteriaSubmenu.Size = new System.Drawing.Size(263, 97);
+            this.panelReporteriaSubmenu.TabIndex = 14;
+            this.panelReporteriaSubmenu.Visible = false;
+            // 
+            // btncarnet
+            // 
+            this.btncarnet.BackColor = System.Drawing.Color.Teal;
+            this.btncarnet.CustomImages.Image = global::AniCLinic.Properties.Resources.info_card_fill;
+            this.btncarnet.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btncarnet.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btncarnet, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btncarnet.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btncarnet.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btncarnet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btncarnet.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btncarnet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btncarnet.FillColor = System.Drawing.Color.Empty;
+            this.btncarnet.FillColor2 = System.Drawing.Color.Empty;
+            this.btncarnet.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btncarnet.ForeColor = System.Drawing.Color.Black;
+            this.btncarnet.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btncarnet.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btncarnet.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncarnet.Location = new System.Drawing.Point(0, 49);
+            this.btncarnet.Name = "btncarnet";
+            this.btncarnet.Size = new System.Drawing.Size(263, 39);
+            this.btncarnet.TabIndex = 11;
+            this.btncarnet.Text = "Carnet";
+            this.btncarnet.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btncarnet.TextOffset = new System.Drawing.Point(40, 0);
+            // 
+            // btnhisto
+            // 
+            this.btnhisto.BackColor = System.Drawing.Color.Teal;
+            this.btnhisto.CustomImages.Image = global::AniCLinic.Properties.Resources.article_fill;
+            this.btnhisto.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnhisto.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btnhisto, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btnhisto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnhisto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnhisto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnhisto.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnhisto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnhisto.FillColor = System.Drawing.Color.Empty;
+            this.btnhisto.FillColor2 = System.Drawing.Color.Empty;
+            this.btnhisto.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnhisto.ForeColor = System.Drawing.Color.Black;
+            this.btnhisto.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btnhisto.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btnhisto.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnhisto.Location = new System.Drawing.Point(0, 3);
+            this.btnhisto.Name = "btnhisto";
+            this.btnhisto.Size = new System.Drawing.Size(263, 40);
+            this.btnhisto.TabIndex = 10;
+            this.btnhisto.Text = "Historial Veterinario";
+            this.btnhisto.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnhisto.TextOffset = new System.Drawing.Point(40, 0);
+            this.btnhisto.Click += new System.EventHandler(this.btnhisto_Click_1);
             // 
             // btnSalir
             // 
@@ -306,22 +372,22 @@
             // 
             this.guna2Transition1.AnimationType = Guna.UI2.AnimatorNS.AnimationType.HorizSlide;
             this.guna2Transition1.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.guna2Transition1.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.guna2Transition1.DefaultAnimation = animation2;
             // 
             // pnlMenu1
             // 
@@ -334,62 +400,6 @@
             this.pnlMenu1.Size = new System.Drawing.Size(803, 663);
             this.pnlMenu1.TabIndex = 12;
             this.pnlMenu1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // btncarnet
-            // 
-            this.btncarnet.BackColor = System.Drawing.Color.Teal;
-            this.btncarnet.CustomImages.Image = global::AniCLinic.Properties.Resources.info_card_fill;
-            this.btncarnet.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btncarnet.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Transition1.SetDecoration(this.btncarnet, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.btncarnet.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btncarnet.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btncarnet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btncarnet.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btncarnet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btncarnet.FillColor = System.Drawing.Color.Empty;
-            this.btncarnet.FillColor2 = System.Drawing.Color.Empty;
-            this.btncarnet.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btncarnet.ForeColor = System.Drawing.Color.Black;
-            this.btncarnet.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.btncarnet.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
-            this.btncarnet.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncarnet.Location = new System.Drawing.Point(0, 49);
-            this.btncarnet.Name = "btncarnet";
-            this.btncarnet.Size = new System.Drawing.Size(263, 39);
-            this.btncarnet.TabIndex = 11;
-            this.btncarnet.Text = "Carnet";
-            this.btncarnet.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btncarnet.TextOffset = new System.Drawing.Point(40, 0);
-            this.btncarnet.Click += new System.EventHandler(this.btncarnet_Click);
-            // 
-            // btnhisto
-            // 
-            this.btnhisto.BackColor = System.Drawing.Color.Teal;
-            this.btnhisto.CustomImages.Image = global::AniCLinic.Properties.Resources.article_fill;
-            this.btnhisto.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnhisto.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Transition1.SetDecoration(this.btnhisto, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.btnhisto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnhisto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnhisto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnhisto.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnhisto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnhisto.FillColor = System.Drawing.Color.Empty;
-            this.btnhisto.FillColor2 = System.Drawing.Color.Empty;
-            this.btnhisto.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnhisto.ForeColor = System.Drawing.Color.Black;
-            this.btnhisto.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.btnhisto.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
-            this.btnhisto.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnhisto.Location = new System.Drawing.Point(0, 3);
-            this.btnhisto.Name = "btnhisto";
-            this.btnhisto.Size = new System.Drawing.Size(263, 40);
-            this.btnhisto.TabIndex = 10;
-            this.btnhisto.Text = "Historial Veterinario";
-            this.btnhisto.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnhisto.TextOffset = new System.Drawing.Point(40, 0);
-            this.btnhisto.Click += new System.EventHandler(this.btnhisto_Click);
             // 
             // btnMinimizarMenu
             // 
@@ -436,17 +446,6 @@
             this.btnMaximizarMenu.Visible = false;
             this.btnMaximizarMenu.Click += new System.EventHandler(this.btnMaximizarMenu_Click);
             // 
-            // pnlSubReporteria
-            // 
-            this.pnlSubReporteria.Controls.Add(this.btncarnet);
-            this.pnlSubReporteria.Controls.Add(this.btnhisto);
-            this.guna2Transition1.SetDecoration(this.pnlSubReporteria, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.pnlSubReporteria.Location = new System.Drawing.Point(0, 524);
-            this.pnlSubReporteria.Name = "pnlSubReporteria";
-            this.pnlSubReporteria.Size = new System.Drawing.Size(263, 127);
-            this.pnlSubReporteria.TabIndex = 13;
-            this.pnlSubReporteria.Visible = false;
-            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -467,8 +466,8 @@
             this.Load += new System.EventHandler(this.Menu_Load);
             this.PanelMenu.ResumeLayout(false);
             this.PanelMenu.PerformLayout();
+            this.panelReporteriaSubmenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
-            this.pnlSubReporteria.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -493,8 +492,8 @@
         private Guna.UI2.WinForms.Guna2CircleButton btnMaximizarMenu;
         private Guna.UI2.WinForms.Guna2CircleButton btnMinimizarMenu;
         private System.Windows.Forms.Panel pnlMenu1;
-        private Guna.UI2.WinForms.Guna2GradientButton btnhisto;
+        private Guna.UI2.WinForms.Guna2Panel panelReporteriaSubmenu;
         private Guna.UI2.WinForms.Guna2GradientButton btncarnet;
-        private Guna.UI2.WinForms.Guna2Panel pnlSubReporteria;
+        private Guna.UI2.WinForms.Guna2GradientButton btnhisto;
     }
 }
