@@ -73,11 +73,12 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCita.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCita.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCita.Location = new System.Drawing.Point(59, 209);
+            this.dgvCita.Location = new System.Drawing.Point(79, 257);
+            this.dgvCita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvCita.Name = "dgvCita";
             this.dgvCita.RowHeadersVisible = false;
             this.dgvCita.RowHeadersWidth = 70;
-            this.dgvCita.Size = new System.Drawing.Size(685, 341);
+            this.dgvCita.Size = new System.Drawing.Size(913, 420);
             this.dgvCita.TabIndex = 13;
             this.dgvCita.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCita.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -100,35 +101,42 @@
             this.dgvCita.ThemeStyle.RowsStyle.Height = 22;
             this.dgvCita.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCita.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvCita.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCita_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Paciente";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Especie";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "Raza";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "Fecha";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Hora";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.HeaderText = "Motivo";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // btnNuvCita
@@ -142,9 +150,10 @@
             this.btnNuvCita.FillColor2 = System.Drawing.Color.DarkOliveGreen;
             this.btnNuvCita.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuvCita.ForeColor = System.Drawing.Color.White;
-            this.btnNuvCita.Location = new System.Drawing.Point(613, 137);
+            this.btnNuvCita.Location = new System.Drawing.Point(817, 169);
+            this.btnNuvCita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuvCita.Name = "btnNuvCita";
-            this.btnNuvCita.Size = new System.Drawing.Size(131, 41);
+            this.btnNuvCita.Size = new System.Drawing.Size(175, 50);
             this.btnNuvCita.TabIndex = 12;
             this.btnNuvCita.Text = "+ Nueva Cita";
             this.btnNuvCita.Click += new System.EventHandler(this.btnNuvCita_Click);
@@ -154,22 +163,25 @@
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel2.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(802, 83);
+            this.guna2Panel2.Size = new System.Drawing.Size(1069, 102);
             this.guna2Panel2.TabIndex = 11;
             // 
             // fCitas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(802, 624);
+            this.ClientSize = new System.Drawing.Size(1069, 768);
             this.Controls.Add(this.dgvCita);
             this.Controls.Add(this.btnNuvCita);
             this.Controls.Add(this.guna2Panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "fCitas";
             this.Text = "1º1";
+            this.Load += new System.EventHandler(this.fCitas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCita)).EndInit();
             this.ResumeLayout(false);
 

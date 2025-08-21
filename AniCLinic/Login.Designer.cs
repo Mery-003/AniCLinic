@@ -41,8 +41,8 @@
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtUser = new Guna.UI2.WinForms.Guna2TextBox();
-            this.checkPassword = new System.Windows.Forms.CheckBox();
+            this.txtUsuario = new Guna.UI2.WinForms.Guna2TextBox();
+            this.chkVer = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.guna2GradientPanel1.SuspendLayout();
@@ -84,7 +84,7 @@
             this.lblBienvenido.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBienvenido.Location = new System.Drawing.Point(552, 115);
             this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(165, 39);
+            this.lblBienvenido.Size = new System.Drawing.Size(205, 48);
             this.lblBienvenido.TabIndex = 4;
             this.lblBienvenido.Text = "¡Bienvenido!";
             // 
@@ -94,7 +94,7 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(420, 38);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(196, 19);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(237, 23);
             this.guna2HtmlLabel1.TabIndex = 5;
             this.guna2HtmlLabel1.Text = "Huellas pequeñas, amor infinito.";
             // 
@@ -147,7 +147,7 @@
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(125, 55);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(187, 19);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(231, 23);
             this.guna2HtmlLabel4.TabIndex = 8;
             this.guna2HtmlLabel4.Text = "Cuidamos a tus mejores amigos";
             // 
@@ -157,7 +157,7 @@
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(105, 30);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(91, 32);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(109, 38);
             this.guna2HtmlLabel3.TabIndex = 8;
             this.guna2HtmlLabel3.Text = "AniClinic";
             // 
@@ -181,6 +181,7 @@
             this.txtPassword.IconLeft = global::AniCLinic.Properties.Resources.key_fill;
             this.txtPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtPassword.Location = new System.Drawing.Point(513, 263);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.txtPassword.PlaceholderText = "Password";
@@ -188,56 +189,57 @@
             this.txtPassword.Size = new System.Drawing.Size(248, 36);
             this.txtPassword.TabIndex = 2;
             // 
-            // txtUser
+            // txtUsuario
             // 
-            this.txtUser.Animated = true;
-            this.txtUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.txtUser.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.txtUser.BorderRadius = 8;
-            this.txtUser.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtUser.DefaultText = "";
-            this.txtUser.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtUser.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtUser.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtUser.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtUser.FillColor = System.Drawing.Color.WhiteSmoke;
-            this.txtUser.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUser.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtUser.ForeColor = System.Drawing.Color.Gray;
-            this.txtUser.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUser.IconLeft = global::AniCLinic.Properties.Resources.user_fill;
-            this.txtUser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtUser.Location = new System.Drawing.Point(513, 196);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtUser.PlaceholderText = "Username";
-            this.txtUser.SelectedText = "";
-            this.txtUser.Size = new System.Drawing.Size(248, 36);
-            this.txtUser.TabIndex = 1;
+            this.txtUsuario.Animated = true;
+            this.txtUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.txtUsuario.BorderColor = System.Drawing.SystemColors.ActiveBorder;
+            this.txtUsuario.BorderRadius = 8;
+            this.txtUsuario.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsuario.DefaultText = "";
+            this.txtUsuario.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtUsuario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtUsuario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsuario.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsuario.FillColor = System.Drawing.Color.WhiteSmoke;
+            this.txtUsuario.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtUsuario.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtUsuario.ForeColor = System.Drawing.Color.Gray;
+            this.txtUsuario.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtUsuario.IconLeft = global::AniCLinic.Properties.Resources.user_fill;
+            this.txtUsuario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txtUsuario.Location = new System.Drawing.Point(513, 196);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.PlaceholderForeColor = System.Drawing.Color.Silver;
+            this.txtUsuario.PlaceholderText = "Username";
+            this.txtUsuario.SelectedText = "";
+            this.txtUsuario.Size = new System.Drawing.Size(248, 36);
+            this.txtUsuario.TabIndex = 1;
             // 
-            // checkPassword
+            // chkVer
             // 
-            this.checkPassword.AutoSize = true;
-            this.checkPassword.Location = new System.Drawing.Point(771, 273);
-            this.checkPassword.Name = "checkPassword";
-            this.checkPassword.Size = new System.Drawing.Size(15, 14);
-            this.checkPassword.TabIndex = 10;
-            this.checkPassword.UseVisualStyleBackColor = true;
+            this.chkVer.AutoSize = true;
+            this.chkVer.Location = new System.Drawing.Point(771, 273);
+            this.chkVer.Name = "chkVer";
+            this.chkVer.Size = new System.Drawing.Size(18, 17);
+            this.chkVer.TabIndex = 10;
+            this.chkVer.UseVisualStyleBackColor = true;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(863, 516);
-            this.Controls.Add(this.checkPassword);
+            this.Controls.Add(this.chkVer);
             this.Controls.Add(this.btnMinimizar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.lblBienvenido);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUser);
+            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.guna2GradientPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -257,7 +259,7 @@
 
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
-        private Guna.UI2.WinForms.Guna2TextBox txtUser;
+        private Guna.UI2.WinForms.Guna2TextBox txtUsuario;
         private Guna.UI2.WinForms.Guna2TextBox txtPassword;
         private Guna.UI2.WinForms.Guna2GradientButton btnLogin;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblBienvenido;
@@ -268,7 +270,7 @@
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2PictureBox btnCerrar;
         private Guna.UI2.WinForms.Guna2PictureBox btnMinimizar;
-        private System.Windows.Forms.CheckBox checkPassword;
+        private System.Windows.Forms.CheckBox chkVer;
     }
 }
 

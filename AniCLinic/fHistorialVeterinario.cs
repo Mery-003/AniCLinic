@@ -10,6 +10,14 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
+<<<<<<<< HEAD:AniCLinic/VerCarnet.cs
+    public partial class VerCarnet : Form
+    {
+        public VerCarnet()
+        {
+            InitializeComponent();
+        }
+========
     public partial class fHistorialVeterinario : Form
     {
         public fHistorialVeterinario()
