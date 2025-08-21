@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
-    public partial class EditarPaciente : Form
+    public partial class fRegistroClinico : Form
     {
-        public EditarPaciente()
+        public fRegistroClinico()
         {
             InitializeComponent();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

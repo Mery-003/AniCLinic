@@ -14,13 +14,20 @@ namespace AniCLinic
     public partial class Menu : Form
     {
         Login nLogin;
+        
         public Menu(Login login)
         {
             InitializeComponent();
             nLogin = login;
+
+        }
+        
+        private void OcultarSubMenus(object sender, EventArgs e)
+        {
+            
         }
 
- 
+
 
         private void PanelMenu_Paint(object sender, PaintEventArgs e)
         {
@@ -73,13 +80,12 @@ namespace AniCLinic
 
         private void btnPacientes_Click(object sender, EventArgs e)
         {
-
             AbrirEnPanel(pnlMenu1, new fPacientes());
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void btnCitas_Click(object sender, EventArgs e)
@@ -91,6 +97,34 @@ namespace AniCLinic
         {
             nLogin.Visible = true;
             this.Close();
+        }
+
+        private void btnhisto_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new fHistorialVeterinario());
+        }
+
+        private void btnReporteria_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void PosicionarSubmenuJuntoA(Control anchor, Panel submenu)
+        {
+            // Ubicar el panel justo al lado derecho del botón
+            var screenPoint = anchor.Parent.PointToScreen(anchor.Bounds.Location);
+            var formPoint = this.PointToClient(new Point(screenPoint.X + anchor.Width, screenPoint.Y));
+            submenu.Location = formPoint;
+            submenu.BringToFront();
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new fRegistroClinico());
+        }
+
+        private void btncarnet_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new Carnet());
         }
     }
 
