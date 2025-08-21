@@ -80,12 +80,6 @@
     <Compile Include="ConexionBD.cs" />
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csMascota.cs" />
-    <Compile Include="EditarPaciente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditarPaciente.Designer.cs">
-      <DependentUpon>EditarPaciente.cs</DependentUpon>
-    </Compile>
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,9 +111,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarPaciente.resx">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditarPaciente.resx">
-      <DependentUpon>EditarPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fCitas.resx">
       <DependentUpon>fCitas.cs</DependentUpon>

@@ -10,19 +10,24 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
-    public partial class EditarPaciente : Form
+    public partial class Carnet : Form
     {
-        public EditarPaciente()
+        public Carnet()
         {
             InitializeComponent();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void Carnet_Load(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void btnAggPaciente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvPacientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

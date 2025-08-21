@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
+using static AniCLinic.Login;
 
 namespace AniCLinic
 {
     public partial class Menu : Form
     {
+        private readonly UsuarioSesion _sesion;
         Login nLogin;
-        public Menu(Login login)
+
+        public Menu(UsuarioSesion sesion)
         {
             InitializeComponent();
-            nLogin = login;
+            _sesion = sesion;
         }
 
- 
+        private void OcultarSubMenus(object sender, EventArgs e)
+        {
+            
+        }
+
+
 
         private void PanelMenu_Paint(object sender, PaintEventArgs e)
         {
@@ -73,13 +81,12 @@ namespace AniCLinic
 
         private void btnPacientes_Click(object sender, EventArgs e)
         {
-
             AbrirEnPanel(pnlMenu1, new fPacientes());
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void btnCitas_Click(object sender, EventArgs e)
@@ -91,6 +98,34 @@ namespace AniCLinic
         {
             nLogin.Visible = true;
             this.Close();
+        }
+
+        private void btnhisto_Click(object sender, EventArgs e)
+        {
+            //AbrirEnPanel(pnlMenu1, new fHistorialVeterinario());
+        }
+
+        private void btnReporteria_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void PosicionarSubmenuJuntoA(Control anchor, Panel submenu)
+        {
+            // Ubicar el panel justo al lado derecho del botón
+            var screenPoint = anchor.Parent.PointToScreen(anchor.Bounds.Location);
+            var formPoint = this.PointToClient(new Point(screenPoint.X + anchor.Width, screenPoint.Y));
+            submenu.Location = formPoint;
+            submenu.BringToFront();
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            //AbrirEnPanel(pnlMenu1, new fRegistroClinico());
+        }
+
+        private void btncarnet_Click(object sender, EventArgs e)
+        {
+            //AbrirEnPanel(pnlMenu1, new Carnet());
         }
     }
 

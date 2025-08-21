@@ -103,6 +103,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _841791 {
+            get {
+                object obj = ResourceManager.GetObject("841791", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _9068699 {
             get {
                 object obj = ResourceManager.GetObject("9068699", resourceCulture);
@@ -136,6 +146,16 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap arrow_right_s_line {
             get {
                 object obj = ResourceManager.GetObject("arrow-right-s-line", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap article_fill {
+            get {
+                object obj = ResourceManager.GetObject("article-fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,6 +223,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap file_3_fill {
+            get {
+                object obj = ResourceManager.GetObject("file-3-fill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap home_heart_fill {
             get {
                 object obj = ResourceManager.GetObject("home-heart-fill", resourceCulture);
@@ -243,6 +273,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap info_card_fill {
+            get {
+                object obj = ResourceManager.GetObject("info-card-fill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap key_fill {
             get {
                 object obj = ResourceManager.GetObject("key-fill", resourceCulture);
@@ -256,6 +296,16 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap minimizar {
             get {
                 object obj = ResourceManager.GetObject("minimizar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shake_hands_fill {
+            get {
+                object obj = ResourceManager.GetObject("shake-hands-fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
