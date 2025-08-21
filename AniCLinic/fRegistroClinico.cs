@@ -16,5 +16,11 @@ namespace AniCLinic
         {
             InitializeComponent();
         }
+
+        private void btnNuvCita_Click(object sender, EventArgs e)
+        {
+            AggRegistroClinico frm = new AggRegistroClinico();
+            frm.Show();
+        }
     }
 }

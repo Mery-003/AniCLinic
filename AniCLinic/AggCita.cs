@@ -23,7 +23,7 @@ namespace AniCLinic
         private int? _idCitaEdit;
         private int? _idMascota;
         private int? _idPropietario; // dueño principal
-        private int? _idEmpleado;    // veterinario
+        private int? _idEmpleado = 1;
 
 
         public AggCita(int idCita) : this() // modo edición
@@ -71,7 +71,7 @@ namespace AniCLinic
                        pm.IdPropietario
                 FROM Mascota m
                 LEFT JOIN PropietarioMascota pm
-                       ON pm.IdMascota = m.IdMascota AND pm.EsPrincipal = 1
+                       ON pm.IdMascota = m.IdMascota
                 WHERE m.IdMascota = @id;";
 
                 using (var cmd = new SqlCommand(sql, cn))
@@ -108,7 +108,7 @@ namespace AniCLinic
 
         private void btnBuscarVet_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -135,14 +135,14 @@ namespace AniCLinic
                         UPDATE GestionCita
                            SET IdPropietario = @p,
                                IdMascota     = @m,
-                               IdEmpleado    = @e,
+                               IdEmpleado    = 1,
                                FechaHora     = @fh,
                                Motivo        = @motivo
                          WHERE IdCita       = @id;", cn))
-                                            {
+                    {
                         cmd.Parameters.AddWithValue("@p", _idPropietario.Value);
                         cmd.Parameters.AddWithValue("@m", _idMascota.Value);
-                        cmd.Parameters.AddWithValue("@e", _idEmpleado.Value);
+                        cmd.Parameters.AddWithValue("@e", 1);
                         cmd.Parameters.AddWithValue("@fh", fechaHora);
                         cmd.Parameters.AddWithValue("@motivo",
                             string.IsNullOrWhiteSpace(txtMotivo.Text) ? (object)DBNull.Value : txtMotivo.Text.Trim());
@@ -162,7 +162,7 @@ namespace AniCLinic
                     {
                         cmd.Parameters.AddWithValue("@p", _idPropietario.Value);
                         cmd.Parameters.AddWithValue("@m", _idMascota.Value);
-                        cmd.Parameters.AddWithValue("@e", _idEmpleado.Value);
+                        cmd.Parameters.AddWithValue("@e", 1);
                         cmd.Parameters.AddWithValue("@fh", fechaHora);
                         cmd.Parameters.AddWithValue("@motivo",
                             string.IsNullOrWhiteSpace(txtMotivo.Text) ? (object)DBNull.Value : txtMotivo.Text.Trim());
@@ -249,6 +249,5 @@ namespace AniCLinic
             catch (Exception ex) { MessageBox.Show("Error al cargar la cita: " + ex.Message); }
             finally { _db.CerrarConexion(); }
         }
-
     }
 }

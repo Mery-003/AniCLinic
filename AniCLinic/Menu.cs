@@ -102,8 +102,9 @@ namespace AniCLinic
 
         private void btnhisto_Click(object sender, EventArgs e)
         {
-            //AbrirEnPanel(pnlMenu1, new fHistorialVeterinario());
+             AbrirEnPanel(pnlMenu1, new fRegistroClinico());
         }
+
 
         private void btnReporteria_Click(object sender, EventArgs e)
         {
@@ -120,12 +121,12 @@ namespace AniCLinic
 
         private void btnHistorial_Click(object sender, EventArgs e)
         {
-            //AbrirEnPanel(pnlMenu1, new fRegistroClinico());
+            AbrirEnPanel(pnlMenu1, new fRegistroClinico());
         }
 
         private void btncarnet_Click(object sender, EventArgs e)
         {
-            //AbrirEnPanel(pnlMenu1, new Carnet());
+            AbrirEnPanel(pnlMenu1, new Carnet());
         }
     }
 

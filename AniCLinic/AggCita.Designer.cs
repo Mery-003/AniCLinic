@@ -53,6 +53,7 @@
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.txtVeterinario = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -437,12 +438,33 @@
             this.guna2HtmlLabel8.TabIndex = 92;
             this.guna2HtmlLabel8.Text = "Veterinario";
             // 
+            // guna2CircleButton1
+            // 
+            this.guna2CircleButton1.BackgroundImage = global::AniCLinic.Properties.Resources._3003596;
+            this.guna2CircleButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton1.FocusedColor = System.Drawing.Color.LightGray;
+            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2CircleButton1.ForeColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.Location = new System.Drawing.Point(457, 580);
+            this.guna2CircleButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.guna2CircleButton1.Name = "guna2CircleButton1";
+            this.guna2CircleButton1.PressedColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CircleButton1.Size = new System.Drawing.Size(32, 27);
+            this.guna2CircleButton1.TabIndex = 94;
+            // 
             // AggCita
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(516, 713);
+            this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.txtVeterinario);
             this.Controls.Add(this.guna2HtmlLabel8);
             this.Controls.Add(this.maskedTextBox1);
@@ -468,7 +490,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AggCita";
             this.Text = "AggCita";
-            this.Load += new System.EventHandler(this.AggCita_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -500,5 +521,6 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2TextBox txtVeterinario;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
     }
 }

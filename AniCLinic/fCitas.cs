@@ -179,6 +179,6 @@ namespace AniCLinic
             catch (Exception ex) { MessageBox.Show("No se pudo eliminar: " + ex.Message); }
             finally { _db.CerrarConexion(); }
         }
-        
+
     }
 }

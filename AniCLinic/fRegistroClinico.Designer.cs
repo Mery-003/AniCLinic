@@ -32,8 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCita = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnNuvCita = new Guna.UI2.WinForms.Guna2GradientButton();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +40,8 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnNuvCita = new Guna.UI2.WinForms.Guna2GradientButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCita)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,11 +77,12 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCita.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCita.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCita.Location = new System.Drawing.Point(45, 200);
+            this.dgvCita.Location = new System.Drawing.Point(60, 246);
+            this.dgvCita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvCita.Name = "dgvCita";
             this.dgvCita.RowHeadersVisible = false;
             this.dgvCita.RowHeadersWidth = 70;
-            this.dgvCita.Size = new System.Drawing.Size(685, 341);
+            this.dgvCita.Size = new System.Drawing.Size(913, 420);
             this.dgvCita.TabIndex = 14;
             this.dgvCita.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCita.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -105,13 +106,62 @@
             this.dgvCita.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCita.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Foto";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Mascota";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Motivo";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Diagnostico";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Tratamiento";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Receta";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Veterinario";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel2.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(802, 83);
+            this.guna2Panel2.Size = new System.Drawing.Size(1069, 102);
             this.guna2Panel2.TabIndex = 15;
             // 
             // btnNuvCita
@@ -125,62 +175,25 @@
             this.btnNuvCita.FillColor2 = System.Drawing.Color.DarkOliveGreen;
             this.btnNuvCita.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuvCita.ForeColor = System.Drawing.Color.White;
-            this.btnNuvCita.Location = new System.Drawing.Point(565, 117);
+            this.btnNuvCita.Location = new System.Drawing.Point(753, 144);
+            this.btnNuvCita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuvCita.Name = "btnNuvCita";
-            this.btnNuvCita.Size = new System.Drawing.Size(165, 45);
+            this.btnNuvCita.Size = new System.Drawing.Size(220, 55);
             this.btnNuvCita.TabIndex = 16;
             this.btnNuvCita.Text = "+ Agregar Registro";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Foto";
-            this.Column2.Name = "Column2";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Mascota";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Motivo";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Diagnostico";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Tratamiento";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Receta";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Veterinario";
-            this.Column1.Name = "Column1";
+            this.btnNuvCita.Click += new System.EventHandler(this.btnNuvCita_Click);
             // 
             // fRegistroClinico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(802, 624);
+            this.ClientSize = new System.Drawing.Size(1069, 768);
             this.Controls.Add(this.btnNuvCita);
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.dgvCita);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "fRegistroClinico";
             this.Text = "fRegistroClinico";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCita)).EndInit();
