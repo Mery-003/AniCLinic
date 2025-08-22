@@ -133,6 +133,11 @@ namespace AniCLinic
         {
             AbrirEnPanel(pnlMenu1, new Historial());
         }
+
+        private void btncarnet_Click_1(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new FormularioCarnet());
+        }
     }
 
 }

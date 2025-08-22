@@ -40,10 +40,17 @@
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblPaciente2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.btnCerrar = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.lblPaciente = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtMotivo = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtDiagnostico = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtTratamiento = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtReceta = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblVeterinario = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblFecha = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.SuspendLayout();
@@ -67,34 +74,43 @@
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(42, 20);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(56, 25);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(201, 32);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(247, 38);
             this.guna2HtmlLabel1.TabIndex = 47;
             this.guna2HtmlLabel1.Text = "Historial Veterinario";
             // 
             // guna2Panel1
             // 
+            this.guna2Panel1.Controls.Add(this.lblFecha);
+            this.guna2Panel1.Controls.Add(this.lblVeterinario);
+            this.guna2Panel1.Controls.Add(this.txtReceta);
+            this.guna2Panel1.Controls.Add(this.txtTratamiento);
+            this.guna2Panel1.Controls.Add(this.txtDiagnostico);
+            this.guna2Panel1.Controls.Add(this.txtMotivo);
+            this.guna2Panel1.Controls.Add(this.lblPaciente);
             this.guna2Panel1.Controls.Add(this.vScrollBar1);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel8);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel5);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel6);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel7);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel4);
-            this.guna2Panel1.Controls.Add(this.guna2HtmlLabel3);
+            this.guna2Panel1.Controls.Add(this.lblPaciente2);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel2);
             this.guna2Panel1.Controls.Add(this.guna2Button3);
-            this.guna2Panel1.Location = new System.Drawing.Point(12, 58);
+            this.guna2Panel1.Location = new System.Drawing.Point(16, 71);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(518, 253);
+            this.guna2Panel1.Size = new System.Drawing.Size(691, 311);
             this.guna2Panel1.TabIndex = 56;
             // 
             // vScrollBar1
             // 
             this.vScrollBar1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.vScrollBar1.Location = new System.Drawing.Point(496, 2);
+            this.vScrollBar1.Location = new System.Drawing.Point(661, 2);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 251);
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 309);
             this.vScrollBar1.TabIndex = 63;
             // 
             // guna2HtmlLabel8
@@ -102,9 +118,10 @@
             this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Lavender;
             this.guna2HtmlLabel8.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(29, 199);
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(39, 245);
+            this.guna2HtmlLabel8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
-            this.guna2HtmlLabel8.Size = new System.Drawing.Size(72, 19);
+            this.guna2HtmlLabel8.Size = new System.Drawing.Size(88, 23);
             this.guna2HtmlLabel8.TabIndex = 62;
             this.guna2HtmlLabel8.Text = "Veterinario:";
             // 
@@ -113,9 +130,10 @@
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Lavender;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(28, 166);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(37, 204);
+            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(46, 19);
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(57, 23);
             this.guna2HtmlLabel5.TabIndex = 61;
             this.guna2HtmlLabel5.Text = "Receta:";
             // 
@@ -124,9 +142,10 @@
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Lavender;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(28, 136);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(37, 167);
+            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            this.guna2HtmlLabel6.Size = new System.Drawing.Size(80, 19);
+            this.guna2HtmlLabel6.Size = new System.Drawing.Size(96, 23);
             this.guna2HtmlLabel6.TabIndex = 60;
             this.guna2HtmlLabel6.Text = "Tratamiento:";
             // 
@@ -135,9 +154,10 @@
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Lavender;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(28, 104);
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(37, 128);
+            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(77, 19);
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(94, 23);
             this.guna2HtmlLabel7.TabIndex = 59;
             this.guna2HtmlLabel7.Text = "Diagnostico:";
             // 
@@ -146,31 +166,34 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Lavender;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(28, 74);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(37, 91);
+            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(49, 19);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(60, 23);
             this.guna2HtmlLabel4.TabIndex = 58;
             this.guna2HtmlLabel4.Text = "Motivo:";
             // 
-            // guna2HtmlLabel3
+            // lblPaciente2
             // 
-            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Lavender;
-            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(28, 47);
-            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(57, 19);
-            this.guna2HtmlLabel3.TabIndex = 57;
-            this.guna2HtmlLabel3.Text = "Paciente:";
+            this.lblPaciente2.BackColor = System.Drawing.Color.Lavender;
+            this.lblPaciente2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaciente2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPaciente2.Location = new System.Drawing.Point(37, 58);
+            this.lblPaciente2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblPaciente2.Name = "lblPaciente2";
+            this.lblPaciente2.Size = new System.Drawing.Size(69, 23);
+            this.lblPaciente2.TabIndex = 57;
+            this.lblPaciente2.Text = "Paciente:";
             // 
             // guna2HtmlLabel2
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Lavender;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(28, 21);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(37, 26);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(41, 19);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(49, 23);
             this.guna2HtmlLabel2.TabIndex = 56;
             this.guna2HtmlLabel2.Text = "Fecha:";
             // 
@@ -187,9 +210,10 @@
             this.guna2Button3.FillColor = System.Drawing.Color.Lavender;
             this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(10, 2);
+            this.guna2Button3.Location = new System.Drawing.Point(13, 2);
+            this.guna2Button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Button3.Name = "guna2Button3";
-            this.guna2Button3.Size = new System.Drawing.Size(483, 238);
+            this.guna2Button3.Size = new System.Drawing.Size(644, 293);
             this.guna2Button3.TabIndex = 55;
             // 
             // btnCerrar
@@ -197,26 +221,113 @@
             this.btnCerrar.BackColor = System.Drawing.Color.Transparent;
             this.btnCerrar.Image = global::AniCLinic.Properties.Resources._9068699;
             this.btnCerrar.ImageRotate = 0F;
-            this.btnCerrar.Location = new System.Drawing.Point(481, 20);
+            this.btnCerrar.Location = new System.Drawing.Point(641, 25);
+            this.btnCerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(24, 24);
+            this.btnCerrar.Size = new System.Drawing.Size(32, 30);
             this.btnCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnCerrar.TabIndex = 64;
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // lblPaciente
+            // 
+            this.lblPaciente.BackColor = System.Drawing.Color.Lavender;
+            this.lblPaciente.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaciente.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPaciente.Location = new System.Drawing.Point(114, 58);
+            this.lblPaciente.Margin = new System.Windows.Forms.Padding(4);
+            this.lblPaciente.Name = "lblPaciente";
+            this.lblPaciente.Size = new System.Drawing.Size(69, 23);
+            this.lblPaciente.TabIndex = 64;
+            this.lblPaciente.Text = "Paciente:";
+            // 
+            // txtMotivo
+            // 
+            this.txtMotivo.BackColor = System.Drawing.Color.Lavender;
+            this.txtMotivo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMotivo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txtMotivo.Location = new System.Drawing.Point(114, 91);
+            this.txtMotivo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMotivo.Name = "txtMotivo";
+            this.txtMotivo.Size = new System.Drawing.Size(69, 23);
+            this.txtMotivo.TabIndex = 65;
+            this.txtMotivo.Text = "Paciente:";
+            // 
+            // txtDiagnostico
+            // 
+            this.txtDiagnostico.BackColor = System.Drawing.Color.Lavender;
+            this.txtDiagnostico.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiagnostico.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txtDiagnostico.Location = new System.Drawing.Point(139, 128);
+            this.txtDiagnostico.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDiagnostico.Name = "txtDiagnostico";
+            this.txtDiagnostico.Size = new System.Drawing.Size(69, 23);
+            this.txtDiagnostico.TabIndex = 66;
+            this.txtDiagnostico.Text = "Paciente:";
+            // 
+            // txtTratamiento
+            // 
+            this.txtTratamiento.BackColor = System.Drawing.Color.Lavender;
+            this.txtTratamiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTratamiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txtTratamiento.Location = new System.Drawing.Point(141, 167);
+            this.txtTratamiento.Margin = new System.Windows.Forms.Padding(4);
+            this.txtTratamiento.Name = "txtTratamiento";
+            this.txtTratamiento.Size = new System.Drawing.Size(69, 23);
+            this.txtTratamiento.TabIndex = 67;
+            this.txtTratamiento.Text = "Paciente:";
+            // 
+            // txtReceta
+            // 
+            this.txtReceta.BackColor = System.Drawing.Color.Lavender;
+            this.txtReceta.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReceta.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txtReceta.Location = new System.Drawing.Point(102, 204);
+            this.txtReceta.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReceta.Name = "txtReceta";
+            this.txtReceta.Size = new System.Drawing.Size(69, 23);
+            this.txtReceta.TabIndex = 68;
+            this.txtReceta.Text = "Paciente:";
+            // 
+            // lblVeterinario
+            // 
+            this.lblVeterinario.BackColor = System.Drawing.Color.Lavender;
+            this.lblVeterinario.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVeterinario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblVeterinario.Location = new System.Drawing.Point(141, 245);
+            this.lblVeterinario.Margin = new System.Windows.Forms.Padding(4);
+            this.lblVeterinario.Name = "lblVeterinario";
+            this.lblVeterinario.Size = new System.Drawing.Size(69, 23);
+            this.lblVeterinario.TabIndex = 69;
+            this.lblVeterinario.Text = "Paciente:";
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.BackColor = System.Drawing.Color.Lavender;
+            this.lblFecha.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFecha.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblFecha.Location = new System.Drawing.Point(94, 27);
+            this.lblFecha.Margin = new System.Windows.Forms.Padding(4);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(69, 23);
+            this.lblFecha.TabIndex = 70;
+            this.lblFecha.Text = "Paciente:";
+            // 
             // VerHistorial
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(542, 323);
+            this.ClientSize = new System.Drawing.Size(723, 398);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "VerHistorial";
             this.Text = "VerHistorial";
+            this.Load += new System.EventHandler(this.VerHistorial_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
@@ -238,9 +349,16 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblPaciente2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2PictureBox btnCerrar;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblFecha;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblVeterinario;
+        private Guna.UI2.WinForms.Guna2HtmlLabel txtReceta;
+        private Guna.UI2.WinForms.Guna2HtmlLabel txtTratamiento;
+        private Guna.UI2.WinForms.Guna2HtmlLabel txtDiagnostico;
+        private Guna.UI2.WinForms.Guna2HtmlLabel txtMotivo;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblPaciente;
     }
 }

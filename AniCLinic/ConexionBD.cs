@@ -11,8 +11,7 @@ namespace AniCLinic
     {
         // 👇 Cambia a tu servidor si hace falta
         private static string cadena =
-@"Data Source=.\SQLEXPRESS;Initial Catalog=AniClinic;User ID=sa;Password=abcdef;Encrypt=False";
-
+     @"Data Source=.;Initial Catalog=AniClinic;User ID=sa;Password=1234;Encrypt=False";
 
 
 

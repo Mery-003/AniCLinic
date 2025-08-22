@@ -12,15 +12,24 @@ namespace AniCLinic
 {
     public partial class FormularioCarnet : Form
     {
-        public FormularioCarnet()
+        private readonly ConexionBD _db = new ConexionBD();
+
+        public FormularioCarnet(int idRegistro)
         {
             InitializeComponent();
+
         }
 
         private void btnAggPaciente_Click(object sender, EventArgs e)
         {
             Carnet frm = new Carnet();
             frm.Show();
+        }
+
+        private void FormularioCarnet_Load(object sender, EventArgs e)
+        {
+            //CargarCarnets();
+            //dgvCarnet.CellClick += dgvCarnet_CellClick; // engancha el evento
         }
     }
 }
