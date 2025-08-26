@@ -34,6 +34,7 @@
             this.btnAggPaciente = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.dgvDatos = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.btnAggPaciente.FillColor2 = System.Drawing.Color.DarkOliveGreen;
             this.btnAggPaciente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAggPaciente.ForeColor = System.Drawing.Color.White;
-            this.btnAggPaciente.Location = new System.Drawing.Point(630, 110);
+            this.btnAggPaciente.Location = new System.Drawing.Point(834, 116);
             this.btnAggPaciente.Name = "btnAggPaciente";
             this.btnAggPaciente.Size = new System.Drawing.Size(131, 41);
             this.btnAggPaciente.TabIndex = 9;
@@ -61,7 +62,7 @@
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel2.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(802, 83);
+            this.guna2Panel2.Size = new System.Drawing.Size(1059, 83);
             this.guna2Panel2.TabIndex = 8;
             // 
             // dgvDatos
@@ -87,11 +88,11 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDatos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvDatos.Location = new System.Drawing.Point(36, 177);
+            this.dgvDatos.Location = new System.Drawing.Point(92, 186);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 70;
-            this.dgvDatos.Size = new System.Drawing.Size(725, 414);
+            this.dgvDatos.Size = new System.Drawing.Size(873, 414);
             this.dgvDatos.TabIndex = 14;
             this.dgvDatos.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvDatos.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -116,12 +117,23 @@
             this.dgvDatos.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
             // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(92, 116);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(192, 32);
+            this.guna2HtmlLabel1.TabIndex = 47;
+            this.guna2HtmlLabel1.Text = "Gestión de Cuentas";
+            // 
             // fPacientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(802, 624);
+            this.ClientSize = new System.Drawing.Size(1059, 693);
+            this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.btnAggPaciente);
             this.Controls.Add(this.guna2Panel2);
@@ -131,6 +143,7 @@
             this.Load += new System.EventHandler(this.fPacientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -138,5 +151,6 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnAggPaciente;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2DataGridView dgvDatos;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

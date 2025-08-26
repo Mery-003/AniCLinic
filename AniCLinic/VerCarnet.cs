@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -23,10 +17,7 @@ namespace AniCLinic
             _idMascota = idMascota;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void btnCerrar_Click(object sender, EventArgs e) => Close();
 
         private void VerCarnet_Load(object sender, EventArgs e)
         {
@@ -35,17 +26,21 @@ namespace AniCLinic
 
         private void CargarCarnet()
         {
+            // ¡OJO! No referenciamos columnas que pueden no existir (como EdadMeses).
             const string sql = @"
-        SELECT 
-            m.Nombre                         AS Mascota,
-            m.Especie, m.Raza, m.Sexo,
-            m.PesoKg,
-            m.EdadAnios,
-            m.Discapacidad,
-            m.Imagen
-        FROM dbo.Mascota m
-        WHERE m.IdMascota = @id;
-    ";
+SELECT 
+    m.Nombre                         AS Mascota,
+    m.Especie, 
+    m.Raza, 
+    m.Sexo,
+    m.PesoKg,
+    CASE WHEN COL_LENGTH('dbo.Mascota','EdadAnios') IS NOT NULL THEN m.EdadAnios ELSE NULL END       AS EdadAnios,
+    CASE WHEN COL_LENGTH('dbo.Mascota','EdadTexto') IS NOT NULL THEN m.EdadTexto ELSE NULL END       AS EdadTexto,
+    CASE WHEN COL_LENGTH('dbo.Mascota','FechaNacimiento') IS NOT NULL THEN m.FechaNacimiento ELSE NULL END AS FechaNacimiento,
+    m.Discapacidad,
+    m.Imagen
+FROM dbo.Mascota m
+WHERE m.IdMascota = @id;";
 
             using (SqlConnection con = _db.AbrirConexion())
             using (SqlCommand cmd = new SqlCommand(sql, con))
@@ -66,10 +61,16 @@ namespace AniCLinic
                     lblEspecie.Text = dr["Especie"]?.ToString() ?? "-";
                     lblRaza.Text = dr["Raza"]?.ToString() ?? "-";
                     lblSexo.Text = dr["Sexo"]?.ToString() ?? "-";
-                    lblEdad.Text = dr["EdadAnios"] is DBNull ? "-" : dr["EdadAnios"].ToString();
                     lblDiscapacidad.Text = dr["Discapacidad"]?.ToString() ?? "-";
 
-                    // Fechas sugeridas (si no las guardas en DB)
+                    // ----- Edad -----
+                    string edadTexto = dr["EdadTexto"] is DBNull ? null : Convert.ToString(dr["EdadTexto"]);
+                    int? edadAnios = dr["EdadAnios"] is DBNull ? (int?)null : Convert.ToInt32(dr["EdadAnios"]);
+                    DateTime? fechaNac = dr["FechaNacimiento"] is DBNull ? (DateTime?)null : Convert.ToDateTime(dr["FechaNacimiento"]);
+
+                    lblEdad.Text = ConstruirEdad(edadTexto, edadAnios, fechaNac);
+
+                    // Fechas del carnet (si no las guardas en DB)
                     lblFechaEmision.Text = DateTime.Now.ToString("dd/MM/yyyy");
                     lblFechaVencimiento.Text = DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
 
@@ -85,11 +86,37 @@ namespace AniCLinic
                     }
                     else
                     {
-                        picFoto.Image = null; // o una imagen por defecto
+                        picFoto.Image = null; // opcional: imagen por defecto
                     }
-
                 }
             }
+        }
+
+        private string ConstruirEdad(string edadTexto, int? anios, DateTime? fechaNac)
+        {
+            // 1) Si guardaste EdadTexto (ej. “8 meses”), úsalo tal cual
+            if (!string.IsNullOrWhiteSpace(edadTexto))
+                return edadTexto;
+
+            // 2) Si tienes sólo años
+            if (anios.HasValue && anios.Value > 0)
+                return $"{anios.Value} años";
+
+            // 3) Si tienes fecha de nacimiento, calculamos años y meses
+            if (fechaNac.HasValue)
+            {
+                var hoy = DateTime.Today;
+                int a = hoy.Year - fechaNac.Value.Year;
+                int m = hoy.Month - fechaNac.Value.Month;
+                if (hoy.Day < fechaNac.Value.Day) m--;
+                if (m < 0) { a--; m += 12; }
+
+                if (a <= 0 && m > 0) return $"{m} meses";
+                if (a > 0 && m > 0) return $"{a} años {m} meses";
+                if (a > 0) return $"{a} años";
+            }
+
+            return "-";
         }
     }
 }

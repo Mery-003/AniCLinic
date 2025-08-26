@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -17,12 +11,16 @@ namespace AniCLinic
         {
             InitializeComponent();
         }
+
         private readonly ConexionBD _db = new ConexionBD();
-        private bool _accionesAgregadas = false;
+
         private void btnNuvCita_Click(object sender, EventArgs e)
         {
-            AggCita frm = new AggCita();
-            frm.Show();
+            using (var frm = new AggCita(SesionActual.IdEmpleado, SesionActual.NombreEmpleado))
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                    CargarCitas();
+            }
         }
 
         private void fCitas_Load(object sender, EventArgs e)
@@ -32,26 +30,28 @@ namespace AniCLinic
 
         private void CargarCitas()
         {
-            // Trae lo esencial y deja IDs ocultos para usarlos después
             string sql = @"
                 SELECT
-                    gc.IdCita,
-                    gc.IdPropietario,
-                    gc.IdMascota,
-                    gc.IdEmpleado,
+                    c.IdCita,
+                    c.IdPropietario,
+                    c.IdMascota,
+                    c.IdEmpleado,
                     m.Nombre AS Paciente,
                     m.Especie,
                     m.Raza,
-                    CAST(gc.FechaHora AS date) AS Fecha,
-                    CONVERT(varchar(5), gc.FechaHora, 108) AS Hora,
-                    gc.Motivo,
-                    gc.Estado
-                FROM dbo.GestionCita gc
-                INNER JOIN dbo.Mascota m      ON m.IdMascota = gc.IdMascota
-                -- (Opcional para mostrar el nombre del vet):
-                -- INNER JOIN dbo.Empleado e     ON e.IdEmpleado = gc.IdEmpleado
-                -- INNER JOIN dbo.Persona pv     ON pv.IdPersona = e.IdPersona
-                ORDER BY gc.FechaHora DESC;";
+                    CONVERT(date, c.FechaHora)            AS Fecha,
+                    CONVERT(varchar(5), c.FechaHora, 108) AS Hora,
+                    c.Motivo,
+                    c.Estado,
+                    CONCAT(pe.Nombre, ' ', pe.Apellido)   AS Propietario,
+                    CONCAT(pv.Nombre, ' ', pv.Apellido)   AS Veterinario
+                FROM dbo.GestionCita c
+                JOIN dbo.Mascota      m   ON m.IdMascota       = c.IdMascota
+                JOIN dbo.Propietario  pr  ON pr.IdPropietario  = c.IdPropietario
+                JOIN dbo.Persona      pe  ON pe.IdPersona      = pr.IdPersona
+                JOIN dbo.Empleado     e   ON e.IdEmpleado      = c.IdEmpleado
+                JOIN dbo.Persona      pv  ON pv.IdPersona      = e.IdPersona
+                ORDER BY c.FechaHora DESC;";
 
             try
             {
@@ -62,16 +62,16 @@ namespace AniCLinic
                     da.Fill(dt);
 
                     dgvCita.AutoGenerateColumns = true;
-                    dgvCita.Columns.Clear();           // por si definiste columnas en el diseñador
+                    dgvCita.Columns.Clear();
                     dgvCita.DataSource = dt;
 
-                    // Ocultar IDs
+                    // Ocultas
                     OcultarCol("IdCita");
-                    OcultarCol("IdPropietario");
-                    OcultarCol("IdMascota");
                     OcultarCol("IdEmpleado");
+                    OcultarCol("IdPropietario");
 
-                    // Encabezados amigables
+                    // Encabezados
+                    Renombrar("IdMascota", "Id Mascota");
                     Renombrar("Paciente", "Paciente");
                     Renombrar("Especie", "Especie");
                     Renombrar("Raza", "Raza");
@@ -79,15 +79,31 @@ namespace AniCLinic
                     Renombrar("Hora", "Hora");
                     Renombrar("Motivo", "Motivo");
                     Renombrar("Estado", "Estado");
+                    Renombrar("Propietario", "Propietario");
+                    Renombrar("Veterinario", "Veterinario");
 
-                    // Presentación
+                    // Orden
+                    if (dgvCita.Columns.Contains("Paciente"))
+                    {
+                        dgvCita.Columns["IdMascota"].DisplayIndex = 0;
+                        dgvCita.Columns["Paciente"].DisplayIndex = 1;
+                        dgvCita.Columns["Especie"].DisplayIndex = 2;
+                        dgvCita.Columns["Raza"].DisplayIndex = 3;
+                        dgvCita.Columns["Fecha"].DisplayIndex = 4;
+                        dgvCita.Columns["Hora"].DisplayIndex = 5;
+                        dgvCita.Columns["Motivo"].DisplayIndex = 6;
+                        dgvCita.Columns["Estado"].DisplayIndex = 7;
+                        dgvCita.Columns["Propietario"].DisplayIndex = 8;
+                        dgvCita.Columns["Veterinario"].DisplayIndex = 9;
+                    }
+
                     dgvCita.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvCita.ReadOnly = true;
                     dgvCita.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     dgvCita.MultiSelect = false;
 
-                    // Columnas botón (una sola vez)
-                    if (!_accionesAgregadas)
+                    // Botones
+                    if (!dgvCita.Columns.Contains("Editar"))
                     {
                         var colEditar = new DataGridViewButtonColumn
                         {
@@ -97,6 +113,11 @@ namespace AniCLinic
                             UseColumnTextForButtonValue = true,
                             Width = 70
                         };
+                        dgvCita.Columns.Add(colEditar);
+                    }
+
+                    if (!dgvCita.Columns.Contains("Eliminar"))
+                    {
                         var colEliminar = new DataGridViewButtonColumn
                         {
                             Name = "Eliminar",
@@ -105,14 +126,14 @@ namespace AniCLinic
                             UseColumnTextForButtonValue = true,
                             Width = 80
                         };
-                        dgvCita.Columns.Add(colEditar);
                         dgvCita.Columns.Add(colEliminar);
-                        _accionesAgregadas = true;
-
-                        // ✋ AÚN SIN LÓGICA: no enganchamos ningún evento aquí.
-                        // Cuando quieras darle funcionalidad:
-                        // dgvCita.CellContentClick += dgvCita_CellContentClick;
                     }
+
+                    dgvCita.Columns["Editar"].DisplayIndex = dgvCita.Columns.Count - 2;
+                    dgvCita.Columns["Eliminar"].DisplayIndex = dgvCita.Columns.Count - 1;
+
+                    dgvCita.CellContentClick -= dgvCita_CellContentClick;
+                    dgvCita.CellContentClick += dgvCita_CellContentClick;
                 }
             }
             catch (Exception ex)
@@ -142,11 +163,17 @@ namespace AniCLinic
             if (e.RowIndex < 0) return;
             var col = dgvCita.Columns[e.ColumnIndex].Name;
             var row = dgvCita.Rows[e.RowIndex];
-            int idCita = Convert.ToInt32(row.Cells["IdCita"].Value);
+
+            int idCita;
+            if (dgvCita.Columns.Contains("IdCita"))
+                idCita = Convert.ToInt32(row.Cells["IdCita"].Value);
+            else if (row.DataBoundItem is DataRowView drv)
+                idCita = Convert.ToInt32(drv["IdCita"]);
+            else
+                return;
 
             if (col == "Editar")
             {
-                // Reusar el mismo formulario, en modo edición
                 using (var f = new AggCita(idCita))
                 {
                     if (f.ShowDialog() == DialogResult.OK)
@@ -179,6 +206,5 @@ namespace AniCLinic
             catch (Exception ex) { MessageBox.Show("No se pudo eliminar: " + ex.Message); }
             finally { _db.CerrarConexion(); }
         }
-
     }
 }

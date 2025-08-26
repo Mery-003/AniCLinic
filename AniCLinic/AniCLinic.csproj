@@ -83,12 +83,6 @@
     <Compile Include="AgregarPaciente.Designer.cs">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Carnet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Carnet.Designer.cs">
-      <DependentUpon>Carnet.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConexionBD.cs" />
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csMascota.cs" />
@@ -136,6 +130,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SesionActual.cs" />
     <Compile Include="VerCarnet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,9 +151,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarPaciente.resx">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Carnet.resx">
-      <DependentUpon>Carnet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fCitas.resx">
       <DependentUpon>fCitas.cs</DependentUpon>

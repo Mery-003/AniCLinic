@@ -10,27 +10,11 @@ namespace AniCLinic
     public partial class fPacientes : Form
     {
         private readonly ConexionBD _db = new ConexionBD();
+        private bool _accionesAgregadas = false;
+
         public fPacientes()
         {
             InitializeComponent();
-            //csConexionBD conexionBD = new csConexionBD();
-            //dgvPacientes.DataSource = conexionBD.retornaRegistro("Select * from tblMascotas");
-        }
-
-        private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnAggPaciente_Click(object sender, EventArgs e)
-        {
-            AgregarPaciente frm = new AgregarPaciente();
-            frm.Show();
         }
 
         private void fPacientes_Load(object sender, EventArgs e)
@@ -38,28 +22,42 @@ namespace AniCLinic
             CargarMascotasConDueno();
         }
 
-        private bool _accionesAgregadas = false;
+        private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs e) { }
+        private void btnAgregar_Click(object sender, EventArgs e) { }
+
+        private void btnAggPaciente_Click(object sender, EventArgs e)
+        {
+            var frm = new AgregarPaciente();
+            frm.Show();
+        }
 
         private void CargarMascotasConDueno()
         {
             string sql = @"
-            SELECT
-                m.IdMascota,
-                pr.IdPropietario,
-                m.Nombre      AS Mascota,
-                m.Especie,
-                m.Sexo,
-                m.EdadAnios   AS Edad,
-                CONCAT(pe.Nombre, ' ', pe.Apellido) AS Dueno,
-                pe.Celular
-            FROM dbo.Mascota m
-            INNER JOIN dbo.PropietarioMascota pm
-                    ON pm.IdMascota = m.IdMascota AND pm.EsPrincipal = 1
-            INNER JOIN dbo.Propietario pr
-                    ON pr.IdPropietario = pm.IdPropietario
-            INNER JOIN dbo.Persona pe
-                    ON pe.IdPersona = pr.IdPersona
-            ORDER BY m.Nombre;";
+                SELECT
+                    m.IdMascota,
+                    pr.IdPropietario,
+                    m.Nombre AS Mascota,
+                    m.Especie,
+                    m.Sexo,
+                    m.EdadTexto AS Edad,  -- 👈 usa la columna calculada
+
+                    CASE 
+                        WHEN LTRIM(RTRIM(pe.Apellido)) IN ('', '(s/n)', 's/n', 'S/N') 
+                             THEN pe.Nombre
+                        ELSE CONCAT(pe.Nombre, ' ', pe.Apellido)
+                    END AS Dueno,
+
+                    pe.Celular
+                FROM dbo.Mascota m
+                INNER JOIN dbo.PropietarioMascota pm
+                        ON pm.IdMascota = m.IdMascota AND pm.EsPrincipal = 1
+                INNER JOIN dbo.Propietario pr
+                        ON pr.IdPropietario = pm.IdPropietario
+                INNER JOIN dbo.Persona pe
+                        ON pe.IdPersona = pr.IdPersona
+                ORDER BY m.Nombre;";
+
 
             try
             {
@@ -72,9 +70,18 @@ namespace AniCLinic
                     dgvDatos.AutoGenerateColumns = true;
                     dgvDatos.DataSource = dt;
 
-                    // Oculta IDs
-                    if (dgvDatos.Columns.Contains("IdMascota")) dgvDatos.Columns["IdMascota"].Visible = false;
-                    if (dgvDatos.Columns.Contains("IdPropietario")) dgvDatos.Columns["IdPropietario"].Visible = false;
+                    if (dgvDatos.Columns.Contains("Dueno"))
+                        dgvDatos.Columns["Dueno"].HeaderText = "Dueño";
+
+                    if (dgvDatos.Columns.Contains("Edad"))
+                        dgvDatos.Columns["Edad"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
+                    // 🔒 Oculta IDs
+                    if (dgvDatos.Columns.Contains("IdMascota"))
+                        dgvDatos.Columns["IdMascota"].Visible = true;   // <- corregido (antes estaba en true)
+                    if (dgvDatos.Columns.Contains("IdPropietario"))
+                        dgvDatos.Columns["IdPropietario"].Visible = false;
 
                     dgvDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvDatos.ReadOnly = true;
@@ -117,13 +124,7 @@ namespace AniCLinic
             {
                 _db.CerrarConexion();
             }
-        
-
         }
-
-
-        private void guna2GradientButton1_Click(object sender, EventArgs e) { }
-        private void eliminarpaciente_Click(object sender, EventArgs e) { }
 
         private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -136,7 +137,7 @@ namespace AniCLinic
 
             if (col == "Editar")
             {
-                using (var f = new AgregarPaciente(idPropietario, idMascota)) // <- nuevo ctor
+                using (var f = new AgregarPaciente(idPropietario, idMascota)) // ctor que recibe IDs
                 {
                     if (f.ShowDialog() == DialogResult.OK)
                         CargarMascotasConDueno();
@@ -144,8 +145,28 @@ namespace AniCLinic
             }
             else if (col == "Eliminar")
             {
-                if (MessageBox.Show("¿Eliminar esta mascota?\n\nSi es la única mascota del dueño, también se eliminará el propietario.",
-                    "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                // 1) Verificar si la mascota tiene citas
+                bool tieneCitas = MascotaTieneCitas(idMascota);
+
+                if (tieneCitas)
+                {
+                    // Advertencia adicional por citas
+                    var rCitas = MessageBox.Show(
+                        "⚠ Esta mascota tiene citas registradas.\n\n" +
+                        "Al eliminarla, también se eliminarán sus citas.\n\n" +
+                        "¿Desea continuar?",
+                        "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (rCitas == DialogResult.No) return;
+                }
+
+                // 2) Advertencia general (mascota + posible propietario)
+                var rGeneral = MessageBox.Show(
+                    "¿Eliminar esta mascota?\n\n" +
+                    "Si es la única mascota del dueño, también se eliminará el propietario.",
+                    "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (rGeneral == DialogResult.Yes)
                 {
                     if (EliminarMascotaYPropietarioSiCorresponde(idPropietario, idMascota))
                         CargarMascotasConDueno();
@@ -153,6 +174,29 @@ namespace AniCLinic
             }
         }
 
+        /// <summary>
+        /// Valida si la mascota tiene citas. 
+        /// Nota: Usamos la tabla GestionCita porque tu eliminación borra ahí.
+        /// </summary>
+        private bool MascotaTieneCitas(int idMascota)
+        {
+            using (var conn = new SqlConnection(_db.CadenaConexion))
+            {
+                conn.Open();
+                const string query = "SELECT COUNT(*) FROM GestionCita WHERE IdMascota = @idMascota";
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idMascota", idMascota);
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Elimina en transacción: RegistroClinico → GestionCita → PropietarioMascota → Mascota (si queda sin dueños)
+        /// y Propietario (si queda sin mascotas) → Persona (si no es Empleado).
+        /// </summary>
         private bool EliminarMascotaYPropietarioSiCorresponde(int idPropietario, int idMascota)
         {
             var cn = _db.AbrirConexion();
@@ -203,15 +247,15 @@ namespace AniCLinic
                     cmd.ExecuteNonQuery();
                 }
 
-                // 4) ¿La mascota quedó sin dueños? Si sí, eliminar mascota.
-                int dueñosRestantes;
+                // 4) ¿La mascota quedó sin dueños? Si sí, eliminar Mascota
+                int duenosRestantes;
                 using (var cmd = new SqlCommand(
                     "SELECT COUNT(*) FROM PropietarioMascota WHERE IdMascota=@m", cn, tx))
                 {
                     cmd.Parameters.AddWithValue("@m", idMascota);
-                    dueñosRestantes = (int)cmd.ExecuteScalar();
+                    duenosRestantes = (int)cmd.ExecuteScalar();
                 }
-                if (dueñosRestantes == 0)
+                if (duenosRestantes == 0)
                 {
                     using (var cmd = new SqlCommand(
                         "DELETE FROM Mascota WHERE IdMascota=@m", cn, tx))
@@ -221,7 +265,7 @@ namespace AniCLinic
                     }
                 }
 
-                // 5) Si el propietario no tenía más mascotas, eliminar Propietario
+                // 5) Si el propietario no tenía más mascotas, eliminar Propietario y quizá Persona
                 if (totalMascotasProp == 1)
                 {
                     using (var cmd = new SqlCommand(
@@ -266,5 +310,7 @@ namespace AniCLinic
             }
         }
 
+        private void guna2GradientButton1_Click(object sender, EventArgs e) { }
+        private void eliminarpaciente_Click(object sender, EventArgs e) { }
     }
 }

@@ -11,7 +11,7 @@ namespace AniCLinic
     {
         // 👇 Cambia a tu servidor si hace falta
         private static string cadena =
-     @"Data Source=.;Initial Catalog=AniClinic;User ID=sa;Password=1234;Encrypt=False";
+        @"Data Source=.\SQLEXPRESS;Initial Catalog=AniClinic;User ID=sa;Password=abcdef;Encrypt=False";
 
 
 
@@ -27,5 +27,7 @@ namespace AniCLinic
         {
             if (cn.State == System.Data.ConnectionState.Open) cn.Close();
         }
+        public string CadenaConexion => cadena;
+
     }
 }

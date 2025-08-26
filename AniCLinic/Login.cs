@@ -125,6 +125,11 @@ WHERE u.Usuario = @u;", cn))
                 // Abrir Menu si autenticó
                 if (sesion != null)
                 {
+                    // >>>>>>>>>>>>>  LÍNEAS AGREGADAS  <<<<<<<<<<<<<
+                    SesionActual.IdEmpleado = sesion.IdEmpleado;                 // int real
+                    SesionActual.NombreEmpleado = sesion.NombreCompleto;         // "Nombre Apellido"
+                    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
                     this.Hide();
                     using (var f = new Menu(sesion))
                     {

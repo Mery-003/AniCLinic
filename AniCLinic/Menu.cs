@@ -96,7 +96,7 @@ namespace AniCLinic
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            nLogin.Visible = true;
+            
             this.Close();
         }
 
@@ -126,7 +126,7 @@ namespace AniCLinic
 
         private void btncarnet_Click(object sender, EventArgs e)
         {
-            AbrirEnPanel(pnlMenu1, new Carnet());
+            AbrirEnPanel(pnlMenu1, new FormularioCarnet());
         }
 
         private void btnhisto_Click_1(object sender, EventArgs e)
