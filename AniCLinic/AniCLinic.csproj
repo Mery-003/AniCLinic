@@ -83,7 +83,6 @@
     <Compile Include="AgregarPaciente.Designer.cs">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConexionBD.cs" />
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csMascota.cs" />
     <Compile Include="fCitas.cs">

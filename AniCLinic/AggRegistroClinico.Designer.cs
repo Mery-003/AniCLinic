@@ -92,7 +92,6 @@
             this.txtMotivo.SelectedText = "";
             this.txtMotivo.Size = new System.Drawing.Size(147, 36);
             this.txtMotivo.TabIndex = 52;
-            this.txtMotivo.TextChanged += new System.EventHandler(this.txtMotivo_TextChanged);
             // 
             // txtDiagnostico
             // 
@@ -115,7 +114,6 @@
             this.txtDiagnostico.SelectedText = "";
             this.txtDiagnostico.Size = new System.Drawing.Size(139, 36);
             this.txtDiagnostico.TabIndex = 51;
-            this.txtDiagnostico.TextChanged += new System.EventHandler(this.txtDiagnostico_TextChanged);
             // 
             // guna2HtmlLabel4
             // 
@@ -160,7 +158,6 @@
             this.txtPropietario.SelectedText = "";
             this.txtPropietario.Size = new System.Drawing.Size(139, 36);
             this.txtPropietario.TabIndex = 48;
-            this.txtPropietario.TextChanged += new System.EventHandler(this.txtPropietario_TextChanged);
             // 
             // guna2HtmlLabel2
             // 
@@ -204,7 +201,6 @@
             this.txtTratamiento.SelectedText = "";
             this.txtTratamiento.Size = new System.Drawing.Size(310, 36);
             this.txtTratamiento.TabIndex = 54;
-            this.txtTratamiento.TextChanged += new System.EventHandler(this.txtTratamiento_TextChanged);
             // 
             // guna2HtmlLabel5
             // 
@@ -238,7 +234,6 @@
             this.txtReceta.SelectedText = "";
             this.txtReceta.Size = new System.Drawing.Size(310, 69);
             this.txtReceta.TabIndex = 56;
-            this.txtReceta.TextChanged += new System.EventHandler(this.txtReceta_TextChanged);
             // 
             // guna2HtmlLabel6
             // 
@@ -272,7 +267,6 @@
             this.txtVeterinario.SelectedText = "";
             this.txtVeterinario.Size = new System.Drawing.Size(310, 36);
             this.txtVeterinario.TabIndex = 58;
-            this.txtVeterinario.TextChanged += new System.EventHandler(this.txtVeterinario_TextChanged);
             // 
             // guna2HtmlLabel7
             // 
@@ -302,7 +296,6 @@
             this.btnCancelar.Size = new System.Drawing.Size(91, 45);
             this.btnCancelar.TabIndex = 91;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -321,7 +314,6 @@
             this.btnAceptar.Size = new System.Drawing.Size(91, 45);
             this.btnAceptar.TabIndex = 90;
             this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // fechahistorial
             // 
@@ -338,7 +330,6 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // guna2HtmlLabel8
             // 
@@ -372,7 +363,6 @@
             this.txtMascota.SelectedText = "";
             this.txtMascota.Size = new System.Drawing.Size(147, 36);
             this.txtMascota.TabIndex = 96;
-            this.txtMascota.TextChanged += new System.EventHandler(this.txtMascota_TextChanged);
             // 
             // label2
             // 
@@ -437,7 +427,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AggRegistroClinico";
             this.Text = "AggRegistroClinico";
-            this.Load += new System.EventHandler(this.AggRegistroClinico_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

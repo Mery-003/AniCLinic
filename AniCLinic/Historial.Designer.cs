@@ -88,7 +88,6 @@
             this.dgvDatos.ThemeStyle.RowsStyle.Height = 22;
             this.dgvDatos.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDatos.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
             // 
             // btnAggPaciente
             // 
@@ -106,7 +105,6 @@
             this.btnAggPaciente.Size = new System.Drawing.Size(131, 41);
             this.btnAggPaciente.TabIndex = 16;
             this.btnAggPaciente.Text = "Ver Historial";
-            this.btnAggPaciente.Click += new System.EventHandler(this.btnAggPaciente_Click);
             // 
             // guna2Panel2
             // 
@@ -140,7 +138,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Historial";
             this.Text = "Historial";
-            this.Load += new System.EventHandler(this.Historial_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

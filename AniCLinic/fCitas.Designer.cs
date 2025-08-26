@@ -101,7 +101,6 @@
             this.dgvCita.ThemeStyle.RowsStyle.Height = 22;
             this.dgvCita.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCita.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvCita.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCita_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -155,7 +154,6 @@
             this.btnNuvCita.Size = new System.Drawing.Size(131, 41);
             this.btnNuvCita.TabIndex = 12;
             this.btnNuvCita.Text = "+ Nueva Cita";
-            this.btnNuvCita.Click += new System.EventHandler(this.btnNuvCita_Click);
             // 
             // guna2Panel2
             // 
@@ -189,7 +187,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "fCitas";
             this.Text = "1º1";
-            this.Load += new System.EventHandler(this.fCitas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCita)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

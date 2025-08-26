@@ -8,17 +8,15 @@ namespace AniCLinic
 {
     public partial class VerCarnet : Form
     {
-        private readonly ConexionBD _db = new ConexionBD();
 
         public VerCarnet(int idMascota)
         {
             InitializeComponent();
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e) => Close();
-
-        private void VerCarnet_Load(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e)
         {
+            Close();
         }
 
     }

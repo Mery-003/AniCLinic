@@ -13,26 +13,23 @@ namespace AniCLinic
 {
     public partial class VerHistorial : Form
     {
-        private readonly ConexionBD _db = new ConexionBD();
 
         
-        public VerHistorial(int idRegistroClinico)
+        public VerHistorial()
         {
+
         }
-        public VerHistorial(int idMascota, bool listarPorMascota)
-        {
-          
-        }
+
 
         private void VerHistorial_Load(object sender, EventArgs e)
         {
             
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e) => Close();
+        private void btnCerrar_Click(object sender, EventArgs e) 
+        { 
+            Close(); 
+        }
 
-       
-        private void guna2Button3_Click(object sender, EventArgs e) { }
-        private void guna2HtmlLabel3_Click(object sender, EventArgs e) { }
     }
 }

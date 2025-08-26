@@ -82,7 +82,6 @@
             this.PanelMenu.Name = "PanelMenu";
             this.PanelMenu.Size = new System.Drawing.Size(256, 693);
             this.PanelMenu.TabIndex = 0;
-            this.PanelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelMenu_Paint);
             // 
             // panelReporteriaSubmenu
             // 
@@ -400,7 +399,6 @@
             this.pnlMenu1.Name = "pnlMenu1";
             this.pnlMenu1.Size = new System.Drawing.Size(1059, 693);
             this.pnlMenu1.TabIndex = 12;
-            this.pnlMenu1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnMinimizarMenu
             // 
@@ -464,7 +462,6 @@
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
-            this.Load += new System.EventHandler(this.Menu_Load);
             this.PanelMenu.ResumeLayout(false);
             this.PanelMenu.PerformLayout();
             this.panelReporteriaSubmenu.ResumeLayout(false);

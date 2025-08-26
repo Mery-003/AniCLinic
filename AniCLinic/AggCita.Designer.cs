@@ -107,7 +107,6 @@
             this.txtCedulaCita.SelectedText = "";
             this.txtCedulaCita.Size = new System.Drawing.Size(139, 36);
             this.txtCedulaCita.TabIndex = 36;
-            this.txtCedulaCita.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
             // 
             // btnBuscarMascota
             // 
@@ -127,7 +126,6 @@
             this.btnBuscarMascota.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.btnBuscarMascota.Size = new System.Drawing.Size(24, 22);
             this.btnBuscarMascota.TabIndex = 1;
-            this.btnBuscarMascota.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
             // guna2HtmlLabel3
             // 
@@ -362,7 +360,6 @@
             this.btnCancelar.Size = new System.Drawing.Size(91, 45);
             this.btnCancelar.TabIndex = 89;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -381,7 +378,6 @@
             this.btnAceptar.Size = new System.Drawing.Size(91, 45);
             this.btnAceptar.TabIndex = 88;
             this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // txtVeterinario
             // 

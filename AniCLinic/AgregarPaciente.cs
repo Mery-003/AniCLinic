@@ -15,7 +15,6 @@ namespace AniCLinic
 {
     public partial class AgregarPaciente : Form
     {
-        private readonly ConexionBD _db = new ConexionBD();
 
         public AgregarPaciente()
         {
@@ -24,26 +23,6 @@ namespace AniCLinic
         private void btncancelar2_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void AgregarPaciente_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnFotoPropietario_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnFotoMascota_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void guna2HtmlLabel10_Click(object sender, EventArgs e)
-        {
         }
     }
 }

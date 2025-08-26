@@ -292,7 +292,6 @@
             this.guna2HtmlLabel10.Size = new System.Drawing.Size(32, 17);
             this.guna2HtmlLabel10.TabIndex = 48;
             this.guna2HtmlLabel10.Text = "Peso:";
-            this.guna2HtmlLabel10.Click += new System.EventHandler(this.guna2HtmlLabel10_Click);
             // 
             // guna2Button4
             // 
@@ -669,7 +668,6 @@
             this.btnFotoMascota.Size = new System.Drawing.Size(121, 45);
             this.btnFotoMascota.TabIndex = 1;
             this.btnFotoMascota.Text = "Seleccionar";
-            this.btnFotoMascota.Click += new System.EventHandler(this.btnFotoMascota_Click);
             // 
             // guna2CirclePictureBox4
             // 
@@ -1026,7 +1024,6 @@
             this.btnFotoPropietario.Size = new System.Drawing.Size(122, 45);
             this.btnFotoPropietario.TabIndex = 48;
             this.btnFotoPropietario.Text = "Seleccionar";
-            this.btnFotoPropietario.Click += new System.EventHandler(this.btnFotoPropietario_Click);
             // 
             // picPropietario
             // 
@@ -1103,7 +1100,6 @@
             this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseTransparentBackground = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -1198,7 +1194,6 @@
             this.Name = "AgregarPaciente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AgregarPaciente";
-            this.Load += new System.EventHandler(this.AgregarPaciente_Load);
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

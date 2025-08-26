@@ -54,7 +54,6 @@
             this.btnAggPaciente.Size = new System.Drawing.Size(131, 41);
             this.btnAggPaciente.TabIndex = 9;
             this.btnAggPaciente.Text = "+ Agregar ";
-            this.btnAggPaciente.Click += new System.EventHandler(this.btnAggPaciente_Click);
             // 
             // guna2Panel2
             // 
@@ -115,7 +114,6 @@
             this.dgvDatos.ThemeStyle.RowsStyle.Height = 22;
             this.dgvDatos.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDatos.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
             // 
             // guna2HtmlLabel1
             // 
@@ -140,7 +138,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "fPacientes";
             this.Text = "fPacientes";
-            this.Load += new System.EventHandler(this.fPacientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
