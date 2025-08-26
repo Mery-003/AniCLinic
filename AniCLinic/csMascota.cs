@@ -12,30 +12,19 @@ namespace AniCLinic
 {
     internal class csMascota
     {
-        int id {  get; set; }
         string nombre { get; set; }
-        string propietario { get; set; }
         string especie {  get; set; }
         string raza {  get; set; }
         string sexo { get; set; }
-        string edad {  get; set; }
+        string edad { get; set; }
+        decimal peso { get; set; }
         string discapacidad { get; set; }
         byte[] foto { get; set; }
         
-        public int Id
-        {
-            get {  return id; }
-            set { id = value; }
-        }
         public string Nombre
         {
             get { return nombre; }
             set { nombre = value; }
-        }
-        public string Propietario
-        {
-            get { return propietario; } 
-            set { propietario = value; }
         }
         public string Especie
         {
@@ -57,6 +46,11 @@ namespace AniCLinic
             get { return edad; }
             set { edad = value; }
         }
+        public decimal Peso
+        {
+            get { return peso; }
+            set { peso = value; }
+        }
         public string Discapacidad
         {
             get { return discapacidad; }
@@ -68,24 +62,22 @@ namespace AniCLinic
             set { foto = value; }
         }
         public csMascota() { }
-        public csMascota(int idp,string nom, string prop, string esp, string raz, string sex, string ed, string disc, byte[] fot)
+        public csMascota(string nom, string esp, string raz, string sex, string ed, decimal pes ,string disc, byte[] fot)
         {
-            Id = idp;
             Nombre = nom;
-            Propietario = prop;
             Especie = esp;
             Raza = raz;
             Sexo = sex;
             Edad = ed;
+            Peso = pes;
             Discapacidad = disc;
             Foto = fot;
         }
         public int agregarMascota()
         {
             csConexionBD conexionBD = new csConexionBD();
-            
-            int retorna = conexionBD.guardarRegistro("insert into tblMascotas " +
-                "values("+ Id + ",'"+ Nombre +"','"+ Propietario +"','"+ Especie +"','"+ Raza +"','"+ Sexo +"','"+ Edad +"','"+ Discapacidad +"', @Foto)", Foto);
+            int retorna = conexionBD.guardarRegistro("insert into Mascota " +
+                "values(@Foto, '"+ Nombre +"','"+ Especie +"','"+ Raza +"','"+ Sexo + "', '"+ Edad +"','" + Peso +"','" + Discapacidad +"'", Foto);
             return retorna;
         }
     }

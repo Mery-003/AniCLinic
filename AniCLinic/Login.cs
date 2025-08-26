@@ -22,11 +22,6 @@ namespace AniCLinic
 
             txtPassword.UseSystemPasswordChar = true;
 
-            chkVer.CheckedChanged += (s, e) =>
-            {
-                txtPassword.UseSystemPasswordChar = !chkVer.Checked;
-            };
-
         }
 
 
@@ -42,8 +37,27 @@ namespace AniCLinic
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            
+            csConexionBD conexionBD = new csConexionBD();
+            int inicio = conexionBD.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
+            if (inicio > 0)
+            {
+                Menu menu = new Menu(this);
+                this.Hide();
+                menu.ShowDialog();
+            }
+            else
+                MessageBox.Show("Usuario o contraseña incorrectos");
+
         }
 
+        private void btnVerPass_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = false;
+        }
+
+        private void btnVerPass_MouseUp(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = true;
+        }
     }
 }

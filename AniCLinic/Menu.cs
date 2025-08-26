@@ -14,12 +14,16 @@ namespace AniCLinic
 {
     public partial class Menu : Form
     {
-
+        Login login;
         public Menu()
         {
             InitializeComponent();
         }
-
+        public Menu(Login l)
+        {
+            InitializeComponent();
+            login = l;
+        }
 
         private void btnMaximizarMenu_Click(object sender, EventArgs e)
         {
@@ -68,7 +72,7 @@ namespace AniCLinic
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            
+            login.Show();
             this.Close();
         }
 

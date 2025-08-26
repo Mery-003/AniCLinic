@@ -35,14 +35,14 @@
             this.lblBienvenido = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
+            this.btnVerPass = new Guna.UI2.WinForms.Guna2Button();
             this.btnMinimizar = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnCerrar = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtUsuario = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtUsuario = new Guna.UI2.WinForms.Guna2TextBox();
-            this.chkVer = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.guna2GradientPanel1.SuspendLayout();
@@ -84,7 +84,7 @@
             this.lblBienvenido.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBienvenido.Location = new System.Drawing.Point(552, 115);
             this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(205, 48);
+            this.lblBienvenido.Size = new System.Drawing.Size(165, 39);
             this.lblBienvenido.TabIndex = 4;
             this.lblBienvenido.Text = "¡Bienvenido!";
             // 
@@ -94,7 +94,7 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(420, 38);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(237, 23);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(196, 19);
             this.guna2HtmlLabel1.TabIndex = 5;
             this.guna2HtmlLabel1.Text = "Huellas pequeñas, amor infinito.";
             // 
@@ -104,6 +104,31 @@
             this.guna2BorderlessForm1.ContainerControl = this;
             this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
             this.guna2BorderlessForm1.TransparentWhileDrag = true;
+            // 
+            // btnVerPass
+            // 
+            this.btnVerPass.BackColor = System.Drawing.Color.Transparent;
+            this.btnVerPass.CustomizableEdges.BottomLeft = false;
+            this.btnVerPass.CustomizableEdges.BottomRight = false;
+            this.btnVerPass.CustomizableEdges.TopLeft = false;
+            this.btnVerPass.CustomizableEdges.TopRight = false;
+            this.btnVerPass.DisabledState.BorderColor = System.Drawing.Color.Transparent;
+            this.btnVerPass.DisabledState.CustomBorderColor = System.Drawing.Color.Transparent;
+            this.btnVerPass.DisabledState.FillColor = System.Drawing.Color.Transparent;
+            this.btnVerPass.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnVerPass.FillColor = System.Drawing.Color.Transparent;
+            this.btnVerPass.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnVerPass.ForeColor = System.Drawing.Color.White;
+            this.btnVerPass.HoverState.FillColor = System.Drawing.Color.Transparent;
+            this.btnVerPass.Image = global::AniCLinic.Properties.Resources.ojo;
+            this.btnVerPass.Location = new System.Drawing.Point(721, 263);
+            this.btnVerPass.Name = "btnVerPass";
+            this.btnVerPass.PressedDepth = 0;
+            this.btnVerPass.Size = new System.Drawing.Size(40, 36);
+            this.btnVerPass.TabIndex = 10;
+            this.btnVerPass.UseTransparentBackground = true;
+            this.btnVerPass.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnVerPass_MouseDown);
+            this.btnVerPass.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnVerPass_MouseUp);
             // 
             // btnMinimizar
             // 
@@ -130,36 +155,6 @@
             this.btnCerrar.TabIndex = 8;
             this.btnCerrar.TabStop = false;
             this.btnCerrar.Click += new System.EventHandler(this.guna2PictureBox1_Click);
-            // 
-            // guna2GradientPanel1
-            // 
-            this.guna2GradientPanel1.BackgroundImage = global::AniCLinic.Properties.Resources.Imagen_de_WhatsApp_2025_08_07_a_las_00_19_56_2ba549bd;
-            this.guna2GradientPanel1.Controls.Add(this.guna2HtmlLabel4);
-            this.guna2GradientPanel1.Controls.Add(this.guna2HtmlLabel3);
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(0, -5);
-            this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(395, 532);
-            this.guna2GradientPanel1.TabIndex = 7;
-            // 
-            // guna2HtmlLabel4
-            // 
-            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(125, 55);
-            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(231, 23);
-            this.guna2HtmlLabel4.TabIndex = 8;
-            this.guna2HtmlLabel4.Text = "Cuidamos a tus mejores amigos";
-            // 
-            // guna2HtmlLabel3
-            // 
-            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(105, 30);
-            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(109, 38);
-            this.guna2HtmlLabel3.TabIndex = 8;
-            this.guna2HtmlLabel3.Text = "AniClinic";
             // 
             // txtPassword
             // 
@@ -217,22 +212,43 @@
             this.txtUsuario.Size = new System.Drawing.Size(248, 36);
             this.txtUsuario.TabIndex = 1;
             // 
-            // chkVer
+            // guna2GradientPanel1
             // 
-            this.chkVer.AutoSize = true;
-            this.chkVer.Location = new System.Drawing.Point(771, 273);
-            this.chkVer.Name = "chkVer";
-            this.chkVer.Size = new System.Drawing.Size(18, 17);
-            this.chkVer.TabIndex = 10;
-            this.chkVer.UseVisualStyleBackColor = true;
+            this.guna2GradientPanel1.BackgroundImage = global::AniCLinic.Properties.Resources.Imagen_de_WhatsApp_2025_08_07_a_las_00_19_56_2ba549bd;
+            this.guna2GradientPanel1.Controls.Add(this.guna2HtmlLabel4);
+            this.guna2GradientPanel1.Controls.Add(this.guna2HtmlLabel3);
+            this.guna2GradientPanel1.Location = new System.Drawing.Point(0, -5);
+            this.guna2GradientPanel1.Name = "guna2GradientPanel1";
+            this.guna2GradientPanel1.Size = new System.Drawing.Size(395, 532);
+            this.guna2GradientPanel1.TabIndex = 7;
+            // 
+            // guna2HtmlLabel4
+            // 
+            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(125, 55);
+            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(187, 19);
+            this.guna2HtmlLabel4.TabIndex = 8;
+            this.guna2HtmlLabel4.Text = "Cuidamos a tus mejores amigos";
+            // 
+            // guna2HtmlLabel3
+            // 
+            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(105, 30);
+            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(91, 32);
+            this.guna2HtmlLabel3.TabIndex = 8;
+            this.guna2HtmlLabel3.Text = "AniClinic";
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(863, 516);
-            this.Controls.Add(this.chkVer);
+            this.Controls.Add(this.btnVerPass);
             this.Controls.Add(this.btnMinimizar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.guna2HtmlLabel1);
@@ -270,7 +286,7 @@
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2PictureBox btnCerrar;
         private Guna.UI2.WinForms.Guna2PictureBox btnMinimizar;
-        private System.Windows.Forms.CheckBox chkVer;
+        private Guna.UI2.WinForms.Guna2Button btnVerPass;
     }
 }
 

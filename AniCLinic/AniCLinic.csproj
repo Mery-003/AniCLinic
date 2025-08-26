@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csMascota.cs" />
+    <Compile Include="csPropietario.cs" />
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +274,7 @@
     <Content Include="Resources\article-fill.png" />
     <Content Include="Resources\file-3-fill.png" />
     <Content Include="Resources\info-card-fill.png" />
+    <None Include="Resources\ojo.png" />
     <Content Include="Resources\shake-hands-fill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

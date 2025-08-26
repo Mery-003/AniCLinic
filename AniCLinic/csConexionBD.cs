@@ -67,7 +67,27 @@ namespace AniCLinic
             }
             return true;
         }
-
+        public int login(string sentencia, string user, string pass)
+        {
+            try
+            {
+                abrirConexion();
+                oCom = new SqlCommand(sentencia, oCon);
+                oDTR = oCom.ExecuteReader();
+                while (oDTR.Read())
+                {
+                    if (oDTR["Usuario"].ToString().ToLower() == user.ToLower() && oDTR["Password"].ToString() == pass)
+                        return 1;
+                }
+                cerrarConexion();
+            } 
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 0;
+            }
+            return 0;
+        }
         public DataTable retornaRegistro(string sentencia)
         {
             abrirConexion();
@@ -93,28 +113,6 @@ namespace AniCLinic
             { 
                 MessageBox.Show(ex.Message); 
                 return result; 
-            }
-        }
-        public int devolverID()
-        {
-            string sentencia = "SELECT MAX([ID Mascota]) AS UltimoID FROM tblMascotas;";
-            int result = 0;
-            try
-            {
-                abrirConexion();
-                oCom = new SqlCommand(sentencia, oCon);
-                oDTR = oCom.ExecuteReader();
-                if (oDTR.Read())
-                    if (!oDTR.IsDBNull(0))
-                        result = oDTR.GetInt32(0);
-                oDTR.Close();
-                cerrarConexion();
-                return result + 1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return result;
             }
         }
     }
