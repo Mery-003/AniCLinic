@@ -15,5 +15,9 @@ namespace AniCLinic
             InitializeComponent();
         }
 
+        private void dgvCuentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

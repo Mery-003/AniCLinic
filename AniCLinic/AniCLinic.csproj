@@ -270,6 +270,8 @@
     <None Include="Resources\3003596.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\1892641.png" />
+    <None Include="Resources\4767994.png" />
     <Content Include="Resources\841791.png" />
     <Content Include="Resources\article-fill.png" />
     <Content Include="Resources\file-3-fill.png" />

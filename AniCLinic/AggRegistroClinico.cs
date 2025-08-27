@@ -14,5 +14,10 @@ namespace AniCLinic
             InitializeComponent();
 
         }
+
+        private void fechahistorial_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

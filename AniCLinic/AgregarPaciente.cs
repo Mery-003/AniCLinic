@@ -24,5 +24,10 @@ namespace AniCLinic
         {
             this.Close();
         }
+
+        private void guna2HtmlLabel14_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
