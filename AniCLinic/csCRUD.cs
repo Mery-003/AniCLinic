@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -19,6 +15,7 @@ namespace AniCLinic
 
         public csCRUD() { }
 
+        // === EXISTENTE (sin parámetros)
         public DataTable cargarBDData(string sentencia)
         {
             try
@@ -37,6 +34,31 @@ namespace AniCLinic
             return oDT;
         }
 
+        // === NUEVO (con parámetros)
+        public DataTable cargarBDData(string sentencia, params SqlParameter[] parametros)
+        {
+            try
+            {
+                conexion = new csConexionBD();
+                conexion.abrirConexion();
+                oCom = new SqlCommand(sentencia, conexion.obtenerConexion());
+                if (parametros != null)
+                {
+                    foreach (var p in parametros)
+                        oCom.Parameters.Add(p);
+                }
+                oDA = new SqlDataAdapter(oCom);
+                oDT = new DataTable();
+                oDA.Fill(oDT);
+                conexion.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+            return oDT;
+        }
+
         public bool agregarBD(string sentencia, params SqlParameter[] parametros)
         {
             try
@@ -44,12 +66,8 @@ namespace AniCLinic
                 conexion = new csConexionBD();
                 conexion.abrirConexion();
                 oCom = new SqlCommand(sentencia, conexion.obtenerConexion());
-
                 foreach (var parametro in parametros)
-                {
                     oCom.Parameters.Add(parametro);
-                }
-
                 oCom.ExecuteNonQuery();
                 conexion.cerrarConexion();
                 return true;
@@ -88,12 +106,8 @@ namespace AniCLinic
                 conexion.abrirConexion();
                 oCom = new SqlCommand(sentencia, conexion.obtenerConexion());
                 oCom.Parameters.AddWithValue("@id", id);
-
                 foreach (var parametro in parametros)
-                {
                     oCom.Parameters.Add(parametro);
-                }
-
                 oCom.ExecuteNonQuery();
                 conexion.cerrarConexion();
                 return true;
@@ -121,6 +135,7 @@ namespace AniCLinic
             }
             return reader;
         }
+
         public int login(string sentencia, string user, string pass)
         {
             try
@@ -140,6 +155,31 @@ namespace AniCLinic
                 return 0;
             }
             return 0;
+        }
+
+        // === Helper para AgregarPaciente (carga TODO por ID)
+        public DataTable ObtenerMascotaDetalladaPorId(int idMascota)
+        {
+            string sql = @"
+SELECT
+    M.IdMascota,
+    M.Nombre,
+    M.Especie,
+    M.Raza,
+    M.Sexo,
+    M.Edad,
+    M.PesoKg,
+    M.Discapacidad,
+    M.Imagen,
+    P.IdPersona,
+    P.Cedula,
+    P.Nombre AS NombreProp,
+    P.Apellido AS ApellidoProp,
+    (P.Nombre + ' ' + P.Apellido) AS Propietario
+FROM Mascota M
+INNER JOIN Persona P ON P.IdPersona = M.IdPersona
+WHERE M.IdMascota = @Id;";
+            return cargarBDData(sql, new SqlParameter("@Id", idMascota));
         }
     }
 }

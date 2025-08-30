@@ -3,12 +3,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -17,8 +14,15 @@ namespace AniCLinic
     {
         csCRUD crud = new csCRUD();
         fPacientes fp;
+
+        // IDs para edición
         public int IdMascota { get; set; }
         public int IdPropietario { get; set; }
+
+        // Estado y respaldo de fotos al editar
+        private bool _esEdicion = false;
+        private byte[] _fotoMascotaOriginal = null;
+        private byte[] _fotoPropietarioOriginal = null;
 
         public AgregarPaciente()
         {
@@ -31,117 +35,291 @@ namespace AniCLinic
             fp = p;
         }
 
+        // === Abrir en modo EDICIÓN ===
         public AgregarPaciente(fPacientes p, int idMascota)
         {
             InitializeComponent();
             fp = p;
+            _esEdicion = true;
 
             if (idMascota != 0)
             {
                 csMascota mascota = cargarMascota(idMascota);
+                if (mascota == null)
+                {
+                    MessageBox.Show("No se encontró la mascota.");
+                    return;
+                }
+
                 csPropietario propietario = cargarPropietario(mascota.IdPersona);
-                txtMascotaNombre.Text = mascota.Nombre;
-                cmbEspecie.SelectedItem = mascota.Especie;
-                cmbRaza.SelectedItem = mascota.Raza;
-                cmbSexo.SelectedItem = mascota.Sexo;
-                txtEdad.Text = mascota.Edad;
-                txtPeso.Text = mascota.Peso.ToString();
-                cmbDiscapacidad.SelectedItem = mascota.Discapacidad;
-                picMascota.Image = Image.FromStream(new MemoryStream(mascota.Foto));
-                txtNombreD.Text = propietario.Nombre;
-                txtApellido.Text = propietario.Apellido;
-                txtCedula.Text = propietario.Cedula;
-                txtCelular.Text = propietario.Celular;
-                txtCorreo.Text = propietario.Correo;
-                txtDireccion.Text = propietario.Direccion;
-                picPropietario.Image = Image.FromStream(new MemoryStream(propietario.Foto));
+                if (propietario == null)
+                {
+                    MessageBox.Show("No se encontró el propietario.");
+                    return;
+                }
+
+                // Mascota
+                txtMascotaNombre.Text = mascota.Nombre ?? "";
+                cmbEspecie.Text = mascota.Especie ?? "";
+                cmbRaza.Text = mascota.Raza ?? "";
+                cmbSexo.Text = mascota.Sexo ?? "";
+                txtEdad.Text = (mascota.Edad ?? "").Split(' ')[0]; // si venía "12 meses", toma "12"
+                if (!string.IsNullOrWhiteSpace(mascota.Edad))
+                {
+                    var partes = mascota.Edad.Split(' ');
+                    if (partes.Length > 1) cmbEdadUnidad.Text = partes[1];
+                }
+                txtPeso.Text = Convert.ToString(mascota.Peso, CultureInfo.CurrentCulture);
+                cmbDiscapacidad.Text = mascota.Discapacidad ?? "";
+
+                if (mascota.Foto != null && mascota.Foto.Length > 0)
+                {
+                    _fotoMascotaOriginal = mascota.Foto;
+                    try
+                    {
+                        picMascota.Image = Image.FromStream(new MemoryStream(mascota.Foto));
+                        picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                    catch { picMascota.Image = null; }
+                }
+                else
+                {
+                    picMascota.Image = null;
+                }
+
+                // Propietario
+                txtNombreD.Text = propietario.Nombre ?? "";
+                txtApellido.Text = propietario.Apellido ?? "";
+                txtCedula.Text = propietario.Cedula ?? "";
+                txtCelular.Text = propietario.Celular ?? "";
+                txtCorreo.Text = propietario.Correo ?? "";
+                txtDireccion.Text = propietario.Direccion ?? "";
+
+                if (propietario.Foto != null && propietario.Foto.Length > 0)
+                {
+                    _fotoPropietarioOriginal = propietario.Foto;
+                    try
+                    {
+                        picPropietario.Image = Image.FromStream(new MemoryStream(propietario.Foto));
+                        picPropietario.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                    catch { picPropietario.Image = null; }
+                }
+                else
+                {
+                    picPropietario.Image = null;
+                }
+
                 this.IdMascota = idMascota;
                 this.IdPropietario = mascota.IdPersona;
-                
             }
         }
 
+        // ==== Cargas directas desde BD ====
         private csMascota cargarMascota(int idMascota)
         {
             csMascota mascota = null;
-            string sentencia = "SELECT * FROM Mascota WHERE IdMascota = ";
-            SqlDataReader reader = crud.EjecutarQuery(sentencia + idMascota);
-
-            if (reader.Read())
+            string sentencia = "SELECT * FROM Mascota WHERE IdMascota = " + idMascota;
+            using (SqlDataReader reader = crud.EjecutarQuery(sentencia))
             {
-                mascota = new csMascota(
-                    Convert.ToInt32(reader["IdMascota"]),
-                    reader["Nombre"].ToString(),
-                    reader["Especie"].ToString(),
-                    reader["Raza"].ToString(),
-                    reader["Sexo"].ToString(),
-                    reader["Edad"].ToString(),
-                    Convert.ToDecimal(reader["PesoKg"]),
-                    reader["Discapacidad"].ToString(),
-                    (byte[])reader["Imagen"],
-                    Convert.ToInt32(reader["IdPersona"])
-                );
+                if (reader != null && reader.Read())
+                {
+                    mascota = new csMascota(
+                        Convert.ToInt32(reader["IdMascota"]),
+                        reader["Nombre"].ToString(),
+                        reader["Especie"].ToString(),
+                        reader["Raza"].ToString(),
+                        reader["Sexo"].ToString(),
+                        reader["Edad"].ToString(),
+                        Convert.ToDecimal(reader["PesoKg"]),
+                        reader["Discapacidad"].ToString(),
+                        reader["Imagen"] == DBNull.Value ? null : (byte[])reader["Imagen"],
+                        Convert.ToInt32(reader["IdPersona"])
+                    );
+                }
             }
-
-            reader.Close();
             return mascota;
         }
 
         private csPropietario cargarPropietario(int idPropietario)
         {
             csPropietario propietario = null;
-            string sentencia = "Select * from Persona where IdPersona = ";
-            SqlDataReader reader = crud.EjecutarQuery(sentencia + idPropietario);
-            if (reader.Read())
+            string sentencia = "SELECT * FROM Persona WHERE IdPersona = " + idPropietario;
+            using (SqlDataReader reader = crud.EjecutarQuery(sentencia))
             {
-                propietario = new csPropietario(
-                    reader["Nombre"].ToString(),
-                    reader["Apellido"].ToString(),
-                    reader["Celular"].ToString(),
-                    reader["Cedula"].ToString(),
-                    reader["Correo"].ToString(),
-                    reader["DireccionDomiciliaria"].ToString(),
-                    (byte[])reader["Imagen"]);
+                if (reader != null && reader.Read())
+                {
+                    propietario = new csPropietario(
+                        reader["Nombre"].ToString(),
+                        reader["Apellido"].ToString(),
+                        reader["Celular"].ToString(),
+                        reader["Cedula"].ToString(),
+                        reader["Correo"].ToString(),
+                        reader["DireccionDomiciliaria"].ToString(),
+                        reader["Imagen"] == DBNull.Value ? null : (byte[])reader["Imagen"]
+                    );
+                }
             }
-            reader.Close();
             return propietario;
         }
+
         private void btncancelar2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private static byte[] ImageToBytesOrNull(Image img)
+        {
+            if (img == null) return null;
+            using (var ms = new MemoryStream())
+            {
+                img.Save(ms, img.RawFormat);
+                return ms.ToArray();
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
-                ImageConverter converter = new ImageConverter();
-                byte[] fotoM = (byte[])converter.ConvertTo(picMascota.Image, typeof(byte[]));
-                byte[] fotoP = (byte[])converter.ConvertTo(picPropietario.Image, typeof(byte[]));
+                // Fotos: si no cambiaste, conserva las originales
+                byte[] fotoM = ImageToBytesOrNull(picMascota.Image) ?? _fotoMascotaOriginal;
+                byte[] fotoP = ImageToBytesOrNull(picPropietario.Image) ?? _fotoPropietarioOriginal;
 
-                csPropietario pro = new csPropietario(txtNombreD.Text, txtApellido.Text, txtCelular.Text, txtCedula.Text, txtCorreo.Text, txtDireccion.Text, fotoP);
-
-                if (pro.agregarPropietario())
+                // Validaciones mínimas
+                if (string.IsNullOrWhiteSpace(txtMascotaNombre.Text))
                 {
-                    MessageBox.Show("El propietario se agregó correctamente.");
-                    int idPropietario = pro.obtenerIdPropietario();
+                    MessageBox.Show("Ingrese el nombre de la mascota.");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtCedula.Text))
+                {
+                    MessageBox.Show("Ingrese la cédula del propietario.");
+                    return;
+                }
 
-                    csMascota masc = new csMascota(txtMascotaNombre.Text, cmbEspecie.Text, cmbRaza.Text, cmbSexo.Text, txtEdad.Text + " " + cmbEdadUnidad.Text, Convert.ToDecimal(txtPeso.Text), cmbDiscapacidad.Text, fotoM, idPropietario);
+                // Preparamos objeto Propietario con los datos del formulario
+                csPropietario pro = new csPropietario(
+                    txtNombreD.Text,
+                    txtApellido.Text,
+                    txtCelular.Text,
+                    txtCedula.Text,
+                    txtCorreo.Text,
+                    txtDireccion.Text,
+                    fotoP
+                );
 
-                    if (masc.agregarMascota())
+                int idPropietarioParaGuardar = IdPropietario;
+
+                if (_esEdicion)
+                {
+                    // En edición: si cambiaron la cédula, validar que no sea de otro propietario
+                    var idCedula = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
+                    if (idCedula.HasValue && idCedula.Value != IdPropietario)
                     {
-                        MessageBox.Show("La mascota se agregó correctamente.");
+                        MessageBox.Show("La cédula ingresada ya pertenece a otro propietario.");
+                        return;
+                    }
+
+                    // Actualizar propietario actual
+                    if (!pro.editarPropietario(IdPropietario))
+                    {
+                        MessageBox.Show("No se pudo actualizar el propietario.");
+                        return;
+                    }
+                }
+                else
+                {
+                    // Nuevo registro: si la cédula ya existe, REUTILIZAR propietario
+                    var idExistente = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
+                    if (idExistente.HasValue)
+                    {
+                        idPropietarioParaGuardar = idExistente.Value;
+
+                        // (Opcional) Si quieres, actualiza los datos del propietario existente con lo del formulario:
+                        // pro.editarPropietario(idPropietarioParaGuardar);
+                    }
+                    else
+                    {
+                        if (pro.agregarPropietario())
+                        {
+                            idPropietarioParaGuardar = pro.obtenerIdPropietario();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo registrar el propietario.");
+                            return;
+                        }
                     }
                 }
 
-                fp.cargarData();
-                LimpiarFormulario();
-            } catch (Exception ex)
+                // Mascota
+                string edadConUnidad = string.IsNullOrWhiteSpace(cmbEdadUnidad.Text)
+                    ? txtEdad.Text
+                    : (txtEdad.Text + " " + cmbEdadUnidad.Text).Trim();
+
+                decimal pesoDecimal = 0m;
+                if (!string.IsNullOrWhiteSpace(txtPeso.Text))
+                    pesoDecimal = Convert.ToDecimal(txtPeso.Text, CultureInfo.CurrentCulture);
+
+                csMascota masc = new csMascota(
+                    txtMascotaNombre.Text,
+                    cmbEspecie.Text,
+                    cmbRaza.Text,
+                    cmbSexo.Text,
+                    edadConUnidad,
+                    pesoDecimal,
+                    cmbDiscapacidad.Text,
+                    fotoM,
+                    idPropietarioParaGuardar
+                );
+
+                bool okMascota = _esEdicion ? masc.editarMascota(IdMascota) : masc.agregarMascota();
+
+                if (!okMascota)
+                {
+                    MessageBox.Show("No se pudo guardar la mascota.");
+                    return;
+                }
+
+                MessageBox.Show(_esEdicion ? "Registro actualizado correctamente." : "Registro creado correctamente.");
+
+                // Refresca el listado y cierra
+                RefrescarGridPacientes();
+                this.Close();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al guardar: " + ex.Message);
             }
         }
 
+
+        // ======= Refresco tolerante a nombre del método =======
+        private void RefrescarGridPacientes()
+        {
+            if (fp == null) return;
+
+            var tipo = fp.GetType();
+
+            // Intenta CargarData()
+            var mCargarData = tipo.GetMethod("CargarData", Type.EmptyTypes);
+            if (mCargarData != null)
+            {
+                mCargarData.Invoke(fp, null);
+                return;
+            }
+
+            // Intenta cargarData()
+            var mCargarDataOld = tipo.GetMethod("cargarData", Type.EmptyTypes);
+            if (mCargarDataOld != null)
+            {
+                mCargarDataOld.Invoke(fp, null);
+                return;
+            }
+        }
+
+        // ======= Helpers UI existentes =======
         private void LimpiarFormulario()
         {
             txtMascotaNombre.Text = "";
@@ -158,6 +336,10 @@ namespace AniCLinic
             txtCelular.Text = "";
             txtCorreo.Text = "";
             txtDireccion.Text = "";
+            picMascota.Image = null;
+            picPropietario.Image = null;
+            _fotoMascotaOriginal = null;
+            _fotoPropietarioOriginal = null;
         }
 
         private void btnFotoMascota_Click(object sender, EventArgs e)
@@ -189,8 +371,8 @@ namespace AniCLinic
             if (cmbEspecie.SelectedIndex == 0)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "American Bully", "American Pit Bull Terrier", "American Staffordshire Terrier", "Beagle", "Bulldog Inglés", "Chihuahua", "Dálmata", "Golden Retriever", "Husky Siberiano", 
-                    "Labrador Retriever", "Lobo Siberiano", "Pastor Alemán", "Perro Peruano","Pug", "San Bernardo", "Staffordshire Bull Terrier", "Yorkshire Terrier" });
+                cmbRaza.Items.AddRange(new string[] { "American Bully", "American Pit Bull Terrier", "American Staffordshire Terrier", "Beagle", "Bulldog Inglés", "Chihuahua", "Dálmata", "Golden Retriever", "Husky Siberiano",
+                    "Labrador Retriever", "Lobo Siberiano", "Pastor Alemán", "Perro Peruano","Pug", "San Bernardo", "Staffordshire Bull Terrier", "Yorkshire Terrier" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 1)
@@ -202,19 +384,19 @@ namespace AniCLinic
             if (cmbEspecie.SelectedIndex == 2)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Angora", "Californiano", "Conejo Gigante de Flandes", "Conejo Mini Lop", "Conejo Netherland Dwarf" });
+                cmbRaza.Items.AddRange(new string[] { "Angora", "Californiano", "Conejo Gigante de Flandes", "Conejo Mini Lop", "Conejo Netherland Dwarf" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 3)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Hámster Roborovski", "Hámster Ruso enano", "Hámster Sirio (dorado)" });
+                cmbRaza.Items.AddRange(new string[] { "Hámster Roborovski", "Hámster Ruso enano", "Hámster Sirio (dorado)" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 4)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Beige", "Blanco mosaico", "Gris estándar" });
+                cmbRaza.Items.AddRange(new string[] { "Beige", "Blanco mosaico", "Gris estándar" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 5)
@@ -226,37 +408,37 @@ namespace AniCLinic
             if (cmbEspecie.SelectedIndex == 6)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Albino", "Azul", "Lutino", "Verde común" });
+                cmbRaza.Items.AddRange(new string[] { "Albino", "Azul", "Lutino", "Verde común" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 7)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Amazona de frente azul", "Conuro aratinga", "Guacamayo azul y amarillo", "Guacamayo escarlata", "Loro yaco (gris africano)" });
+                cmbRaza.Items.AddRange(new string[] { "Amazona de frente azul", "Conuro aratinga", "Guacamayo azul y amarillo", "Guacamayo escarlata", "Loro yaco (gris africano)" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 8)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Cacatúa alba (moño blanco)", "Cacatúa galerita (sulfur crest)", "Cacatúa ninfa (Carolina)" });
+                cmbRaza.Items.AddRange(new string[] { "Cacatúa alba (moño blanco)", "Cacatúa galerita (sulfur crest)", "Cacatúa ninfa (Carolina)" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 9)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Tortuga de orejas rojas", "Tortuga rusa", "Tortuga sulcata" });
+                cmbRaza.Items.AddRange(new string[] { "Tortuga de orejas rojas", "Tortuga rusa", "Tortuga sulcata" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 10)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Camaleón de Jackson", "Camaleón pantera", "Camaleón velado" });
+                cmbRaza.Items.AddRange(new string[] { "Camaleón de Jackson", "Camaleón pantera", "Camaleón velado" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 11)
             {
                 cmbRaza.Items.Clear();
-                cmbRaza.Items.AddRange(new string[] { "Andaluz (PRE)", "Árabe", "Cuarto de Milla", "Frisón", "Pura Sangre Inglés" });
+                cmbRaza.Items.AddRange(new string[] { "Andaluz (PRE)", "Árabe", "Cuarto de Milla", "Frisón", "Pura Sangre Inglés" });
                 return;
             }
             if (cmbEspecie.SelectedIndex == 12)
@@ -287,7 +469,7 @@ namespace AniCLinic
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
             {
                 e.Handled = true;
             }
@@ -295,7 +477,8 @@ namespace AniCLinic
 
         private void txtPeso_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ',')
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ','
+                && e.KeyChar != '.')
             {
                 e.Handled = true;
             }

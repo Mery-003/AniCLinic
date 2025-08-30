@@ -128,5 +128,24 @@ namespace AniCLinic
             }
             return idPropietario;
         }
+        public int? obtenerIdPorCedula(string cedula)
+        {
+            try
+            {
+                csCRUD conexionBD = new csCRUD();
+                using (SqlDataReader r = conexionBD.EjecutarQuery(
+                    "SELECT IdPersona FROM Persona WHERE Cedula = '" + cedula.Replace("'", "''") + "'"))
+                {
+                    if (r != null && r.Read())
+                        return Convert.ToInt32(r["IdPersona"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar cédula: " + ex.Message);
+            }
+            return null; // no existe
+        }
+
     }
 }

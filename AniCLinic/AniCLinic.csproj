@@ -83,6 +83,7 @@
     <Compile Include="AgregarPaciente.Designer.cs">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </Compile>
+    <Compile Include="CedulaUtils.cs" />
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csCRUD.cs" />
     <Compile Include="csMascota.cs" />
@@ -132,6 +133,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SesionActual.cs" />
+    <Compile Include="SesionRepo.cs" />
+    <Compile Include="UxBuscarCedulaHelper.cs" />
     <Compile Include="VerCarnet.cs">
       <SubType>Form</SubType>
     </Compile>

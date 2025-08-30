@@ -22,9 +22,14 @@ namespace AniCLinic
 
             txtPassword.UseSystemPasswordChar = true;
 
+
         }
 
-
+        public static class SesionActual
+        {
+            public static int IdEmpleado { get; set; }
+            public static string NombreEmpleado { get; set; }
+        }
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
@@ -39,8 +44,15 @@ namespace AniCLinic
         {
             csCRUD conexion = new csCRUD();
             int inicio = conexion.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
+
             if (inicio > 0)
             {
+                if (!SesionRepo.CargarPorUsuario(txtUsuario.Text.Trim()))
+                {
+                    MessageBox.Show("No se pudo cargar la sesión del usuario.");
+                    return;
+                }
+
                 Menu menu = new Menu(this);
                 txtUsuario.Text = "";
                 txtPassword.Text = "";
@@ -48,9 +60,12 @@ namespace AniCLinic
                 menu.ShowDialog();
             }
             else
+            {
                 MessageBox.Show("Usuario o contraseña incorrectos");
-
+            }
         }
+
+
 
         private void btnVerPass_MouseDown(object sender, MouseEventArgs e)
         {
