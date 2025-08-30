@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
-    public partial class fRegistroClinico : Form
+    public partial class RegistroClinico : Form
     {
-        public fRegistroClinico()
+        public RegistroClinico()
         {
             InitializeComponent();
+        }
+
+        private void dgvAnteriores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -95,10 +95,6 @@ namespace AniCLinic
             submenu.BringToFront();
         }
 
-        private void btnHistorial_Click(object sender, EventArgs e)
-        {
-            AbrirEnPanel(pnlMenu1, new fRegistroClinico());
-        }
 
         private void btncarnet_Click(object sender, EventArgs e)
         {

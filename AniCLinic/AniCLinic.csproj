@@ -83,10 +83,8 @@
     <Compile Include="AgregarPaciente.Designer.cs">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </Compile>
-    <Compile Include="CedulaUtils.cs" />
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csCRUD.cs" />
-    <Compile Include="csMascota.cs" />
     <Compile Include="csPropietario.cs" />
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
@@ -132,6 +130,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistroClinico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroClinico.Designer.cs">
+      <DependentUpon>RegistroClinico.cs</DependentUpon>
+    </Compile>
     <Compile Include="SesionActual.cs" />
     <Compile Include="SesionRepo.cs" />
     <Compile Include="UxBuscarCedulaHelper.cs" />
@@ -165,9 +169,6 @@
     <EmbeddedResource Include="fPacientes.resx">
       <DependentUpon>fPacientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fRegistroClinico.resx">
-      <DependentUpon>fRegistroClinico.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +188,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RegistroClinico.resx">
+      <DependentUpon>RegistroClinico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VerCarnet.resx">
       <DependentUpon>VerCarnet.cs</DependentUpon>
     </EmbeddedResource>
