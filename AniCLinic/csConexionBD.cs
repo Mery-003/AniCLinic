@@ -38,7 +38,7 @@ namespace AniCLinic
             clave = "reinaramon15";
         }
 
-        private bool abrirConexion()
+        public void abrirConexion()
         {
             oCon = new SqlConnection();
             oCon.ConnectionString = "Server = " + servidor + "; Database = " + basedatos + "; User id = " + usuario + "; Password = " + clave;
@@ -49,12 +49,10 @@ namespace AniCLinic
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return false;
             }
-            return true;
         }
 
-        private bool cerrarConexion()
+        public void cerrarConexion()
         {
             try
             {
@@ -63,57 +61,11 @@ namespace AniCLinic
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return false;
             }
-            return true;
         }
-        public int login(string sentencia, string user, string pass)
+        public SqlConnection obtenerConexion()
         {
-            try
-            {
-                abrirConexion();
-                oCom = new SqlCommand(sentencia, oCon);
-                oDTR = oCom.ExecuteReader();
-                while (oDTR.Read())
-                {
-                    if (oDTR["Usuario"].ToString().ToLower() == user.ToLower() && oDTR["Password"].ToString() == pass)
-                        return 1;
-                }
-                cerrarConexion();
-            } 
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return 0;
-            }
-            return 0;
-        }
-        public DataTable retornaRegistro(string sentencia)
-        {
-            abrirConexion();
-            oCom = new SqlCommand(sentencia, oCon);
-            oDA = new SqlDataAdapter(oCom);
-            oDT = new DataTable();
-            oDA.Fill(oDT);
-            cerrarConexion();
-            return oDT;
-        }
-        public int guardarRegistro(string sentencia, byte[] f)
-        {
-            int result = 0;
-            try
-            {
-                abrirConexion();
-                oCom = new SqlCommand(sentencia, oCon);
-                oCom.Parameters.AddWithValue("@Foto", f);
-                result = oCom.ExecuteNonQuery();
-                cerrarConexion();
-                return result;
-            } catch (Exception ex)
-            { 
-                MessageBox.Show(ex.Message); 
-                return result; 
-            }
+            return oCon;
         }
     }
 }

@@ -34,10 +34,10 @@
             this.btnAggPaciente = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtMascotaNombre = new Guna.UI2.WinForms.Guna2TextBox();
-            this.dgvCuentas = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.dgvPacientes = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCuentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPacientes)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAggPaciente
@@ -56,6 +56,7 @@
             this.btnAggPaciente.Size = new System.Drawing.Size(131, 41);
             this.btnAggPaciente.TabIndex = 9;
             this.btnAggPaciente.Text = "+ Agregar ";
+            this.btnAggPaciente.Click += new System.EventHandler(this.btnAggPaciente_Click);
             // 
             // guna2HtmlLabel1
             // 
@@ -93,10 +94,10 @@
             this.txtMascotaNombre.TabIndex = 48;
             this.txtMascotaNombre.Tag = "";
             // 
-            // dgvCuentas
+            // dgvPacientes
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvCuentas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPacientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,9 +105,9 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCuentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvCuentas.ColumnHeadersHeight = 50;
-            this.dgvCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvPacientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvPacientes.ColumnHeadersHeight = 50;
+            this.dgvPacientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -114,35 +115,37 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCuentas.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvCuentas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCuentas.Location = new System.Drawing.Point(93, 127);
-            this.dgvCuentas.Name = "dgvCuentas";
-            this.dgvCuentas.RowHeadersVisible = false;
-            this.dgvCuentas.RowHeadersWidth = 70;
-            this.dgvCuentas.Size = new System.Drawing.Size(873, 438);
-            this.dgvCuentas.TabIndex = 14;
-            this.dgvCuentas.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvCuentas.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvCuentas.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvCuentas.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvCuentas.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvCuentas.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.dgvCuentas.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCuentas.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-            this.dgvCuentas.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvCuentas.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCuentas.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.DarkCyan;
-            this.dgvCuentas.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvCuentas.ThemeStyle.HeaderStyle.Height = 50;
-            this.dgvCuentas.ThemeStyle.ReadOnly = false;
-            this.dgvCuentas.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvCuentas.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvCuentas.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCuentas.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvCuentas.ThemeStyle.RowsStyle.Height = 22;
-            this.dgvCuentas.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCuentas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvPacientes.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvPacientes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvPacientes.Location = new System.Drawing.Point(93, 127);
+            this.dgvPacientes.Name = "dgvPacientes";
+            this.dgvPacientes.ReadOnly = true;
+            this.dgvPacientes.RowHeadersVisible = false;
+            this.dgvPacientes.RowHeadersWidth = 70;
+            this.dgvPacientes.Size = new System.Drawing.Size(873, 438);
+            this.dgvPacientes.TabIndex = 14;
+            this.dgvPacientes.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvPacientes.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.dgvPacientes.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.dgvPacientes.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.dgvPacientes.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.dgvPacientes.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.dgvPacientes.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvPacientes.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
+            this.dgvPacientes.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvPacientes.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPacientes.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.DarkCyan;
+            this.dgvPacientes.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvPacientes.ThemeStyle.HeaderStyle.Height = 50;
+            this.dgvPacientes.ThemeStyle.ReadOnly = true;
+            this.dgvPacientes.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvPacientes.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvPacientes.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPacientes.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvPacientes.ThemeStyle.RowsStyle.Height = 22;
+            this.dgvPacientes.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvPacientes.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvPacientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPacientes_CellContentClick);
             // 
             // guna2Separator1
             // 
@@ -182,12 +185,12 @@
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.txtMascotaNombre);
             this.Controls.Add(this.guna2HtmlLabel1);
-            this.Controls.Add(this.dgvCuentas);
+            this.Controls.Add(this.dgvPacientes);
             this.Controls.Add(this.btnAggPaciente);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "fPacientes";
             this.Text = "fPacientes";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCuentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPacientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,7 +200,7 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnAggPaciente;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2TextBox txtMascotaNombre;
-        private Guna.UI2.WinForms.Guna2DataGridView dgvCuentas;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvPacientes;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
     }

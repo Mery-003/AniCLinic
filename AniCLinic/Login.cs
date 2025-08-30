@@ -37,11 +37,13 @@ namespace AniCLinic
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            csConexionBD conexionBD = new csConexionBD();
-            int inicio = conexionBD.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
+            csCRUD conexion = new csCRUD();
+            int inicio = conexion.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
             if (inicio > 0)
             {
                 Menu menu = new Menu(this);
+                txtUsuario.Text = "";
+                txtPassword.Text = "";
                 this.Hide();
                 menu.ShowDialog();
             }

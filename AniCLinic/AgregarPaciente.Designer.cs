@@ -33,17 +33,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.guna2HtmlLabel19 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel18 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel17 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2ComboBox2 = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.guna2Button15 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtPeso = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel16 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cmbRaza = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -69,18 +66,18 @@
             this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtApellido = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button11 = new Guna.UI2.WinForms.Guna2Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCorreo = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtCedula2 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2TextBox8 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtCedula = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtCelular = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtDireccion = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtDuenoNombreCompleto = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtNombreD = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button9 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -143,17 +140,14 @@
             // 
             this.tabPage1.Controls.Add(this.guna2HtmlLabel19);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel18);
-            this.tabPage1.Controls.Add(this.guna2HtmlLabel17);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel14);
-            this.tabPage1.Controls.Add(this.guna2ComboBox2);
-            this.tabPage1.Controls.Add(this.guna2Button15);
-            this.tabPage1.Controls.Add(this.guna2TextBox2);
+            this.tabPage1.Controls.Add(this.txtPeso);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel1);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel10);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel5);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel16);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel13);
-            this.tabPage1.Controls.Add(this.guna2ComboBox1);
+            this.tabPage1.Controls.Add(this.cmbRaza);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label6);
@@ -208,17 +202,6 @@
             this.guna2HtmlLabel18.TabIndex = 73;
             this.guna2HtmlLabel18.Text = "Discapacidad:";
             // 
-            // guna2HtmlLabel17
-            // 
-            this.guna2HtmlLabel17.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel17.Location = new System.Drawing.Point(638, 283);
-            this.guna2HtmlLabel17.Name = "guna2HtmlLabel17";
-            this.guna2HtmlLabel17.Size = new System.Drawing.Size(36, 19);
-            this.guna2HtmlLabel17.TabIndex = 72;
-            this.guna2HtmlLabel17.Text = "kg/g:";
-            // 
             // guna2HtmlLabel14
             // 
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
@@ -230,63 +213,28 @@
             this.guna2HtmlLabel14.TabIndex = 71;
             this.guna2HtmlLabel14.Text = "Peso:";
             // 
-            // guna2ComboBox2
+            // txtPeso
             // 
-            this.guna2ComboBox2.BackColor = System.Drawing.Color.LightGray;
-            this.guna2ComboBox2.BorderRadius = 19;
-            this.guna2ComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox2.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2ComboBox2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.guna2ComboBox2.ItemHeight = 30;
-            this.guna2ComboBox2.Items.AddRange(new object[] {
-            "kg",
-            "g"});
-            this.guna2ComboBox2.Location = new System.Drawing.Point(638, 309);
-            this.guna2ComboBox2.Name = "guna2ComboBox2";
-            this.guna2ComboBox2.Size = new System.Drawing.Size(87, 36);
-            this.guna2ComboBox2.TabIndex = 70;
-            // 
-            // guna2Button15
-            // 
-            this.guna2Button15.BorderRadius = 24;
-            this.guna2Button15.CausesValidation = false;
-            this.guna2Button15.DisabledState.BorderColor = System.Drawing.Color.LightGray;
-            this.guna2Button15.DisabledState.CustomBorderColor = System.Drawing.Color.LightGray;
-            this.guna2Button15.DisabledState.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button15.DisabledState.ForeColor = System.Drawing.Color.LightGray;
-            this.guna2Button15.Enabled = false;
-            this.guna2Button15.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button15.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button15.ForeColor = System.Drawing.Color.White;
-            this.guna2Button15.Location = new System.Drawing.Point(627, 301);
-            this.guna2Button15.Name = "guna2Button15";
-            this.guna2Button15.Size = new System.Drawing.Size(107, 53);
-            this.guna2Button15.TabIndex = 69;
-            // 
-            // guna2TextBox2
-            // 
-            this.guna2TextBox2.BackColor = System.Drawing.Color.LightGray;
-            this.guna2TextBox2.BorderRadius = 19;
-            this.guna2TextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox2.DefaultText = "";
-            this.guna2TextBox2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2TextBox2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Location = new System.Drawing.Point(455, 310);
-            this.guna2TextBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.guna2TextBox2.Name = "guna2TextBox2";
-            this.guna2TextBox2.PlaceholderText = "";
-            this.guna2TextBox2.SelectedText = "";
-            this.guna2TextBox2.Size = new System.Drawing.Size(137, 36);
-            this.guna2TextBox2.TabIndex = 68;
+            this.txtPeso.BackColor = System.Drawing.Color.LightGray;
+            this.txtPeso.BorderRadius = 19;
+            this.txtPeso.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPeso.DefaultText = "";
+            this.txtPeso.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtPeso.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtPeso.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPeso.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPeso.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPeso.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtPeso.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtPeso.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPeso.Location = new System.Drawing.Point(455, 310);
+            this.txtPeso.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPeso.Name = "txtPeso";
+            this.txtPeso.PlaceholderText = "";
+            this.txtPeso.SelectedText = "";
+            this.txtPeso.Size = new System.Drawing.Size(270, 36);
+            this.txtPeso.TabIndex = 68;
+            this.txtPeso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPeso_KeyPress);
             // 
             // guna2HtmlLabel1
             // 
@@ -343,47 +291,27 @@
             this.guna2HtmlLabel13.TabIndex = 63;
             this.guna2HtmlLabel13.Text = "Especie:";
             // 
-            // guna2ComboBox1
+            // cmbRaza
             // 
-            this.guna2ComboBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.guna2ComboBox1.BackColor = System.Drawing.Color.LightGray;
-            this.guna2ComboBox1.BorderRadius = 19;
-            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox1.DropDownHeight = 120;
-            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox1.DropDownWidth = 23;
-            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2ComboBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.guna2ComboBox1.IntegralHeight = false;
-            this.guna2ComboBox1.ItemHeight = 30;
-            this.guna2ComboBox1.Items.AddRange(new object[] {
-            "Perro",
-            "Gato",
-            "Conejo",
-            "Hámster",
-            "Chinchilla",
-            "Hurón",
-            "Periquito",
-            "Loro",
-            "Cacatúa",
-            "Tortuga",
-            "Camaleón",
-            "Caballo",
-            " Vaca",
-            " Oveja",
-            " Cabra",
-            " Cerdo",
-            " Gallina",
-            " Pato",
-            " Pavo"});
-            this.guna2ComboBox1.Location = new System.Drawing.Point(457, 141);
-            this.guna2ComboBox1.MaxDropDownItems = 4;
-            this.guna2ComboBox1.Name = "guna2ComboBox1";
-            this.guna2ComboBox1.Size = new System.Drawing.Size(268, 36);
-            this.guna2ComboBox1.TabIndex = 61;
-            this.guna2ComboBox1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.cmbRaza.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.cmbRaza.BackColor = System.Drawing.Color.LightGray;
+            this.cmbRaza.BorderRadius = 19;
+            this.cmbRaza.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRaza.DropDownHeight = 120;
+            this.cmbRaza.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRaza.DropDownWidth = 23;
+            this.cmbRaza.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cmbRaza.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cmbRaza.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmbRaza.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.cmbRaza.IntegralHeight = false;
+            this.cmbRaza.ItemHeight = 30;
+            this.cmbRaza.Location = new System.Drawing.Point(457, 141);
+            this.cmbRaza.MaxDropDownItems = 4;
+            this.cmbRaza.Name = "cmbRaza";
+            this.cmbRaza.Size = new System.Drawing.Size(268, 36);
+            this.cmbRaza.TabIndex = 61;
+            this.cmbRaza.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
             // label9
             // 
@@ -463,8 +391,8 @@
             this.cmbEdadUnidad.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.cmbEdadUnidad.ItemHeight = 30;
             this.cmbEdadUnidad.Items.AddRange(new object[] {
-            "Hembra",
-            "Macho"});
+            "Años",
+            "Meses"});
             this.cmbEdadUnidad.Location = new System.Drawing.Point(164, 396);
             this.cmbEdadUnidad.Name = "cmbEdadUnidad";
             this.cmbEdadUnidad.Size = new System.Drawing.Size(171, 36);
@@ -484,7 +412,7 @@
             this.guna2Button7.ForeColor = System.Drawing.Color.White;
             this.guna2Button7.Location = new System.Drawing.Point(444, 301);
             this.guna2Button7.Name = "guna2Button7";
-            this.guna2Button7.Size = new System.Drawing.Size(162, 53);
+            this.guna2Button7.Size = new System.Drawing.Size(295, 53);
             this.guna2Button7.TabIndex = 52;
             // 
             // guna2Button4
@@ -597,19 +525,17 @@
             "Tortuga",
             "Camaleón",
             "Caballo",
-            " Vaca",
-            " Oveja",
-            " Cabra",
-            " Cerdo",
-            " Gallina",
-            " Pato",
-            " Pavo"});
+            "Vaca",
+            "Oveja",
+            "Cabra",
+            "Cerdo"});
             this.cmbEspecie.Location = new System.Drawing.Point(457, 58);
             this.cmbEspecie.MaxDropDownItems = 4;
             this.cmbEspecie.Name = "cmbEspecie";
             this.cmbEspecie.Size = new System.Drawing.Size(268, 36);
             this.cmbEspecie.TabIndex = 38;
             this.cmbEspecie.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.cmbEspecie.SelectedIndexChanged += new System.EventHandler(this.cmbEspecie_SelectedIndexChanged);
             // 
             // txtMascotaNombre
             // 
@@ -740,6 +666,7 @@
             this.txtEdad.SelectedText = "";
             this.txtEdad.Size = new System.Drawing.Size(53, 36);
             this.txtEdad.TabIndex = 15;
+            this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // guna2Button5
             // 
@@ -775,6 +702,7 @@
             this.btnFotoMascota.Size = new System.Drawing.Size(121, 45);
             this.btnFotoMascota.TabIndex = 1;
             this.btnFotoMascota.Text = "Seleccionar";
+            this.btnFotoMascota.Click += new System.EventHandler(this.btnFotoMascota_Click);
             // 
             // guna2CirclePictureBox4
             // 
@@ -791,18 +719,18 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.guna2TextBox1);
+            this.tabPage2.Controls.Add(this.txtApellido);
             this.tabPage2.Controls.Add(this.guna2HtmlLabel12);
             this.tabPage2.Controls.Add(this.guna2Button11);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.txtCorreo);
-            this.tabPage2.Controls.Add(this.txtCedula2);
-            this.tabPage2.Controls.Add(this.guna2TextBox8);
+            this.tabPage2.Controls.Add(this.txtCedula);
+            this.tabPage2.Controls.Add(this.txtCelular);
             this.tabPage2.Controls.Add(this.txtDireccion);
             this.tabPage2.Controls.Add(this.guna2HtmlLabel2);
-            this.tabPage2.Controls.Add(this.txtDuenoNombreCompleto);
+            this.tabPage2.Controls.Add(this.txtNombreD);
             this.tabPage2.Controls.Add(this.guna2HtmlLabel4);
             this.tabPage2.Controls.Add(this.guna2Button9);
             this.tabPage2.Controls.Add(this.guna2HtmlLabel8);
@@ -836,27 +764,27 @@
             this.label11.TabIndex = 92;
             this.label11.Text = "*";
             // 
-            // guna2TextBox1
+            // txtApellido
             // 
-            this.guna2TextBox1.BackColor = System.Drawing.Color.LightGray;
-            this.guna2TextBox1.BorderRadius = 19;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.DefaultText = "";
-            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TextBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(68, 407);
-            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PlaceholderText = "";
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(271, 36);
-            this.guna2TextBox1.TabIndex = 90;
+            this.txtApellido.BackColor = System.Drawing.Color.LightGray;
+            this.txtApellido.BorderRadius = 19;
+            this.txtApellido.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtApellido.DefaultText = "";
+            this.txtApellido.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtApellido.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtApellido.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtApellido.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtApellido.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtApellido.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtApellido.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtApellido.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtApellido.Location = new System.Drawing.Point(68, 407);
+            this.txtApellido.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.PlaceholderText = "";
+            this.txtApellido.SelectedText = "";
+            this.txtApellido.Size = new System.Drawing.Size(271, 36);
+            this.txtApellido.TabIndex = 90;
             // 
             // guna2HtmlLabel12
             // 
@@ -941,51 +869,51 @@
             this.txtCorreo.Size = new System.Drawing.Size(268, 36);
             this.txtCorreo.TabIndex = 85;
             // 
-            // txtCedula2
+            // txtCedula
             // 
-            this.txtCedula2.BackColor = System.Drawing.Color.LightGray;
-            this.txtCedula2.BorderRadius = 19;
-            this.txtCedula2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCedula2.DefaultText = "";
-            this.txtCedula2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCedula2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCedula2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCedula2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCedula2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCedula2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCedula2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtCedula2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCedula2.Location = new System.Drawing.Point(449, 145);
-            this.txtCedula2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCedula2.Name = "txtCedula2";
-            this.txtCedula2.PlaceholderText = "";
-            this.txtCedula2.ReadOnly = true;
-            this.txtCedula2.SelectedText = "";
-            this.txtCedula2.Size = new System.Drawing.Size(270, 36);
-            this.txtCedula2.TabIndex = 83;
+            this.txtCedula.BackColor = System.Drawing.Color.LightGray;
+            this.txtCedula.BorderRadius = 19;
+            this.txtCedula.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCedula.DefaultText = "";
+            this.txtCedula.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtCedula.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtCedula.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCedula.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCedula.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCedula.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCedula.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtCedula.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCedula.Location = new System.Drawing.Point(449, 145);
+            this.txtCedula.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCedula.Name = "txtCedula";
+            this.txtCedula.PlaceholderText = "";
+            this.txtCedula.SelectedText = "";
+            this.txtCedula.Size = new System.Drawing.Size(270, 36);
+            this.txtCedula.TabIndex = 83;
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
-            // guna2TextBox8
+            // txtCelular
             // 
-            this.guna2TextBox8.BackColor = System.Drawing.Color.LightGray;
-            this.guna2TextBox8.BorderRadius = 19;
-            this.guna2TextBox8.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox8.DefaultText = "";
-            this.guna2TextBox8.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox8.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox8.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox8.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox8.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox8.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TextBox8.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.guna2TextBox8.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox8.Location = new System.Drawing.Point(452, 56);
-            this.guna2TextBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.guna2TextBox8.Name = "guna2TextBox8";
-            this.guna2TextBox8.PlaceholderText = "";
-            this.guna2TextBox8.ReadOnly = true;
-            this.guna2TextBox8.SelectedText = "";
-            this.guna2TextBox8.Size = new System.Drawing.Size(267, 36);
-            this.guna2TextBox8.TabIndex = 81;
+            this.txtCelular.BackColor = System.Drawing.Color.LightGray;
+            this.txtCelular.BorderRadius = 19;
+            this.txtCelular.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCelular.DefaultText = "";
+            this.txtCelular.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtCelular.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtCelular.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCelular.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCelular.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCelular.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCelular.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtCelular.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCelular.Location = new System.Drawing.Point(452, 56);
+            this.txtCelular.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCelular.Name = "txtCelular";
+            this.txtCelular.PlaceholderText = "";
+            this.txtCelular.SelectedText = "";
+            this.txtCelular.Size = new System.Drawing.Size(267, 36);
+            this.txtCelular.TabIndex = 81;
+            this.txtCelular.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCelular_KeyPress);
             // 
             // txtDireccion
             // 
@@ -1020,27 +948,27 @@
             this.guna2HtmlLabel2.TabIndex = 64;
             this.guna2HtmlLabel2.Text = "Dirección:";
             // 
-            // txtDuenoNombreCompleto
+            // txtNombreD
             // 
-            this.txtDuenoNombreCompleto.BackColor = System.Drawing.Color.LightGray;
-            this.txtDuenoNombreCompleto.BorderRadius = 19;
-            this.txtDuenoNombreCompleto.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDuenoNombreCompleto.DefaultText = "";
-            this.txtDuenoNombreCompleto.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtDuenoNombreCompleto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtDuenoNombreCompleto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtDuenoNombreCompleto.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtDuenoNombreCompleto.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtDuenoNombreCompleto.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDuenoNombreCompleto.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtDuenoNombreCompleto.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtDuenoNombreCompleto.Location = new System.Drawing.Point(68, 327);
-            this.txtDuenoNombreCompleto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtDuenoNombreCompleto.Name = "txtDuenoNombreCompleto";
-            this.txtDuenoNombreCompleto.PlaceholderText = "";
-            this.txtDuenoNombreCompleto.SelectedText = "";
-            this.txtDuenoNombreCompleto.Size = new System.Drawing.Size(271, 36);
-            this.txtDuenoNombreCompleto.TabIndex = 62;
+            this.txtNombreD.BackColor = System.Drawing.Color.LightGray;
+            this.txtNombreD.BorderRadius = 19;
+            this.txtNombreD.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtNombreD.DefaultText = "";
+            this.txtNombreD.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtNombreD.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtNombreD.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtNombreD.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtNombreD.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtNombreD.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreD.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtNombreD.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtNombreD.Location = new System.Drawing.Point(68, 327);
+            this.txtNombreD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtNombreD.Name = "txtNombreD";
+            this.txtNombreD.PlaceholderText = "";
+            this.txtNombreD.SelectedText = "";
+            this.txtNombreD.Size = new System.Drawing.Size(271, 36);
+            this.txtNombreD.TabIndex = 62;
             // 
             // guna2HtmlLabel4
             // 
@@ -1188,6 +1116,7 @@
             this.btnFotoPropietario.Size = new System.Drawing.Size(122, 45);
             this.btnFotoPropietario.TabIndex = 48;
             this.btnFotoPropietario.Text = "Seleccionar";
+            this.btnFotoPropietario.Click += new System.EventHandler(this.btnFotoPropietario_Click);
             // 
             // picPropietario
             // 
@@ -1260,6 +1189,7 @@
             this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseTransparentBackground = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -1311,29 +1241,14 @@
 
         #endregion
         private Guna.UI2.WinForms.Guna2TabControl guna2TabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Guna.UI2.WinForms.Guna2GradientButton btnFotoMascota;
-        private Guna.UI2.WinForms.Guna2Button guna2Button5;
-        private Guna.UI2.WinForms.Guna2TextBox txtMascotaNombre;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button8;
-        private Guna.UI2.WinForms.Guna2Button guna2Button6;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbSexo;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbEspecie;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbDiscapacidad;
-        private Guna.UI2.WinForms.Guna2TextBox txtEdad;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox4;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox picMascota;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picPropietario;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2TextBox txtDuenoNombreCompleto;
+        private Guna.UI2.WinForms.Guna2TextBox txtNombreD;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2Button guna2Button9;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
@@ -1346,39 +1261,51 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnFotoPropietario;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox5;
         private Guna.UI2.WinForms.Guna2TextBox txtDireccion;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox8;
-        private Guna.UI2.WinForms.Guna2TextBox txtCedula2;
+        private Guna.UI2.WinForms.Guna2TextBox txtCelular;
+        private Guna.UI2.WinForms.Guna2TextBox txtCedula;
         private Guna.UI2.WinForms.Guna2TextBox txtCorreo;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbEdadUnidad;
-        private Guna.UI2.WinForms.Guna2Button guna2Button7;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private Guna.UI2.WinForms.Guna2TextBox txtApellido;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
+        private Guna.UI2.WinForms.Guna2Button guna2Button11;
+        private System.Windows.Forms.TabPage tabPage1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel19;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel18;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
+        private Guna.UI2.WinForms.Guna2TextBox txtPeso;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel16;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbRaza;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label10;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
-        private System.Windows.Forms.Label label11;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
-        private Guna.UI2.WinForms.Guna2Button guna2Button11;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel16;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel19;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel18;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel17;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button15;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbEdadUnidad;
+        private Guna.UI2.WinForms.Guna2Button guna2Button7;
+        private Guna.UI2.WinForms.Guna2Button guna2Button4;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox picMascota;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbDiscapacidad;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbSexo;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbEspecie;
+        private Guna.UI2.WinForms.Guna2TextBox txtMascotaNombre;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button8;
+        private Guna.UI2.WinForms.Guna2Button guna2Button6;
+        private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2TextBox txtEdad;
+        private Guna.UI2.WinForms.Guna2Button guna2Button5;
+        private Guna.UI2.WinForms.Guna2GradientButton btnFotoMascota;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox4;
     }
 }

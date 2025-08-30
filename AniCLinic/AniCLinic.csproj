@@ -84,6 +84,7 @@
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="csConexionBD.cs" />
+    <Compile Include="csCRUD.cs" />
     <Compile Include="csMascota.cs" />
     <Compile Include="csPropietario.cs" />
     <Compile Include="fCitas.cs">
