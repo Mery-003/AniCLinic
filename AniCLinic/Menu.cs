@@ -14,25 +14,15 @@ namespace AniCLinic
 {
     public partial class Menu : Form
     {
-        private readonly UsuarioSesion _sesion;
-        Login nLogin;
-
-        public Menu(UsuarioSesion sesion)
+        Login login;
+        public Menu()
         {
             InitializeComponent();
-            _sesion = sesion;
         }
-
-        private void OcultarSubMenus(object sender, EventArgs e)
+        public Menu(Login l)
         {
-            
-        }
-
-
-
-        private void PanelMenu_Paint(object sender, PaintEventArgs e)
-        {
-
+            InitializeComponent();
+            login = l;
         }
 
         private void btnMaximizarMenu_Click(object sender, EventArgs e)
@@ -53,11 +43,6 @@ namespace AniCLinic
             guna2Transition1.ShowSync(PanelMenu);
         }
 
-        private void Menu_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void AbrirEnPanel(Panel contenedor, Form hijo)
         {
             foreach (Control c in contenedor.Controls) c.Dispose();
@@ -74,19 +59,10 @@ namespace AniCLinic
             hijo.Show();
         }
 
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
-        {
-         
-        }
 
         private void btnPacientes_Click(object sender, EventArgs e)
         {
             AbrirEnPanel(pnlMenu1, new fPacientes());
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            
         }
 
         private void btnCitas_Click(object sender, EventArgs e)
@@ -96,7 +72,7 @@ namespace AniCLinic
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            nLogin.Visible = true;
+            login.Show();
             this.Close();
         }
 
@@ -126,7 +102,7 @@ namespace AniCLinic
 
         private void btncarnet_Click(object sender, EventArgs e)
         {
-            AbrirEnPanel(pnlMenu1, new Carnet());
+            AbrirEnPanel(pnlMenu1, new FormularioCarnet());
         }
 
         private void btnhisto_Click_1(object sender, EventArgs e)

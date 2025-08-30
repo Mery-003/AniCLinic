@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -17,10 +14,6 @@ namespace AniCLinic
             InitializeComponent();
         }
 
-        private void btnNuvCita_Click(object sender, EventArgs e)
-        {
-            AggRegistroClinico frm = new AggRegistroClinico();
-            frm.Show();
-        }
+
     }
 }
