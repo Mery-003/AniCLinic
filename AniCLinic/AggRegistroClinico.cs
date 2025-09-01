@@ -20,29 +20,23 @@ namespace AniCLinic
             this.AcceptButton = btnAceptar;
             this.CancelButton = btnCancelar;
 
-            // No permitir edición de cabecera
             txtPropietario.ReadOnly = true;
             txtMascota.ReadOnly = true;
             txtMotivo.ReadOnly = true;
             txtVeterinario.ReadOnly = true;
 
-            // Por si el Designer conectó eventos
             btnAceptar.Click -= BtnGuardar_Click;
             btnCancelar.Click -= BtnCancelar_Click;
             btnAceptar.Click += BtnGuardar_Click;
             btnCancelar.Click += BtnCancelar_Click;
 
-            // MUY IMPORTANTE: si el Designer dejó un Load con Fill a "Propietario", lo desconectamos
-            try { this.Load -= AggRegistroClinico_Load; } catch { /* si no existe, no pasa nada */ }
+            try { this.Load -= AggRegistroClinico_Load; } catch {  }
 
-            // Cabecera desde la cita
             CargarCabeceraDesdeCita();
 
-            // Si es edición, traer último registro clínico
             CargarRegistroClinicoSiExiste(_info.IdCita);
         }
 
-        // Constructor vacío SOLO para diseñador. No usar en runtime.
         public AggRegistroClinico()
         {
             InitializeComponent();
@@ -142,7 +136,6 @@ WHERE IdCita = @id;";
                         cmd.ExecuteNonQuery();
                     }
 
-                    // Marca la cita como registrada
                     using (var cmd = new SqlCommand(
                         "UPDATE dbo.GestionCita SET Registrada = 1 WHERE IdCita = @id;", db.obtenerConexion(), tx))
                     {
@@ -156,7 +149,6 @@ WHERE IdCita = @id;";
             finally { db.cerrarConexion(); }
         }
 
-        // Si el Designer generó esto, queda vacío (o elimínalo con seguridad)
         private void AggRegistroClinico_Load(object sender, EventArgs e) { }
     }
 }

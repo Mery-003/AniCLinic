@@ -297,7 +297,6 @@
             this.fechahistorial.Size = new System.Drawing.Size(38, 19);
             this.fechahistorial.TabIndex = 93;
             this.fechahistorial.Text = "Fecha";
-            this.fechahistorial.Click += new System.EventHandler(this.fechahistorial_Click);
             // 
             // timer1
             // 

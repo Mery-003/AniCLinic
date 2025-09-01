@@ -144,7 +144,7 @@ namespace AniCLinic
             {
                 MessageBox.Show("Error al buscar cédula: " + ex.Message);
             }
-            return null; // no existe
+            return null; 
         }
 
     }

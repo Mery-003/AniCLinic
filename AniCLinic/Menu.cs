@@ -88,7 +88,6 @@ namespace AniCLinic
         }
         private void PosicionarSubmenuJuntoA(Control anchor, Panel submenu)
         {
-            // Ubicar el panel justo al lado derecho del botón
             var screenPoint = anchor.Parent.PointToScreen(anchor.Bounds.Location);
             var formPoint = this.PointToClient(new Point(screenPoint.X + anchor.Width, screenPoint.Y));
             submenu.Location = formPoint;

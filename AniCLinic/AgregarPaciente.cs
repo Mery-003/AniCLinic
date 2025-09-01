@@ -15,11 +15,9 @@ namespace AniCLinic
         csCRUD crud = new csCRUD();
         fPacientes fp;
 
-        // IDs para edición
         public int IdMascota { get; set; }
         public int IdPropietario { get; set; }
 
-        // Estado y respaldo de fotos al editar
         private bool _esEdicion = false;
         private byte[] _fotoMascotaOriginal = null;
         private byte[] _fotoPropietarioOriginal = null;
@@ -35,7 +33,6 @@ namespace AniCLinic
             fp = p;
         }
 
-        // === Abrir en modo EDICIÓN ===
         public AgregarPaciente(fPacientes p, int idMascota)
         {
             InitializeComponent();
@@ -58,12 +55,11 @@ namespace AniCLinic
                     return;
                 }
 
-                // Mascota
                 txtMascotaNombre.Text = mascota.Nombre ?? "";
                 cmbEspecie.Text = mascota.Especie ?? "";
                 cmbRaza.Text = mascota.Raza ?? "";
                 cmbSexo.Text = mascota.Sexo ?? "";
-                txtEdad.Text = (mascota.Edad ?? "").Split(' ')[0]; // si venía "12 meses", toma "12"
+                txtEdad.Text = (mascota.Edad ?? "").Split(' ')[0]; 
                 if (!string.IsNullOrWhiteSpace(mascota.Edad))
                 {
                     var partes = mascota.Edad.Split(' ');
@@ -87,7 +83,6 @@ namespace AniCLinic
                     picMascota.Image = null;
                 }
 
-                // Propietario
                 txtNombreD.Text = propietario.Nombre ?? "";
                 txtApellido.Text = propietario.Apellido ?? "";
                 txtCedula.Text = propietario.Cedula ?? "";
@@ -115,7 +110,6 @@ namespace AniCLinic
             }
         }
 
-        // ==== Cargas directas desde BD ====
         private csMascota cargarMascota(int idMascota)
         {
             csMascota mascota = null;
@@ -182,11 +176,9 @@ namespace AniCLinic
         {
             try
             {
-                // Fotos: si no cambiaste, conserva las originales
                 byte[] fotoM = ImageToBytesOrNull(picMascota.Image) ?? _fotoMascotaOriginal;
                 byte[] fotoP = ImageToBytesOrNull(picPropietario.Image) ?? _fotoPropietarioOriginal;
 
-                // Validaciones mínimas
                 if (string.IsNullOrWhiteSpace(txtMascotaNombre.Text))
                 {
                     MessageBox.Show("Ingrese el nombre de la mascota.");
@@ -198,7 +190,6 @@ namespace AniCLinic
                     return;
                 }
 
-                // Preparamos objeto Propietario con los datos del formulario
                 csPropietario pro = new csPropietario(
                     txtNombreD.Text,
                     txtApellido.Text,
@@ -213,7 +204,6 @@ namespace AniCLinic
 
                 if (_esEdicion)
                 {
-                    // En edición: si cambiaron la cédula, validar que no sea de otro propietario
                     var idCedula = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
                     if (idCedula.HasValue && idCedula.Value != IdPropietario)
                     {
@@ -221,7 +211,6 @@ namespace AniCLinic
                         return;
                     }
 
-                    // Actualizar propietario actual
                     if (!pro.editarPropietario(IdPropietario))
                     {
                         MessageBox.Show("No se pudo actualizar el propietario.");
@@ -230,14 +219,10 @@ namespace AniCLinic
                 }
                 else
                 {
-                    // Nuevo registro: si la cédula ya existe, REUTILIZAR propietario
                     var idExistente = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
                     if (idExistente.HasValue)
                     {
                         idPropietarioParaGuardar = idExistente.Value;
-
-                        // (Opcional) Si quieres, actualiza los datos del propietario existente con lo del formulario:
-                        // pro.editarPropietario(idPropietarioParaGuardar);
                     }
                     else
                     {
@@ -253,7 +238,6 @@ namespace AniCLinic
                     }
                 }
 
-                // Mascota
                 string edadConUnidad = string.IsNullOrWhiteSpace(cmbEdadUnidad.Text)
                     ? txtEdad.Text
                     : (txtEdad.Text + " " + cmbEdadUnidad.Text).Trim();
@@ -284,7 +268,6 @@ namespace AniCLinic
 
                 MessageBox.Show(_esEdicion ? "Registro actualizado correctamente." : "Registro creado correctamente.");
 
-                // Refresca el listado y cierra
                 RefrescarGridPacientes();
                 this.Close();
             }
@@ -294,15 +277,12 @@ namespace AniCLinic
             }
         }
 
-
-        // ======= Refresco tolerante a nombre del método =======
         private void RefrescarGridPacientes()
         {
             if (fp == null) return;
 
             var tipo = fp.GetType();
 
-            // Intenta CargarData()
             var mCargarData = tipo.GetMethod("CargarData", Type.EmptyTypes);
             if (mCargarData != null)
             {
@@ -310,7 +290,6 @@ namespace AniCLinic
                 return;
             }
 
-            // Intenta cargarData()
             var mCargarDataOld = tipo.GetMethod("cargarData", Type.EmptyTypes);
             if (mCargarDataOld != null)
             {
@@ -319,7 +298,6 @@ namespace AniCLinic
             }
         }
 
-        // ======= Helpers UI existentes =======
         private void LimpiarFormulario()
         {
             txtMascotaNombre.Text = "";

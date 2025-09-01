@@ -11,27 +11,22 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            // --- Seguridad: desengancha handlers viejos que pudo dejar el Designer ---
             try { dgvHoy.CellContentClick -= DgvHoy_CellContentClick; } catch { }
             try { dgvProximas.CellContentClick -= DgvProximas_CellContentClick; } catch { }
             try { dgvAnteriores.CellContentClick -= DgvAnteriores_CellContentClick; } catch { }
 
-            // Config base y columnas
             ConfigurarGridsBase();
             PrepararGrid_Hoy(dgvHoy);
             PrepararGrid_Proximas(dgvProximas);
             PrepararGrid_Anteriores(dgvAnteriores);
 
-            // Engancha UN solo handler para los 3 grids
             dgvHoy.CellContentClick += Grid_CellContentClick;
             dgvProximas.CellContentClick += Grid_CellContentClick;
             dgvAnteriores.CellContentClick += Grid_CellContentClick;
 
-            // Carga inicial
             RecargarTodo();
         }
 
-        // ===================== Config básica =====================
         private void ConfigurarGridsBase()
         {
             foreach (var g in new DataGridView[] { dgvHoy, dgvProximas, dgvAnteriores })
@@ -58,7 +53,6 @@ namespace AniCLinic
                 ReadOnly = true
             };
 
-        // ===================== Columnas HOY =====================
         private void PrepararGrid_Hoy(DataGridView grid)
         {
             grid.Columns.Add(MkText("Id", "IdCita", 60));
@@ -72,17 +66,8 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Veterinario", "Veterinario", 140));
             grid.Columns.Add(MkText("Estado", "Estado", 100));
 
-            grid.Columns.Add(new DataGridViewButtonColumn
-            {
-                Name = "colRegistrar",
-                HeaderText = "",
-                Text = "Registrar",
-                UseColumnTextForButtonValue = true,
-                Width = 90
-            });
         }
 
-        // ===================== Columnas PRÓXIMAS =====================
         private void PrepararGrid_Proximas(DataGridView grid)
         {
             grid.Columns.Add(MkText("Id", "IdCita", 60));
@@ -97,7 +82,6 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Estado", "Estado", 100));
         }
 
-        // ===================== Columnas ANTERIORES =====================
         private void PrepararGrid_Anteriores(DataGridView grid)
         {
             grid.Columns.Add(MkText("Id", "IdCita", 60));
@@ -111,17 +95,8 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Veterinario", "Veterinario", 140));
             grid.Columns.Add(MkText("Estado", "Estado", 120));
 
-            grid.Columns.Add(new DataGridViewButtonColumn
-            {
-                Name = "colEditar",
-                HeaderText = "",
-                Text = "Editar",
-                UseColumnTextForButtonValue = true,
-                Width = 90
-            });
         }
 
-        // ===================== Recarga =====================
         private void RecargarTodo()
         {
             RecargarHoy();
@@ -191,7 +166,6 @@ namespace AniCLinic
             return dv.ToTable();
         }
 
-        // ===================== Clicks (Registrar / Editar) =====================
         private void Grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -202,8 +176,7 @@ namespace AniCLinic
 
             int idCita = Convert.ToInt32(grid.Rows[e.RowIndex].Cells["IdCita"].Value);
 
-            // Usa SIEMPRE nuestra versión que une con PERSONAS
-            var info = ObtenerCitaInfo(idCita); // alias que dirige a GetCitaInfo_SinPropietario
+            var info = ObtenerCitaInfo(idCita); 
             if (info == null) return;
 
             bool isEdit = (col == "colEditar");
@@ -221,13 +194,10 @@ namespace AniCLinic
             else if (grid == dgvAnteriores) RecargarAnteriores();
         }
 
-        // ===================== Alias para compatibilidad con código viejo =====================
         private CitaInfo ObtenerCitaInfo(int idCita) => GetCitaInfo_SinPropietario(idCita);
 
-        // ===================== Obtener Cita SIN usar 'Propietario' =====================
         private CitaInfo GetCitaInfo_SinPropietario(int idCita)
         {
-            // Variante A: GestionCita.IdPropietario -> Personas.IdPersona
             const string SQL_A = @"
 SELECT c.IdCita, c.Fecha, c.Hora,
        m.IdMascota, m.Nombre AS Mascota, m.Especie, m.Raza,
@@ -241,7 +211,6 @@ JOIN dbo.Personas      AS p ON p.IdPersona     = c.IdPropietario
 JOIN dbo.Veterinario   AS v ON v.IdVeterinario = c.IdVeterinario
 WHERE c.IdCita = @id;";
 
-            // Variante B: GestionCita.IdPersona -> Personas.IdPersona
             const string SQL_B = @"
 SELECT c.IdCita, c.Fecha, c.Hora,
        m.IdMascota, m.Nombre AS Mascota, m.Especie, m.Raza,
@@ -279,12 +248,10 @@ WHERE c.IdCita = @id;";
                     {
                         if (!rd.Read()) return false;
 
-                        // Fecha
                         DateTime fecha = (rd["Fecha"] is DateTime df)
                                          ? df.Date
                                          : DateTime.Parse(rd["Fecha"].ToString()).Date;
 
-                        // Hora (string HH:mm[:ss] o DateTime)
                         TimeSpan hora = TimeSpan.Zero;
                         var hs = rd["Hora"]?.ToString();
                         if (!string.IsNullOrWhiteSpace(hs))
@@ -312,20 +279,17 @@ WHERE c.IdCita = @id;";
             }
             catch (SqlException ex)
             {
-                // 208: objeto no válido (tabla/vista), 207: columna no válida => probamos la otra variante sin mostrar popup
                 if (ex.Number == 208 || ex.Number == 207) return false;
                 throw;
             }
             finally { db.cerrarConexion(); }
         }
 
-        // --- Estos métodos pueden existir aún si el Designer los generó; los dejamos vacíos para que no molesten.
         private void DgvHoy_CellContentClick(object s, DataGridViewCellEventArgs e) { }
         private void DgvProximas_CellContentClick(object s, DataGridViewCellEventArgs e) { }
         private void DgvAnteriores_CellContentClick(object s, DataGridViewCellEventArgs e) { }
     }
 
-    // ===================== DTO para AggRegistroClinico =====================
     public class CitaInfo
     {
         public int IdCita { get; set; }

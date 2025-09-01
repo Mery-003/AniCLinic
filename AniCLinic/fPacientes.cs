@@ -14,13 +14,12 @@ namespace AniCLinic
         {
             InitializeComponent();
             PrepararGrid();
-            CargarData();               // carga inicial (sin filtro)
-            WireEvents();               // engancha eventos una sola vez
+            CargarData();  
+            WireEvents();  
         }
 
         private void WireEvents()
         {
-            // evita doble enganche
             dgvPacientes.CellContentClick -= dgvPacientes_CellContentClick;
             dgvPacientes.CellContentClick += dgvPacientes_CellContentClick;
 
@@ -38,14 +37,13 @@ namespace AniCLinic
             g.MultiSelect = false;
             g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             g.RowHeadersVisible = false;
-            g.AllowUserToAddRows = false;           // <- quita la fila invisible
+            g.AllowUserToAddRows = false;  
             g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            g.AutoGenerateColumns = true;           // usamos alias en el SQL
+            g.AutoGenerateColumns = true;
         }
 
         private void CargarData(string cedulaFiltro = "")
         {
-            // JOIN + alias "ID" y columna Propietario
             string sql = @"
 SELECT 
     M.IdMascota AS ID,
@@ -64,27 +62,25 @@ ORDER BY M.IdMascota DESC;";
 
             dgvPacientes.DataSource = _crud.cargarBDData(sql, new SqlParameter("@Cedula", cedulaFiltro ?? ""));
 
-            ConfigurarColumnas(); // agregar botones y pequeños ajustes
+            ConfigurarColumnas();
         }
 
         private void ConfigurarColumnas()
         {
             var g = dgvPacientes;
 
-            // asegura ancho de ID y orden
             if (g.Columns.Contains("ID"))
             {
                 g.Columns["ID"].Width = 60;
                 g.Columns["ID"].DisplayIndex = 0;
             }
 
-            // agrega botones solo una vez
             if (!_botonesAgregados)
             {
                 var colEditar = new DataGridViewButtonColumn
                 {
                     Name = "Editar",
-                    HeaderText = "",                 // sin letras
+                    HeaderText = "",  
                     Text = "Editar",
                     UseColumnTextForButtonValue = true,
                     Width = 80
@@ -94,7 +90,7 @@ ORDER BY M.IdMascota DESC;";
                 var colEliminar = new DataGridViewButtonColumn
                 {
                     Name = "Eliminar",
-                    HeaderText = "",                 // sin letras
+                    HeaderText = "",
                     Text = "Eliminar",
                     UseColumnTextForButtonValue = true,
                     Width = 90
@@ -107,7 +103,6 @@ ORDER BY M.IdMascota DESC;";
 
         private void txtMascotaNombre_TextChanged(object sender, EventArgs e)
         {
-            // filtra por CÉDULA del propietario (prefijo)
             var filtro = (txtMascotaNombre.Text ?? string.Empty).Trim();
             CargarData(filtro);
         }
@@ -116,7 +111,6 @@ ORDER BY M.IdMascota DESC;";
         {
             var f = new AgregarPaciente(this);
             f.ShowDialog();
-            // refresca al cerrar
             CargarData((txtMascotaNombre.Text ?? "").Trim());
         }
 
@@ -127,7 +121,6 @@ ORDER BY M.IdMascota DESC;";
             var nombreCol = dgvPacientes.Columns[e.ColumnIndex].Name;
             if (nombreCol != "Editar" && nombreCol != "Eliminar") return;
 
-            // fila actual -> DataRow
             var rowView = dgvPacientes.Rows[e.RowIndex].DataBoundItem as DataRowView;
             if (rowView == null) return;
 
@@ -147,9 +140,8 @@ ORDER BY M.IdMascota DESC;";
                     }
                 }
             }
-            else // Editar
+            else 
             {
-                // Abrir formulario de edición con TODOS los campos cargados
                 var f = new AgregarPaciente(this, idMascota);
                 f.ShowDialog();
                 CargarData((txtMascotaNombre.Text ?? "").Trim());

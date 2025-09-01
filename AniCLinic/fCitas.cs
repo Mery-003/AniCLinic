@@ -13,7 +13,6 @@ namespace AniCLinic
             PrepararGrid();
             WireEvents();
 
-            // Buscador reutilizable (10 dígitos + Enter)
             UxBuscarCedulaHelper.Wire(txtBuscar, ced => RecargarGrid(ced));
 
             RecargarGrid();
@@ -21,7 +20,6 @@ namespace AniCLinic
 
         private void WireEvents()
         {
-            // Asegura 1 sola suscripción (evita doble apertura)
             btnNuvCita.Click -= btnNuvCita_Click;
             btnNuvCita.Click += btnNuvCita_Click;
 
@@ -87,7 +85,6 @@ namespace AniCLinic
             dgvCitas.DataSource = CedulaUtils.CitasListado(cedulaFiltro);
         }
 
-        // --- Aquí se abre AggCita al pulsar el botón ---
         private void btnNuvCita_Click(object sender, EventArgs e)
         {
             using (var frm = new AggCita())
@@ -146,10 +143,9 @@ namespace AniCLinic
             finally { db.cerrarConexion(); }
         }
 
-        // (Solo si el Designer te exige este handler; si no, bórralo)
         private void guna2HtmlLabel2_Click(object sender, EventArgs e)
         {
-            // vacío
+
         }
     }
 }
