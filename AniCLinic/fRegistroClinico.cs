@@ -11,9 +11,21 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            try { dgvHoy.CellContentClick -= DgvHoy_CellContentClick; } catch { }
-            try { dgvProximas.CellContentClick -= DgvProximas_CellContentClick; } catch { }
-            try { dgvAnteriores.CellContentClick -= DgvAnteriores_CellContentClick; } catch { }
+            try 
+            { 
+                dgvHoy.CellContentClick -= DgvHoy_CellContentClick; 
+            } 
+            catch { }
+            try 
+            { 
+                dgvProximas.CellContentClick -= DgvProximas_CellContentClick; 
+            } 
+            catch { }
+            try 
+            { 
+                dgvAnteriores.CellContentClick -= DgvAnteriores_CellContentClick; 
+            } 
+            catch { }
 
             ConfigurarGridsBase();
             PrepararGrid_Hoy(dgvHoy);
@@ -31,7 +43,8 @@ namespace AniCLinic
         {
             foreach (var g in new DataGridView[] { dgvHoy, dgvProximas, dgvAnteriores })
             {
-                if (g == null) continue;
+                if (g == null) 
+                    continue;
                 g.AutoGenerateColumns = false;
                 g.AllowUserToAddRows = false;
                 g.MultiSelect = false;
@@ -45,13 +58,15 @@ namespace AniCLinic
         }
 
         private DataGridViewTextBoxColumn MkText(string header, string prop, int width)
-            => new DataGridViewTextBoxColumn
-            {
-                HeaderText = header,
-                DataPropertyName = prop,
-                Width = width,
-                ReadOnly = true
+        {
+            return new DataGridViewTextBoxColumn 
+            { 
+                HeaderText = header, 
+                DataPropertyName = prop, 
+                Width = width, 
+                ReadOnly = true 
             };
+        }
 
         private void PrepararGrid_Hoy(DataGridView grid)
         {
@@ -194,8 +209,11 @@ namespace AniCLinic
             else if (grid == dgvAnteriores) RecargarAnteriores();
         }
 
-        private CitaInfo ObtenerCitaInfo(int idCita) => GetCitaInfo_SinPropietario(idCita);
-
+        private CitaInfo ObtenerCitaInfo(int idCita) 
+        {
+            return GetCitaInfo_SinPropietario(idCita);
+        }
+        
         private CitaInfo GetCitaInfo_SinPropietario(int idCita)
         {
             const string SQL_A = @"
@@ -224,8 +242,10 @@ JOIN dbo.Personas      AS p ON p.IdPersona     = c.IdPersona
 JOIN dbo.Veterinario   AS v ON v.IdVeterinario = c.IdVeterinario
 WHERE c.IdCita = @id;";
 
-            if (TryLeerCita(SQL_A, idCita, out var info)) return info;
-            if (TryLeerCita(SQL_B, idCita, out info)) return info;
+            if (TryLeerCita(SQL_A, idCita, out var info)) 
+                return info;
+            if (TryLeerCita(SQL_B, idCita, out info)) 
+                return info;
 
             MessageBox.Show(
                 "No se pudo leer la cita con Personas.\n" +
@@ -282,7 +302,10 @@ WHERE c.IdCita = @id;";
                 if (ex.Number == 208 || ex.Number == 207) return false;
                 throw;
             }
-            finally { db.cerrarConexion(); }
+            finally 
+            { 
+                db.cerrarConexion(); 
+            }
         }
 
         private void DgvHoy_CellContentClick(object s, DataGridViewCellEventArgs e) { }

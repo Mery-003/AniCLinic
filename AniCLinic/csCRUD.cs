@@ -15,7 +15,6 @@ namespace AniCLinic
 
         public csCRUD() { }
 
-        // === EXISTENTE (sin parámetros)
         public DataTable cargarBDData(string sentencia)
         {
             try
@@ -34,7 +33,6 @@ namespace AniCLinic
             return oDT;
         }
 
-        // === NUEVO (con parámetros)
         public DataTable cargarBDData(string sentencia, params SqlParameter[] parametros)
         {
             try
@@ -157,7 +155,6 @@ namespace AniCLinic
             return 0;
         }
 
-        // === Helper para AgregarPaciente (carga TODO por ID)
         public DataTable ObtenerMascotaDetalladaPorId(int idMascota)
         {
             string sql = @"

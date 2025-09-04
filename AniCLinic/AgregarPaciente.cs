@@ -18,7 +18,7 @@ namespace AniCLinic
         public int IdMascota { get; set; }
         public int IdPropietario { get; set; }
 
-        private bool _esEdicion = false;
+        private bool edicion = false;
         private byte[] _fotoMascotaOriginal = null;
         private byte[] _fotoPropietarioOriginal = null;
 
@@ -37,7 +37,7 @@ namespace AniCLinic
         {
             InitializeComponent();
             fp = p;
-            _esEdicion = true;
+            edicion = true;
 
             if (idMascota != 0)
             {
@@ -63,7 +63,8 @@ namespace AniCLinic
                 if (!string.IsNullOrWhiteSpace(mascota.Edad))
                 {
                     var partes = mascota.Edad.Split(' ');
-                    if (partes.Length > 1) cmbEdadUnidad.Text = partes[1];
+                    if (partes.Length > 1) 
+                        cmbEdadUnidad.Text = partes[1];
                 }
                 txtPeso.Text = Convert.ToString(mascota.Peso, CultureInfo.CurrentCulture);
                 cmbDiscapacidad.Text = mascota.Discapacidad ?? "";
@@ -76,7 +77,10 @@ namespace AniCLinic
                         picMascota.Image = Image.FromStream(new MemoryStream(mascota.Foto));
                         picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
                     }
-                    catch { picMascota.Image = null; }
+                    catch 
+                    { 
+                        picMascota.Image = null; 
+                    }
                 }
                 else
                 {
@@ -98,7 +102,10 @@ namespace AniCLinic
                         picPropietario.Image = Image.FromStream(new MemoryStream(propietario.Foto));
                         picPropietario.SizeMode = PictureBoxSizeMode.StretchImage;
                     }
-                    catch { picPropietario.Image = null; }
+                    catch 
+                    { 
+                        picPropietario.Image = null;
+                    }
                 }
                 else
                 {
@@ -202,7 +209,7 @@ namespace AniCLinic
 
                 int idPropietarioParaGuardar = IdPropietario;
 
-                if (_esEdicion)
+                if (edicion)
                 {
                     var idCedula = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
                     if (idCedula.HasValue && idCedula.Value != IdPropietario)
@@ -239,8 +246,7 @@ namespace AniCLinic
                 }
 
                 string edadConUnidad = string.IsNullOrWhiteSpace(cmbEdadUnidad.Text)
-                    ? txtEdad.Text
-                    : (txtEdad.Text + " " + cmbEdadUnidad.Text).Trim();
+                    ? txtEdad.Text : (txtEdad.Text + " " + cmbEdadUnidad.Text).Trim();
 
                 decimal pesoDecimal = 0m;
                 if (!string.IsNullOrWhiteSpace(txtPeso.Text))
@@ -258,7 +264,7 @@ namespace AniCLinic
                     idPropietarioParaGuardar
                 );
 
-                bool okMascota = _esEdicion ? masc.editarMascota(IdMascota) : masc.agregarMascota();
+                bool okMascota = edicion ? masc.editarMascota(IdMascota) : masc.agregarMascota();
 
                 if (!okMascota)
                 {
@@ -266,7 +272,7 @@ namespace AniCLinic
                     return;
                 }
 
-                MessageBox.Show(_esEdicion ? "Registro actualizado correctamente." : "Registro creado correctamente.");
+                MessageBox.Show(edicion ? "Registro actualizado correctamente." : "Registro creado correctamente.");
 
                 RefrescarGridPacientes();
                 this.Close();
@@ -279,7 +285,8 @@ namespace AniCLinic
 
         private void RefrescarGridPacientes()
         {
-            if (fp == null) return;
+            if (fp == null) 
+                return;
 
             var tipo = fp.GetType();
 
@@ -298,27 +305,6 @@ namespace AniCLinic
             }
         }
 
-        private void LimpiarFormulario()
-        {
-            txtMascotaNombre.Text = "";
-            txtEdad.Text = "";
-            txtPeso.Text = "";
-            cmbEspecie.SelectedIndex = -1;
-            cmbRaza.SelectedIndex = -1;
-            cmbSexo.SelectedIndex = -1;
-            cmbEdadUnidad.SelectedIndex = -1;
-            cmbDiscapacidad.SelectedIndex = -1;
-            txtNombreD.Text = "";
-            txtApellido.Text = "";
-            txtCedula.Text = "";
-            txtCelular.Text = "";
-            txtCorreo.Text = "";
-            txtDireccion.Text = "";
-            picMascota.Image = null;
-            picPropietario.Image = null;
-            _fotoMascotaOriginal = null;
-            _fotoPropietarioOriginal = null;
-        }
 
         private void btnFotoMascota_Click(object sender, EventArgs e)
         {

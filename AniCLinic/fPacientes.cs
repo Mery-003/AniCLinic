@@ -42,7 +42,7 @@ namespace AniCLinic
             g.AutoGenerateColumns = true;
         }
 
-        private void CargarData(string cedulaFiltro = "")
+        private void CargarData(string filtro = "")
         {
             string sql = @"
 SELECT 
@@ -57,10 +57,11 @@ SELECT
     (P.Nombre + ' ' + P.Apellido) AS Propietario
 FROM Mascota M
 INNER JOIN Persona P ON P.IdPersona = M.IdPersona
-WHERE (@Cedula='' OR P.Cedula LIKE @Cedula + '%')
+WHERE (@Filtro ='' OR P.Cedula LIKE @Filtro + '%' OR P.Nombre LIKE @Filtro + '%' 
+OR M.Nombre LIKE @Filtro + '%')
 ORDER BY M.IdMascota DESC;";
 
-            dgvPacientes.DataSource = _crud.cargarBDData(sql, new SqlParameter("@Cedula", cedulaFiltro ?? ""));
+            dgvPacientes.DataSource = _crud.cargarBDData(sql, new SqlParameter("@Filtro", filtro));
 
             ConfigurarColumnas();
         }
@@ -116,13 +117,16 @@ ORDER BY M.IdMascota DESC;";
 
         private void dgvPacientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) 
+                return;
 
             var nombreCol = dgvPacientes.Columns[e.ColumnIndex].Name;
-            if (nombreCol != "Editar" && nombreCol != "Eliminar") return;
+            if (nombreCol != "Editar" && nombreCol != "Eliminar") 
+                return;
 
             var rowView = dgvPacientes.Rows[e.RowIndex].DataBoundItem as DataRowView;
-            if (rowView == null) return;
+            if (rowView == null) 
+                return;
 
             int idMascota = Convert.ToInt32(rowView["ID"]);
 
