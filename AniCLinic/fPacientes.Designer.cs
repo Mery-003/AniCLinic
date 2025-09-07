@@ -93,6 +93,7 @@
             this.txtMascotaNombre.Size = new System.Drawing.Size(331, 36);
             this.txtMascotaNombre.TabIndex = 48;
             this.txtMascotaNombre.Tag = "";
+            this.txtMascotaNombre.TextChanged += new System.EventHandler(this.txtMascotaNombre_TextChanged_1);
             // 
             // dgvPacientes
             // 

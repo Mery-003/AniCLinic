@@ -151,5 +151,10 @@ ORDER BY M.IdMascota DESC;";
                 CargarData((txtMascotaNombre.Text ?? "").Trim());
             }
         }
+
+        private void txtMascotaNombre_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

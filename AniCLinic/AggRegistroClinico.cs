@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -9,17 +10,24 @@ namespace AniCLinic
         private readonly bool _isEdit;
         private readonly CitaInfo _info;
 
+        private const string SCH = "dbo";
+        private const string TBL = "RegistroClinico";
+
+        // PK para editar/eliminar el del día si existe
+        private int _idRegistroClinicoExistente = 0;
+
         public AggRegistroClinico(CitaInfo info, bool isEdit)
         {
             InitializeComponent();
 
-            _info = info ?? throw new ArgumentNullException(nameof(info));
+            _info = info ?? throw new ArgumentNullException("info");
             _isEdit = isEdit;
 
             Text = _isEdit ? "Editar Registro Clínico" : "Registrar Atención";
             this.AcceptButton = btnAceptar;
             this.CancelButton = btnCancelar;
 
+            // Cabecera
             txtPropietario.ReadOnly = true;
             txtMascota.ReadOnly = true;
             txtMotivo.ReadOnly = true;
@@ -30,11 +38,16 @@ namespace AniCLinic
             btnAceptar.Click += BtnGuardar_Click;
             btnCancelar.Click += BtnCancelar_Click;
 
-            try { this.Load -= AggRegistroClinico_Load; } catch {  }
+            try { this.Load -= AggRegistroClinico_Load; } catch { }
 
+            // Mostrar datos base
             CargarCabeceraDesdeCita();
 
-            CargarRegistroClinicoSiExiste(_info.IdCita);
+            // Prefill de motivo clínico (si lo usas en otro TextBox, muévelo allí)
+            if (txtMotivo != null) txtMotivo.Text = _info.Motivo ?? "";
+
+            // Cargar del día (si ya se registró algo para esa cita)
+            CargarRegistroClinicoDelDia(_info.IdMascota, _info.IdVeterinario, _info.FechaHora.Date);
         }
 
         public AggRegistroClinico()
@@ -45,7 +58,7 @@ namespace AniCLinic
         private void CargarCabeceraDesdeCita()
         {
             txtPropietario.Text = _info.Propietario ?? "";
-            txtMascota.Text = $"{_info.Mascota} ({_info.Especie}/{_info.Raza})";
+            txtMascota.Text = string.Format("{0} ({1}/{2})", _info.Mascota, _info.Especie, _info.Raza);
             txtMotivo.Text = _info.Motivo ?? "";
             txtVeterinario.Text = _info.Veterinario ?? "";
         }
@@ -71,13 +84,14 @@ namespace AniCLinic
             }
         }
 
-        private void CargarRegistroClinicoSiExiste(int idCita)
+        // ========== Cargar (si existe) por IdMascota + IdVeterinario + fecha ==========
+        private void CargarRegistroClinicoDelDia(int idMascota, int idVet, DateTime fecha)
         {
-            const string sql = @"
-SELECT TOP 1 Diagnostico, Tratamiento, Receta
-FROM dbo.RegistroClinico
-WHERE IdCita = @id
-ORDER BY FechaUltimaEdicion DESC;";
+            string sql = string.Format(@"
+SELECT TOP(1) IdRegistroClinico, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento
+FROM {0}.{1}
+WHERE IdMascota = @m AND IdVeterinario = @v AND CONVERT(date, FechaRegistro) = @f
+ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;", SCH, TBL);
 
             var db = new csConexionBD();
             try
@@ -85,14 +99,25 @@ ORDER BY FechaUltimaEdicion DESC;";
                 db.abrirConexion();
                 using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@id", idCita);
+                    cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
+                    cmd.Parameters.Add("@v", SqlDbType.Int).Value = idVet;
+                    cmd.Parameters.Add("@f", SqlDbType.Date).Value = fecha;
+
                     using (var rd = cmd.ExecuteReader())
                     {
                         if (rd.Read())
                         {
-                            txtDiagnostico.Text = rd["Diagnostico"]?.ToString() ?? "";
-                            txtTratamiento.Text = rd["Tratamiento"]?.ToString() ?? "";
-                            txtReceta.Text = rd["Receta"]?.ToString() ?? "";
+                            _idRegistroClinicoExistente = Convert.ToInt32(rd["IdRegistroClinico"]);
+                            txtDiagnostico.Text = Convert.ToString(rd["Diagnostico"] ?? "");
+                            txtTratamiento.Text = Convert.ToString(rd["Tratamiento"] ?? "");
+                            // txtReceta lo usamos como "Aplicación de Tratamiento"
+                            txtReceta.Text = Convert.ToString(rd["AplicacionTratamiento"] ?? "");
+                            // Si tienes un TextBox para MotivoConsulta, cárgalo aquí:
+                            // txtMotivoConsulta.Text    = Convert.ToString(rd["MotivoConsulta"] ?? "");
+                        }
+                        else
+                        {
+                            _idRegistroClinicoExistente = 0; // nuevo
                         }
                     }
                 }
@@ -100,50 +125,65 @@ ORDER BY FechaUltimaEdicion DESC;";
             finally { db.cerrarConexion(); }
         }
 
+        // ========== Guardar ==========
         private void GuardarRegistroClinico()
         {
-            const string sqlExiste = "SELECT COUNT(1) FROM dbo.RegistroClinico WHERE IdCita = @id;";
-            const string sqlInsert = @"
-INSERT INTO dbo.RegistroClinico (IdCita, Diagnostico, Tratamiento, Receta, FechaUltimaEdicion)
-VALUES (@id, @diag, @trat, @rec, GETDATE());";
-            const string sqlUpdate = @"
-UPDATE dbo.RegistroClinico
-SET Diagnostico = @diag,
-    Tratamiento = @trat,
-    Receta      = @rec,
-    FechaUltimaEdicion = GETDATE()
-WHERE IdCita = @id;";
             var db = new csConexionBD();
+            db.abrirConexion();
             try
             {
-                db.abrirConexion();
-                using (var tx = db.obtenerConexion().BeginTransaction())
+                SqlTransaction tx = db.obtenerConexion().BeginTransaction();
+                try
                 {
-                    int existe;
-                    using (var cmd = new SqlCommand(sqlExiste, db.obtenerConexion(), tx))
+                    if (_idRegistroClinicoExistente > 0)
                     {
-                        cmd.Parameters.AddWithValue("@id", _info.IdCita);
-                        existe = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
+                        // UPDATE
+                        string sqlU = string.Format(@"
+UPDATE {0}.{1}
+SET MotivoConsulta = @mot,
+    Diagnostico = @diag,
+    Tratamiento = @trat,
+    AplicacionTratamiento = @apli
+WHERE IdRegistroClinico = @id;", SCH, TBL);
 
-                    var sql = (existe > 0) ? sqlUpdate : sqlInsert;
-                    using (var cmd = new SqlCommand(sql, db.obtenerConexion(), tx))
-                    {
-                        cmd.Parameters.AddWithValue("@id", _info.IdCita);
-                        cmd.Parameters.AddWithValue("@diag", (object)(txtDiagnostico.Text?.Trim() ?? "") ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@trat", (object)(txtTratamiento.Text?.Trim() ?? "") ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@rec", (object)(txtReceta.Text?.Trim() ?? "") ?? DBNull.Value);
-                        cmd.ExecuteNonQuery();
+                        using (var cmd = new SqlCommand(sqlU, db.obtenerConexion(), tx))
+                        {
+                            cmd.Parameters.Add("@mot", SqlDbType.NVarChar, 300).Value = (object)(txtMotivo.Text ?? "").ToString();
+                            cmd.Parameters.Add("@diag", SqlDbType.NVarChar, 800).Value = (object)(txtDiagnostico.Text ?? "").ToString();
+                            cmd.Parameters.Add("@trat", SqlDbType.NVarChar, 800).Value = (object)(txtTratamiento.Text ?? "").ToString();
+                            cmd.Parameters.Add("@apli", SqlDbType.NVarChar, 300).Value = (object)(txtReceta.Text ?? "").ToString();
+                            cmd.Parameters.Add("@id", SqlDbType.Int).Value = _idRegistroClinicoExistente;
+                            cmd.ExecuteNonQuery();
+                        }
                     }
-
-                    using (var cmd = new SqlCommand(
-                        "UPDATE dbo.GestionCita SET Registrada = 1 WHERE IdCita = @id;", db.obtenerConexion(), tx))
+                    else
                     {
-                        cmd.Parameters.AddWithValue("@id", _info.IdCita);
-                        cmd.ExecuteNonQuery();
+                        // INSERT
+                        string sqlI = string.Format(@"
+INSERT INTO {0}.{1}
+    (IdMascota, IdVeterinario, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento, FechaRegistro)
+VALUES
+    (@m, @v, @mot, @diag, @trat, @apli, @f);", SCH, TBL);
+
+                        using (var cmd = new SqlCommand(sqlI, db.obtenerConexion(), tx))
+                        {
+                            cmd.Parameters.Add("@m", SqlDbType.Int).Value = _info.IdMascota;
+                            cmd.Parameters.Add("@v", SqlDbType.Int).Value = _info.IdVeterinario;
+                            cmd.Parameters.Add("@mot", SqlDbType.NVarChar, 300).Value = (object)(txtMotivo.Text ?? "").ToString();
+                            cmd.Parameters.Add("@diag", SqlDbType.NVarChar, 800).Value = (object)(txtDiagnostico.Text ?? "").ToString();
+                            cmd.Parameters.Add("@trat", SqlDbType.NVarChar, 800).Value = (object)(txtTratamiento.Text ?? "").ToString();
+                            cmd.Parameters.Add("@apli", SqlDbType.NVarChar, 300).Value = (object)(txtReceta.Text ?? "").ToString();
+                            cmd.Parameters.Add("@f", SqlDbType.DateTime2).Value = _info.FechaHora.Date; // guardamos con la fecha de la cita (hora 00:00)
+                            cmd.ExecuteNonQuery();
+                        }
                     }
 
                     tx.Commit();
+                }
+                catch
+                {
+                    try { tx.Rollback(); } catch { }
+                    throw;
                 }
             }
             finally { db.cerrarConexion(); }

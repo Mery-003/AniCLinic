@@ -113,6 +113,16 @@ namespace AniCLinic
         {
             AbrirEnPanel(pnlMenu1, new FormularioCarnet());
         }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new Inventario());
+        }
+
+        private void btnProveedor_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new Proveedores());
+        }
     }
 
 }
