@@ -127,7 +127,6 @@ namespace AniCLinic
             return crud.editarBD(
                 "UPDATE Mascota SET Nombre=@Nombre, Especie=@Especie, Raza=@Raza, Sexo=@Sexo, Edad=@Edad, PesoKg=@Peso, Discapacidad=@Discapacidad, Imagen=@Foto, IdPersona=@IdPropietario " +
                 "WHERE IdMascota=@Id",
-                id,
                 new SqlParameter("@Nombre", Nombre),
                 new SqlParameter("@Especie", Especie),
                 new SqlParameter("@Raza", Raza),
@@ -136,7 +135,9 @@ namespace AniCLinic
                 new SqlParameter("@Peso", Peso),
                 new SqlParameter("@Discapacidad", Discapacidad),
                 new SqlParameter("@Foto", Foto),
-                new SqlParameter("@IdPropietario", IdPersona));
+                new SqlParameter("@IdPropietario", IdPersona),
+                new SqlParameter("@Id", id)
+                );
         }
 
         public bool eliminarMascota(int id)

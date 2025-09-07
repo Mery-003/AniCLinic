@@ -87,7 +87,9 @@
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csCRUD.cs" />
     <Compile Include="csMascota.cs" />
+    <Compile Include="csProducto.cs" />
     <Compile Include="csPropietario.cs" />
+    <Compile Include="csProveedor.cs" />
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
     </Compile>

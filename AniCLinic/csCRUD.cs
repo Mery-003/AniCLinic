@@ -96,14 +96,13 @@ namespace AniCLinic
             }
         }
 
-        public bool editarBD(string sentencia, int id, params SqlParameter[] parametros)
+        public bool editarBD(string sentencia, params SqlParameter[] parametros)
         {
             try
             {
                 conexion = new csConexionBD();
                 conexion.abrirConexion();
                 oCom = new SqlCommand(sentencia, conexion.obtenerConexion());
-                oCom.Parameters.AddWithValue("@id", id);
                 foreach (var parametro in parametros)
                     oCom.Parameters.Add(parametro);
                 oCom.ExecuteNonQuery();
