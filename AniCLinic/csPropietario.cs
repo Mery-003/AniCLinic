@@ -91,14 +91,14 @@ namespace AniCLinic
             return conexionBD.editarBD(
                 "UPDATE Persona SET Nombre=@Nombre, Apellido=@Apellido, Celular=@Celular, Cedula=@Cedula, Correo=@Correo, DireccionDomiciliaria=@Direccion, Imagen=@Foto " +
                 "WHERE IdPersona=@Id",
-                idPropietario,
                 new SqlParameter("@Nombre", Nombre),
                 new SqlParameter("@Apellido", Apellido),
                 new SqlParameter("@Celular", Celular),
                 new SqlParameter("@Cedula", Cedula),
                 new SqlParameter("@Correo", Correo),
                 new SqlParameter("@Direccion", Direccion),
-                new SqlParameter("@Foto", Foto));
+                new SqlParameter("@Foto", Foto),
+                new SqlParameter("@Id", idPropietario));
         }
 
         public bool eliminarPropietario(int idPropietario)
