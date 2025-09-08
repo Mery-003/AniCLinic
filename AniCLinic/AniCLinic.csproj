@@ -150,11 +150,11 @@
     <Compile Include="NuvProducto.Designer.cs">
       <DependentUpon>NuvProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Producto.cs">
+    <Compile Include="MasProductos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Producto.Designer.cs">
-      <DependentUpon>Producto.cs</DependentUpon>
+    <Compile Include="MasProductos.Designer.cs">
+      <DependentUpon>MasProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,8 +224,8 @@
     <EmbeddedResource Include="NuvProducto.resx">
       <DependentUpon>NuvProducto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Producto.resx">
-      <DependentUpon>Producto.cs</DependentUpon>
+    <EmbeddedResource Include="MasProductos.resx">
+      <DependentUpon>MasProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

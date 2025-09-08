@@ -72,17 +72,17 @@ namespace AniCLinic
             PrecioUnitario = preUni;
             Cantidad = cant;
         }
-        public bool agregarProveedor()
+        public bool agregarProducto()
+        {
+            csCRUD crud = new csCRUD();
+            return crud.agregarBD("INSERT");
+        }
+        public bool editarProducto(int id)
         {
             csCRUD crud = new csCRUD();
             return true;
         }
-        public bool editarProveedor(int id)
-        {
-            csCRUD crud = new csCRUD();
-            return true;
-        }
-        public bool eliminarProveedor(int id)
+        public bool eliminarProducto(int id)
         {
             csCRUD crud = new csCRUD();
             return crud.eliminarBD("DELETE FROM Inventario WHERE IdProducto=@Id", id);

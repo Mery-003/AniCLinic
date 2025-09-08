@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace AniCLinic
 {
-    public partial class Producto : Form
+    public partial class MasProductos : Form
     {
-        public Producto()
+        public MasProductos()
         {
             InitializeComponent();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
