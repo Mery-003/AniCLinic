@@ -11,11 +11,9 @@ namespace AniCLinic
     {
         private DataTable _dtHoy, _dtProximas, _dtAnteriores;
 
-        // Colores
-        private static readonly Color TEXT_GRAY = Color.FromArgb(0x6B, 0x72, 0x80); // #6B7280 (más claro)
-        private static readonly Color SEL_GRAY = Color.FromArgb(0xD1, 0xD5, 0xDB); // #D1D5DB
+        private static readonly Color TEXT_GRAY = Color.FromArgb(0x6B, 0x72, 0x80);
+        private static readonly Color SEL_GRAY = Color.FromArgb(0xD1, 0xD5, 0xDB);
 
-        // Tabla de Registro Clínico
         private const string SCH_REG = "dbo";
         private const string TBL_REG = "RegistroClinico";
 
@@ -23,13 +21,11 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            // por si el diseñador dejó algo enganchado
             try { dgvHoy.CellClick -= Grid_ButtonClick; dgvHoy.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvProximas.CellClick -= Grid_ButtonClick; dgvProximas.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvAnteriores.CellClick -= Grid_ButtonClick; dgvAnteriores.CellContentClick -= Grid_ButtonClick; } catch { }
 
             ConfigurarGridsBase();
-
             PrepararGrid_Hoy(dgvHoy);
             PrepararGrid_Proximas(dgvProximas);
             PrepararGrid_Anteriores(dgvAnteriores);
@@ -37,7 +33,6 @@ namespace AniCLinic
             AsegurarBotones();
             EstiloBotones();
 
-            // conectar ambos para asegurar el click
             dgvHoy.CellClick += Grid_ButtonClick; dgvHoy.CellContentClick += Grid_ButtonClick;
             dgvProximas.CellClick += Grid_ButtonClick; dgvProximas.CellContentClick += Grid_ButtonClick;
             dgvAnteriores.CellClick += Grid_ButtonClick; dgvAnteriores.CellContentClick += Grid_ButtonClick;
@@ -46,7 +41,6 @@ namespace AniCLinic
             RecargarTodo();
         }
 
-        // ==================== Estilo base ====================
         private void ConfigurarGridsBase()
         {
             foreach (var g in new DataGridView[] { dgvHoy, dgvProximas, dgvAnteriores })
@@ -88,12 +82,14 @@ namespace AniCLinic
                 ReadOnly = true
             };
         }
+
         private DataGridViewTextBoxColumn MkHidden(string prop)
         {
             var c = MkText("", prop, 2);
             c.Visible = false;
             return c;
         }
+
         private static DataGridViewButtonColumn MkBtn(string name, string text, int width = 110)
         {
             return new DataGridViewButtonColumn
@@ -109,8 +105,6 @@ namespace AniCLinic
         private void PrepararGrid_Hoy(DataGridView grid)
         {
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdVeterinario"));
-
             grid.Columns.Add(MkText("Id", "IdCita", 60));
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
             grid.Columns.Add(MkText("Especie", "Especie", 100));
@@ -119,14 +113,12 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Veterinario", "Veterinario", 140));
             grid.Columns.Add(MkText("Estado", "Estado", 100));
         }
+
         private void PrepararGrid_Proximas(DataGridView grid)
         {
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdVeterinario"));
-
             grid.Columns.Add(MkText("Id", "IdCita", 60));
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
             grid.Columns.Add(MkText("Especie", "Especie", 100));
@@ -135,14 +127,12 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Veterinario", "Veterinario", 140));
             grid.Columns.Add(MkText("Estado", "Estado", 100));
         }
+
         private void PrepararGrid_Anteriores(DataGridView grid)
         {
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdVeterinario"));
-
             grid.Columns.Add(MkText("Id", "IdCita", 60));
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
             grid.Columns.Add(MkText("Especie", "Especie", 100));
@@ -151,7 +141,6 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Veterinario", "Veterinario", 140));
             grid.Columns.Add(MkText("Estado", "Estado", 120));
         }
 
@@ -161,6 +150,7 @@ namespace AniCLinic
             if (dgvAnteriores.Columns["colEditar"] == null) dgvAnteriores.Columns.Add(MkBtn("colEditar", "Editar", 95));
             if (dgvAnteriores.Columns["colEliminar"] == null) dgvAnteriores.Columns.Add(MkBtn("colEliminar", "Eliminar", 95));
         }
+
         private void EstiloBotones()
         {
             var c = TEXT_GRAY;
@@ -172,7 +162,6 @@ namespace AniCLinic
             if (b2 != null) b2.DefaultCellStyle.ForeColor = c;
         }
 
-        // ==================== Carga ====================
         private void RecargarTodo()
         {
             RecargarHoy(); RecargarProximas(); RecargarAnteriores();
@@ -181,12 +170,13 @@ namespace AniCLinic
 
         private void RecargarHoy()
         {
-            var dt = CedulaUtils.CitasListado(null); // debe traer IdMascota e IdVeterinario si es posible
+            var dt = CedulaUtils.CitasListado(null);
             if (!dt.Columns.Contains("Estado")) dt.Columns.Add("Estado", typeof(string));
             foreach (DataRow r in dt.Rows) r["Estado"] = "Pendiente";
             _dtHoy = FiltrarPorFecha(dt, TipoSeccion.Hoy);
             dgvHoy.DataSource = _dtHoy;
         }
+
         private void RecargarProximas()
         {
             var dt = CedulaUtils.CitasListado(null);
@@ -195,6 +185,7 @@ namespace AniCLinic
             _dtProximas = FiltrarPorFecha(dt, TipoSeccion.Proximas);
             dgvProximas.DataSource = _dtProximas;
         }
+
         private void RecargarAnteriores()
         {
             var dt = CedulaUtils.CitasListado(null);
@@ -205,6 +196,7 @@ namespace AniCLinic
         }
 
         private enum TipoSeccion { Hoy, Proximas, Anteriores }
+
         private DataTable FiltrarPorFecha(DataTable dt, TipoSeccion seccion)
         {
             if (dt == null) return null;
@@ -223,6 +215,7 @@ namespace AniCLinic
             }
             return clone;
         }
+
         private bool TryParseFecha(DataRow r, out DateTime fecha)
         {
             fecha = DateTime.MinValue;
@@ -232,13 +225,13 @@ namespace AniCLinic
             return false;
         }
 
-        // ==================== Búsquedas ====================
         private void WireBusquedas()
         {
             if (txtBuscarHoy != null) { txtBuscarHoy.TextChanged -= TxtBuscarHoy_TextChanged; txtBuscarHoy.TextChanged += TxtBuscarHoy_TextChanged; }
             if (txtBuscarProximas != null) { txtBuscarProximas.TextChanged -= TxtBuscarProximas_TextChanged; txtBuscarProximas.TextChanged += TxtBuscarProximas_TextChanged; }
             if (txtBuscarAnteriores != null) { txtBuscarAnteriores.TextChanged -= TxtBuscarAnteriores_TextChanged; txtBuscarAnteriores.TextChanged += TxtBuscarAnteriores_TextChanged; }
         }
+
         private void TxtBuscarHoy_TextChanged(object s, EventArgs e) { AplicarBusquedaHoy(); }
         private void TxtBuscarProximas_TextChanged(object s, EventArgs e) { AplicarBusquedaProximas(); }
         private void TxtBuscarAnteriores_TextChanged(object s, EventArgs e) { AplicarBusquedaAnteriores(); }
@@ -253,7 +246,7 @@ namespace AniCLinic
             var t = (term ?? "").Trim();
             if (t.Length == 0) { grid.DataSource = baseTable; return; }
 
-            string[] campos = { "IdCita", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Veterinario", "Estado", "CedulaPropietario" };
+            string[] campos = { "IdCita", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
             var cols = campos.Where(c => baseTable.Columns.Contains(c)).ToArray();
             var val = t.Replace("'", "''");
             var expr = string.Join(" OR ", cols.Select(c =>
@@ -266,29 +259,15 @@ namespace AniCLinic
             grid.DataSource = new DataView(baseTable) { RowFilter = expr };
         }
 
-        // ==================== Botones ====================
         private void Grid_ButtonClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             var grid = (DataGridView)sender;
             var btnCol = grid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
-            if (btnCol == null) return; // no es botón
+            if (btnCol == null) return;
 
-            // 1) intenta leer desde la fila
             var info = ObtenerCitaInfoDesdeFila(grid, e.RowIndex);
-
-            // 2) si faltan IDs, intenta completar por DB usando IdCita
-            if ((info == null) || info.IdMascota <= 0 || info.IdVeterinario <= 0)
-            {
-                int idCita = 0;
-                try { idCita = Convert.ToInt32(grid.Rows[e.RowIndex].Cells["IdCita"].Value); } catch { }
-                if (idCita > 0)
-                {
-                    var full = ObtenerCitaInfo_DB(idCita);
-                    if (full != null) info = full;
-                }
-            }
 
             if (info == null)
             {
@@ -313,13 +292,6 @@ namespace AniCLinic
             }
             else if (btnCol.Name == "colEliminar")
             {
-                // asegurar IDs para eliminar
-                if (info.IdMascota <= 0 || info.IdVeterinario <= 0)
-                {
-                    var full = ObtenerCitaInfo_DB(info.IdCita);
-                    if (full != null) info = full;
-                }
-
                 var ok = MessageBox.Show("¿Eliminar el registro clínico de esta cita?",
                                          "Confirmar eliminación",
                                          MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -342,20 +314,17 @@ namespace AniCLinic
             else if (grid == dgvAnteriores) RecargarAnteriores();
         }
 
-        // ====== Lee desde la FILA (permite IDs vacíos, se completan luego por DB) ======
         private CitaInfo ObtenerCitaInfoDesdeFila(DataGridView grid, int rowIndex)
         {
             Func<string, object> Get = name => grid.Columns.Contains(name) ? grid.Rows[rowIndex].Cells[name].Value : null;
 
             int idCita; int.TryParse(Convert.ToString(Get("IdCita")), out idCita);
             int idMascota; int.TryParse(Convert.ToString(Get("IdMascota")), out idMascota);
-            int idVet; int.TryParse(Convert.ToString(Get("IdVeterinario")), out idVet);
 
             string masc = Convert.ToString(Get("Mascota"));
             string esp = Convert.ToString(Get("Especie"));
             string raz = Convert.ToString(Get("Raza"));
             string prop = Convert.ToString(Get("Propietario"));
-            string vet = Convert.ToString(Get("Veterinario"));
             string mot = Convert.ToString(Get("Motivo"));
 
             DateTime fecha = DateTime.Today; DateTime.TryParse(Convert.ToString(Get("Fecha")), out fecha);
@@ -368,126 +337,30 @@ namespace AniCLinic
                 if (!TimeSpan.TryParse(vh, out hora) && DateTime.TryParse(vh, out ht)) hora = ht.TimeOfDay;
             }
 
-            // Si no hay nada util, devuelve null
             if (idCita <= 0 && idMascota <= 0 && string.IsNullOrEmpty(masc)) return null;
 
             return new CitaInfo
             {
                 IdCita = idCita,
                 IdMascota = idMascota,
-                IdVeterinario = idVet,
                 Mascota = masc,
                 Especie = esp,
                 Raza = raz,
                 Propietario = prop,
-                Veterinario = vet,
                 Motivo = mot,
                 FechaHora = (fecha == DateTime.MinValue ? DateTime.Today : fecha.Date).Add(hora)
             };
         }
 
-        // ====== Completa por DB usando IdCita (2 variantes de FK de Personas) ======
-        private CitaInfo ObtenerCitaInfo_DB(int idCita)
-        {
-            // Incluimos IdVeterinario para poder grabar/eliminar en RegistroClinico
-            const string SQL_A = @"
-SELECT c.IdCita, c.Fecha, c.Hora,
-       m.IdMascota, m.Nombre AS Mascota, m.Especie, m.Raza,
-       (p.Nombres + ' ' + p.Apellidos) AS Propietario,
-       v.IdVeterinario, (v.Nombres + ' ' + v.Apellidos) AS Veterinario,
-       c.Motivo
-FROM dbo.GestionCita AS c
-JOIN dbo.Mascota     AS m ON m.IdMascota = c.IdMascota
-JOIN dbo.Personas    AS p ON p.IdPersona = c.IdPropietario
-JOIN dbo.Veterinario AS v ON v.IdVeterinario = c.IdVeterinario
-WHERE c.IdCita = @id;";
-
-            const string SQL_B = @"
-SELECT c.IdCita, c.Fecha, c.Hora,
-       m.IdMascota, m.Nombre AS Mascota, m.Especie, m.Raza,
-       (p.Nombres + ' ' + p.Apellidos) AS Propietario,
-       v.IdVeterinario, (v.Nombres + ' ' + v.Apellidos) AS Veterinario,
-       c.Motivo
-FROM dbo.GestionCita AS c
-JOIN dbo.Mascota     AS m ON m.IdMascota = c.IdMascota
-JOIN dbo.Personas    AS p ON p.IdPersona = c.IdPersona
-JOIN dbo.Veterinario AS v ON v.IdVeterinario = c.IdVeterinario
-WHERE c.IdCita = @id;";
-
-            CitaInfo info;
-            if (TryLeerCita(SQL_A, idCita, out info)) return info;
-            if (TryLeerCita(SQL_B, idCita, out info)) return info;
-
-            return null;
-        }
-
-        private bool TryLeerCita(string sql, int idCita, out CitaInfo info)
-        {
-            info = null;
-            var db = new csConexionBD();
-            try
-            {
-                db.abrirConexion();
-                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
-                {
-                    cmd.Parameters.AddWithValue("@id", idCita);
-                    using (var rd = cmd.ExecuteReader())
-                    {
-                        if (!rd.Read()) return false;
-
-                        DateTime fecha = DateTime.Today;
-                        if (rd["Fecha"] is DateTime) fecha = ((DateTime)rd["Fecha"]).Date;
-                        else DateTime.TryParse(Convert.ToString(rd["Fecha"]), out fecha);
-
-                        TimeSpan hora = TimeSpan.Zero;
-                        string hs = rd["Hora"] == null ? null : rd["Hora"].ToString();
-                        if (!string.IsNullOrWhiteSpace(hs))
-                        {
-                            DateTime ht;
-                            if (!TimeSpan.TryParse(hs, out hora) && DateTime.TryParse(hs, out ht)) hora = ht.TimeOfDay;
-                        }
-
-                        info = new CitaInfo
-                        {
-                            IdCita = idCita,
-                            IdMascota = Convert.ToInt32(rd["IdMascota"]),
-                            IdVeterinario = Convert.ToInt32(rd["IdVeterinario"]),
-                            Mascota = Convert.ToString(rd["Mascota"]),
-                            Especie = Convert.ToString(rd["Especie"]),
-                            Raza = Convert.ToString(rd["Raza"]),
-                            Propietario = Convert.ToString(rd["Propietario"]),
-                            Veterinario = Convert.ToString(rd["Veterinario"]),
-                            Motivo = Convert.ToString(rd["Motivo"]),
-                            FechaHora = fecha.Add(hora)
-                        };
-                        return true;
-                    }
-                }
-            }
-            catch (SqlException)
-            {
-                return false;
-            }
-            finally { db.cerrarConexion(); }
-        }
-
-        // Borrar registro clínico del día (IdMascota + IdVeterinario + Fecha)
         private void EliminarRegistroClinico(CitaInfo info)
         {
-            // completar si vinieron vacíos
-            if ((info.IdMascota <= 0 || info.IdVeterinario <= 0) && info.IdCita > 0)
-            {
-                var full = ObtenerCitaInfo_DB(info.IdCita);
-                if (full != null) info = full;
-            }
-
             DateTime fechaCita = info.FechaHora.Date;
 
             string sql = string.Format(@"
 WITH x AS (
   SELECT TOP(1) *
   FROM {0}.{1}
-  WHERE IdMascota = @m AND IdVeterinario = @v AND CONVERT(date, FechaRegistro) = @f
+  WHERE IdMascota = @m AND CONVERT(date, FechaRegistro) = @f
   ORDER BY FechaRegistro DESC, IdRegistroClinico DESC
 )
 DELETE FROM x;", SCH_REG, TBL_REG);
@@ -499,7 +372,6 @@ DELETE FROM x;", SCH_REG, TBL_REG);
                 using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
                 {
                     cmd.Parameters.Add("@m", SqlDbType.Int).Value = info.IdMascota;
-                    cmd.Parameters.Add("@v", SqlDbType.Int).Value = info.IdVeterinario;
                     cmd.Parameters.Add("@f", SqlDbType.Date).Value = fechaCita;
                     cmd.ExecuteNonQuery();
                 }
@@ -512,12 +384,10 @@ DELETE FROM x;", SCH_REG, TBL_REG);
     {
         public int IdCita { get; set; }
         public int IdMascota { get; set; }
-        public int IdVeterinario { get; set; }
         public string Mascota { get; set; }
         public string Especie { get; set; }
         public string Raza { get; set; }
         public string Propietario { get; set; }
-        public string Veterinario { get; set; }
         public string Motivo { get; set; }
         public DateTime FechaHora { get; set; }
     }
