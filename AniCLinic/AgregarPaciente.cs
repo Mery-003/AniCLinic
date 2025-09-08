@@ -433,7 +433,7 @@ namespace AniCLinic
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if ((!char.IsDigit(e.KeyChar) || txtEdad.Text.Length >= 2) && e.KeyChar != 8)
             {
                 e.Handled = true;
             }
@@ -441,8 +441,8 @@ namespace AniCLinic
 
         private void txtPeso_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ','
-                && e.KeyChar != '.')
+            if ((char.IsDigit(e.KeyChar) && txtPeso.Text.Replace(",", "").Replace(".", "").Length >= 4)
+             || (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ',' && e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
@@ -450,7 +450,7 @@ namespace AniCLinic
 
         private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if ((!char.IsDigit(e.KeyChar) || txtCelular.Text.Length >= 10) && e.KeyChar != 8)
             {
                 e.Handled = true;
             }
@@ -458,7 +458,7 @@ namespace AniCLinic
 
         private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if ((!char.IsDigit(e.KeyChar) || txtCedula.Text.Length >= 10) && e.KeyChar != 8)
             {
                 e.Handled = true;
             }

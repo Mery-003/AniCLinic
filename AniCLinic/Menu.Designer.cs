@@ -33,6 +33,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.PanelMenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.panelReporteriaSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2GradientButton1 = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnProveedor = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnStock = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -46,19 +49,20 @@
             this.btnPacientes = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnPanel = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.panelReporteriaSubmenu = new Guna.UI2.WinForms.Guna2Panel();
-            this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
             this.pnlMenu1 = new System.Windows.Forms.Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.lblEmpleado = new System.Windows.Forms.Label();
+            this.pcbEmpleado = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.btnMaximizarMenu = new Guna.UI2.WinForms.Guna2CircleButton();
             this.btnMinimizarMenu = new Guna.UI2.WinForms.Guna2CircleButton();
             this.PanelMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.panelReporteriaSubmenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
+            this.guna2Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbEmpleado)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Elipse1
@@ -89,6 +93,73 @@
             this.PanelMenu.Name = "PanelMenu";
             this.PanelMenu.Size = new System.Drawing.Size(256, 693);
             this.PanelMenu.TabIndex = 0;
+            // 
+            // panelReporteriaSubmenu
+            // 
+            this.panelReporteriaSubmenu.Controls.Add(this.btncarnet);
+            this.panelReporteriaSubmenu.Controls.Add(this.btnhisto);
+            this.guna2Transition1.SetDecoration(this.panelReporteriaSubmenu, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.panelReporteriaSubmenu.Location = new System.Drawing.Point(-1, 459);
+            this.panelReporteriaSubmenu.Name = "panelReporteriaSubmenu";
+            this.panelReporteriaSubmenu.Size = new System.Drawing.Size(263, 102);
+            this.panelReporteriaSubmenu.TabIndex = 14;
+            this.panelReporteriaSubmenu.Visible = false;
+            // 
+            // btncarnet
+            // 
+            this.btncarnet.BackColor = System.Drawing.Color.Teal;
+            this.btncarnet.CustomImages.Image = global::AniCLinic.Properties.Resources.info_card_fill;
+            this.btncarnet.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btncarnet.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btncarnet, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btncarnet.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btncarnet.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btncarnet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btncarnet.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btncarnet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btncarnet.FillColor = System.Drawing.Color.Empty;
+            this.btncarnet.FillColor2 = System.Drawing.Color.Empty;
+            this.btncarnet.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btncarnet.ForeColor = System.Drawing.Color.Black;
+            this.btncarnet.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btncarnet.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btncarnet.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btncarnet.Location = new System.Drawing.Point(0, 55);
+            this.btncarnet.Name = "btncarnet";
+            this.btncarnet.Size = new System.Drawing.Size(263, 39);
+            this.btncarnet.TabIndex = 11;
+            this.btncarnet.Text = "Carnet";
+            this.btncarnet.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btncarnet.TextOffset = new System.Drawing.Point(40, 0);
+            this.btncarnet.Click += new System.EventHandler(this.btncarnet_Click_1);
+            // 
+            // btnhisto
+            // 
+            this.btnhisto.BackColor = System.Drawing.Color.Teal;
+            this.btnhisto.CustomImages.Image = global::AniCLinic.Properties.Resources.article_fill;
+            this.btnhisto.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnhisto.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btnhisto, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btnhisto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnhisto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnhisto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnhisto.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnhisto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnhisto.FillColor = System.Drawing.Color.Empty;
+            this.btnhisto.FillColor2 = System.Drawing.Color.Empty;
+            this.btnhisto.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnhisto.ForeColor = System.Drawing.Color.Black;
+            this.btnhisto.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btnhisto.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btnhisto.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnhisto.Location = new System.Drawing.Point(0, 7);
+            this.btnhisto.Name = "btnhisto";
+            this.btnhisto.Size = new System.Drawing.Size(263, 40);
+            this.btnhisto.TabIndex = 10;
+            this.btnhisto.Text = "Historial Veterinario";
+            this.btnhisto.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnhisto.TextOffset = new System.Drawing.Point(40, 0);
+            this.btnhisto.Click += new System.EventHandler(this.btnhisto_Click_1);
             // 
             // guna2GradientButton1
             // 
@@ -375,73 +446,6 @@
             this.guna2CirclePictureBox1.TabStop = false;
             this.guna2CirclePictureBox1.UseTransparentBackground = true;
             // 
-            // panelReporteriaSubmenu
-            // 
-            this.panelReporteriaSubmenu.Controls.Add(this.btncarnet);
-            this.panelReporteriaSubmenu.Controls.Add(this.btnhisto);
-            this.guna2Transition1.SetDecoration(this.panelReporteriaSubmenu, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.panelReporteriaSubmenu.Location = new System.Drawing.Point(-1, 445);
-            this.panelReporteriaSubmenu.Name = "panelReporteriaSubmenu";
-            this.panelReporteriaSubmenu.Size = new System.Drawing.Size(263, 102);
-            this.panelReporteriaSubmenu.TabIndex = 14;
-            this.panelReporteriaSubmenu.Visible = false;
-            // 
-            // btncarnet
-            // 
-            this.btncarnet.BackColor = System.Drawing.Color.Teal;
-            this.btncarnet.CustomImages.Image = global::AniCLinic.Properties.Resources.info_card_fill;
-            this.btncarnet.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btncarnet.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Transition1.SetDecoration(this.btncarnet, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.btncarnet.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btncarnet.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btncarnet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btncarnet.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btncarnet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btncarnet.FillColor = System.Drawing.Color.Empty;
-            this.btncarnet.FillColor2 = System.Drawing.Color.Empty;
-            this.btncarnet.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btncarnet.ForeColor = System.Drawing.Color.Black;
-            this.btncarnet.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.btncarnet.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
-            this.btncarnet.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncarnet.Location = new System.Drawing.Point(0, 55);
-            this.btncarnet.Name = "btncarnet";
-            this.btncarnet.Size = new System.Drawing.Size(263, 39);
-            this.btncarnet.TabIndex = 11;
-            this.btncarnet.Text = "Carnet";
-            this.btncarnet.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btncarnet.TextOffset = new System.Drawing.Point(40, 0);
-            this.btncarnet.Click += new System.EventHandler(this.btncarnet_Click_1);
-            // 
-            // btnhisto
-            // 
-            this.btnhisto.BackColor = System.Drawing.Color.Teal;
-            this.btnhisto.CustomImages.Image = global::AniCLinic.Properties.Resources.article_fill;
-            this.btnhisto.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnhisto.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Transition1.SetDecoration(this.btnhisto, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.btnhisto.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnhisto.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnhisto.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnhisto.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnhisto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnhisto.FillColor = System.Drawing.Color.Empty;
-            this.btnhisto.FillColor2 = System.Drawing.Color.Empty;
-            this.btnhisto.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnhisto.ForeColor = System.Drawing.Color.Black;
-            this.btnhisto.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.btnhisto.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
-            this.btnhisto.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnhisto.Location = new System.Drawing.Point(0, 7);
-            this.btnhisto.Name = "btnhisto";
-            this.btnhisto.Size = new System.Drawing.Size(263, 40);
-            this.btnhisto.TabIndex = 10;
-            this.btnhisto.Text = "Historial Veterinario";
-            this.btnhisto.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnhisto.TextOffset = new System.Drawing.Point(40, 0);
-            this.btnhisto.Click += new System.EventHandler(this.btnhisto_Click_1);
-            // 
             // guna2DragControl1
             // 
             this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
@@ -489,12 +493,36 @@
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2Panel2.Controls.Add(this.lblEmpleado);
+            this.guna2Panel2.Controls.Add(this.pcbEmpleado);
             this.guna2Transition1.SetDecoration(this.guna2Panel2, Guna.UI2.AnimatorNS.DecorationType.None);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel2.Location = new System.Drawing.Point(256, 0);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1059, 83);
             this.guna2Panel2.TabIndex = 13;
+            // 
+            // lblEmpleado
+            // 
+            this.lblEmpleado.AutoSize = true;
+            this.guna2Transition1.SetDecoration(this.lblEmpleado, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.lblEmpleado.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmpleado.Location = new System.Drawing.Point(703, 28);
+            this.lblEmpleado.Name = "lblEmpleado";
+            this.lblEmpleado.Size = new System.Drawing.Size(65, 25);
+            this.lblEmpleado.TabIndex = 1;
+            this.lblEmpleado.Text = "label1";
+            // 
+            // pcbEmpleado
+            // 
+            this.guna2Transition1.SetDecoration(this.pcbEmpleado, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.pcbEmpleado.ImageRotate = 0F;
+            this.pcbEmpleado.Location = new System.Drawing.Point(960, 9);
+            this.pcbEmpleado.Name = "pcbEmpleado";
+            this.pcbEmpleado.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pcbEmpleado.Size = new System.Drawing.Size(64, 64);
+            this.pcbEmpleado.TabIndex = 0;
+            this.pcbEmpleado.TabStop = false;
             // 
             // btnMaximizarMenu
             // 
@@ -561,8 +589,11 @@
             this.Text = "Menu";
             this.PanelMenu.ResumeLayout(false);
             this.PanelMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             this.panelReporteriaSubmenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
+            this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbEmpleado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -594,5 +625,7 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnProveedor;
         private Guna.UI2.WinForms.Guna2GradientButton btnStock;
         private Guna.UI2.WinForms.Guna2GradientButton guna2GradientButton1;
+        private System.Windows.Forms.Label lblEmpleado;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox pcbEmpleado;
     }
 }

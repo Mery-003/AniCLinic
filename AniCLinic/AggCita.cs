@@ -12,7 +12,6 @@ namespace AniCLinic
         private int? _idCitaEdit;
         private DataTable _mascotasDT;
 
-        // Ajusta si tu CHECK permite otro valor
         private const string ESTADO_NUEVO = "Pendiente";
 
         private static readonly TimeSpan APERTURA = new TimeSpan(7, 0, 0);

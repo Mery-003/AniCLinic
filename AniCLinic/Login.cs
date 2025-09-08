@@ -42,18 +42,39 @@ namespace AniCLinic
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            csCRUD conexion = new csCRUD();
-            int inicio = conexion.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
+            string nombre = null;
+            byte[] foto = null;
+            csConexionBD conexion = new csConexionBD();
+            conexion.abrirConexion();
+            csCRUD crud = new csCRUD();
+            int idUsuario = crud.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
 
-            if (inicio > 0)
+            if (idUsuario > 0)
             {
                 if (!SesionRepo.CargarPorUsuario(txtUsuario.Text.Trim()))
                 {
                     MessageBox.Show("No se pudo cargar la sesión del usuario.");
                     return;
                 }
+                SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen " + 
+                    "FROM Empleado E INNER JOIN Persona P ON E.IdPersona = P.IdPersona " + 
+                    "WHERE E.IdEmpleado = @Id", conexion.obtenerConexion()); 
+                oCom.Parameters.AddWithValue("@Id", idUsuario); 
+                SqlDataReader oDTR = oCom.ExecuteReader();
+                if (oDTR.Read())
+                {
+                    nombre = "Dr. " + oDTR["Nombre"].ToString() + " " + oDTR["Apellido"].ToString();
 
-                Menu menu = new Menu(this);
+                    if (oDTR["Imagen"] != DBNull.Value && oDTR["Imagen"] is byte[])
+                    {
+                         foto = (byte[])oDTR["Imagen"];
+                    }
+                    else
+                    {
+                         foto = (byte[])new ImageConverter().ConvertTo(Properties.Resources.user_fill, typeof(byte[]));
+                    }
+                }
+                Menu menu = new Menu(this, nombre, foto);
                 txtUsuario.Text = "";
                 txtPassword.Text = "";
                 this.Hide();

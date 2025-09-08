@@ -427,6 +427,7 @@
             this.Controls.Add(this.guna2HtmlLabel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AggRegistroClinico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AggRegistroClinico";
             this.ResumeLayout(false);
             this.PerformLayout();

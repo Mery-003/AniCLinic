@@ -15,11 +15,12 @@ namespace AniCLinic
                 using (var da = new SqlDataAdapter(@"
                     SELECT TOP 1 
                            e.IdEmpleado,
-                           (p.Nombre + ' ' + p.Apellido) AS NombreCompleto
+                           (p.Nombre + ' ' + p.Apellido) AS NombreCompleto,
+                           p.Imagen
                     FROM dbo.Usuario u
                     JOIN dbo.Empleado e ON e.IdEmpleado = u.IdEmpleado
                     JOIN dbo.Persona  p ON p.IdPersona  = e.IdPersona
-                    WHERE u.Usuario = @u AND u.Activo = 1;", db.obtenerConexion()))
+                    WHERE u.Usuario = @u AND u.Activo = 1", db.obtenerConexion()))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@u", usuario);
                     var dt = new DataTable();

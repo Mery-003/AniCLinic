@@ -18,8 +18,6 @@ namespace AniCLinic
             PrepararGrid();
             WireEvents();
 
-            // (Quitamos el helper antiguo de cédula para no duplicar lógicas)
-            // UxBuscarCedulaHelper.Wire(txtBuscar, ced => CargarData(ced));
 
             CargarData();
         }
@@ -86,7 +84,6 @@ namespace AniCLinic
 
             dgvCitas.Columns.Add(MkText("Motivo", "Motivo", 220));
             dgvCitas.Columns.Add(MkText("Propietario", "Propietario", 160));
-            dgvCitas.Columns.Add(MkText("Veterinario", "Veterinario", 140));
 
             // Botones
             dgvCitas.Columns.Add(new DataGridViewButtonColumn
@@ -162,13 +159,10 @@ SELECT
     M.Especie,
     M.Raza,
     (P.Nombre + ' ' + P.Apellido) AS Propietario,
-    P.Cedula AS CedulaPropietario,
-    ISNULL(V.Nombre + ' ' + V.Apellido, '') AS Veterinario
+    P.Cedula AS CedulaPropietario
 FROM GestionCita C
 INNER JOIN Mascota   M ON M.IdMascota = C.IdMascota
 INNER JOIN Persona   P ON P.IdPersona = M.IdPersona
-LEFT  JOIN Persona   V ON 1 = 0  -- <-- si tienes cómo identificar al veterinario, reemplaza este join
--- LEFT JOIN Veterinario V ON V.IdVeterinario = C.IdVeterinario
 WHERE (@Filtro = '' 
        OR P.Cedula LIKE @Filtro + '%'
        OR P.Nombre LIKE @Filtro + '%'

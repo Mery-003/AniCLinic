@@ -19,10 +19,25 @@ namespace AniCLinic
         {
             InitializeComponent();
         }
-        public Menu(Login l)
+        public Menu(Login l, string nom, byte[] foto)
         {
             InitializeComponent();
             login = l;
+            lblEmpleado.Text = nom;
+
+            if (foto != null && foto.Length > 0)
+            {
+                using (var ms = new MemoryStream(foto))
+                {
+                    pcbEmpleado.Image = Image.FromStream(ms);
+                }
+            }
+            else
+            {
+                pcbEmpleado.Image = Properties.Resources.user_fill;
+            }
+
+            pcbEmpleado.SizeMode = PictureBoxSizeMode.CenterImage; 
         }
 
         private void btnMaximizarMenu_Click(object sender, EventArgs e)

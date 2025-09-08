@@ -143,7 +143,7 @@ namespace AniCLinic
                 oDTR = oCom.ExecuteReader();
                 while (oDTR.Read())
                     if (oDTR["Usuario"].ToString() == user && oDTR["Password"].ToString() == pass)
-                        return 1;
+                        return (int)oDTR["IdUsuario"];
                 conexion.cerrarConexion();
             }
             catch (Exception ex)
