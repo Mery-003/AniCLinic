@@ -167,6 +167,12 @@
     <Compile Include="SesionActual.cs" />
     <Compile Include="SesionRepo.cs" />
     <Compile Include="UxBuscarCedulaHelper.cs" />
+    <Compile Include="Ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas.Designer.cs">
+      <DependentUpon>Ventas.cs</DependentUpon>
+    </Compile>
     <Compile Include="VerCarnet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -321,11 +327,14 @@
     <None Include="Resources\3003596.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\shopping-basket-2-fill2.png" />
     <None Include="Resources\1892641.png" />
     <None Include="Resources\4767994.png" />
     <Content Include="Resources\841791.png" />
     <Content Include="Resources\article-fill.png" />
+    <None Include="Resources\box-1-fill2.png" />
     <Content Include="Resources\file-3-fill.png" />
+    <None Include="Resources\folder-user-fill2.png" />
     <Content Include="Resources\info-card-fill.png" />
     <None Include="Resources\ojo.png" />
     <Content Include="Resources\shake-hands-fill.png" />

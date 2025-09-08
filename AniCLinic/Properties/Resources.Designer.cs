@@ -193,6 +193,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap box_1_fill1 {
+            get {
+                object obj = ResourceManager.GetObject("box-1-fill1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_bin_5_line {
             get {
                 object obj = ResourceManager.GetObject("delete-bin-5-line", resourceCulture);
@@ -246,6 +256,16 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap file_3_fill {
             get {
                 object obj = ResourceManager.GetObject("file-3-fill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_user_fill {
+            get {
+                object obj = ResourceManager.GetObject("folder-user-fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -336,6 +356,16 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap shake_hands_fill {
             get {
                 object obj = ResourceManager.GetObject("shake-hands-fill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shopping_basket_2_fill {
+            get {
+                object obj = ResourceManager.GetObject("shopping-basket-2-fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

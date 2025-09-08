@@ -28,31 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvHoy = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.btnAggPaciente = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.txtBuscarHoy = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dgvProximas = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.txtBuscarProximas = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
-            this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.btnAggPaciente = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.guna2TabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHoy)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProximas)).BeginInit();
+            this.dgvHistorial = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2HtmlLabel3
@@ -60,129 +46,46 @@
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(405, 14);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(115, 77);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(289, 36);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(157, 36);
             this.guna2HtmlLabel3.TabIndex = 53;
-            this.guna2HtmlLabel3.Text = "Inventario y Ventas";
+            this.guna2HtmlLabel3.Text = "Inventario";
             // 
-            // guna2TabControl1
+            // btnAggPaciente
             // 
-            this.guna2TabControl1.Controls.Add(this.tabPage1);
-            this.guna2TabControl1.Controls.Add(this.tabPage2);
-            this.guna2TabControl1.ItemSize = new System.Drawing.Size(100, 40);
-            this.guna2TabControl1.Location = new System.Drawing.Point(4, 14);
-            this.guna2TabControl1.Name = "guna2TabControl1";
-            this.guna2TabControl1.SelectedIndex = 0;
-            this.guna2TabControl1.Size = new System.Drawing.Size(1035, 589);
-            this.guna2TabControl1.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
-            this.guna2TabControl1.TabButtonHoverState.FillColor = System.Drawing.Color.LightGray;
-            this.guna2TabControl1.TabButtonHoverState.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.guna2TabControl1.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
-            this.guna2TabControl1.TabButtonHoverState.InnerColor = System.Drawing.Color.MediumAquamarine;
-            this.guna2TabControl1.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty;
-            this.guna2TabControl1.TabButtonIdleState.FillColor = System.Drawing.Color.Honeydew;
-            this.guna2TabControl1.TabButtonIdleState.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TabControl1.TabButtonIdleState.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.guna2TabControl1.TabButtonIdleState.InnerColor = System.Drawing.Color.LightSlateGray;
-            this.guna2TabControl1.TabButtonImageAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2TabControl1.TabButtonSelectedState.BorderColor = System.Drawing.Color.White;
-            this.guna2TabControl1.TabButtonSelectedState.FillColor = System.Drawing.Color.LightSlateGray;
-            this.guna2TabControl1.TabButtonSelectedState.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2TabControl1.TabButtonSelectedState.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2TabControl1.TabButtonSelectedState.InnerColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2TabControl1.TabButtonSize = new System.Drawing.Size(100, 40);
-            this.guna2TabControl1.TabIndex = 52;
-            this.guna2TabControl1.TabMenuBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.guna2TabControl1.TabMenuOrientation = Guna.UI2.WinForms.TabMenuOrientation.HorizontalTop;
+            this.btnAggPaciente.BorderRadius = 19;
+            this.btnAggPaciente.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAggPaciente.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAggPaciente.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAggPaciente.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAggPaciente.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAggPaciente.FillColor2 = System.Drawing.Color.DarkOliveGreen;
+            this.btnAggPaciente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAggPaciente.ForeColor = System.Drawing.Color.White;
+            this.btnAggPaciente.Location = new System.Drawing.Point(792, 72);
+            this.btnAggPaciente.Name = "btnAggPaciente";
+            this.btnAggPaciente.Size = new System.Drawing.Size(170, 41);
+            this.btnAggPaciente.TabIndex = 107;
+            this.btnAggPaciente.Text = "+ Nuevo Producto";
             // 
-            // tabPage1
+            // btnAceptar
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tabPage1.Controls.Add(this.btnAggPaciente);
-            this.tabPage1.Controls.Add(this.btnAceptar);
-            this.tabPage1.Controls.Add(this.dgvHoy);
-            this.tabPage1.Controls.Add(this.guna2CircleButton1);
-            this.tabPage1.Controls.Add(this.txtBuscarHoy);
-            this.tabPage1.Controls.Add(this.guna2Separator1);
-            this.tabPage1.ForeColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Location = new System.Drawing.Point(4, 44);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1027, 541);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Inventario";
-            // 
-            // dgvHoy
-            // 
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.White;
-            this.dgvHoy.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
-            this.dgvHoy.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHoy.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
-            this.dgvHoy.ColumnHeadersHeight = 50;
-            this.dgvHoy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHoy.DefaultCellStyle = dataGridViewCellStyle27;
-            this.dgvHoy.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvHoy.Location = new System.Drawing.Point(30, 88);
-            this.dgvHoy.Name = "dgvHoy";
-            this.dgvHoy.RowHeadersVisible = false;
-            this.dgvHoy.RowHeadersWidth = 70;
-            this.dgvHoy.Size = new System.Drawing.Size(967, 423);
-            this.dgvHoy.TabIndex = 55;
-            this.dgvHoy.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvHoy.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvHoy.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvHoy.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvHoy.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvHoy.ThemeStyle.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvHoy.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvHoy.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-            this.dgvHoy.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvHoy.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvHoy.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.DarkCyan;
-            this.dgvHoy.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvHoy.ThemeStyle.HeaderStyle.Height = 50;
-            this.dgvHoy.ThemeStyle.ReadOnly = false;
-            this.dgvHoy.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvHoy.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvHoy.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvHoy.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvHoy.ThemeStyle.RowsStyle.Height = 22;
-            this.dgvHoy.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvHoy.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // guna2CircleButton1
-            // 
-            this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.Location = new System.Drawing.Point(987, 14);
-            this.guna2CircleButton1.Name = "guna2CircleButton1";
-            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton1.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton1.TabIndex = 54;
-            this.guna2CircleButton1.UseTransparentBackground = true;
+            this.btnAceptar.BorderRadius = 19;
+            this.btnAceptar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAceptar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAceptar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAceptar.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAceptar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAceptar.FillColor = System.Drawing.Color.MediumAquamarine;
+            this.btnAceptar.FillColor2 = System.Drawing.Color.LimeGreen;
+            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnAceptar.ForeColor = System.Drawing.Color.AliceBlue;
+            this.btnAceptar.Location = new System.Drawing.Point(615, 72);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(155, 41);
+            this.btnAceptar.TabIndex = 106;
+            this.btnAceptar.Text = "+Producto";
             // 
             // txtBuscarHoy
             // 
@@ -199,179 +102,94 @@
             this.txtBuscarHoy.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtBuscarHoy.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtBuscarHoy.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarHoy.Location = new System.Drawing.Point(338, 14);
+            this.txtBuscarHoy.Location = new System.Drawing.Point(349, 13);
             this.txtBuscarHoy.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBuscarHoy.Name = "txtBuscarHoy";
             this.txtBuscarHoy.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.txtBuscarHoy.PlaceholderText = "Buscar...";
             this.txtBuscarHoy.SelectedText = "";
             this.txtBuscarHoy.Size = new System.Drawing.Size(348, 36);
-            this.txtBuscarHoy.TabIndex = 52;
+            this.txtBuscarHoy.TabIndex = 103;
             this.txtBuscarHoy.Tag = "";
             // 
             // guna2Separator1
             // 
             this.guna2Separator1.FillColor = System.Drawing.Color.DarkSlateGray;
             this.guna2Separator1.FillThickness = 2;
-            this.guna2Separator1.Location = new System.Drawing.Point(-16, 52);
+            this.guna2Separator1.Location = new System.Drawing.Point(-14, 56);
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(1068, 10);
-            this.guna2Separator1.TabIndex = 53;
+            this.guna2Separator1.TabIndex = 104;
             // 
-            // tabPage2
+            // dgvHistorial
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tabPage2.Controls.Add(this.dgvProximas);
-            this.tabPage2.Controls.Add(this.guna2CircleButton2);
-            this.tabPage2.Controls.Add(this.txtBuscarProximas);
-            this.tabPage2.Controls.Add(this.guna2Separator2);
-            this.tabPage2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tabPage2.Location = new System.Drawing.Point(4, 44);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1027, 541);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Ventas";
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.dgvHistorial.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHistorial.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvHistorial.ColumnHeadersHeight = 50;
+            this.dgvHistorial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHistorial.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvHistorial.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvHistorial.Location = new System.Drawing.Point(89, 139);
+            this.dgvHistorial.Name = "dgvHistorial";
+            this.dgvHistorial.RowHeadersVisible = false;
+            this.dgvHistorial.RowHeadersWidth = 70;
+            this.dgvHistorial.Size = new System.Drawing.Size(873, 438);
+            this.dgvHistorial.TabIndex = 108;
+            this.dgvHistorial.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvHistorial.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.dgvHistorial.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.dgvHistorial.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.dgvHistorial.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.dgvHistorial.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.dgvHistorial.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvHistorial.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
+            this.dgvHistorial.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvHistorial.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvHistorial.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.DarkCyan;
+            this.dgvHistorial.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvHistorial.ThemeStyle.HeaderStyle.Height = 50;
+            this.dgvHistorial.ThemeStyle.ReadOnly = false;
+            this.dgvHistorial.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvHistorial.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvHistorial.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvHistorial.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvHistorial.ThemeStyle.RowsStyle.Height = 22;
+            this.dgvHistorial.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvHistorial.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // dgvProximas
+            // guna2CircleButton1
             // 
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.White;
-            this.dgvProximas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle28;
-            this.dgvProximas.BackgroundColor = System.Drawing.Color.Honeydew;
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProximas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
-            this.dgvProximas.ColumnHeadersHeight = 50;
-            this.dgvProximas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProximas.DefaultCellStyle = dataGridViewCellStyle30;
-            this.dgvProximas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvProximas.Location = new System.Drawing.Point(36, 84);
-            this.dgvProximas.Name = "dgvProximas";
-            this.dgvProximas.RowHeadersVisible = false;
-            this.dgvProximas.RowHeadersWidth = 70;
-            this.dgvProximas.Size = new System.Drawing.Size(967, 423);
-            this.dgvProximas.TabIndex = 57;
-            this.dgvProximas.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvProximas.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvProximas.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvProximas.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvProximas.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvProximas.ThemeStyle.BackColor = System.Drawing.Color.Honeydew;
-            this.dgvProximas.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvProximas.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-            this.dgvProximas.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvProximas.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProximas.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.DarkCyan;
-            this.dgvProximas.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvProximas.ThemeStyle.HeaderStyle.Height = 50;
-            this.dgvProximas.ThemeStyle.ReadOnly = false;
-            this.dgvProximas.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvProximas.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvProximas.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProximas.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvProximas.ThemeStyle.RowsStyle.Height = 22;
-            this.dgvProximas.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvProximas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // guna2CircleButton2
-            // 
-            this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton2.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton2.Location = new System.Drawing.Point(987, 6);
-            this.guna2CircleButton2.Name = "guna2CircleButton2";
-            this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton2.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton2.TabIndex = 56;
-            this.guna2CircleButton2.UseTransparentBackground = true;
-            // 
-            // txtBuscarProximas
-            // 
-            this.txtBuscarProximas.BackColor = System.Drawing.Color.Transparent;
-            this.txtBuscarProximas.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.txtBuscarProximas.BorderRadius = 15;
-            this.txtBuscarProximas.BorderThickness = 2;
-            this.txtBuscarProximas.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscarProximas.DefaultText = "";
-            this.txtBuscarProximas.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBuscarProximas.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBuscarProximas.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscarProximas.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscarProximas.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarProximas.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBuscarProximas.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarProximas.Location = new System.Drawing.Point(340, 8);
-            this.txtBuscarProximas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBuscarProximas.Name = "txtBuscarProximas";
-            this.txtBuscarProximas.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.txtBuscarProximas.PlaceholderText = "Buscar...";
-            this.txtBuscarProximas.SelectedText = "";
-            this.txtBuscarProximas.Size = new System.Drawing.Size(331, 36);
-            this.txtBuscarProximas.TabIndex = 54;
-            this.txtBuscarProximas.Tag = "";
-            // 
-            // guna2Separator2
-            // 
-            this.guna2Separator2.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2Separator2.FillThickness = 2;
-            this.guna2Separator2.Location = new System.Drawing.Point(-18, 51);
-            this.guna2Separator2.Name = "guna2Separator2";
-            this.guna2Separator2.Size = new System.Drawing.Size(1068, 10);
-            this.guna2Separator2.TabIndex = 55;
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.BorderRadius = 19;
-            this.btnAceptar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAceptar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnAceptar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAceptar.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAceptar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnAceptar.FillColor = System.Drawing.Color.MediumAquamarine;
-            this.btnAceptar.FillColor2 = System.Drawing.Color.LimeGreen;
-            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnAceptar.ForeColor = System.Drawing.Color.AliceBlue;
-            this.btnAceptar.Location = new System.Drawing.Point(30, 9);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(155, 41);
-            this.btnAceptar.TabIndex = 101;
-            this.btnAceptar.Text = "+Producto";
-            // 
-            // btnAggPaciente
-            // 
-            this.btnAggPaciente.BorderRadius = 19;
-            this.btnAggPaciente.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAggPaciente.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnAggPaciente.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAggPaciente.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAggPaciente.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnAggPaciente.FillColor2 = System.Drawing.Color.DarkOliveGreen;
-            this.btnAggPaciente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAggPaciente.ForeColor = System.Drawing.Color.White;
-            this.btnAggPaciente.Location = new System.Drawing.Point(789, 9);
-            this.btnAggPaciente.Name = "btnAggPaciente";
-            this.btnAggPaciente.Size = new System.Drawing.Size(170, 41);
-            this.btnAggPaciente.TabIndex = 102;
-            this.btnAggPaciente.Text = "+ Nuevo Producto";
+            this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton1.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
+            this.guna2CircleButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
+            this.guna2CircleButton1.Location = new System.Drawing.Point(997, 12);
+            this.guna2CircleButton1.Name = "guna2CircleButton1";
+            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CircleButton1.Size = new System.Drawing.Size(34, 28);
+            this.guna2CircleButton1.TabIndex = 109;
+            this.guna2CircleButton1.UseTransparentBackground = true;
             // 
             // Inventario
             // 
@@ -379,16 +197,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1043, 575);
+            this.Controls.Add(this.guna2CircleButton1);
+            this.Controls.Add(this.dgvHistorial);
+            this.Controls.Add(this.btnAggPaciente);
+            this.Controls.Add(this.btnAceptar);
+            this.Controls.Add(this.txtBuscarHoy);
+            this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.guna2HtmlLabel3);
-            this.Controls.Add(this.guna2TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Inventario";
             this.Text = "Inventario";
-            this.guna2TabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHoy)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProximas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,18 +216,11 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2TabControl guna2TabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private Guna.UI2.WinForms.Guna2DataGridView dgvHoy;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
+        private Guna.UI2.WinForms.Guna2GradientButton btnAggPaciente;
+        private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscarHoy;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private Guna.UI2.WinForms.Guna2DataGridView dgvProximas;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
-        private Guna.UI2.WinForms.Guna2TextBox txtBuscarProximas;
-        private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
-        private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
-        private Guna.UI2.WinForms.Guna2GradientButton btnAggPaciente;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvHistorial;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
     }
 }

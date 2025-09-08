@@ -11,9 +11,9 @@ namespace AniCLinic
     {
         private DataTable _dtHoy, _dtProximas, _dtAnteriores;
 
-        // Colores
-        private static readonly Color TEXT_GRAY = Color.FromArgb(0x6B, 0x72, 0x80); // #6B7280 (más claro)
-        private static readonly Color SEL_GRAY = Color.FromArgb(0xD1, 0xD5, 0xDB); // #D1D5DB
+        // ===== Colores (texto gris oscuro y resaltado claro) =====
+        private static readonly Color TEXT_GRAY = Color.FromArgb(0x37, 0x41, 0x51); // #374151
+        private static readonly Color SEL_GRAY = Color.FromArgb(0xE5, 0xE7, 0xEB); // #E5E7EB
 
         // Tabla de Registro Clínico
         private const string SCH_REG = "dbo";
@@ -42,9 +42,20 @@ namespace AniCLinic
             dgvProximas.CellClick += Grid_ButtonClick; dgvProximas.CellContentClick += Grid_ButtonClick;
             dgvAnteriores.CellClick += Grid_ButtonClick; dgvAnteriores.CellContentClick += Grid_ButtonClick;
 
+            // Re-decorar "Anteriores" cuando cambian/ordenan los datos
+            dgvAnteriores.DataBindingComplete -= DgvAnteriores_DataBindingComplete;
+            dgvAnteriores.DataBindingComplete += DgvAnteriores_DataBindingComplete;
+            dgvAnteriores.Sorted -= DgvAnteriores_Sorted;
+            dgvAnteriores.Sorted += DgvAnteriores_Sorted;
+
             WireBusquedas();
             RecargarTodo();
         }
+
+        private void DgvAnteriores_DataBindingComplete(object s, DataGridViewBindingCompleteEventArgs e)
+            => DecorarGridAnteriores();
+        private void DgvAnteriores_Sorted(object s, EventArgs e)
+            => DecorarGridAnteriores();
 
         // ==================== Estilo base ====================
         private void ConfigurarGridsBase()
@@ -65,13 +76,16 @@ namespace AniCLinic
                 g.RowsDefaultCellStyle.BackColor = SystemColors.Window;
                 g.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.Window;
 
+                // Texto gris más oscuro
                 g.DefaultCellStyle.ForeColor = TEXT_GRAY;
                 g.RowsDefaultCellStyle.ForeColor = TEXT_GRAY;
                 g.AlternatingRowsDefaultCellStyle.ForeColor = TEXT_GRAY;
 
+                // Resaltado claro
                 g.DefaultCellStyle.SelectionBackColor = SEL_GRAY;
                 g.DefaultCellStyle.SelectionForeColor = TEXT_GRAY;
                 g.RowHeadersDefaultCellStyle.SelectionBackColor = SEL_GRAY;
+                g.RowHeadersDefaultCellStyle.SelectionForeColor = TEXT_GRAY;
 
                 g.GridColor = SystemColors.ControlLight;
             }
@@ -152,7 +166,7 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
             grid.Columns.Add(MkText("Veterinario", "Veterinario", 140));
-            grid.Columns.Add(MkText("Estado", "Estado", 120));
+            // >>> Sin columna "Estado" en Anteriores
         }
 
         private void AsegurarBotones()
@@ -202,6 +216,9 @@ namespace AniCLinic
             foreach (DataRow r in dt.Rows) r["Estado"] = "No registrado";
             _dtAnteriores = FiltrarPorFecha(dt, TipoSeccion.Anteriores);
             dgvAnteriores.DataSource = _dtAnteriores;
+
+            // Decora filas de "Anteriores" según tengan o no registro clínico
+            DecorarGridAnteriores();
         }
 
         private enum TipoSeccion { Hoy, Proximas, Anteriores }
@@ -241,7 +258,11 @@ namespace AniCLinic
         }
         private void TxtBuscarHoy_TextChanged(object s, EventArgs e) { AplicarBusquedaHoy(); }
         private void TxtBuscarProximas_TextChanged(object s, EventArgs e) { AplicarBusquedaProximas(); }
-        private void TxtBuscarAnteriores_TextChanged(object s, EventArgs e) { AplicarBusquedaAnteriores(); }
+        private void TxtBuscarAnteriores_TextChanged(object s, EventArgs e)
+        {
+            AplicarBusquedaAnteriores();
+            DecorarGridAnteriores(); // aplicar de nuevo según el filtro
+        }
 
         private void AplicarBusquedaHoy() { AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy == null ? null : txtBuscarHoy.Text); }
         private void AplicarBusquedaProximas() { AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas == null ? null : txtBuscarProximas.Text); }
@@ -272,8 +293,10 @@ namespace AniCLinic
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             var grid = (DataGridView)sender;
+
+            // Si la celda no es botón, no hacemos nada
             var btnCol = grid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
-            if (btnCol == null) return; // no es botón
+            if (btnCol == null) return;
 
             // 1) intenta leer desde la fila
             var info = ObtenerCitaInfoDesdeFila(grid, e.RowIndex);
@@ -295,6 +318,14 @@ namespace AniCLinic
                 MessageBox.Show("No se pudo leer la información de la fila.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+
+            // En "Anteriores": permitir Eliminar siempre; bloquear Editar si no hay registro
+            if (grid == dgvAnteriores)
+            {
+                bool tiene = ExisteRegistroClinico(info);
+                if (btnCol.Name == "colEditar" && !tiene) return;
+                // si es Eliminar, continúa (aunque no exista registro no pasa nada)
             }
 
             if (btnCol.Name == "colRegistrar")
@@ -368,7 +399,7 @@ namespace AniCLinic
                 if (!TimeSpan.TryParse(vh, out hora) && DateTime.TryParse(vh, out ht)) hora = ht.TimeOfDay;
             }
 
-            // Si no hay nada util, devuelve null
+            // Si no hay nada útil, devuelve null
             if (idCita <= 0 && idMascota <= 0 && string.IsNullOrEmpty(masc)) return null;
 
             return new CitaInfo
@@ -469,6 +500,89 @@ WHERE c.IdCita = @id;";
                 return false;
             }
             finally { db.cerrarConexion(); }
+        }
+
+        // ====== Helpers de Registro Clínico ======
+
+        private bool ExisteRegistroClinico(CitaInfo info)
+        {
+            // Si faltan IDs, intenta completarlos por DB
+            if ((info.IdMascota <= 0 || info.IdVeterinario <= 0) && info.IdCita > 0)
+            {
+                var full = ObtenerCitaInfo_DB(info.IdCita);
+                if (full != null) info = full;
+            }
+
+            var fecha = info.FechaHora.Date;
+
+            string sql = $@"
+SELECT TOP(1) 1
+FROM {SCH_REG}.{TBL_REG}
+WHERE IdMascota = @m AND IdVeterinario = @v AND CONVERT(date, FechaRegistro) = @f;";
+
+            var db = new csConexionBD();
+            db.abrirConexion();
+            try
+            {
+                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                {
+                    cmd.Parameters.Add("@m", SqlDbType.Int).Value = info.IdMascota;
+                    cmd.Parameters.Add("@v", SqlDbType.Int).Value = info.IdVeterinario;
+                    cmd.Parameters.Add("@f", SqlDbType.Date).Value = fecha;
+                    var o = cmd.ExecuteScalar();
+                    return o != null && o != DBNull.Value;
+                }
+            }
+            finally { db.cerrarConexion(); }
+        }
+
+        /// <summary>
+        /// En "Anteriores":
+        /// - Si NO tiene registro clínico => en la celda de Editar se muestra "No registro"
+        ///   (texto, no botón) y en Eliminar se deja como botón.
+        /// - Si SÍ tiene => botones Editar y Eliminar activos.
+        /// </summary>
+        private void DecorarGridAnteriores()
+        {
+            if (dgvAnteriores == null || dgvAnteriores.Rows.Count == 0) return;
+            if (dgvAnteriores.Columns["colEditar"] == null || dgvAnteriores.Columns["colEliminar"] == null) return;
+
+            for (int i = 0; i < dgvAnteriores.Rows.Count; i++)
+            {
+                var row = dgvAnteriores.Rows[i];
+                if (row.IsNewRow) continue;
+
+                var info = ObtenerCitaInfoDesdeFila(dgvAnteriores, i);
+                if (info == null) continue;
+
+                bool tieneRegistro = ExisteRegistroClinico(info);
+
+                if (!tieneRegistro)
+                {
+                    // EDITAR -> texto "No registro"
+                    var txt = new DataGridViewTextBoxCell { Value = "No registro" };
+                    txt.Style.ForeColor = TEXT_GRAY;
+                    txt.Style.Font = new Font(dgvAnteriores.Font, FontStyle.Italic);
+                    row.Cells["colEditar"] = txt;
+
+                    // ELIMINAR -> debe quedar como botón siempre
+                    if (!(row.Cells["colEliminar"] is DataGridViewButtonCell))
+                        row.Cells["colEliminar"] = new DataGridViewButtonCell();
+                    row.Cells["colEliminar"].Value = "Eliminar";
+                }
+                else
+                {
+                    // EDITAR -> botón
+                    if (!(row.Cells["colEditar"] is DataGridViewButtonCell))
+                        row.Cells["colEditar"] = new DataGridViewButtonCell();
+                    row.Cells["colEditar"].Value = "Editar";
+
+                    // ELIMINAR -> botón
+                    if (!(row.Cells["colEliminar"] is DataGridViewButtonCell))
+                        row.Cells["colEliminar"] = new DataGridViewButtonCell();
+                    row.Cells["colEliminar"].Value = "Eliminar";
+                }
+            }
         }
 
         // Borrar registro clínico del día (IdMascota + IdVeterinario + Fecha)
