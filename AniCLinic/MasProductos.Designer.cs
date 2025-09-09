@@ -33,14 +33,12 @@
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtMascota = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtCedulaCita = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.txtMasProd = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnGuardar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.cmbIdProducto = new Guna.UI2.WinForms.Guna2ComboBox();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -69,28 +67,6 @@
             this.guna2HtmlLabel9.TabIndex = 120;
             this.guna2HtmlLabel9.Text = "Producto";
             // 
-            // txtMascota
-            // 
-            this.txtMascota.BackColor = System.Drawing.Color.Transparent;
-            this.txtMascota.BorderRadius = 19;
-            this.txtMascota.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMascota.DefaultText = "";
-            this.txtMascota.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtMascota.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtMascota.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtMascota.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtMascota.FillColor = System.Drawing.Color.LightGray;
-            this.txtMascota.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMascota.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtMascota.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtMascota.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMascota.Location = new System.Drawing.Point(30, 85);
-            this.txtMascota.Name = "txtMascota";
-            this.txtMascota.PlaceholderText = "";
-            this.txtMascota.SelectedText = "";
-            this.txtMascota.Size = new System.Drawing.Size(426, 36);
-            this.txtMascota.TabIndex = 119;
-            // 
             // guna2HtmlLabel3
             // 
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
@@ -113,81 +89,46 @@
             this.guna2HtmlLabel2.TabIndex = 116;
             this.guna2HtmlLabel2.Text = "Nombre del Producto:";
             // 
-            // guna2HtmlLabel4
+            // txtMasProd
             // 
-            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.SeaGreen;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(253, 30);
-            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(21, 19);
-            this.guna2HtmlLabel4.TabIndex = 124;
-            this.guna2HtmlLabel4.Text = "ID:";
+            this.txtMasProd.BackColor = System.Drawing.Color.Transparent;
+            this.txtMasProd.BorderRadius = 19;
+            this.txtMasProd.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMasProd.DefaultText = "";
+            this.txtMasProd.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtMasProd.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtMasProd.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMasProd.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMasProd.FillColor = System.Drawing.Color.LightGray;
+            this.txtMasProd.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMasProd.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtMasProd.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtMasProd.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMasProd.Location = new System.Drawing.Point(30, 156);
+            this.txtMasProd.Name = "txtMasProd";
+            this.txtMasProd.PlaceholderText = "";
+            this.txtMasProd.SelectedText = "";
+            this.txtMasProd.Size = new System.Drawing.Size(426, 36);
+            this.txtMasProd.TabIndex = 125;
             // 
-            // txtCedulaCita
+            // btnGuardar
             // 
-            this.txtCedulaCita.BackColor = System.Drawing.Color.Transparent;
-            this.txtCedulaCita.BorderColor = System.Drawing.Color.SeaGreen;
-            this.txtCedulaCita.BorderRadius = 12;
-            this.txtCedulaCita.BorderThickness = 2;
-            this.txtCedulaCita.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCedulaCita.DefaultText = "";
-            this.txtCedulaCita.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCedulaCita.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCedulaCita.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCedulaCita.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCedulaCita.FillColor = System.Drawing.Color.Snow;
-            this.txtCedulaCita.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCedulaCita.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtCedulaCita.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtCedulaCita.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCedulaCita.Location = new System.Drawing.Point(280, 26);
-            this.txtCedulaCita.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCedulaCita.Name = "txtCedulaCita";
-            this.txtCedulaCita.PlaceholderText = "";
-            this.txtCedulaCita.SelectedText = "";
-            this.txtCedulaCita.Size = new System.Drawing.Size(174, 30);
-            this.txtCedulaCita.TabIndex = 123;
-            // 
-            // guna2TextBox1
-            // 
-            this.guna2TextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2TextBox1.BorderRadius = 19;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.DefaultText = "";
-            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.FillColor = System.Drawing.Color.LightGray;
-            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2TextBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(30, 156);
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PlaceholderText = "";
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(426, 36);
-            this.guna2TextBox1.TabIndex = 125;
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.BorderRadius = 22;
-            this.btnAceptar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAceptar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnAceptar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAceptar.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAceptar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnAceptar.FillColor = System.Drawing.Color.MediumAquamarine;
-            this.btnAceptar.FillColor2 = System.Drawing.Color.LimeGreen;
-            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnAceptar.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnAceptar.Location = new System.Drawing.Point(360, 208);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(91, 45);
-            this.btnAceptar.TabIndex = 127;
-            this.btnAceptar.Text = "Guardar";
+            this.btnGuardar.BorderRadius = 22;
+            this.btnGuardar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuardar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardar.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuardar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuardar.FillColor = System.Drawing.Color.MediumAquamarine;
+            this.btnGuardar.FillColor2 = System.Drawing.Color.LimeGreen;
+            this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnGuardar.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnGuardar.Location = new System.Drawing.Point(360, 208);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(91, 45);
+            this.btnGuardar.TabIndex = 127;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
@@ -208,19 +149,35 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // cmbIdProducto
+            // 
+            this.cmbIdProducto.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cmbIdProducto.BorderColor = System.Drawing.Color.Silver;
+            this.cmbIdProducto.BorderRadius = 19;
+            this.cmbIdProducto.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbIdProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIdProducto.FillColor = System.Drawing.Color.LightGray;
+            this.cmbIdProducto.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cmbIdProducto.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cmbIdProducto.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmbIdProducto.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.cmbIdProducto.ItemHeight = 30;
+            this.cmbIdProducto.Location = new System.Drawing.Point(30, 89);
+            this.cmbIdProducto.Name = "cmbIdProducto";
+            this.cmbIdProducto.Size = new System.Drawing.Size(426, 36);
+            this.cmbIdProducto.TabIndex = 128;
+            // 
             // MasProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(499, 272);
-            this.Controls.Add(this.btnAceptar);
+            this.Controls.Add(this.cmbIdProducto);
+            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.guna2TextBox1);
-            this.Controls.Add(this.guna2HtmlLabel4);
-            this.Controls.Add(this.txtCedulaCita);
+            this.Controls.Add(this.txtMasProd);
             this.Controls.Add(this.guna2HtmlLabel9);
-            this.Controls.Add(this.txtMascota);
             this.Controls.Add(this.guna2HtmlLabel3);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -238,13 +195,11 @@
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2TextBox txtMascota;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna.UI2.WinForms.Guna2TextBox txtCedulaCita;
-        private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
+        private Guna.UI2.WinForms.Guna2TextBox txtMasProd;
+        private Guna.UI2.WinForms.Guna2GradientButton btnGuardar;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
+        private Guna.UI2.WinForms.Guna2ComboBox cmbIdProducto;
     }
 }

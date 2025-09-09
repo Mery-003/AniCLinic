@@ -15,24 +15,6 @@ namespace AniCLinic
 
         public csCRUD() { }
 
-        public DataTable cargarBDData(string sentencia)
-        {
-            try
-            {
-                conexion = new csConexionBD();
-                conexion.abrirConexion();
-                oDA = new SqlDataAdapter(sentencia, conexion.obtenerConexion());
-                oDT = new DataTable();
-                oDA.Fill(oDT);
-                conexion.cerrarConexion();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error:" + ex.Message);
-            }
-            return oDT;
-        }
-
         public DataTable cargarBDData(string sentencia, params SqlParameter[] parametros)
         {
             try

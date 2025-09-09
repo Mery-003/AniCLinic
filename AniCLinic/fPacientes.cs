@@ -15,19 +15,6 @@ namespace AniCLinic
             InitializeComponent();
             PrepararGrid();
             CargarData();  
-            WireEvents();  
-        }
-
-        private void WireEvents()
-        {
-            dgvPacientes.CellContentClick -= dgvPacientes_CellContentClick;
-            dgvPacientes.CellContentClick += dgvPacientes_CellContentClick;
-
-            txtMascotaNombre.TextChanged -= txtMascotaNombre_TextChanged;
-            txtMascotaNombre.TextChanged += txtMascotaNombre_TextChanged;
-
-            btnAggPaciente.Click -= btnAggPaciente_Click;
-            btnAggPaciente.Click += btnAggPaciente_Click;
         }
 
         private void PrepararGrid()
@@ -102,12 +89,6 @@ ORDER BY M.IdMascota DESC;";
             }
         }
 
-        private void txtMascotaNombre_TextChanged(object sender, EventArgs e)
-        {
-            var filtro = (txtMascotaNombre.Text ?? string.Empty).Trim();
-            CargarData(filtro);
-        }
-
         private void btnAggPaciente_Click(object sender, EventArgs e)
         {
             var f = new AgregarPaciente(this);
@@ -154,7 +135,8 @@ ORDER BY M.IdMascota DESC;";
 
         private void txtMascotaNombre_TextChanged_1(object sender, EventArgs e)
         {
-
+            string filtro = txtMascotaNombre.Text;
+            CargarData(filtro);
         }
     }
 }

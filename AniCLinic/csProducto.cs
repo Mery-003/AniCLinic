@@ -75,12 +75,28 @@ namespace AniCLinic
         public bool agregarProducto()
         {
             csCRUD crud = new csCRUD();
-            return crud.agregarBD("INSERT");
+            return crud.agregarBD("Insert into Inventario (IdProveedor, NombreProducto, Descripcion, Categoria, PrecioUnitario, CantidadDisponible) " +
+                "values (@IdProveedor, @NombreP, @Descripcion, @Categoria, @Precio, @Cantidad)", 
+                new SqlParameter("@IdProveedor", IdProveedor),
+                new SqlParameter("@NombreP", NombreProducto),
+                new SqlParameter("@Descripcion", Descripcion),
+                new SqlParameter("@Categoria", Categoria),
+                new SqlParameter("@Precio", PrecioUnitario),
+                new SqlParameter("@Cantidad", Cantidad));
         }
         public bool editarProducto(int id)
         {
             csCRUD crud = new csCRUD();
-            return true;
+            return crud.editarBD("Update Inventario set IdProveedor = @IdProveedor, NombreProducto = @Nombre, Descripcion = @Descripcion, " +
+                "Categoria = @Categoria, PrecioUnitario = @Precio, CantidadDisponible = @Cantidad " +
+                "Where IdProducto = @Id",
+                new SqlParameter("@IdProveedor", IdProveedor),
+                new SqlParameter("@Nombre", NombreProducto),
+                new SqlParameter("@Descripcion", Descripcion),
+                new SqlParameter("@Categoria", Categoria),
+                new SqlParameter("@Precio", PrecioUnitario),
+                new SqlParameter("@Cantidad", Cantidad),
+                new SqlParameter("@Id", id));
         }
         public bool eliminarProducto(int id)
         {

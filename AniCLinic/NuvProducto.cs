@@ -14,11 +14,58 @@ namespace AniCLinic
 {
     public partial class NuvProducto : Form
     {
+        csCRUD crud = new csCRUD();
+        csProducto prod;
         SqlDataReader oDR;
+        Inventario fInventario;
+        bool editar = false;
+        int idProducto;
+
         public NuvProducto()
         {
             InitializeComponent();
             cargarProveedores();
+            cmbCategoria.Items.AddRange(new object[] 
+            {
+                "Medicamentos",
+                "Equipos Medicos",
+                "Alimentos",
+                "Accesorios",
+                "Higiene"
+            });
+        }
+        public NuvProducto(Inventario fI, int idProd)
+        {
+            fInventario = fI;
+            InitializeComponent();
+            cargarProveedores();
+            idProducto = idProd;
+            cmbCategoria.Items.AddRange(new object[]
+            {
+                "Medicamentos",
+                "Equipos Medicos",
+                "Alimentos",
+                "Accesorios",
+                "Higiene"
+            });
+            editar = true;
+
+            if (idProd != 0)
+            {
+                prod = CargarProducto(idProd);
+                if (prod == null)
+                {
+                    MessageBox.Show("No se pudo encontrar el producto");
+                    return;
+                }
+
+                txtNomProducto.Text = prod.NombreProducto;
+                txtDescripcion.Text = prod.Descripcion;
+                txtCantidad.Text = prod.Cantidad.ToString();
+                txtPrecio.Text = prod.PrecioUnitario.ToString();
+                cmbCategoria.Text = prod.Categoria;
+                cmbProveedor.Text = prod.IdProveedor.ToString();
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -27,29 +74,93 @@ namespace AniCLinic
         }
         private void cargarProveedores()
         {
-            csCRUD crud = new csCRUD();
             oDR = crud.EjecutarQuery("Select IdProveedor, NombreProveedor from Proveedor");
             if (oDR != null)
             {
                 while (oDR.Read())
                 {
-                    cmbProveedor.Items.Add(oDR.GetInt32(0).ToString() + " - " + oDR.GetString(1));
+                    int idP = oDR.GetInt32(0);
+                    string nomP = oDR.GetString(1);
+                    cmbProveedor.Items.Add(new ProveedorItem(idP, nomP));
                 }
             }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            csProducto producto = new csProducto(
-                Convert.ToInt32(cmbProveedor.Text), 
-                txtNomProducto.Text, 
-                txtDescripcion.Text, 
-                cmbCategoria.Text, 
-                Convert.ToDecimal(txtPrecio.Text), 
-                Convert.ToInt32(txtCantidad.Text));
-            if (producto.agregarProducto())
-                MessageBox.Show("Producto agregado correctamente.");
+            if (!editar)
+            {
+                if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
+                {
+                    int idProveedor = proveedorSeleccionado.idProveedor;
+                    prod = new csProducto(
+                    idProveedor,
+                    txtNomProducto.Text,
+                    txtDescripcion.Text,
+                    cmbCategoria.Text,
+                    Convert.ToDecimal(txtPrecio.Text),
+                    Convert.ToInt32(txtCantidad.Text));
+
+                    if (prod.agregarProducto())
+                        MessageBox.Show("Producto agregado correctamente.");
+                    else
+                        MessageBox.Show("Error al guardar un producto");
+                }
+            }
             else
-                MessageBox.Show("Error al guardar un procducto");
+            {
+                if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
+                {
+                    int idProveedor = proveedorSeleccionado.idProveedor;
+                    prod = new csProducto(
+                    idProveedor,
+                    txtNomProducto.Text,
+                    txtDescripcion.Text,
+                    cmbCategoria.Text,
+                    Convert.ToDecimal(txtPrecio.Text),
+                    Convert.ToInt32(txtCantidad.Text));
+
+                    if (prod.editarProducto(idProducto))
+                        MessageBox.Show("Producto editado correctamente.");
+                    else
+                        MessageBox.Show("Error al editar el producto");
+                }
+            }
+            this.Close();
+        }
+        private csProducto CargarProducto(int id)
+        {
+            prod = null;
+            string sentencia = "Select * from Inventario Where IdProducto = " + id;
+            using (SqlDataReader reader = crud.EjecutarQuery(sentencia))
+            {
+                if (reader.Read() && reader != null)
+                {
+                    prod = new csProducto(
+                        Convert.ToInt32(reader["IdProveedor"]),
+                        reader["NombreProducto"].ToString(),
+                        reader["Descripcion"].ToString(),
+                        reader["Categoria"].ToString(),
+                        Convert.ToDecimal(reader["PrecioUnitario"]),
+                        Convert.ToInt32(reader["CantidadDisponible"])
+                        );
+                }
+            }
+            return prod;
+        }
+    }
+
+    public class ProveedorItem
+    {
+        public int idProveedor { get; set; }
+        public string nombreProveedor { get; set; }
+        public ProveedorItem(int id, string nombre)
+        {
+            idProveedor = id;
+            nombreProveedor = nombre;
+        }
+        public override string ToString()
+        {
+            return $"{idProveedor} - {nombreProveedor}";
         }
     }
 }
