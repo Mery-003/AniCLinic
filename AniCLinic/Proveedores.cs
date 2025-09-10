@@ -78,7 +78,7 @@ namespace AniCLinic
         {
             AggProveedor nProveedor = new AggProveedor();
             nProveedor.ShowDialog();
-
+            CargarDataP();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -96,7 +96,7 @@ namespace AniCLinic
                 return;
 
             var rowView = dgvProveedores.Rows[e.RowIndex].DataBoundItem as DataRowView;
-            if (rowView != null)
+            if (rowView == null)
                 return;
 
             int idProveedor = Convert.ToInt32(rowView["IdProveedor"]);

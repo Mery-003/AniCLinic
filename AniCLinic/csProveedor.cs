@@ -64,7 +64,6 @@ namespace AniCLinic
             Correo = cor;
             Direccion = dir;
         }
-
         public bool agregarProveedor()
         {
             csCRUD crud = new csCRUD();
@@ -81,7 +80,7 @@ namespace AniCLinic
         {
             csCRUD crud = new csCRUD();
             return crud.editarBD(
-                "UPDATE Proveedor SET NombreProveedor=@Nombre', RUC=@Ruc, " +
+                "UPDATE Proveedor SET NombreProveedor=@Nombre, RUC=@Ruc, " +
                 "Telefono=@Telefono, Correo=@Correo, Direccion=@Direccion " +
                 "WHERE IdProveedor=@Id",
                 new SqlParameter("@Nombre", NombreProveedor),
