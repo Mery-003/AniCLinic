@@ -130,7 +130,7 @@ namespace AniCLinic
 
         private void RecargarHoy()
         {
-            var dt = CedulaUtils.CitasListado(null);
+            var dt = CedulaUtils.CitasListado();
             if (!dt.Columns.Contains("Estado")) dt.Columns.Add("Estado", typeof(string));
             foreach (DataRow r in dt.Rows) r["Estado"] = "Pendiente";
             _dtHoy = FiltrarPorFecha(dt, TipoSeccion.Hoy);
@@ -139,7 +139,7 @@ namespace AniCLinic
 
         private void RecargarProximas()
         {
-            var dt = CedulaUtils.CitasListado(null);
+            var dt = CedulaUtils.CitasListado();
             if (!dt.Columns.Contains("Estado")) dt.Columns.Add("Estado", typeof(string));
             foreach (DataRow r in dt.Rows) r["Estado"] = "Próximo";
             _dtProximas = FiltrarPorFecha(dt, TipoSeccion.Proximas);
@@ -148,7 +148,7 @@ namespace AniCLinic
 
         private void RecargarAnteriores()
         {
-            var dt = CedulaUtils.CitasListado(null);
+            var dt = CedulaUtils.CitasListado();
             if (!dt.Columns.Contains("Estado")) dt.Columns.Add("Estado", typeof(string));
             foreach (DataRow r in dt.Rows) r["Estado"] = "No registrado";
             _dtAnteriores = FiltrarPorFecha(dt, TipoSeccion.Anteriores);

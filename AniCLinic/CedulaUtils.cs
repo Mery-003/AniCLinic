@@ -85,7 +85,7 @@ namespace AniCLinic
         }
 
         // Listado del grid
-        public static DataTable CitasListado(string cedulaFiltro = null)
+        public static DataTable CitasListado()
         {
             var db = new csConexionBD();
             try
@@ -102,16 +102,10 @@ namespace AniCLinic
                 FROM dbo.GestionCita g
                 JOIN dbo.Mascota     m ON m.IdMascota = g.IdMascota
                 JOIN dbo.Persona     p ON p.IdPersona = m.IdPersona
-                /**where**/
                 ORDER BY g.FechaHora DESC;";
 
-                string where = string.IsNullOrWhiteSpace(cedulaFiltro) ? "" : "WHERE p.Cedula = @ced";
-                using (var da = new SqlDataAdapter(sql.Replace("/**where**/", where), db.obtenerConexion()))
+                using (var da = new SqlDataAdapter(sql, db.obtenerConexion()))
                 {
-                    if (!string.IsNullOrWhiteSpace(cedulaFiltro))
-                        da.SelectCommand.Parameters.AddWithValue("@ced", cedulaFiltro);
-
-
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;
