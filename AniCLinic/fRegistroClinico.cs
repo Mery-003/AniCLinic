@@ -11,12 +11,6 @@ namespace AniCLinic
     {
         private DataTable _dtHoy, _dtProximas, _dtAnteriores;
 
-        private static readonly Color TEXT_GRAY = Color.FromArgb(0x6B, 0x72, 0x80);
-        private static readonly Color SEL_GRAY = Color.FromArgb(0xD1, 0xD5, 0xDB);
-
-        private const string SCH_REG = "dbo";
-        private const string TBL_REG = "RegistroClinico";
-
         public fRegistroClinico()
         {
             InitializeComponent();
@@ -25,7 +19,6 @@ namespace AniCLinic
             try { dgvProximas.CellClick -= Grid_ButtonClick; dgvProximas.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvAnteriores.CellClick -= Grid_ButtonClick; dgvAnteriores.CellContentClick -= Grid_ButtonClick; } catch { }
 
-            ConfigurarGridsBase();
             PrepararGrid_Hoy(dgvHoy);
             PrepararGrid_Proximas(dgvProximas);
             PrepararGrid_Anteriores(dgvAnteriores);
@@ -41,35 +34,6 @@ namespace AniCLinic
             RecargarTodo();
         }
 
-        private void ConfigurarGridsBase()
-        {
-            foreach (var g in new DataGridView[] { dgvHoy, dgvProximas, dgvAnteriores })
-            {
-                if (g == null) continue;
-
-                g.AutoGenerateColumns = false;
-                g.AllowUserToAddRows = false;
-                g.MultiSelect = false;
-                g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                g.ReadOnly = true;
-                g.Columns.Clear();
-
-                g.BackgroundColor = SystemColors.Window;
-                g.DefaultCellStyle.BackColor = SystemColors.Window;
-                g.RowsDefaultCellStyle.BackColor = SystemColors.Window;
-                g.AlternatingRowsDefaultCellStyle.BackColor = SystemColors.Window;
-
-                g.DefaultCellStyle.ForeColor = TEXT_GRAY;
-                g.RowsDefaultCellStyle.ForeColor = TEXT_GRAY;
-                g.AlternatingRowsDefaultCellStyle.ForeColor = TEXT_GRAY;
-
-                g.DefaultCellStyle.SelectionBackColor = SEL_GRAY;
-                g.DefaultCellStyle.SelectionForeColor = TEXT_GRAY;
-                g.RowHeadersDefaultCellStyle.SelectionBackColor = SEL_GRAY;
-
-                g.GridColor = SystemColors.ControlLight;
-            }
-        }
 
         private DataGridViewTextBoxColumn MkText(string header, string prop, int width)
         {
@@ -153,13 +117,9 @@ namespace AniCLinic
 
         private void EstiloBotones()
         {
-            var c = TEXT_GRAY;
             var b0 = dgvHoy.Columns["colRegistrar"] as DataGridViewButtonColumn;
             var b1 = dgvAnteriores.Columns["colEditar"] as DataGridViewButtonColumn;
             var b2 = dgvAnteriores.Columns["colEliminar"] as DataGridViewButtonColumn;
-            if (b0 != null) b0.DefaultCellStyle.ForeColor = c;
-            if (b1 != null) b1.DefaultCellStyle.ForeColor = c;
-            if (b2 != null) b2.DefaultCellStyle.ForeColor = c;
         }
 
         private void RecargarTodo()
@@ -220,25 +180,62 @@ namespace AniCLinic
         {
             fecha = DateTime.MinValue;
             DateTime tmp;
-            if (r.Table.Columns.Contains("Fecha") && DateTime.TryParse(Convert.ToString(r["Fecha"]), out tmp)) { fecha = tmp.Date; return true; }
-            if (r.Table.Columns.Contains("FechaHora") && DateTime.TryParse(Convert.ToString(r["FechaHora"]), out tmp)) { fecha = tmp.Date; return true; }
+            if (r.Table.Columns.Contains("Fecha") && DateTime.TryParse(Convert.ToString(r["Fecha"]), out tmp)) 
+            { 
+                fecha = tmp.Date; 
+                return true; 
+            }
+            if (r.Table.Columns.Contains("FechaHora") && DateTime.TryParse(Convert.ToString(r["FechaHora"]), out tmp)) 
+            { 
+                fecha = tmp.Date; 
+                return true; 
+            }
             return false;
         }
 
         private void WireBusquedas()
         {
-            if (txtBuscarHoy != null) { txtBuscarHoy.TextChanged -= TxtBuscarHoy_TextChanged; txtBuscarHoy.TextChanged += TxtBuscarHoy_TextChanged; }
-            if (txtBuscarProximas != null) { txtBuscarProximas.TextChanged -= TxtBuscarProximas_TextChanged; txtBuscarProximas.TextChanged += TxtBuscarProximas_TextChanged; }
-            if (txtBuscarAnteriores != null) { txtBuscarAnteriores.TextChanged -= TxtBuscarAnteriores_TextChanged; txtBuscarAnteriores.TextChanged += TxtBuscarAnteriores_TextChanged; }
+            if (txtBuscarHoy != null) 
+            { txtBuscarHoy.TextChanged -= TxtBuscarHoy_TextChanged; 
+                txtBuscarHoy.TextChanged += TxtBuscarHoy_TextChanged; 
+            }
+            if (txtBuscarProximas != null) 
+            { 
+                txtBuscarProximas.TextChanged -= TxtBuscarProximas_TextChanged; 
+                txtBuscarProximas.TextChanged += TxtBuscarProximas_TextChanged; 
+            }
+            if (txtBuscarAnteriores != null) 
+            { 
+                txtBuscarAnteriores.TextChanged -= TxtBuscarAnteriores_TextChanged; 
+                txtBuscarAnteriores.TextChanged += TxtBuscarAnteriores_TextChanged; 
+            }
         }
 
-        private void TxtBuscarHoy_TextChanged(object s, EventArgs e) { AplicarBusquedaHoy(); }
-        private void TxtBuscarProximas_TextChanged(object s, EventArgs e) { AplicarBusquedaProximas(); }
-        private void TxtBuscarAnteriores_TextChanged(object s, EventArgs e) { AplicarBusquedaAnteriores(); }
+        private void TxtBuscarHoy_TextChanged(object s, EventArgs e) 
+        { 
+            AplicarBusquedaHoy(); 
+        }
+        private void TxtBuscarProximas_TextChanged(object s, EventArgs e) 
+        { 
+            AplicarBusquedaProximas(); 
+        }
+        private void TxtBuscarAnteriores_TextChanged(object s, EventArgs e) 
+        { 
+            AplicarBusquedaAnteriores(); 
+        }
 
-        private void AplicarBusquedaHoy() { AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy == null ? null : txtBuscarHoy.Text); }
-        private void AplicarBusquedaProximas() { AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas == null ? null : txtBuscarProximas.Text); }
-        private void AplicarBusquedaAnteriores() { AplicarBusqueda(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores == null ? null : txtBuscarAnteriores.Text); }
+        private void AplicarBusquedaHoy() 
+        { 
+            AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy == null ? null : txtBuscarHoy.Text); 
+        }
+        private void AplicarBusquedaProximas() 
+        { 
+            AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas == null ? null : txtBuscarProximas.Text); 
+        }
+        private void AplicarBusquedaAnteriores() 
+        { 
+            AplicarBusqueda(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores == null ? null : txtBuscarAnteriores.Text); 
+        }
 
         private void AplicarBusqueda(DataGridView grid, DataTable baseTable, string term)
         {
@@ -359,11 +356,11 @@ namespace AniCLinic
             string sql = string.Format(@"
 WITH x AS (
   SELECT TOP(1) *
-  FROM {0}.{1}
+  FROM Select * from RegistroClinico
   WHERE IdMascota = @m AND CONVERT(date, FechaRegistro) = @f
   ORDER BY FechaRegistro DESC, IdRegistroClinico DESC
 )
-DELETE FROM x;", SCH_REG, TBL_REG);
+DELETE FROM x;");
 
             var db = new csConexionBD();
             db.abrirConexion();

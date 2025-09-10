@@ -98,8 +98,7 @@ namespace AniCLinic
                         CONVERT(date, g.FechaHora)                AS Fecha,
                         CONVERT(varchar(5), g.FechaHora, 108)     AS Hora,
                         g.Motivo,
-                        (p.Nombre + ' ' + p.Apellido)             AS Propietario,
-                        @vet                                      AS Veterinario
+                        (p.Nombre + ' ' + p.Apellido)             AS Propietario
                 FROM dbo.GestionCita g
                 JOIN dbo.Mascota     m ON m.IdMascota = g.IdMascota
                 JOIN dbo.Persona     p ON p.IdPersona = m.IdPersona
@@ -112,7 +111,6 @@ namespace AniCLinic
                     if (!string.IsNullOrWhiteSpace(cedulaFiltro))
                         da.SelectCommand.Parameters.AddWithValue("@ced", cedulaFiltro);
 
-                    da.SelectCommand.Parameters.AddWithValue("@vet", VeterinarioDeSesion());
 
                     var dt = new DataTable();
                     da.Fill(dt);
