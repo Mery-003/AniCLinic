@@ -15,16 +15,17 @@ namespace AniCLinic
     public partial class Menu : Form
     {
         Login login;
+        bool esAdmin;
         public Menu()
         {
             InitializeComponent();
         }
-        public Menu(Login l, string nom, byte[] foto)
+        public Menu(Login l, string nom, byte[] foto, bool admin)
         {
             InitializeComponent();
             login = l;
             lblEmpleado.Text = nom;
-
+            esAdmin = admin;
             if (foto != null && foto.Length > 0)
             {
                 using (var ms = new MemoryStream(foto))
@@ -38,6 +39,8 @@ namespace AniCLinic
             }
 
             pcbEmpleado.SizeMode = PictureBoxSizeMode.CenterImage; 
+            if (!admin)
+                btnAdministrador.Enabled = false;
         }
 
         private void btnMaximizarMenu_Click(object sender, EventArgs e)
@@ -58,7 +61,7 @@ namespace AniCLinic
             guna2Transition1.ShowSync(PanelMenu);
         }
 
-        private void AbrirEnPanel(Panel contenedor, Form hijo)
+        public void AbrirEnPanel(Panel contenedor, Form hijo)
         {
             foreach (Control c in contenedor.Controls) c.Dispose();
             contenedor.Controls.Clear();
@@ -136,7 +139,7 @@ namespace AniCLinic
 
         private void btnProveedor_Click(object sender, EventArgs e)
         {
-            AbrirEnPanel(pnlMenu1, new FMenuAdmin());
+            AbrirEnPanel(pnlMenu1, new FMenuAdmin(this, pnlMenu1));
         }
     }
 

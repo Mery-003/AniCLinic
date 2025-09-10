@@ -31,9 +31,9 @@
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button10 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDiseño = new Guna.UI2.WinForms.Guna2Button();
+            this.btnUsuarios = new Guna.UI2.WinForms.Guna2Button();
+            this.btnProveedores = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // guna2HtmlLabel3
@@ -65,59 +65,61 @@
             this.guna2Separator2.Size = new System.Drawing.Size(1068, 10);
             this.guna2Separator2.TabIndex = 112;
             // 
-            // guna2Button2
+            // btnDiseño
             // 
-            this.guna2Button2.Animated = true;
-            this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button2.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012944;
-            this.guna2Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(687, 204);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(253, 241);
-            this.guna2Button2.TabIndex = 119;
+            this.btnDiseño.Animated = true;
+            this.btnDiseño.BackColor = System.Drawing.Color.Transparent;
+            this.btnDiseño.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012944;
+            this.btnDiseño.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDiseño.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDiseño.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDiseño.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDiseño.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDiseño.FillColor = System.Drawing.Color.Transparent;
+            this.btnDiseño.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnDiseño.ForeColor = System.Drawing.Color.White;
+            this.btnDiseño.Location = new System.Drawing.Point(687, 204);
+            this.btnDiseño.Name = "btnDiseño";
+            this.btnDiseño.Size = new System.Drawing.Size(253, 241);
+            this.btnDiseño.TabIndex = 119;
             // 
-            // guna2Button1
+            // btnUsuarios
             // 
-            this.guna2Button1.Animated = true;
-            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012905;
-            this.guna2Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(401, 204);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(253, 241);
-            this.guna2Button1.TabIndex = 118;
+            this.btnUsuarios.Animated = true;
+            this.btnUsuarios.BackColor = System.Drawing.Color.Transparent;
+            this.btnUsuarios.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012905;
+            this.btnUsuarios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnUsuarios.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnUsuarios.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnUsuarios.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnUsuarios.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnUsuarios.FillColor = System.Drawing.Color.Transparent;
+            this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnUsuarios.ForeColor = System.Drawing.Color.White;
+            this.btnUsuarios.Location = new System.Drawing.Point(401, 204);
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.Size = new System.Drawing.Size(253, 241);
+            this.btnUsuarios.TabIndex = 118;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
-            // guna2Button10
+            // btnProveedores
             // 
-            this.guna2Button10.Animated = true;
-            this.guna2Button10.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button10.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012747;
-            this.guna2Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2Button10.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button10.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button10.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button10.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button10.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button10.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button10.ForeColor = System.Drawing.Color.White;
-            this.guna2Button10.Location = new System.Drawing.Point(108, 204);
-            this.guna2Button10.Name = "guna2Button10";
-            this.guna2Button10.Size = new System.Drawing.Size(253, 241);
-            this.guna2Button10.TabIndex = 117;
+            this.btnProveedores.Animated = true;
+            this.btnProveedores.BackColor = System.Drawing.Color.Transparent;
+            this.btnProveedores.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012747;
+            this.btnProveedores.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnProveedores.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnProveedores.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnProveedores.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnProveedores.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnProveedores.FillColor = System.Drawing.Color.Transparent;
+            this.btnProveedores.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnProveedores.ForeColor = System.Drawing.Color.White;
+            this.btnProveedores.Location = new System.Drawing.Point(108, 204);
+            this.btnProveedores.Name = "btnProveedores";
+            this.btnProveedores.Size = new System.Drawing.Size(253, 241);
+            this.btnProveedores.TabIndex = 117;
+            this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
             // FMenuAdmin
             // 
@@ -125,9 +127,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1059, 614);
-            this.Controls.Add(this.guna2Button2);
-            this.Controls.Add(this.guna2Button1);
-            this.Controls.Add(this.guna2Button10);
+            this.Controls.Add(this.btnDiseño);
+            this.Controls.Add(this.btnUsuarios);
+            this.Controls.Add(this.btnProveedores);
             this.Controls.Add(this.guna2Separator2);
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.guna2HtmlLabel3);
@@ -143,8 +145,8 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button10;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button btnProveedores;
+        private Guna.UI2.WinForms.Guna2Button btnUsuarios;
+        private Guna.UI2.WinForms.Guna2Button btnDiseño;
     }
 }

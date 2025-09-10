@@ -12,15 +12,27 @@ namespace AniCLinic
 {
     public partial class FMenuAdmin : Form
     {
+        Menu menu;
+        Panel panel;
         public FMenuAdmin()
         {
             InitializeComponent();
         }
-
+        public FMenuAdmin(Menu m, Panel p)
+        {
+            InitializeComponent();
+            menu = m;
+            panel = p;
+        }
 
         private void btnProveedores_Click(object sender, EventArgs e)
         {
+            menu.AbrirEnPanel(panel, new Proveedores());
+        }
 
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            menu.AbrirEnPanel(panel, new FUsuariosAdmin());
         }
     }
 

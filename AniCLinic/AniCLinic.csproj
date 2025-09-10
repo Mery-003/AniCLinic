@@ -94,8 +94,9 @@
     <Compile Include="csCRUD.cs" />
     <Compile Include="csMascota.cs" />
     <Compile Include="csProducto.cs" />
-    <Compile Include="csPropietario.cs" />
+    <Compile Include="csPersona.cs" />
     <Compile Include="csProveedor.cs" />
+    <Compile Include="csUsuario.cs" />
     <Compile Include="DatosAcceso.cs">
       <SubType>Form</SubType>
     </Compile>

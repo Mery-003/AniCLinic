@@ -42,6 +42,7 @@ namespace AniCLinic
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            bool admin = false;
             string nombre = null;
             byte[] foto = null;
             csConexionBD conexion = new csConexionBD();
@@ -56,15 +57,15 @@ namespace AniCLinic
                     MessageBox.Show("No se pudo cargar la sesión del usuario.");
                     return;
                 }
-                SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen " + 
-                    "FROM Empleado E INNER JOIN Persona P ON E.IdPersona = P.IdPersona " + 
-                    "WHERE E.IdEmpleado = @Id", conexion.obtenerConexion()); 
+                SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen, U.Administrador " +
+                    "FROM Empleado E INNER JOIN Persona P ON E.IdPersona = P.IdPersona " +
+                    "INNER JOIN Usuario U ON U.IdEmpleado=E.IdEmpleado", conexion.obtenerConexion()); 
                 oCom.Parameters.AddWithValue("@Id", idUsuario); 
                 SqlDataReader oDTR = oCom.ExecuteReader();
                 if (oDTR.Read())
                 {
                     nombre = "Dr. " + oDTR["Nombre"].ToString() + " " + oDTR["Apellido"].ToString();
-
+                    admin = (bool)oDTR["Administrador"];
                     if (oDTR["Imagen"] != DBNull.Value && oDTR["Imagen"] is byte[])
                     {
                          foto = (byte[])oDTR["Imagen"];
@@ -74,7 +75,7 @@ namespace AniCLinic
                          foto = (byte[])new ImageConverter().ConvertTo(Properties.Resources.user_fill, typeof(byte[]));
                     }
                 }
-                Menu menu = new Menu(this, nombre, foto);
+                Menu menu = new Menu(this, nombre, foto, admin);
                 txtUsuario.Text = "";
                 txtPassword.Text = "";
                 this.Hide();

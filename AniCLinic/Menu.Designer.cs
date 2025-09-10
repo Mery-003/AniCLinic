@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
+            Guna.UI2.AnimatorNS.Animation animation2 = new Guna.UI2.AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.PanelMenu = new Guna.UI2.WinForms.Guna2Panel();
@@ -37,7 +37,7 @@
             this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2GradientButton1 = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.btnProveedor = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnAdministrador = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnStock = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnSalir = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
@@ -75,7 +75,7 @@
             this.PanelMenu.BackColor = System.Drawing.Color.CadetBlue;
             this.PanelMenu.Controls.Add(this.panelReporteriaSubmenu);
             this.PanelMenu.Controls.Add(this.guna2GradientButton1);
-            this.PanelMenu.Controls.Add(this.btnProveedor);
+            this.PanelMenu.Controls.Add(this.btnAdministrador);
             this.PanelMenu.Controls.Add(this.btnStock);
             this.PanelMenu.Controls.Add(this.btnSalir);
             this.PanelMenu.Controls.Add(this.guna2Separator2);
@@ -187,32 +187,32 @@
             this.guna2GradientButton1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.guna2GradientButton1.TextOffset = new System.Drawing.Point(40, 0);
             // 
-            // btnProveedor
+            // btnAdministrador
             // 
-            this.btnProveedor.CustomImages.Image = global::AniCLinic.Properties.Resources.folder_lock_fill;
-            this.btnProveedor.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnProveedor.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Transition1.SetDecoration(this.btnProveedor, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.btnProveedor.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnProveedor.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnProveedor.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnProveedor.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnProveedor.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnProveedor.FillColor = System.Drawing.Color.Empty;
-            this.btnProveedor.FillColor2 = System.Drawing.Color.Empty;
-            this.btnProveedor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnProveedor.ForeColor = System.Drawing.Color.Black;
-            this.btnProveedor.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.btnProveedor.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
-            this.btnProveedor.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProveedor.Location = new System.Drawing.Point(0, 558);
-            this.btnProveedor.Name = "btnProveedor";
-            this.btnProveedor.Size = new System.Drawing.Size(263, 44);
-            this.btnProveedor.TabIndex = 11;
-            this.btnProveedor.Text = "Administrador";
-            this.btnProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnProveedor.TextOffset = new System.Drawing.Point(40, 0);
-            this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
+            this.btnAdministrador.CustomImages.Image = global::AniCLinic.Properties.Resources.folder_lock_fill;
+            this.btnAdministrador.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnAdministrador.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btnAdministrador, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btnAdministrador.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAdministrador.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAdministrador.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAdministrador.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAdministrador.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAdministrador.FillColor = System.Drawing.Color.Empty;
+            this.btnAdministrador.FillColor2 = System.Drawing.Color.Empty;
+            this.btnAdministrador.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnAdministrador.ForeColor = System.Drawing.Color.Black;
+            this.btnAdministrador.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btnAdministrador.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btnAdministrador.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdministrador.Location = new System.Drawing.Point(0, 558);
+            this.btnAdministrador.Name = "btnAdministrador";
+            this.btnAdministrador.Size = new System.Drawing.Size(263, 44);
+            this.btnAdministrador.TabIndex = 11;
+            this.btnAdministrador.Text = "Administrador";
+            this.btnAdministrador.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnAdministrador.TextOffset = new System.Drawing.Point(40, 0);
+            this.btnAdministrador.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
             // btnStock
             // 
@@ -463,22 +463,22 @@
             // 
             this.guna2Transition1.AnimationType = Guna.UI2.AnimatorNS.AnimationType.HorizSlide;
             this.guna2Transition1.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.guna2Transition1.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.guna2Transition1.DefaultAnimation = animation2;
             // 
             // pnlMenu1
             // 
@@ -622,10 +622,10 @@
         private Guna.UI2.WinForms.Guna2Panel panelReporteriaSubmenu;
         private Guna.UI2.WinForms.Guna2GradientButton btncarnet;
         private Guna.UI2.WinForms.Guna2GradientButton btnhisto;
-        private Guna.UI2.WinForms.Guna2GradientButton btnProveedor;
         private Guna.UI2.WinForms.Guna2GradientButton btnStock;
         private Guna.UI2.WinForms.Guna2GradientButton guna2GradientButton1;
         private System.Windows.Forms.Label lblEmpleado;
         private Guna.UI2.WinForms.Guna2CirclePictureBox pcbEmpleado;
+        public Guna.UI2.WinForms.Guna2GradientButton btnAdministrador;
     }
 }

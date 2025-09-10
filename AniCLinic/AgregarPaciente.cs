@@ -48,7 +48,7 @@ namespace AniCLinic
                     return;
                 }
 
-                csPropietario propietario = cargarPropietario(mascota.IdPersona);
+                csPersona propietario = cargarPropietario(mascota.IdPersona);
                 if (propietario == null)
                 {
                     MessageBox.Show("No se encontró el propietario.");
@@ -142,15 +142,15 @@ namespace AniCLinic
             return mascota;
         }
 
-        private csPropietario cargarPropietario(int idPropietario)
+        private csPersona cargarPropietario(int idPropietario)
         {
-            csPropietario propietario = null;
+            csPersona propietario = null;
             string sentencia = "SELECT * FROM Persona WHERE IdPersona = " + idPropietario;
             using (SqlDataReader reader = crud.EjecutarQuery(sentencia))
             {
                 if (reader != null && reader.Read())
                 {
-                    propietario = new csPropietario(
+                    propietario = new csPersona(
                         reader["Nombre"].ToString(),
                         reader["Apellido"].ToString(),
                         reader["Celular"].ToString(),
@@ -197,7 +197,7 @@ namespace AniCLinic
                     return;
                 }
 
-                csPropietario pro = new csPropietario(
+                csPersona pro = new csPersona(
                     txtNombreD.Text,
                     txtApellido.Text,
                     txtCelular.Text,
@@ -211,14 +211,14 @@ namespace AniCLinic
 
                 if (edicion)
                 {
-                    var idCedula = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
+                    var idCedula = new csPersona().obtenerIdPorCedula(txtCedula.Text);
                     if (idCedula.HasValue && idCedula.Value != IdPropietario)
                     {
                         MessageBox.Show("La cédula ingresada ya pertenece a otro propietario.");
                         return;
                     }
 
-                    if (!pro.editarPropietario(IdPropietario))
+                    if (!pro.editarPersona(IdPropietario))
                     {
                         MessageBox.Show("No se pudo actualizar el propietario.");
                         return;
@@ -226,16 +226,16 @@ namespace AniCLinic
                 }
                 else
                 {
-                    var idExistente = new csPropietario().obtenerIdPorCedula(txtCedula.Text);
+                    var idExistente = new csPersona().obtenerIdPorCedula(txtCedula.Text);
                     if (idExistente.HasValue)
                     {
                         idPropietarioParaGuardar = idExistente.Value;
                     }
                     else
                     {
-                        if (pro.agregarPropietario())
+                        if (pro.agregarPersona())
                         {
-                            idPropietarioParaGuardar = pro.obtenerIdPropietario();
+                            idPropietarioParaGuardar = pro.obtenerIdPersona();
                         }
                         else
                         {

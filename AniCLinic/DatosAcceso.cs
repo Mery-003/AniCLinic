@@ -15,6 +15,13 @@ namespace AniCLinic
         public DatosAcceso()
         {
             InitializeComponent();
+            cmbCargo.Items.AddRange(new string[] {"Administrador", "Empleado"});
+
+        }
+
+        private void btnGuardarR_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

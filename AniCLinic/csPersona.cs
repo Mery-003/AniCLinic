@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace AniCLinic
 {
 
-    internal class csPropietario
+    internal class csPersona
     {
         string nombre { get; set; }
         string apellido { get; set; }
@@ -57,9 +57,9 @@ namespace AniCLinic
             set { foto = value; }
         }
 
-        public csPropietario() { }
+        public csPersona() { }
 
-        public csPropietario(string nom, string ape, string cel, string ced, string cor, string dir, byte[] fot)
+        public csPersona(string nom, string ape, string cel, string ced, string cor, string dir, byte[] fot)
         {
             Nombre = nom;
             Apellido = ape;
@@ -70,7 +70,7 @@ namespace AniCLinic
             Foto = fot;
         }
 
-        public bool agregarPropietario()
+        public bool agregarPersona()
         {
             csCRUD conexionBD = new csCRUD();
             return conexionBD.agregarBD(
@@ -85,7 +85,7 @@ namespace AniCLinic
                 new SqlParameter("@Foto", Foto));
         }
 
-        public bool editarPropietario(int idPropietario)
+        public bool editarPersona(int idPropietario)
         {
             csCRUD conexionBD = new csCRUD();
             return conexionBD.editarBD(
@@ -101,13 +101,13 @@ namespace AniCLinic
                 new SqlParameter("@Id", idPropietario));
         }
 
-        public bool eliminarPropietario(int idPropietario)
+        public bool eliminarPersona(int idPropietario)
         {
             csCRUD conexionBD = new csCRUD();
             return conexionBD.eliminarBD("DELETE FROM Persona WHERE IdPersona=@Id", idPropietario);
         }
 
-        public int obtenerIdPropietario()
+        public int obtenerIdPersona()
         {
             int idPropietario = 0;
             try
