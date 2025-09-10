@@ -98,7 +98,7 @@ namespace AniCLinic
             var rowView = dgvProveedores.Rows[e.RowIndex].DataBoundItem as DataRowView;
             if (rowView == null)
                 return;
-
+                
             int idProveedor = Convert.ToInt32(rowView["IdProveedor"]);
 
             if (colNombre == "Eliminar")
