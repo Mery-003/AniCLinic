@@ -9,13 +9,16 @@ namespace AniCLinic
 {
     public partial class fRegistroClinico : Form
     {
+        // Columna auxiliar para "forzar" que la fila tenga RC justo después de registrar
+        private const string COL_TIENE_REG = "__TieneRegistroClinico";
+
         private DataTable _dtHoy, _dtProximas, _dtAnteriores;
 
         public fRegistroClinico()
         {
             InitializeComponent();
 
-            // SOLO CellContentClick (evita doble apertura)
+            // Solo CellContentClick para evitar doble apertura
             try { dgvHoy.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvProximas.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvAnteriores.CellContentClick -= Grid_ButtonClick; } catch { }
@@ -28,7 +31,6 @@ namespace AniCLinic
             dgvProximas.CellContentClick += Grid_ButtonClick;
             dgvAnteriores.CellContentClick += Grid_ButtonClick;
 
-            // Post-bind
             dgvHoy.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvHoy); };
             dgvProximas.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvProximas); };
             dgvAnteriores.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvAnteriores); DecorarAnterioresSegunRegistro(); };
@@ -37,18 +39,16 @@ namespace AniCLinic
             RecargarTodo();
         }
 
-        // ==================== Preparación de grillas ====================
+        #region Preparación de grids
         private void PrepararBase(DataGridView grid)
         {
             grid.DataSource = null;
             grid.AutoGenerateColumns = false;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.MultiSelect = false;
-
             grid.ReadOnly = true;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
-            grid.AllowUserToAddRows = false; // sin fila vacía
-
+            grid.AllowUserToAddRows = false;
             grid.RowHeadersVisible = false;
             grid.Columns.Clear();
         }
@@ -96,7 +96,6 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            // HOY NO muestra Estado (lo quitamos del DataTable)
             grid.Columns.Add(MkBtn("colRegistrar", "Registrar", 110));
         }
 
@@ -112,8 +111,7 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            // PRÓXIMAS sí muestra Estado
-            grid.Columns.Add(MkText("Estado", "Estado", 100));
+            grid.Columns.Add(MkText("Estado", "Estado", 100)); // solo Próximas
         }
 
         private void PrepararGrid_Anteriores(DataGridView grid)
@@ -128,7 +126,10 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            // ANTERIORES NO muestra Estado (lo quitamos del DataTable)
+
+            // ⬇️ Columna oculta que “marca” que la fila ya tiene RC (override hasta recargar BD)
+            grid.Columns.Add(MkHidden(COL_TIENE_REG));
+
             grid.Columns.Add(MkBtn("colEditar", "Editar", 95));
             grid.Columns.Add(MkBtn("colEliminar", "Eliminar", 95));
         }
@@ -139,49 +140,53 @@ namespace AniCLinic
             grid.ReadOnly = true;
             grid.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
+        #endregion
 
-        // ==================== Carga y separación ====================
+        #region Carga / separación
         private void RecargarTodo()
         {
             RecargarColeccionesDesdeBD();
 
-            // Búsqueda activa (estilo fCitas)
-            AplicarBusquedaTipoCitas(dgvHoy, _dtHoy, txtBuscarHoy == null ? null : txtBuscarHoy.Text);
-            AplicarBusquedaTipoCitas(dgvProximas, _dtProximas, txtBuscarProximas == null ? null : txtBuscarProximas.Text);
-            AplicarBusquedaTipoCitas(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores == null ? null : txtBuscarAnteriores.Text);
+            // Búsqueda activa
+            AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy == null ? null : txtBuscarHoy.Text);
+            AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas == null ? null : txtBuscarProximas.Text);
+            AplicarBusqueda(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores == null ? null : txtBuscarAnteriores.Text);
         }
 
         private void RecargarColeccionesDesdeBD()
         {
-            var all = CedulaUtils.CitasListado();
+            var all = CedulaUtils.CitasListado(); // trae IdCita, IdMascota, Mascota, Especie, Raza, Fecha/Hora, Motivo, Propietario...
 
-            // Agrega Estado (solo se usará en Próximas)
             if (!all.Columns.Contains("Estado"))
                 all.Columns.Add("Estado", typeof(string));
 
-            var hoyDate = DateTime.Today;
+            var hoy = DateTime.Today;
 
             _dtHoy = all.Clone();
             _dtProximas = all.Clone();
             _dtAnteriores = all.Clone();
 
+            // aseguro columna oculta en tablas (por si movemos filas a mano)
+            EnsureTieneRegCol(_dtHoy);
+            EnsureTieneRegCol(_dtProximas);
+            EnsureTieneRegCol(_dtAnteriores);
+
             foreach (DataRow r in all.Rows)
             {
-                DateTime f;
-                if (!TryParseFecha(r, out f)) continue;
+                if (!TryParseFecha(r, out DateTime f)) continue;
                 var d = f.Date;
 
-                if (d > hoyDate) r["Estado"] = "Próximo";
+                if (d > hoy) r["Estado"] = "Próximo";
 
-                int idMascota = ToIntSafe(r, "IdMascota");
-                bool tieneReg = RC_ExistePara(idMascota, d);
+                int idMascota = ToInt(r, "IdMascota");
+                bool tieneReg = RC_ExistePara(idMascota, d); // consulta real
 
-                if (d == hoyDate)
+                if (d == hoy)
                 {
                     if (tieneReg) _dtAnteriores.Rows.Add((object[])r.ItemArray.Clone());
                     else _dtHoy.Rows.Add((object[])r.ItemArray.Clone());
                 }
-                else if (d > hoyDate)
+                else if (d > hoy)
                 {
                     _dtProximas.Rows.Add((object[])r.ItemArray.Clone());
                 }
@@ -191,88 +196,47 @@ namespace AniCLinic
                 }
             }
 
-            // Quitar 'Estado' en DATA para Hoy y Anteriores (no en el grid)
+            // Hoy y Anteriores no muestran Estado → elimino del DataTable (no del grid)
             if (_dtHoy.Columns.Contains("Estado")) _dtHoy.Columns.Remove("Estado");
             if (_dtAnteriores.Columns.Contains("Estado")) _dtAnteriores.Columns.Remove("Estado");
 
-            // Bind
             dgvHoy.DataSource = _dtHoy;
             dgvProximas.DataSource = _dtProximas;
             dgvAnteriores.DataSource = _dtAnteriores;
 
-            // Decorado inicial de Anteriores
             DecorarAnterioresSegunRegistro();
         }
 
-        private void LimpiarFilasVacias(DataTable dt)
+        private void EnsureTieneRegCol(DataTable dt)
         {
             if (dt == null) return;
-            var borrar = dt.AsEnumerable()
-                .Where(r =>
-                {
-                    int id = 0; int.TryParse(Convert.ToString(r["IdCita"]), out id);
-                    var masc = Convert.ToString(r.Table.Columns.Contains("Mascota") ? r["Mascota"] : null);
-                    return id <= 0 && string.IsNullOrWhiteSpace(masc);
-                }).ToList();
-            foreach (var r in borrar) dt.Rows.Remove(r);
-            dt.AcceptChanges();
+            if (!dt.Columns.Contains(COL_TIENE_REG))
+                dt.Columns.Add(COL_TIENE_REG, typeof(bool));
         }
+        #endregion
 
-        // ==================== Búsquedas ====================
+        #region Búsqueda
         private void WireBusquedas()
         {
             if (txtBuscarHoy != null)
             {
-                txtBuscarHoy.TextChanged -= (s, e) => AplicarBusquedaTipoCitas(dgvHoy, _dtHoy, txtBuscarHoy.Text);
-                txtBuscarHoy.TextChanged += (s, e) => AplicarBusquedaTipoCitas(dgvHoy, _dtHoy, txtBuscarHoy.Text);
+                txtBuscarHoy.TextChanged -= (s, e) => AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy.Text);
+                txtBuscarHoy.TextChanged += (s, e) => AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy.Text);
             }
+
             if (txtBuscarProximas != null)
             {
-                txtBuscarProximas.TextChanged -= (s, e) => AplicarBusquedaTipoCitas(dgvProximas, _dtProximas, txtBuscarProximas.Text);
-                txtBuscarProximas.TextChanged += (s, e) => AplicarBusquedaTipoCitas(dgvProximas, _dtProximas, txtBuscarProximas.Text);
+                txtBuscarProximas.TextChanged -= (s, e) => AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas.Text);
+                txtBuscarProximas.TextChanged += (s, e) => AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas.Text);
             }
+
             if (txtBuscarAnteriores != null)
             {
-                txtBuscarAnteriores.TextChanged -= (s, e) => AplicarBusquedaTipoCitas(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores.Text);
-                txtBuscarAnteriores.TextChanged += (s, e) => AplicarBusquedaTipoCitas(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores.Text);
+                txtBuscarAnteriores.TextChanged -= (s, e) => AplicarBusqueda(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores.Text);
+                txtBuscarAnteriores.TextChanged += (s, e) => AplicarBusqueda(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores.Text);
             }
         }
 
-        // ==== NUEVO: búsqueda estilo fCitas (Cedula prefijo; Propietario/Mascota contiene) ====
-        private void AplicarBusquedaTipoCitas(DataGridView grid, DataTable baseTable, string term)
-        {
-            if (grid == null || baseTable == null) return;
-
-            var t = (term ?? string.Empty).Trim();
-            if (t.Length == 0) { grid.DataSource = baseTable; return; }
-
-            string[] camposPreferidos = { "CedulaPropietario", "Propietario", "Mascota" };
-            var cols = camposPreferidos.Where(c => baseTable.Columns.Contains(c)).ToArray();
-            if (cols.Length == 0) { grid.DataSource = baseTable; return; }
-
-            var val = t.Replace("'", "''");
-
-            var condiciones = cols.Select(c =>
-            {
-                bool esNumero = baseTable.Columns[c].DataType == typeof(int)
-                             || baseTable.Columns[c].DataType == typeof(long)
-                             || baseTable.Columns[c].DataType == typeof(decimal)
-                             || baseTable.Columns[c].DataType == typeof(double);
-
-                // Cedula = prefijo | Propietario/Mascota = contiene
-                string patron = c.Equals("CedulaPropietario", StringComparison.OrdinalIgnoreCase)
-                                ? $"{val}%"
-                                : $"%{val}%";
-
-                return esNumero
-                    ? $"CONVERT([{c}], 'System.String') LIKE '{patron}'"
-                    : $"([{c}] LIKE '{patron}')";
-            });
-
-            grid.DataSource = new DataView(baseTable) { RowFilter = string.Join(" OR ", condiciones) };
-        }
-
-        // (Conservo tu método por si lo usas luego; ya no se invoca para los buscadores)
         private void AplicarBusqueda(DataGridView grid, DataTable baseTable, string term)
         {
             if (grid == null || baseTable == null) return;
@@ -286,74 +250,108 @@ namespace AniCLinic
             {
                 var col = baseTable.Columns[c];
                 bool num = col.DataType == typeof(int) || col.DataType == typeof(decimal) || col.DataType == typeof(double);
-                return num ? string.Format("CONVERT([{0}], 'System.String') LIKE '%{1}%'", c, val)
-                           : string.Format("([{0}] LIKE '%{1}%')", c, val);
+                return num ? $"CONVERT([{c}], 'System.String') LIKE '%{val}%'" : $"([{c}] LIKE '%{val}%')";
             }).ToArray());
             grid.DataSource = new DataView(baseTable) { RowFilter = expr };
         }
+        #endregion
 
-        // ==================== Clicks de botones ====================
-        // ==================== Clicks de botones ====================
+        #region Clicks botones (Registrar/Editar/Eliminar)
         private void Grid_ButtonClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             var grid = (DataGridView)sender;
-
-            // <<< IMPORTANTE: validar el TIPO DE LA CELDA (no de la columna) >>>
-            var cell = grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (!(cell is DataGridViewButtonCell)) return;   // C# 7.3
-
-            string colName = grid.Columns[e.ColumnIndex].Name;
+            if (!(grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
 
             var info = ObtenerCitaInfoDesdeFila(grid, e.RowIndex);
             if (info == null) return;
 
-            if (grid == dgvHoy && colName == "colRegistrar")
+            // Registrar (HOY)
+            if (grid == dgvHoy && grid.Columns[e.ColumnIndex].Name == "colRegistrar")
             {
                 using (var frm = new AggRegistroClinico(info, false))
                 {
-                    if (frm.ShowDialog(this) == DialogResult.OK) RecargarTodo();
+                    if (frm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        // 1) quitar de Hoy
+                        var dv = grid.DataSource as DataView;
+                        DataRowView drv = null;
+                        if (dv != null) drv = dv[e.RowIndex];
+                        else if (grid.Rows[e.RowIndex].DataBoundItem is DataRowView d0) drv = d0;
+
+                        if (drv != null)
+                        {
+                            var nueva = _dtAnteriores.NewRow();
+                            nueva.ItemArray = (object[])drv.Row.ItemArray.Clone();
+                            // 2) marcar override para mostrar Editar sin esperar recargar BD
+                            EnsureTieneRegCol(_dtAnteriores);
+                            nueva[COL_TIENE_REG] = true;
+                            _dtAnteriores.Rows.Add(nueva);
+
+                            drv.Row.Delete();
+                            _dtHoy.AcceptChanges();
+                            _dtAnteriores.AcceptChanges();
+
+                            // Rebind para refrescar vistas y decorado
+                            dgvHoy.DataSource = _dtHoy;
+                            dgvAnteriores.DataSource = _dtAnteriores;
+                            DecorarAnterioresSegunRegistro();
+                        }
+                        else
+                        {
+                            // fallback: recarga general
+                            RecargarTodo();
+                        }
+                    }
                 }
                 return;
             }
 
-            if (grid == dgvAnteriores && colName == "colEditar")
+            // Editar (ANTERIORES)
+            if (grid == dgvAnteriores && grid.Columns[e.ColumnIndex].Name == "colEditar")
             {
                 using (var frm = new AggRegistroClinico(info, true))
                 {
-                    if (frm.ShowDialog(this) == DialogResult.OK) RecargarTodo();
+                    if (frm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        // ya estaba en anteriores; solo redecorar por si cambió algo
+                        DecorarAnterioresSegunRegistro();
+                    }
                 }
                 return;
             }
 
-            if (grid == dgvAnteriores && colName == "colEliminar")
+            // Eliminar (ANTERIORES)
+            if (grid == dgvAnteriores && grid.Columns[e.ColumnIndex].Name == "colEliminar")
             {
-                var ok = MessageBox.Show("¿Eliminar el registro clínico de esta cita?",
-                                         "Confirmar eliminación",
-                                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (ok == DialogResult.Yes)
+                if (MessageBox.Show("¿Eliminar el registro clínico de esta cita?",
+                    "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
-                        RC_DeleteByMascotaFechaOCita(
-                            info.IdCita > 0 ? (int?)info.IdCita : null,
-                            info.IdMascota,
-                            info.FechaHora);
-                        RecargarTodo();
+                        RC_DeleteByMascotaFechaOCita(info.IdCita > 0 ? (int?)info.IdCita : null,
+                                                     info.IdMascota,
+                                                     info.FechaHora);
+                        // quitar override si lo hubiera
+                        var dv = grid.DataSource as DataView;
+                        DataRowView drv = dv != null ? dv[e.RowIndex] : (grid.Rows[e.RowIndex].DataBoundItem as DataRowView);
+                        if (drv != null && drv.Row.Table.Columns.Contains(COL_TIENE_REG))
+                            drv.Row[COL_TIENE_REG] = false;
+
+                        DecorarAnterioresSegunRegistro();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("No se pudo eliminar: " + ex.Message,
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se pudo eliminar: " + ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
         }
+        #endregion
 
-
-
-        // ==================== Decorado de ANTERIORES ====================
+        #region Decorado de ANTERIORES (mostrar Editar/Sin registro)
         private void DecorarAnterioresSegunRegistro()
         {
             if (dgvAnteriores.Rows.Count == 0) return;
@@ -363,155 +361,65 @@ namespace AniCLinic
                 if (row.IsNewRow) continue;
 
                 DateTime fecha = ParseDateFromRow(dgvAnteriores, row.Index);
-                int idMascota = 0; int.TryParse(Convert.ToString(row.Cells["IdMascota"].Value), out idMascota);
-                bool tiene = RC_ExistePara(idMascota, fecha);
+                int idMascota = ToInt(row.Cells["IdMascota"]?.Value);
 
-                // ===== Editar =====
-                if (row.Cells["colEditar"] is DataGridViewButtonCell || row.Cells["colEditar"] is DataGridViewTextBoxCell)
+                // Leer override desde la celda oculta (si existe)
+                bool overrideTiene = false;
+                if (dgvAnteriores.Columns.Contains(COL_TIENE_REG))
                 {
-                    if (!tiene)
-                    {
-                        // Mostrar texto "Sin registro" (no clickeable)
-                        var txtCell = new DataGridViewTextBoxCell { Value = "Sin registro" };
-                        row.Cells["colEditar"] = txtCell;
-                        row.Cells["colEditar"].ReadOnly = true;
-                        row.Cells["colEditar"].Style.ForeColor = Color.DimGray;
-                        row.Cells["colEditar"].Style.BackColor = Color.Gainsboro;
-                    }
-                    else
-                    {
-                        if (!(row.Cells["colEditar"] is DataGridViewButtonCell))
-                            row.Cells["colEditar"] = new DataGridViewButtonCell();
-
-                        row.Cells["colEditar"].ReadOnly = false;
-                        row.Cells["colEditar"].Value = "Editar";
-                        row.Cells["colEditar"].Style.BackColor = dgvAnteriores.DefaultCellStyle.BackColor;
-                        row.Cells["colEditar"].Style.ForeColor = dgvAnteriores.DefaultCellStyle.ForeColor;
-                    }
+                    var val = row.Cells[COL_TIENE_REG]?.Value;
+                    if (val is bool b) overrideTiene = b;
                 }
 
-                // ===== Eliminar (SIEMPRE botón) =====
+                bool tiene = overrideTiene || RC_ExistePara(idMascota, fecha);
+
+                // ===== Editar =====
+                if (!tiene)
+                {
+                    var txtCell = new DataGridViewTextBoxCell { Value = "Sin registro" };
+                    row.Cells["colEditar"] = txtCell;
+                    row.Cells["colEditar"].ReadOnly = true;
+                    row.Cells["colEditar"].Style.ForeColor = Color.DimGray;
+                    row.Cells["colEditar"].Style.BackColor = Color.Gainsboro;
+                }
+                else
+                {
+                    if (!(row.Cells["colEditar"] is DataGridViewButtonCell))
+                        row.Cells["colEditar"] = new DataGridViewButtonCell();
+                    row.Cells["colEditar"].ReadOnly = false;
+                    row.Cells["colEditar"].Value = "Editar";
+                    row.Cells["colEditar"].Style.BackColor = dgvAnteriores.DefaultCellStyle.BackColor;
+                    row.Cells["colEditar"].Style.ForeColor = dgvAnteriores.DefaultCellStyle.ForeColor;
+                }
+
+                // ===== Eliminar (siempre botón) =====
                 if (!(row.Cells["colEliminar"] is DataGridViewButtonCell))
                     row.Cells["colEliminar"] = new DataGridViewButtonCell();
-
                 row.Cells["colEliminar"].ReadOnly = false;
                 row.Cells["colEliminar"].Value = "Eliminar";
                 row.Cells["colEliminar"].Style.BackColor = dgvAnteriores.DefaultCellStyle.BackColor;
                 row.Cells["colEliminar"].Style.ForeColor = dgvAnteriores.DefaultCellStyle.ForeColor;
             }
         }
+        #endregion
 
-        // ==================== CRUD Registro Clínico (adentro de esta clase) ====================
-
-        // LECTURA
-        private DataRow RC_GetByCita(int idCita)
+        #region CRUD/DB helpers (registro clínico)
+        private bool RC_ExistePara(int idMascota, DateTime fecha)
         {
-            if (idCita <= 0) return null;
-            const string sql = @"
-SELECT TOP(1) *
-FROM RegistroClinico
-WHERE IdCita = @c
-ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
-            return RC_LoadSingle(sql, delegate (SqlCommand cmd) {
-                cmd.Parameters.Add("@c", SqlDbType.Int).Value = idCita;
-            });
-        }
-
-        private DataRow RC_GetByMascotaFecha(int idMascota, DateTime fecha)
-        {
-            if (idMascota <= 0) return null;
-            const string sql = @"
-SELECT TOP(1) *
-FROM RegistroClinico
-WHERE IdMascota = @m AND CONVERT(date, FechaRegistro) = @f
-ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
-            return RC_LoadSingle(sql, delegate (SqlCommand cmd) {
-                cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
-                cmd.Parameters.Add("@f", SqlDbType.Date).Value = fecha.Date;
-            });
-        }
-
-        private DataRow RC_LoadSingle(string sql, Action<SqlCommand> addParams)
-        {
+            if (idMascota <= 0) return false;
+            const string sql = @"SELECT TOP(1) 1
+                                 FROM RegistroClinico
+                                 WHERE IdMascota=@m AND CONVERT(date, FechaRegistro)=@f;";
             var db = new csConexionBD();
             db.abrirConexion();
             try
             {
                 using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
                 {
-                    addParams(cmd);
-                    using (var da = new SqlDataAdapter(cmd))
-                    {
-                        var dt = new DataTable();
-                        da.Fill(dt);
-                        return dt.Rows.Count > 0 ? dt.Rows[0] : null;
-                    }
-                }
-            }
-            finally { db.cerrarConexion(); }
-        }
-
-        // CREAR
-        // Ajusta columnas a tu tabla real (Diagnostico, Tratamiento, Peso, etc.)
-        private int RC_Create(int? idCita, int idMascota, DateTime fechaRegistro, string motivo, string observacion)
-        {
-            const string sql = @"
-INSERT INTO RegistroClinico (IdCita, IdMascota, FechaRegistro, Motivo, Observacion)
-VALUES (@c, @m, @f, @mot, @obs);
-SELECT CAST(SCOPE_IDENTITY() AS int);";
-
-            var db = new csConexionBD();
-            db.abrirConexion();
-            try
-            {
-                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
-                {
-                    cmd.Parameters.Add("@c", SqlDbType.Int).Value = idCita.HasValue ? (object)idCita.Value : DBNull.Value;
                     cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
-                    cmd.Parameters.Add("@f", SqlDbType.DateTime).Value = fechaRegistro;
-                    cmd.Parameters.Add("@mot", SqlDbType.NVarChar, 200).Value = (motivo ?? "").Trim();
-                    cmd.Parameters.Add("@obs", SqlDbType.NVarChar, -1).Value = (observacion ?? "").Trim();
-                    return (int)cmd.ExecuteScalar();
-                }
-            }
-            finally { db.cerrarConexion(); }
-        }
-
-        // ACTUALIZAR
-        private void RC_UpdateById(int idRegistroClinico, string motivo, string observacion)
-        {
-            const string sql = @"
-UPDATE RegistroClinico
-SET Motivo = @mot, Observacion = @obs
-WHERE IdRegistroClinico = @id;";
-
-            var db = new csConexionBD();
-            db.abrirConexion();
-            try
-            {
-                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
-                {
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = idRegistroClinico;
-                    cmd.Parameters.Add("@mot", SqlDbType.NVarChar, 200).Value = (motivo ?? "").Trim();
-                    cmd.Parameters.Add("@obs", SqlDbType.NVarChar, -1).Value = (observacion ?? "").Trim();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            finally { db.cerrarConexion(); }
-        }
-
-        // ELIMINAR
-        private void RC_DeleteById(int idRegistroClinico)
-        {
-            const string sql = @"DELETE FROM RegistroClinico WHERE IdRegistroClinico = @id;";
-            var db = new csConexionBD();
-            db.abrirConexion();
-            try
-            {
-                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
-                {
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = idRegistroClinico;
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add("@f", SqlDbType.Date).Value = fecha.Date;
+                    var o = cmd.ExecuteScalar();
+                    return o != null && o != DBNull.Value;
                 }
             }
             finally { db.cerrarConexion(); }
@@ -524,11 +432,10 @@ WHERE IdRegistroClinico = @id;";
   SELECT TOP(1) *
   FROM RegistroClinico
   WHERE (IdCita = @c AND @c IS NOT NULL)
-     OR (IdCita IS NULL AND IdMascota = @m AND CONVERT(date, FechaRegistro) = @f)
+     OR (IdCita IS NULL AND IdMascota=@m AND CONVERT(date, FechaRegistro)=@f)
   ORDER BY FechaRegistro DESC, IdRegistroClinico DESC
 )
 DELETE FROM x;";
-
             var db = new csConexionBD();
             db.abrirConexion();
             try
@@ -543,15 +450,9 @@ DELETE FROM x;";
             }
             finally { db.cerrarConexion(); }
         }
+        #endregion
 
-        // Helper usado por existencia y decorado
-        private bool RC_ExistePara(int idMascota, DateTime fecha)
-        {
-            var row = RC_GetByMascotaFecha(idMascota, fecha);
-            return row != null;
-        }
-
-        // ==================== Utilidades ====================
+        #region Utilidades
         private DateTime ParseDateFromRow(DataGridView grid, int rowIndex)
         {
             DateTime f = DateTime.Today;
@@ -611,15 +512,19 @@ DELETE FROM x;";
             };
         }
 
-        private int ToIntSafe(DataRow r, string col)
+        private static int ToInt(object v)
         {
-            if (!r.Table.Columns.Contains(col)) return 0;
-            int v; int.TryParse(Convert.ToString(r[col]), out v);
-            return v;
+            int n; return int.TryParse(Convert.ToString(v), out n) ? n : 0;
         }
+        private static int ToInt(DataRow r, string col)
+        {
+            if (r == null || !r.Table.Columns.Contains(col)) return 0;
+            int n; return int.TryParse(Convert.ToString(r[col]), out n) ? n : 0;
+        }
+        #endregion
     }
 
-    // === Modelo simple para pasar datos entre formularios ===
+    // Modelo simple para pasar datos
     public class CitaInfo
     {
         public int IdCita { get; set; }

@@ -42,11 +42,7 @@
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtReceta = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtVeterinario = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.fechahistorial = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtMascota = new Guna.UI2.WinForms.Guna2TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +50,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.fechahistorial = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtVeterinario = new Guna.UI2.WinForms.Guna2TextBox();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -236,39 +236,6 @@
             this.guna2HtmlLabel6.TabIndex = 55;
             this.guna2HtmlLabel6.Text = "Receta:";
             // 
-            // txtVeterinario
-            // 
-            this.txtVeterinario.BackColor = System.Drawing.Color.Transparent;
-            this.txtVeterinario.BorderRadius = 19;
-            this.txtVeterinario.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtVeterinario.DefaultText = "";
-            this.txtVeterinario.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtVeterinario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtVeterinario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVeterinario.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVeterinario.FillColor = System.Drawing.Color.LightGray;
-            this.txtVeterinario.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVeterinario.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtVeterinario.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtVeterinario.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVeterinario.Location = new System.Drawing.Point(29, 421);
-            this.txtVeterinario.Name = "txtVeterinario";
-            this.txtVeterinario.PlaceholderText = "";
-            this.txtVeterinario.SelectedText = "";
-            this.txtVeterinario.Size = new System.Drawing.Size(310, 36);
-            this.txtVeterinario.TabIndex = 58;
-            // 
-            // guna2HtmlLabel7
-            // 
-            this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(39, 399);
-            this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(76, 19);
-            this.guna2HtmlLabel7.TabIndex = 57;
-            this.guna2HtmlLabel7.Text = "Veterinario:";
-            // 
             // btnCancelar
             // 
             this.btnCancelar.BorderRadius = 22;
@@ -286,22 +253,6 @@
             this.btnCancelar.Size = new System.Drawing.Size(91, 45);
             this.btnCancelar.TabIndex = 91;
             this.btnCancelar.Text = "Cancelar";
-            // 
-            // fechahistorial
-            // 
-            this.fechahistorial.BackColor = System.Drawing.Color.Transparent;
-            this.fechahistorial.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fechahistorial.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.fechahistorial.Location = new System.Drawing.Point(41, 52);
-            this.fechahistorial.Name = "fechahistorial";
-            this.fechahistorial.Size = new System.Drawing.Size(38, 19);
-            this.fechahistorial.TabIndex = 93;
-            this.fechahistorial.Text = "Fecha";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
             // 
             // guna2HtmlLabel8
             // 
@@ -398,6 +349,55 @@
             this.guna2HtmlLabel9.TabIndex = 101;
             this.guna2HtmlLabel9.Text = "Registro Clínico";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            // 
+            // fechahistorial
+            // 
+            this.fechahistorial.BackColor = System.Drawing.Color.Transparent;
+            this.fechahistorial.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fechahistorial.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.fechahistorial.Location = new System.Drawing.Point(41, 52);
+            this.fechahistorial.Name = "fechahistorial";
+            this.fechahistorial.Size = new System.Drawing.Size(38, 19);
+            this.fechahistorial.TabIndex = 93;
+            this.fechahistorial.Text = "Fecha";
+            // 
+            // guna2HtmlLabel7
+            // 
+            this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.guna2HtmlLabel7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(39, 399);
+            this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(76, 19);
+            this.guna2HtmlLabel7.TabIndex = 57;
+            this.guna2HtmlLabel7.Text = "Veterinario:";
+            // 
+            // txtVeterinario
+            // 
+            this.txtVeterinario.BackColor = System.Drawing.Color.Transparent;
+            this.txtVeterinario.BorderRadius = 19;
+            this.txtVeterinario.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtVeterinario.DefaultText = "";
+            this.txtVeterinario.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtVeterinario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtVeterinario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtVeterinario.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtVeterinario.FillColor = System.Drawing.Color.LightGray;
+            this.txtVeterinario.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtVeterinario.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtVeterinario.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtVeterinario.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtVeterinario.Location = new System.Drawing.Point(29, 421);
+            this.txtVeterinario.Name = "txtVeterinario";
+            this.txtVeterinario.PlaceholderText = "";
+            this.txtVeterinario.SelectedText = "";
+            this.txtVeterinario.Size = new System.Drawing.Size(310, 36);
+            this.txtVeterinario.TabIndex = 58;
+            // 
             // AggRegistroClinico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,15 +445,11 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2TextBox txtPropietario;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2TextBox txtVeterinario;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox txtReceta;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2TextBox txtTratamiento;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
-        private Guna.UI2.WinForms.Guna2HtmlLabel fechahistorial;
-        private System.Windows.Forms.Timer timer1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2TextBox txtMascota;
         private System.Windows.Forms.Label label3;
@@ -461,5 +457,9 @@
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
+        private Guna.UI2.WinForms.Guna2HtmlLabel fechahistorial;
+        private Guna.UI2.WinForms.Guna2TextBox txtVeterinario;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
+        private System.Windows.Forms.Timer timer1;
     }
 }
