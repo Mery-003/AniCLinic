@@ -136,7 +136,7 @@ namespace AniCLinic
 
         private void btnProveedor_Click(object sender, EventArgs e)
         {
-            AbrirEnPanel(pnlMenu1, new Proveedores());
+            AbrirEnPanel(pnlMenu1, new FMenuAdmin());
         }
     }
 
