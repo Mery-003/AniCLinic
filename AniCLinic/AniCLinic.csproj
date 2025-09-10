@@ -96,11 +96,29 @@
     <Compile Include="csProducto.cs" />
     <Compile Include="csPropietario.cs" />
     <Compile Include="csProveedor.cs" />
+    <Compile Include="DatosAcceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosAcceso.Designer.cs">
+      <DependentUpon>DatosAcceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosUsuario.Designer.cs">
+      <DependentUpon>DatosUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fCitas.Designer.cs">
       <DependentUpon>fCitas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FMenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FMenuAdmin.Designer.cs">
+      <DependentUpon>FMenuAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="FormularioCarnet.cs">
       <SubType>Form</SubType>
@@ -119,6 +137,12 @@
     </Compile>
     <Compile Include="fRegistroClinico.Designer.cs">
       <DependentUpon>fRegistroClinico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FUsuariosAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FUsuariosAdmin.Designer.cs">
+      <DependentUpon>FUsuariosAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial.cs">
       <SubType>Form</SubType>
@@ -197,8 +221,17 @@
     <EmbeddedResource Include="AgregarPaciente.resx">
       <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DatosAcceso.resx">
+      <DependentUpon>DatosAcceso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosUsuario.resx">
+      <DependentUpon>DatosUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fCitas.resx">
       <DependentUpon>fCitas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FMenuAdmin.resx">
+      <DependentUpon>FMenuAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormularioCarnet.resx">
       <DependentUpon>FormularioCarnet.cs</DependentUpon>
@@ -208,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fRegistroClinico.resx">
       <DependentUpon>fRegistroClinico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUsuariosAdmin.resx">
+      <DependentUpon>FUsuariosAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
@@ -330,11 +366,16 @@
     <None Include="Resources\shopping-basket-2-fill2.png" />
     <None Include="Resources\1892641.png" />
     <None Include="Resources\4767994.png" />
+    <None Include="Resources\3391036.png" />
     <Content Include="Resources\841791.png" />
     <Content Include="Resources\article-fill.png" />
     <None Include="Resources\box-1-fill2.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-10 012747.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-10 012905.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-10 012944.png" />
     <Content Include="Resources\file-3-fill.png" />
     <None Include="Resources\folder-user-fill2.png" />
+    <None Include="Resources\folder-lock-fill.png" />
     <Content Include="Resources\info-card-fill.png" />
     <None Include="Resources\ojo.png" />
     <Content Include="Resources\shake-hands-fill.png" />

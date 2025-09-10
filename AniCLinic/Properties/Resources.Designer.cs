@@ -93,6 +93,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3391036 {
+            get {
+                object obj = ResourceManager.GetObject("3391036", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _4767994 {
             get {
                 object obj = ResourceManager.GetObject("4767994", resourceCulture);
@@ -203,6 +213,36 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Captura_de_pantalla_2025_09_10_012747 {
+            get {
+                object obj = ResourceManager.GetObject("Captura de pantalla 2025-09-10 012747", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Captura_de_pantalla_2025_09_10_012905 {
+            get {
+                object obj = ResourceManager.GetObject("Captura de pantalla 2025-09-10 012905", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Captura_de_pantalla_2025_09_10_012944 {
+            get {
+                object obj = ResourceManager.GetObject("Captura de pantalla 2025-09-10 012944", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_bin_5_line {
             get {
                 object obj = ResourceManager.GetObject("delete-bin-5-line", resourceCulture);
@@ -256,6 +296,16 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap file_3_fill {
             get {
                 object obj = ResourceManager.GetObject("file-3-fill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_lock_fill {
+            get {
+                object obj = ResourceManager.GetObject("folder-lock-fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

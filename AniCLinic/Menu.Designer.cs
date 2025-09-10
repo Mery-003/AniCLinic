@@ -189,7 +189,7 @@
             // 
             // btnProveedor
             // 
-            this.btnProveedor.CustomImages.Image = global::AniCLinic.Properties.Resources.folder_user_fill;
+            this.btnProveedor.CustomImages.Image = global::AniCLinic.Properties.Resources.folder_lock_fill;
             this.btnProveedor.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnProveedor.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Transition1.SetDecoration(this.btnProveedor, Guna.UI2.AnimatorNS.DecorationType.None);
@@ -209,7 +209,7 @@
             this.btnProveedor.Name = "btnProveedor";
             this.btnProveedor.Size = new System.Drawing.Size(263, 44);
             this.btnProveedor.TabIndex = 11;
-            this.btnProveedor.Text = "Proveedores";
+            this.btnProveedor.Text = "Administrador";
             this.btnProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnProveedor.TextOffset = new System.Drawing.Point(40, 0);
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
