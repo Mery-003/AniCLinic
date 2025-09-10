@@ -19,9 +19,9 @@ namespace AniCLinic
             try { dgvProximas.CellClick -= Grid_ButtonClick; dgvProximas.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvAnteriores.CellClick -= Grid_ButtonClick; dgvAnteriores.CellContentClick -= Grid_ButtonClick; } catch { }
 
-            PrepararGrid_Hoy(dgvHoy);
-            PrepararGrid_Proximas(dgvProximas);
-            PrepararGrid_Anteriores(dgvAnteriores);
+            PrepararGrid(dgvHoy, 100);
+            PrepararGrid(dgvProximas, 100);
+            PrepararGrid(dgvAnteriores, 120);
 
             AsegurarBotones();
             EstiloBotones();
@@ -66,7 +66,7 @@ namespace AniCLinic
             };
         }
 
-        private void PrepararGrid_Hoy(DataGridView grid)
+        private void PrepararGrid(DataGridView grid, int anchoEstado)
         {
             grid.Columns.Add(MkHidden("IdMascota"));
             grid.Columns.Add(MkText("Id", "IdCita", 60));
@@ -77,35 +77,14 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Estado", "Estado", 100));
-        }
-
-        private void PrepararGrid_Proximas(DataGridView grid)
-        {
-            grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkText("Id", "IdCita", 60));
-            grid.Columns.Add(MkText("Mascota", "Mascota", 120));
-            grid.Columns.Add(MkText("Especie", "Especie", 100));
-            grid.Columns.Add(MkText("Raza", "Raza", 120));
-            grid.Columns.Add(MkText("Fecha", "Fecha", 90));
-            grid.Columns.Add(MkText("Hora", "Hora", 70));
-            grid.Columns.Add(MkText("Motivo", "Motivo", 220));
-            grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Estado", "Estado", 100));
-        }
-
-        private void PrepararGrid_Anteriores(DataGridView grid)
-        {
-            grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkText("Id", "IdCita", 60));
-            grid.Columns.Add(MkText("Mascota", "Mascota", 120));
-            grid.Columns.Add(MkText("Especie", "Especie", 100));
-            grid.Columns.Add(MkText("Raza", "Raza", 120));
-            grid.Columns.Add(MkText("Fecha", "Fecha", 90));
-            grid.Columns.Add(MkText("Hora", "Hora", 70));
-            grid.Columns.Add(MkText("Motivo", "Motivo", 220));
-            grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Estado", "Estado", 120));
+            grid.Columns.Add(MkText("Estado", "Estado", anchoEstado));
+            grid.ReadOnly = true;
+            grid.MultiSelect = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.RowHeadersVisible = false;
+            grid.AllowUserToAddRows = false;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            grid.AutoGenerateColumns = true;
         }
 
         private void AsegurarBotones()

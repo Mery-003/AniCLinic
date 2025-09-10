@@ -12,9 +12,17 @@ namespace AniCLinic
 {
     public partial class AggProveedor : Form
     {
+        csCRUD crud = new csCRUD();
+        Proveedores pro;
+        bool edicion = false;
         public AggProveedor()
         {
             InitializeComponent();
+        }
+        public AggProveedor(Proveedores proveedores, int id)
+        {
+            InitializeComponent();
+            pro = proveedores;
         }
     }
 }

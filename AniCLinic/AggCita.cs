@@ -233,16 +233,29 @@ namespace AniCLinic
         {
             var ced = txtCedulaCita.Text.Trim();
             if (!CedulaUtils.CedulaValida(ced))
-            { MessageBox.Show("Cédula inválida."); txtCedulaCita.Focus(); return; }
+            { 
+                MessageBox.Show("Cédula inválida."); 
+                txtCedulaCita.Focus(); return; 
+            }
 
             if (cmbMascotaCita.SelectedIndex < 0 || cmbMascotaCita.SelectedValue == null)
-            { MessageBox.Show("Seleccione una mascota."); return; }
+            { 
+                MessageBox.Show("Seleccione una mascota.");
+                return; 
+            }
 
             if (string.IsNullOrWhiteSpace(txtHora.Text))
-            { MessageBox.Show("Seleccione una hora."); return; }
+            { 
+                MessageBox.Show("Seleccione una hora."); 
+                return; 
+            }
 
             if (string.IsNullOrWhiteSpace(txtMotivo.Text))
-            { MessageBox.Show("Ingrese el motivo."); txtMotivo.Focus(); return; }
+            { 
+                MessageBox.Show("Ingrese el motivo."); 
+                txtMotivo.Focus(); 
+                return; 
+            }
 
             // Validaciones de negocio
             var ts = TimeSpan.ParseExact(txtHora.Text, @"hh\:mm", CultureInfo.InvariantCulture);
@@ -252,10 +265,16 @@ namespace AniCLinic
             var fechaSel = dtpFecha.Value.Date;
             var ahora = DateTime.Now;
             if (fechaSel < DateTime.Today)
-            { MessageBox.Show("No se permiten días pasados."); return; }
+            { 
+                MessageBox.Show("No se permiten días pasados."); 
+                return; 
+            }
 
             if (fechaSel == DateTime.Today && ts < SiguienteMediaHora(ahora))
-            { MessageBox.Show("La hora seleccionada ya pasó."); return; }
+            { 
+                MessageBox.Show("La hora seleccionada ya pasó."); 
+                return; 
+            }
 
             var fechaHora = fechaSel.Add(ts);
             int idMascota = Convert.ToInt32(cmbMascotaCita.SelectedValue);
