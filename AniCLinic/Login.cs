@@ -48,7 +48,7 @@ namespace AniCLinic
             csConexionBD conexion = new csConexionBD();
             conexion.abrirConexion();
             csCRUD crud = new csCRUD();
-            int idUsuario = crud.login("Select * from Usuario", txtUsuario.Text, txtPassword.Text);
+            int idUsuario = crud.login("Select * from Empleados", txtUsuario.Text, txtPassword.Text);
 
             if (idUsuario > 0)
             {
@@ -57,9 +57,9 @@ namespace AniCLinic
                     MessageBox.Show("No se pudo cargar la sesión del usuario.");
                     return;
                 }
-                SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen, U.Administrador " +
-                    "FROM Empleado E INNER JOIN Persona P ON E.IdPersona = P.IdPersona " +
-                    "INNER JOIN Usuario U ON U.IdEmpleado=E.IdEmpleado", conexion.obtenerConexion()); 
+                SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen, E.Administrador " +
+                    "FROM Empleados E INNER JOIN Persona P ON E.IdPersona = P.IdPersona ", 
+                    conexion.obtenerConexion()); 
                 oCom.Parameters.AddWithValue("@Id", idUsuario); 
                 SqlDataReader oDTR = oCom.ExecuteReader();
                 if (oDTR.Read())

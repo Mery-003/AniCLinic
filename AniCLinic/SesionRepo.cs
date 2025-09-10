@@ -17,10 +17,8 @@ namespace AniCLinic
                            e.IdEmpleado,
                            (p.Nombre + ' ' + p.Apellido) AS NombreCompleto,
                            p.Imagen
-                    FROM dbo.Usuario u
-                    JOIN dbo.Empleado e ON e.IdEmpleado = u.IdEmpleado
-                    JOIN dbo.Persona  p ON p.IdPersona  = e.IdPersona
-                    WHERE u.Usuario = @u AND u.Activo = 1", db.obtenerConexion()))
+                    FROM Empleados e Inner Join Persona p ON e.IdPersona = p.IdPersona
+                    WHERE e.Usuario = @u AND e.Activo = 1", db.obtenerConexion()))
                 {
                     da.SelectCommand.Parameters.AddWithValue("@u", usuario);
                     var dt = new DataTable();
