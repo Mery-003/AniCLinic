@@ -103,6 +103,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _33910361 {
+            get {
+                object obj = ResourceManager.GetObject("33910361", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _4767994 {
             get {
                 object obj = ResourceManager.GetObject("4767994", resourceCulture);
@@ -396,6 +406,17 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap ojo {
             get {
                 object obj = ResourceManager.GetObject("ojo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_dog_paw_with_dots_in_orange_colors_with_flatline_style_vector_png_image_12296221 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-dog-paw-with-dots-in-orange-colors-with-flatline-style-vector-png-image_1" +
+                        "2296221", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
