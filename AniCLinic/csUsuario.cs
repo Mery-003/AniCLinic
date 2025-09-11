@@ -15,8 +15,8 @@ namespace AniCLinic
         int id { get; set; }
         string usuario { get; set; }
         string contraseña { get; set; }
-        string cargo { get; set; }
         decimal sueldo { get; set; }
+        bool admin { get; set; }
         public int Id 
         { 
             get { return id; } 
@@ -32,59 +32,62 @@ namespace AniCLinic
             get { return contraseña; }
             set { contraseña = value; }
         }
-        public string Cargo
-        {
-            get { return  cargo; }
-            set { cargo = value; }
-        }
         public decimal Sueldo
         {
             get { return sueldo; }
             set { sueldo = value; }
         }
+        public bool Admin
+        {
+            get { return admin; }
+            set { admin = value; }
+        }
         public csUsuario() { }
-        public csUsuario(string user, string pass, string cargo, decimal sueld)
+        public csUsuario(string user, string pass, decimal sueld, bool admin)
         {
             Usuario = user;
             Contraseña = pass;
-            Cargo = cargo;
             Sueldo = sueld;
+            Admin = admin;
         }
-        public csUsuario(int id, string user, string pass, string cargo, decimal sueld)
+        public csUsuario(int id, string user, string pass, decimal sueld, bool admin)
         {
             Id = id;
             Usuario = user;
             Contraseña = pass;
-            Cargo = cargo;
             Sueldo = sueld;
+            Admin = admin;
         }
 
-        public bool agregarUsuario(int idPer, int Admin)
+        public bool agregarUsuario(int idPers)
         {
             csCRUD crud = new csCRUD();
             return crud.agregarBD(
                 "Insert into Empleados (IdPersona, Sueldo, Usuario, Password, Activo, Administrador) " +
                 "Values(@IdPersona, @Sueldo, @User, @Pass, @Activo, @Admin)",
-                new SqlParameter("@IdPersona", idPer),
+                new SqlParameter("@IdPersona", idPers),
                 new SqlParameter("@Sueldo", Sueldo),
                 new SqlParameter("@User", Usuario),
                 new SqlParameter("@Pass", Contraseña),
                 new SqlParameter("@Activo", 1),
                 new SqlParameter("@Admin", Admin));
         }
-        public bool editarProveedor(int id)
+        public bool editarUsuario(int id)
         {
             csCRUD crud = new csCRUD();
             return crud.editarBD(
-                "Update Usuario Set Usuario = @User, Password = @Pass, Administrador = @Admin " +
+                "Update Empleados Set Sueldo = @Sueldo, Usuario = @User, Password = @Pass, Administrador = @Admin " +
                 "Where IdEmpleado = @Id",
+                new SqlParameter("@Sueldo", Sueldo),
                 new SqlParameter("@User", Usuario),
-                new SqlParameter("@Pass", Contraseña));
+                new SqlParameter("@Pass", Contraseña),
+                new SqlParameter("@Admin", Admin),
+                new SqlParameter("@Id", id));
         }
-        public bool eliminarProveedor(int id)
+        public bool eliminarUsuario(int id)
         {
             csCRUD crud = new csCRUD();
-            return crud.eliminarBD("DELETE FROM Proveedor WHERE IdProveedor=@Id", id);
+            return crud.eliminarBD("DELETE FROM Empleados WHERE IdEmpleado =@Id", id);
         }
     }
 }

@@ -82,7 +82,8 @@ namespace AniCLinic
                 new SqlParameter("@Cedula", Cedula),
                 new SqlParameter("@Correo", Correo),
                 new SqlParameter("@Direccion", Direccion),
-                new SqlParameter("@Foto", Foto));
+                new SqlParameter("@Foto", SqlDbType.VarBinary) { Value = (object)Foto ?? DBNull.Value }
+                );
         }
 
         public bool editarPersona(int idPropietario)
@@ -97,7 +98,7 @@ namespace AniCLinic
                 new SqlParameter("@Cedula", Cedula),
                 new SqlParameter("@Correo", Correo),
                 new SqlParameter("@Direccion", Direccion),
-                new SqlParameter("@Foto", Foto),
+                new SqlParameter("@Foto", SqlDbType.VarBinary) { Value = (object)Foto ?? DBNull.Value },
                 new SqlParameter("@Id", idPropietario));
         }
 

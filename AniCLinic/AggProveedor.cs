@@ -102,6 +102,7 @@ namespace AniCLinic
                 else
                     MessageBox.Show("Error al editar el Proveedor.");
             }
+            this.Close();
         }
     }
 }

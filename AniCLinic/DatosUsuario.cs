@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,12 +14,68 @@ namespace AniCLinic
 {
     public partial class DatosUsuario : Form
     {
+        FUsuariosAdmin fUsuarios;
+        csCRUD crud = new csCRUD();
         csPersona persona;
         Image image;
-        byte[] foto;
+        bool edicion = false;
+        byte[] foto = null;
+        int idEmpleado = 0;
         public DatosUsuario()
         {
             InitializeComponent();
+        }
+        public DatosUsuario(FUsuariosAdmin us, int IdEmpleado)
+        {
+            InitializeComponent();
+            fUsuarios = us;
+            edicion = true;
+            idEmpleado = IdEmpleado;
+            if (idEmpleado > 0)
+            {
+                persona = CargarPersona(idEmpleado);
+
+                if(persona == null)
+                {
+                    MessageBox.Show("No se pudo cargar el empleado");
+                    return;
+                }
+                txtNombre.Text = persona.Nombre;
+                txtApellido.Text = persona.Apellido;
+                txtCedula.Text = persona.Cedula;
+                txtCelular.Text = persona.Celular;
+                txtCorreo.Text = persona.Correo;
+                txtDireccion.Text = persona.Direccion;
+            }
+        }
+        private csPersona CargarPersona(int id)
+        {
+            persona = null;
+            string sentencia = "SELECT * FROM Persona P inner join Empleados E " +
+                "on P.IdPersona=E.IdPersona WHERE E.IdEmpleado = " + id;
+
+            using (SqlDataReader reader = crud.EjecutarQuery(sentencia))
+            {
+                if (reader != null && reader.Read())
+                {
+                    byte[] imagenBytes = null;
+                    if (!(reader["Imagen"] is DBNull))
+                    {
+                        imagenBytes = (byte[])reader["Imagen"];
+                    }
+
+                    persona = new csPersona(
+                        reader["Nombre"].ToString(),
+                        reader["Apellido"].ToString(),
+                        reader["Celular"].ToString(),
+                        reader["Cedula"].ToString(),
+                        reader["Correo"].ToString(),
+                        reader["DireccionDomiciliaria"].ToString(),
+                        imagenBytes
+                    );
+                }
+            }
+            return persona;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -37,14 +94,30 @@ namespace AniCLinic
                 txtDireccion.Text,
                 foto
                 );
-            if (persona.agregarPersona())
-                MessageBox.Show("Persona agregada correctamente");
-            else
+
+            if (!edicion) 
             {
-                MessageBox.Show("Error al guardar la persona.");
-                return;
+                if (persona.agregarPersona())
+                    MessageBox.Show("Persona agregada correctamente");
+                else
+                {
+                    MessageBox.Show("Error al guardar la persona.");
+                    return;
+                }
             }
-            DatosAcceso datos = new DatosAcceso();
+            else 
+            {
+                if (persona.editarPersona(idEmpleado))
+                    MessageBox.Show("Persona editada correctamente");
+                else
+                {
+                    MessageBox.Show("Error al editar la persona.");
+                    return;
+                }
+            }
+
+            DatosAcceso datos = new DatosAcceso(idEmpleado, edicion);
+            this.Visible = false;
             datos.ShowDialog();
             this.Close();
         }

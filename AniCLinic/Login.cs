@@ -58,7 +58,8 @@ namespace AniCLinic
                     return;
                 }
                 SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen, E.Administrador " +
-                    "FROM Empleados E INNER JOIN Persona P ON E.IdPersona = P.IdPersona ", 
+                    "FROM Empleados E INNER JOIN Persona P ON E.IdPersona = P.IdPersona " +
+"                   WHERE E.IdEmpleado = @Id", 
                     conexion.obtenerConexion()); 
                 oCom.Parameters.AddWithValue("@Id", idUsuario); 
                 SqlDataReader oDTR = oCom.ExecuteReader();

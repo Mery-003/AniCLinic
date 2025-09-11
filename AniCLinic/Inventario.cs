@@ -25,7 +25,6 @@ namespace AniCLinic
         }
         public void cargarDataI(string filtro = "")
         {
-            csCRUD crud = new csCRUD();
             string sentencia = "Select * from Inventario " +
                 "Where NombreProducto like @filtro + '%'";
             dgvInventario.DataSource = crud.cargarBDData(sentencia, new SqlParameter ("@filtro", filtro));
