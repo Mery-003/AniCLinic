@@ -134,22 +134,16 @@ namespace AniCLinic
                 ReadOnly = true
             };
 
-        // =========================
-        // Búsqueda en vivo (igual a fPacientes)
-        // =========================
+        // Búsqueda 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             var filtro = (txtBuscar.Text ?? string.Empty).Trim();
             CargarData(filtro);
         }
 
-        // =========================
-        // Cargar/recargar datos DESDE SQL con filtro @Filtro (igual enfoque a fPacientes)
-        // =========================
+        // Cargar/recargar datos DESDE SQL 
         private void CargarData(string filtro = "")
         {
-            // Nota: ajusta nombres de tablas/columnas si difieren.
-            // Veterinario lo dejo como LEFT JOIN opcional; si no existe, quedará vacío.
             string sql = @"
 SELECT
     C.IdCita,
@@ -198,7 +192,6 @@ ORDER BY C.FechaHora DESC;";
                 }
                 else
                 {
-                    // Si tu consulta no trae FechaHora, puedes construirla aquí desde columnas Fecha/Hora si existieran
                     if (TryBuildFechaHoraFromCols(r,
                             dt.Columns.Contains("Fecha") ? r["Fecha"] : null,
                             dt.Columns.Contains("Hora") ? r["Hora"] : null,
@@ -221,7 +214,6 @@ ORDER BY C.FechaHora DESC;";
             dgvCitas.DataSource = dt;
         }
 
-        // Construir FechaHora desde posibles columnas Fecha/Hora (string/DateTime + string/TimeSpan)
         private bool TryBuildFechaHoraFromCols(DataRow r, object fechaObj, object horaObj, out DateTime fh)
         {
             fh = default;
@@ -250,9 +242,7 @@ ORDER BY C.FechaHora DESC;";
             return true;
         }
 
-        // =========================
         // Estética y reglas de botones
-        // =========================
         private void DgvCitas_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             AplicarReglasEditarPorFecha();
@@ -276,7 +266,7 @@ ORDER BY C.FechaHora DESC;";
 
                 if (!esActualOFutura)
                 {
-                    // Reemplazar botón por texto "Cita Antigua" (no editable) con fondo rojo suave
+                    // Reemplazar botón por texto "Cita Antigua" 
                     var celda = new DataGridViewTextBoxCell { Value = "Cita Antigua" };
                     row.Cells["colEditar"] = celda;             // 1) asignar a la fila
                     row.Cells["colEditar"].ReadOnly = true;      // 2) ahora sí, marcar ReadOnly
@@ -297,9 +287,7 @@ ORDER BY C.FechaHora DESC;";
             }
         }
 
-        // =========================
         // Acciones de botones
-        // =========================
         private void btnNuvCita_Click(object sender, EventArgs e)
         {
             using (var frm = new AggCita())

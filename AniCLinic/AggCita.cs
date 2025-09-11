@@ -26,9 +26,8 @@ namespace AniCLinic
             _idCitaEdit = idCita;
 
             txtVeterinario.ReadOnly = true;
-            txtVeterinario.TabStop = false; // evita que reciba foco
+            txtVeterinario.TabStop = false; 
             txtVeterinario.Text = SesionActual.NombreEmpleado ?? "";
-            // solo lectura
             txtPropietarioCita.ReadOnly = true;
             txtEspecieCita.ReadOnly = true;
             txtRazaCita.ReadOnly = true;
@@ -125,13 +124,14 @@ namespace AniCLinic
 
         private void AbrirSelectorHora()
         {
-            AplicarRestriccionFechaMinima(); // revalida si ya pasó la hora
+            // revalida si ya pasó la hora
+            AplicarRestriccionFechaMinima(); 
             var hhmm = ElegirHora(dtpFecha.Value.Date);
             if (!string.IsNullOrEmpty(hhmm))
                 txtHora.Text = hhmm;
         }
 
-        // === POPUP DE HORAS (con scroll y bloqueos) ===
+        // cuadro de horas
         private string ElegirHora(DateTime dia)
         {
             // Horas ocupadas en BD

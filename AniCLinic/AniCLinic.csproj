@@ -368,6 +368,7 @@
     <None Include="Resources\1892641.png" />
     <None Include="Resources\4767994.png" />
     <None Include="Resources\3391036.png" />
+    <None Include="Resources\33910361.png" />
     <Content Include="Resources\841791.png" />
     <Content Include="Resources\article-fill.png" />
     <None Include="Resources\box-1-fill2.png" />
@@ -379,6 +380,7 @@
     <None Include="Resources\folder-lock-fill.png" />
     <Content Include="Resources\info-card-fill.png" />
     <None Include="Resources\ojo.png" />
+    <None Include="Resources\pngtree-dog-paw-with-dots-in-orange-colors-with-flatline-style-vector-png-image_12296221.png" />
     <Content Include="Resources\shake-hands-fill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
