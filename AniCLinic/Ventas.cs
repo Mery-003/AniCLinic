@@ -15,6 +15,23 @@ namespace AniCLinic
         public Ventas()
         {
             InitializeComponent();
+            visible(false);
+        }
+        private void visible(bool bvisible)
+        {
+            lblIVA.Visible = bvisible;
+            lblIVAno.Visible = bvisible;
+            lblTotalno.Visible = bvisible;
+            lblTotal.Visible = bvisible;
+            lblTtlVenta.Visible = bvisible;
+            lblTtlVno.Visible = bvisible;
+            btnImprimir.Visible = bvisible;
+        }
+        private void guna2GradientButton2_Click(object sender, EventArgs e)
+        {
+            btnFinalizar.Location = new Point(873, 407);
+            dgvVentas.Size = new Size(811, 255);
+            visible(true);
         }
     }
 }

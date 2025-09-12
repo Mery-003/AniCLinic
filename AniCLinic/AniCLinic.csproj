@@ -277,6 +277,9 @@
     <EmbeddedResource Include="Proveedores.resx">
       <DependentUpon>Proveedores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ventas.resx">
+      <DependentUpon>Ventas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VerCarnet.resx">
       <DependentUpon>VerCarnet.cs</DependentUpon>
     </EmbeddedResource>

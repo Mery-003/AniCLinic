@@ -141,6 +141,11 @@ namespace AniCLinic
         {
             AbrirEnPanel(pnlMenu1, new FMenuAdmin(this, pnlMenu1));
         }
+
+        private void guna2GradientButton1_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new Ventas());
+        }
     }
 
 }
