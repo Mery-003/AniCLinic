@@ -25,7 +25,7 @@ namespace AniCLinic
         {
             string sentencia = "Select * from Proveedor " +
                 "Where NombreProveedor like (@Filtro + '%') or RUC like (@Filtro + '%')";
-            dgvProveedores.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@Filtro", filtro) );
+            dgvProveedores.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@Filtro", filtro));
             configurarColumnas();
         }
         public void configurarColumnas()
@@ -72,7 +72,6 @@ namespace AniCLinic
             dgvProveedores.AllowUserToAddRows = false;
             dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProveedores.AutoGenerateColumns = true;
-
         }
         private void btnNvProveedor_Click(object sender, EventArgs e)
         {

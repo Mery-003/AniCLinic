@@ -129,7 +129,7 @@ ORDER BY M.IdMascota DESC;";
             {
                 var f = new AgregarPaciente(this, idMascota);
                 f.ShowDialog();
-                CargarData((txtMascotaNombre.Text ?? "").Trim());
+                CargarData((txtMascotaNombre.Text).Trim());
             }
         }
 

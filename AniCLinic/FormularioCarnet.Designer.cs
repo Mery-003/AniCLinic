@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-            this.txtMascotaNombre = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.dgvCarnet = new Guna.UI2.WinForms.Guna2DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarnet)).BeginInit();
@@ -67,30 +67,31 @@
             this.guna2Separator1.Size = new System.Drawing.Size(1068, 10);
             this.guna2Separator1.TabIndex = 59;
             // 
-            // txtMascotaNombre
+            // txtBuscar
             // 
-            this.txtMascotaNombre.BackColor = System.Drawing.Color.Transparent;
-            this.txtMascotaNombre.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.txtMascotaNombre.BorderRadius = 15;
-            this.txtMascotaNombre.BorderThickness = 2;
-            this.txtMascotaNombre.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMascotaNombre.DefaultText = "";
-            this.txtMascotaNombre.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtMascotaNombre.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtMascotaNombre.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtMascotaNombre.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtMascotaNombre.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMascotaNombre.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtMascotaNombre.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMascotaNombre.Location = new System.Drawing.Point(391, 16);
-            this.txtMascotaNombre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtMascotaNombre.Name = "txtMascotaNombre";
-            this.txtMascotaNombre.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.txtMascotaNombre.PlaceholderText = "Buscar...";
-            this.txtMascotaNombre.SelectedText = "";
-            this.txtMascotaNombre.Size = new System.Drawing.Size(331, 36);
-            this.txtMascotaNombre.TabIndex = 58;
-            this.txtMascotaNombre.Tag = "";
+            this.txtBuscar.BackColor = System.Drawing.Color.Transparent;
+            this.txtBuscar.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.txtBuscar.BorderRadius = 15;
+            this.txtBuscar.BorderThickness = 2;
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.DefaultText = "";
+            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Location = new System.Drawing.Point(391, 16);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.txtBuscar.PlaceholderText = "Buscar...";
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.Size = new System.Drawing.Size(331, 36);
+            this.txtBuscar.TabIndex = 58;
+            this.txtBuscar.Tag = "";
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // guna2HtmlLabel2
             // 
@@ -153,6 +154,7 @@
             this.dgvCarnet.ThemeStyle.RowsStyle.Height = 22;
             this.dgvCarnet.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCarnet.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvCarnet.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCarnet_CellContentClick);
             // 
             // FormularioCarnet
             // 
@@ -162,7 +164,7 @@
             this.ClientSize = new System.Drawing.Size(1059, 693);
             this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.guna2Separator1);
-            this.Controls.Add(this.txtMascotaNombre);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.dgvCarnet);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -178,7 +180,7 @@
 
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
-        private Guna.UI2.WinForms.Guna2TextBox txtMascotaNombre;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2DataGridView dgvCarnet;
     }

@@ -102,12 +102,15 @@ namespace AniCLinic
                 return;
 
             var nombreCol = dgvInventario.Columns[e.ColumnIndex].Name;
+
             if (nombreCol != "Editar" && nombreCol != "Eliminar")
                 return;
 
             var rowView = dgvInventario.Rows[e.RowIndex].DataBoundItem as DataRowView;
+
             if (rowView == null)
                 return;
+
             int idProd = Convert.ToInt32(rowView["IdProducto"]);
 
             if (nombreCol == "Eliminar")

@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace AniCLinic
 {
-    internal class csMascota
+    public class csMascota
     {
         int idMascota { get; set; }
         string nombre { get; set; }
@@ -77,6 +77,17 @@ namespace AniCLinic
 
         public csMascota() { }
 
+        public csMascota(string nom, string esp, string raz, string sex, string ed, decimal pes, string disc, byte[] fot)
+        {
+            Nombre = nom;
+            Especie = esp;
+            Raza = raz;
+            Sexo = sex;
+            Edad = ed;
+            Peso = pes;
+            Discapacidad = disc;
+            Foto = fot;
+        }
         public csMascota(string nom, string esp, string raz, string sex, string ed, decimal pes, string disc, byte[] fot, int idpro)
         {
             Nombre = nom;

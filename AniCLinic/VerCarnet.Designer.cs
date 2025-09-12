@@ -41,7 +41,6 @@
             this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picFoto = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.btnCerrar = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -52,7 +51,6 @@
             this.lblFechaEmision = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblRaza = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblEdad = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblFechaVencimiento = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
@@ -99,18 +97,18 @@
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(274, 130);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(275, 149);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(65, 19);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(59, 19);
             this.guna2HtmlLabel3.TabIndex = 50;
-            this.guna2HtmlLabel3.Text = "Nombres:";
+            this.guna2HtmlLabel3.Text = "Nombre:";
             // 
             // guna2HtmlLabel4
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(532, 218);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(533, 148);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(52, 19);
             this.guna2HtmlLabel4.TabIndex = 51;
@@ -121,7 +119,7 @@
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(274, 173);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(275, 192);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(37, 19);
             this.guna2HtmlLabel5.TabIndex = 52;
@@ -132,7 +130,7 @@
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(532, 128);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(534, 192);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             this.guna2HtmlLabel6.Size = new System.Drawing.Size(37, 19);
             this.guna2HtmlLabel6.TabIndex = 53;
@@ -143,7 +141,7 @@
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(532, 173);
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(534, 238);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             this.guna2HtmlLabel7.Size = new System.Drawing.Size(37, 19);
             this.guna2HtmlLabel7.TabIndex = 54;
@@ -154,7 +152,7 @@
             this.guna2HtmlLabel8.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel8.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(274, 217);
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(275, 236);
             this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
             this.guna2HtmlLabel8.Size = new System.Drawing.Size(88, 19);
             this.guna2HtmlLabel8.TabIndex = 55;
@@ -165,22 +163,11 @@
             this.guna2HtmlLabel9.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.guna2HtmlLabel9.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel9.Location = new System.Drawing.Point(275, 320);
+            this.guna2HtmlLabel9.Location = new System.Drawing.Point(275, 281);
             this.guna2HtmlLabel9.Name = "guna2HtmlLabel9";
             this.guna2HtmlLabel9.Size = new System.Drawing.Size(110, 19);
             this.guna2HtmlLabel9.TabIndex = 56;
             this.guna2HtmlLabel9.Text = "Fecha de Emisión";
-            // 
-            // guna2HtmlLabel10
-            // 
-            this.guna2HtmlLabel10.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.guna2HtmlLabel10.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel10.Location = new System.Drawing.Point(516, 320);
-            this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
-            this.guna2HtmlLabel10.Size = new System.Drawing.Size(142, 19);
-            this.guna2HtmlLabel10.TabIndex = 57;
-            this.guna2HtmlLabel10.Text = "Fecha de vencimiento:";
             // 
             // picFoto
             // 
@@ -226,7 +213,7 @@
             this.lblNombres.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblNombres.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombres.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblNombres.Location = new System.Drawing.Point(277, 146);
+            this.lblNombres.Location = new System.Drawing.Point(278, 165);
             this.lblNombres.Name = "lblNombres";
             this.lblNombres.Size = new System.Drawing.Size(62, 19);
             this.lblNombres.TabIndex = 59;
@@ -237,7 +224,7 @@
             this.lblEspecie.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblEspecie.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEspecie.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEspecie.Location = new System.Drawing.Point(538, 235);
+            this.lblEspecie.Location = new System.Drawing.Point(539, 165);
             this.lblEspecie.Name = "lblEspecie";
             this.lblEspecie.Size = new System.Drawing.Size(62, 19);
             this.lblEspecie.TabIndex = 60;
@@ -248,7 +235,7 @@
             this.lblSexo.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSexo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblSexo.Location = new System.Drawing.Point(278, 190);
+            this.lblSexo.Location = new System.Drawing.Point(279, 209);
             this.lblSexo.Name = "lblSexo";
             this.lblSexo.Size = new System.Drawing.Size(62, 19);
             this.lblSexo.TabIndex = 61;
@@ -259,7 +246,7 @@
             this.lblDiscapacidad.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblDiscapacidad.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiscapacidad.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblDiscapacidad.Location = new System.Drawing.Point(277, 237);
+            this.lblDiscapacidad.Location = new System.Drawing.Point(278, 256);
             this.lblDiscapacidad.Name = "lblDiscapacidad";
             this.lblDiscapacidad.Size = new System.Drawing.Size(62, 19);
             this.lblDiscapacidad.TabIndex = 62;
@@ -270,7 +257,7 @@
             this.lblFechaEmision.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblFechaEmision.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaEmision.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblFechaEmision.Location = new System.Drawing.Point(276, 341);
+            this.lblFechaEmision.Location = new System.Drawing.Point(276, 302);
             this.lblFechaEmision.Name = "lblFechaEmision";
             this.lblFechaEmision.Size = new System.Drawing.Size(62, 19);
             this.lblFechaEmision.TabIndex = 63;
@@ -281,7 +268,7 @@
             this.lblRaza.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblRaza.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRaza.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblRaza.Location = new System.Drawing.Point(535, 146);
+            this.lblRaza.Location = new System.Drawing.Point(537, 210);
             this.lblRaza.Name = "lblRaza";
             this.lblRaza.Size = new System.Drawing.Size(62, 19);
             this.lblRaza.TabIndex = 64;
@@ -292,22 +279,11 @@
             this.lblEdad.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblEdad.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEdad.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEdad.Location = new System.Drawing.Point(537, 191);
+            this.lblEdad.Location = new System.Drawing.Point(539, 256);
             this.lblEdad.Name = "lblEdad";
             this.lblEdad.Size = new System.Drawing.Size(62, 19);
             this.lblEdad.TabIndex = 65;
             this.lblEdad.Text = "Nombres:";
-            // 
-            // lblFechaVencimiento
-            // 
-            this.lblFechaVencimiento.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.lblFechaVencimiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaVencimiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblFechaVencimiento.Location = new System.Drawing.Point(519, 341);
-            this.lblFechaVencimiento.Name = "lblFechaVencimiento";
-            this.lblFechaVencimiento.Size = new System.Drawing.Size(62, 19);
-            this.lblFechaVencimiento.TabIndex = 66;
-            this.lblFechaVencimiento.Text = "Nombres:";
             // 
             // VerCarnet
             // 
@@ -315,7 +291,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.ClientSize = new System.Drawing.Size(741, 412);
-            this.Controls.Add(this.lblFechaVencimiento);
             this.Controls.Add(this.lblEdad);
             this.Controls.Add(this.lblRaza);
             this.Controls.Add(this.lblFechaEmision);
@@ -324,7 +299,6 @@
             this.Controls.Add(this.lblEspecie);
             this.Controls.Add(this.lblNombres);
             this.Controls.Add(this.btnCerrar);
-            this.Controls.Add(this.guna2HtmlLabel10);
             this.Controls.Add(this.guna2HtmlLabel9);
             this.Controls.Add(this.guna2HtmlLabel8);
             this.Controls.Add(this.guna2HtmlLabel7);
@@ -362,10 +336,8 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
         private Guna.UI2.WinForms.Guna2PictureBox btnCerrar;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblFechaVencimiento;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblEdad;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblRaza;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblFechaEmision;
