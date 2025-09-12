@@ -50,7 +50,6 @@
             this.cmbEdadUnidad = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            this.picMascota = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.cmbDiscapacidad = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cmbSexo = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cmbEspecie = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -63,7 +62,6 @@
             this.txtEdad = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.btnFotoMascota = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.txtApellido = new Guna.UI2.WinForms.Guna2TextBox();
@@ -88,19 +86,24 @@
             this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button14 = new Guna.UI2.WinForms.Guna2Button();
             this.btnFotoPropietario = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.picPropietario = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.picMascota = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.picPropietario = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMascota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).BeginInit();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPropietario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
@@ -138,6 +141,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label13);
+            this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel19);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel18);
             this.tabPage1.Controls.Add(this.guna2HtmlLabel14);
@@ -373,7 +378,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(354, 335);
+            this.label1.Location = new System.Drawing.Point(354, 323);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 20);
             this.label1.TabIndex = 54;
@@ -431,21 +436,6 @@
             this.guna2Button4.Name = "guna2Button4";
             this.guna2Button4.Size = new System.Drawing.Size(191, 53);
             this.guna2Button4.TabIndex = 50;
-            // 
-            // picMascota
-            // 
-            this.picMascota.BackColor = System.Drawing.Color.Transparent;
-            this.picMascota.FillColor = System.Drawing.Color.Gainsboro;
-            this.picMascota.Image = global::AniCLinic.Properties.Resources._1084899;
-            this.picMascota.ImageRotate = 0F;
-            this.picMascota.Location = new System.Drawing.Point(145, 55);
-            this.picMascota.Name = "picMascota";
-            this.picMascota.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picMascota.Size = new System.Drawing.Size(127, 134);
-            this.picMascota.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picMascota.TabIndex = 47;
-            this.picMascota.TabStop = false;
-            this.picMascota.UseTransparentBackground = true;
             // 
             // cmbDiscapacidad
             // 
@@ -704,20 +694,9 @@
             this.btnFotoMascota.Text = "Seleccionar";
             this.btnFotoMascota.Click += new System.EventHandler(this.btnFotoMascota_Click);
             // 
-            // guna2CirclePictureBox4
-            // 
-            this.guna2CirclePictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox4.FillColor = System.Drawing.Color.LightGray;
-            this.guna2CirclePictureBox4.ImageRotate = 0F;
-            this.guna2CirclePictureBox4.Location = new System.Drawing.Point(125, 37);
-            this.guna2CirclePictureBox4.Name = "guna2CirclePictureBox4";
-            this.guna2CirclePictureBox4.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox4.Size = new System.Drawing.Size(167, 168);
-            this.guna2CirclePictureBox4.TabIndex = 46;
-            this.guna2CirclePictureBox4.TabStop = false;
-            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.txtApellido);
             this.tabPage2.Controls.Add(this.guna2HtmlLabel12);
@@ -1118,43 +1097,6 @@
             this.btnFotoPropietario.Text = "Seleccionar";
             this.btnFotoPropietario.Click += new System.EventHandler(this.btnFotoPropietario_Click);
             // 
-            // picPropietario
-            // 
-            this.picPropietario.BackColor = System.Drawing.Color.Transparent;
-            this.picPropietario.FillColor = System.Drawing.Color.Gainsboro;
-            this.picPropietario.Image = global::AniCLinic.Properties.Resources.icone_utilisateur;
-            this.picPropietario.ImageRotate = 0F;
-            this.picPropietario.Location = new System.Drawing.Point(126, 58);
-            this.picPropietario.Name = "picPropietario";
-            this.picPropietario.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picPropietario.Size = new System.Drawing.Size(146, 155);
-            this.picPropietario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picPropietario.TabIndex = 73;
-            this.picPropietario.TabStop = false;
-            this.picPropietario.UseTransparentBackground = true;
-            // 
-            // guna2CirclePictureBox5
-            // 
-            this.guna2CirclePictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox5.FillColor = System.Drawing.Color.LightGray;
-            this.guna2CirclePictureBox5.ImageRotate = 0F;
-            this.guna2CirclePictureBox5.Location = new System.Drawing.Point(106, 41);
-            this.guna2CirclePictureBox5.Name = "guna2CirclePictureBox5";
-            this.guna2CirclePictureBox5.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox5.Size = new System.Drawing.Size(187, 189);
-            this.guna2CirclePictureBox5.TabIndex = 72;
-            this.guna2CirclePictureBox5.TabStop = false;
-            // 
-            // guna2CirclePictureBox1
-            // 
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(56, 58);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(64, 64);
-            this.guna2CirclePictureBox1.TabIndex = 0;
-            this.guna2CirclePictureBox1.TabStop = false;
-            // 
             // guna2ShadowForm1
             // 
             this.guna2ShadowForm1.BorderRadius = 50;
@@ -1212,6 +1154,103 @@
             this.btnCancelar.UseTransparentBackground = true;
             this.btnCancelar.Click += new System.EventHandler(this.btncancelar2_Click);
             // 
+            // picMascota
+            // 
+            this.picMascota.BackColor = System.Drawing.Color.Transparent;
+            this.picMascota.FillColor = System.Drawing.Color.Gainsboro;
+            this.picMascota.Image = global::AniCLinic.Properties.Resources._1084899;
+            this.picMascota.ImageRotate = 0F;
+            this.picMascota.Location = new System.Drawing.Point(145, 55);
+            this.picMascota.Name = "picMascota";
+            this.picMascota.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picMascota.Size = new System.Drawing.Size(127, 134);
+            this.picMascota.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picMascota.TabIndex = 47;
+            this.picMascota.TabStop = false;
+            this.picMascota.UseTransparentBackground = true;
+            // 
+            // guna2CirclePictureBox4
+            // 
+            this.guna2CirclePictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox4.FillColor = System.Drawing.Color.LightGray;
+            this.guna2CirclePictureBox4.ImageRotate = 0F;
+            this.guna2CirclePictureBox4.Location = new System.Drawing.Point(125, 37);
+            this.guna2CirclePictureBox4.Name = "guna2CirclePictureBox4";
+            this.guna2CirclePictureBox4.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox4.Size = new System.Drawing.Size(167, 168);
+            this.guna2CirclePictureBox4.TabIndex = 46;
+            this.guna2CirclePictureBox4.TabStop = false;
+            // 
+            // picPropietario
+            // 
+            this.picPropietario.BackColor = System.Drawing.Color.Transparent;
+            this.picPropietario.FillColor = System.Drawing.Color.Gainsboro;
+            this.picPropietario.Image = global::AniCLinic.Properties.Resources.icone_utilisateur;
+            this.picPropietario.ImageRotate = 0F;
+            this.picPropietario.Location = new System.Drawing.Point(126, 58);
+            this.picPropietario.Name = "picPropietario";
+            this.picPropietario.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picPropietario.Size = new System.Drawing.Size(146, 155);
+            this.picPropietario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picPropietario.TabIndex = 73;
+            this.picPropietario.TabStop = false;
+            this.picPropietario.UseTransparentBackground = true;
+            // 
+            // guna2CirclePictureBox5
+            // 
+            this.guna2CirclePictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox5.FillColor = System.Drawing.Color.LightGray;
+            this.guna2CirclePictureBox5.ImageRotate = 0F;
+            this.guna2CirclePictureBox5.Location = new System.Drawing.Point(106, 41);
+            this.guna2CirclePictureBox5.Name = "guna2CirclePictureBox5";
+            this.guna2CirclePictureBox5.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox5.Size = new System.Drawing.Size(187, 189);
+            this.guna2CirclePictureBox5.TabIndex = 72;
+            this.guna2CirclePictureBox5.TabStop = false;
+            // 
+            // guna2CirclePictureBox1
+            // 
+            this.guna2CirclePictureBox1.ImageRotate = 0F;
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(56, 58);
+            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(64, 64);
+            this.guna2CirclePictureBox1.TabIndex = 0;
+            this.guna2CirclePictureBox1.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label8.Location = new System.Drawing.Point(732, 237);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(16, 20);
+            this.label8.TabIndex = 93;
+            this.label8.Text = "*";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label12.Location = new System.Drawing.Point(740, 319);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(16, 20);
+            this.label12.TabIndex = 89;
+            this.label12.Text = "*";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label13.Location = new System.Drawing.Point(132, 407);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(16, 20);
+            this.label13.TabIndex = 90;
+            this.label13.Text = "*";
+            // 
             // AgregarPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1228,10 +1267,10 @@
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMascota)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMascota)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPropietario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
@@ -1307,5 +1346,8 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
         private Guna.UI2.WinForms.Guna2GradientButton btnFotoMascota;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox4;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label13;
     }
 }
