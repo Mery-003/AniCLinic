@@ -190,7 +190,6 @@
       <DependentUpon>Proveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="SesionActual.cs" />
-    <Compile Include="SesionRepo.cs" />
     <Compile Include="UxBuscarCedulaHelper.cs" />
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>

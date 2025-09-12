@@ -45,24 +45,15 @@ namespace AniCLinic
             bool admin = false;
             string nombre = null;
             byte[] foto = null;
-            csConexionBD conexion = new csConexionBD();
-            conexion.abrirConexion();
             csCRUD crud = new csCRUD();
             int idUsuario = crud.login("Select * from Empleados", txtUsuario.Text, txtPassword.Text);
 
             if (idUsuario > 0)
             {
-                if (!SesionRepo.CargarPorUsuario(txtUsuario.Text.Trim()))
-                {
-                    MessageBox.Show("No se pudo cargar la sesión del usuario.");
-                    return;
-                }
-                SqlCommand oCom = new SqlCommand("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen, E.Administrador " +
+
+                SqlDataReader oDTR = crud.EjecutarQuery("SELECT E.IdEmpleado, E.IdPersona, P.Nombre, P.Apellido, P.Imagen, E.Administrador " +
                     "FROM Empleados E INNER JOIN Persona P ON E.IdPersona = P.IdPersona " +
-"                   WHERE E.IdEmpleado = @Id", 
-                    conexion.obtenerConexion()); 
-                oCom.Parameters.AddWithValue("@Id", idUsuario); 
-                SqlDataReader oDTR = oCom.ExecuteReader();
+"                   WHERE E.IdEmpleado = " + idUsuario);
                 if (oDTR.Read())
                 {
                     nombre = "Dr. " + oDTR["Nombre"].ToString() + " " + oDTR["Apellido"].ToString();

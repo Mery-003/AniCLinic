@@ -33,5 +33,10 @@ namespace AniCLinic
             dgvVentas.Size = new Size(811, 255);
             visible(true);
         }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

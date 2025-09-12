@@ -125,9 +125,9 @@
             this.cmbProducto.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbProducto.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.cmbProducto.ItemHeight = 30;
-            this.cmbProducto.Location = new System.Drawing.Point(37, 137);
+            this.cmbProducto.Location = new System.Drawing.Point(279, 137);
             this.cmbProducto.Name = "cmbProducto";
-            this.cmbProducto.Size = new System.Drawing.Size(217, 36);
+            this.cmbProducto.Size = new System.Drawing.Size(227, 36);
             this.cmbProducto.TabIndex = 129;
             // 
             // cmbCategoria
@@ -143,7 +143,7 @@
             this.cmbCategoria.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmbCategoria.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.cmbCategoria.ItemHeight = 30;
-            this.cmbCategoria.Location = new System.Drawing.Point(279, 137);
+            this.cmbCategoria.Location = new System.Drawing.Point(37, 137);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(217, 36);
             this.cmbCategoria.TabIndex = 130;
@@ -169,13 +169,14 @@
             this.txtCantidad.SelectedText = "";
             this.txtCantidad.Size = new System.Drawing.Size(244, 36);
             this.txtCantidad.TabIndex = 133;
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // guna2HtmlLabel10
             // 
             this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel10.Location = new System.Drawing.Point(46, 112);
+            this.guna2HtmlLabel10.Location = new System.Drawing.Point(288, 112);
             this.guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             this.guna2HtmlLabel10.Size = new System.Drawing.Size(63, 19);
             this.guna2HtmlLabel10.TabIndex = 134;
@@ -186,7 +187,7 @@
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(289, 112);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(47, 112);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(66, 19);
             this.guna2HtmlLabel1.TabIndex = 135;
