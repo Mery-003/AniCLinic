@@ -47,8 +47,6 @@
             this.guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.txtVeterinario = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cmbMascotaCita = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -301,7 +299,7 @@
             this.btnCancelar.FillColor2 = System.Drawing.Color.Silver;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnCancelar.Location = new System.Drawing.Point(89, 528);
+            this.btnCancelar.Location = new System.Drawing.Point(89, 458);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(91, 45);
             this.btnCancelar.TabIndex = 89;
@@ -319,45 +317,11 @@
             this.btnAceptar.FillColor2 = System.Drawing.Color.LimeGreen;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAceptar.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnAceptar.Location = new System.Drawing.Point(220, 528);
+            this.btnAceptar.Location = new System.Drawing.Point(220, 458);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(91, 45);
             this.btnAceptar.TabIndex = 88;
             this.btnAceptar.Text = "Aceptar";
-            // 
-            // txtVeterinario
-            // 
-            this.txtVeterinario.BackColor = System.Drawing.Color.Transparent;
-            this.txtVeterinario.BorderRadius = 19;
-            this.txtVeterinario.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtVeterinario.DefaultText = "";
-            this.txtVeterinario.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtVeterinario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtVeterinario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVeterinario.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtVeterinario.FillColor = System.Drawing.Color.LightGray;
-            this.txtVeterinario.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVeterinario.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtVeterinario.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtVeterinario.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtVeterinario.Location = new System.Drawing.Point(47, 475);
-            this.txtVeterinario.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtVeterinario.Name = "txtVeterinario";
-            this.txtVeterinario.PlaceholderText = "";
-            this.txtVeterinario.SelectedText = "";
-            this.txtVeterinario.Size = new System.Drawing.Size(307, 36);
-            this.txtVeterinario.TabIndex = 93;
-            // 
-            // guna2HtmlLabel8
-            // 
-            this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(57, 451);
-            this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
-            this.guna2HtmlLabel8.Size = new System.Drawing.Size(72, 19);
-            this.guna2HtmlLabel8.TabIndex = 92;
-            this.guna2HtmlLabel8.Text = "Veterinario";
             // 
             // guna2HtmlLabel9
             // 
@@ -498,7 +462,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(417, 591);
+            this.ClientSize = new System.Drawing.Size(417, 523);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.txtPropietarioCita);
             this.Controls.Add(this.label3);
@@ -507,8 +471,6 @@
             this.Controls.Add(this.guna2HtmlLabel9);
             this.Controls.Add(this.cmbMascotaCita);
             this.Controls.Add(this.guna2HtmlLabel10);
-            this.Controls.Add(this.txtVeterinario);
-            this.Controls.Add(this.guna2HtmlLabel8);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.guna2TextBox5);
             this.Controls.Add(this.btnCancelar);
@@ -555,8 +517,6 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox5;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
-        private Guna.UI2.WinForms.Guna2TextBox txtVeterinario;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
         private Guna.UI2.WinForms.Guna2ComboBox cmbMascotaCita;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;

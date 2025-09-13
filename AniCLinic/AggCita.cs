@@ -25,17 +25,10 @@ namespace AniCLinic
 
             _idCitaEdit = idCita;
 
-            txtVeterinario.ReadOnly = true;
-            txtVeterinario.TabStop = false; 
-            txtVeterinario.Text = SesionActual.NombreEmpleado ?? "";
             txtPropietarioCita.ReadOnly = true;
             txtEspecieCita.ReadOnly = true;
             txtRazaCita.ReadOnly = true;
-            txtVeterinario.ReadOnly = true;
             txtHora.ReadOnly = true;
-
-            // Veterinario
-            txtVeterinario.Text = CedulaUtils.VeterinarioDeSesion();
 
             // Cédula con búsqueda reutilizable
             UxBuscarCedulaHelper.Wire(txtCedulaCita, BuscarPorCedula);

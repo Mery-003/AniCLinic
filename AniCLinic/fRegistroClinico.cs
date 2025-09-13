@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic; // <-- agregado
 
 namespace AniCLinic
 {
@@ -157,6 +158,9 @@ namespace AniCLinic
         {
             var all = CedulaUtils.CitasListado(); // trae IdCita, IdMascota, Mascota, Especie, Raza, Fecha/Hora, Motivo, Propietario...
 
+            // === nuevo: añadimos cédula del propietario al dataset base ===
+            AgregarCedulasPropietario(all);
+
             if (!all.Columns.Contains("Estado"))
                 all.Columns.Add("Estado", typeof(string));
 
@@ -173,7 +177,8 @@ namespace AniCLinic
 
             foreach (DataRow r in all.Rows)
             {
-                if (!TryParseFecha(r, out DateTime f)) continue;
+                DateTime f;
+                if (!TryParseFecha(r, out f)) continue;
                 var d = f.Date;
 
                 if (d > hoy) r["Estado"] = "Próximo";
@@ -213,6 +218,60 @@ namespace AniCLinic
             if (!dt.Columns.Contains(COL_TIENE_REG))
                 dt.Columns.Add(COL_TIENE_REG, typeof(bool));
         }
+
+        // ===== NUEVO: completa la columna CedulaPropietario para permitir buscar por cédula =====
+        private void AgregarCedulasPropietario(DataTable all)
+        {
+            if (all == null) return;
+
+            if (!all.Columns.Contains("CedulaPropietario"))
+                all.Columns.Add("CedulaPropietario", typeof(string));
+
+            // Reunimos todos los IdMascota presentes
+            var ids = all.AsEnumerable()
+                         .Select(r => ToInt(r, "IdMascota"))
+                         .Where(id => id > 0)
+                         .Distinct()
+                         .ToList();
+
+            if (ids.Count == 0) return;
+
+            // Consulta única (JOIN Mascota -> Persona) para traer la cédula por IdMascota
+            string idList = string.Join(",", ids);
+            string sql = @"
+SELECT m.IdMascota, p.Cedula
+FROM dbo.Mascota m
+INNER JOIN dbo.Persona p ON p.IdPersona = m.IdPersona
+WHERE m.IdMascota IN (" + idList + @");";
+
+            var map = new Dictionary<int, string>();
+
+            var db = new csConexionBD();
+            db.abrirConexion();
+            try
+            {
+                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                using (var rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        int id = Convert.ToInt32(rd["IdMascota"]);
+                        string ced = Convert.ToString(rd["Cedula"] ?? "");
+                        map[id] = ced;
+                    }
+                }
+            }
+            finally { db.cerrarConexion(); }
+
+            // Aplicamos la cédula a cada fila
+            foreach (DataRow r in all.Rows)
+            {
+                int id = ToInt(r, "IdMascota");
+                string cedula;
+                if (id > 0 && map.TryGetValue(id, out cedula))
+                    r["CedulaPropietario"] = cedula ?? "";
+            }
+        }
         #endregion
 
         #region Búsqueda
@@ -240,20 +299,31 @@ namespace AniCLinic
         private void AplicarBusqueda(DataGridView grid, DataTable baseTable, string term)
         {
             if (grid == null || baseTable == null) return;
+
             var t = (term ?? "").Trim();
             if (t.Length == 0) { grid.DataSource = baseTable; return; }
 
+            // Campos permitidos para buscar (incluye cédula si la tienes cargada)
             string[] campos = { "IdCita", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
             var cols = campos.Where(c => baseTable.Columns.Contains(c)).ToArray();
+
             var val = t.Replace("'", "''");
-            var expr = string.Join(" OR ", cols.Select(c =>
+
+            // Si la columna NO es string (número, bool, DateTime, etc.), convierto a texto antes de usar LIKE
+            var exprParts = cols.Select(c =>
             {
                 var col = baseTable.Columns[c];
-                bool num = col.DataType == typeof(int) || col.DataType == typeof(decimal) || col.DataType == typeof(double);
-                return num ? $"CONVERT([{c}], 'System.String') LIKE '%{val}%'" : $"([{c}] LIKE '%{val}%')";
-            }).ToArray());
+                bool needsConvert = col.DataType != typeof(string);
+                return needsConvert
+                    ? $"Convert([{c}], 'System.String') LIKE '%{val}%'"
+                    : $"([{c}] LIKE '%{val}%')";
+            });
+
+            var expr = string.Join(" OR ", exprParts);
+
             grid.DataSource = new DataView(baseTable) { RowFilter = expr };
         }
+
         #endregion
 
         #region Clicks botones (Registrar/Editar/Eliminar)
