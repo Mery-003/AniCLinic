@@ -338,6 +338,12 @@ namespace AniCLinic
                 dgvVentas.Rows.Remove(fila);
             }
         }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            frFactura frFac = new frFactura(factura.IdFactura);
+            frFac.ShowDialog();
+        }
     }
     public class ProductoItem
     {

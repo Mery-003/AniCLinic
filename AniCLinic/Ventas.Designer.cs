@@ -559,6 +559,7 @@
             this.btnImprimir.Size = new System.Drawing.Size(151, 41);
             this.btnImprimir.TabIndex = 156;
             this.btnImprimir.Text = "Imprimir";
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // cmbMetodoPago
             // 
