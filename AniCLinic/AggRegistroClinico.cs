@@ -11,7 +11,6 @@ namespace AniCLinic
         private readonly CitaInfo _info;
 
         private int _idRegistroClinicoExistente = 0;
-        private int _idVeterinarioSesion = 0;
 
         public AggRegistroClinico(CitaInfo info, bool isEdit)
         {
@@ -47,7 +46,6 @@ namespace AniCLinic
 
             // Carga de datos en pantalla
             CargarCabeceraDesdeCita();
-            CargarVeterinarioDeSesion();
             CargarRegistroClinicoDelDia(_info.IdMascota, _info.FechaHora.Date);
         }
 
@@ -62,19 +60,6 @@ namespace AniCLinic
             if (txtPropietario != null) txtPropietario.Text = _info.Propietario ?? "";
             if (txtMascota != null) txtMascota.Text = _info.Mascota ?? "";
             if (txtMotivo != null) txtMotivo.Text = _info.Motivo ?? "";
-        }
-
-        // --------- Veterinario de la sesión (sin consultar BD) ----------
-        private void CargarVeterinarioDeSesion()
-        {
-            // Texto visible
-            string nombreVet = CedulaUtils.VeterinarioDeSesion();
-            if (string.IsNullOrWhiteSpace(nombreVet))
-                nombreVet = SesionActual.NombreEmpleado ?? "";
-            if (txtVeterinario != null) txtVeterinario.Text = nombreVet;
-
-            // Id para la FK
-            _idVeterinarioSesion = SesionActual.IdEmpleado > 0 ? SesionActual.IdEmpleado : 0;
         }
 
         // --------- Carga previa del registro clínico del día (si existe) ----------
@@ -173,16 +158,7 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
                 return false;
             }
 
-            // Si tu FK NO permite 0, asegúrate de setear IdEmpleado al iniciar sesión.
-            if (_idVeterinarioSesion <= 0)
-            {
-                // Lo mostramos pero permitimos continuar si tu FK lo acepta.
-                // Si no lo acepta, el INSERT fallará, dejando claro el problema.
-                MessageBox.Show("No se detectó el Id del veterinario de la sesión.\n" +
-                                "Verifique que SesionActual.IdEmpleado esté asignado.",
-                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
+            // ✅ Veterinario eliminado: no validamos ni mostramos avisos
             return true;
         }
 
@@ -209,8 +185,7 @@ UPDATE RegistroClinico
    SET MotivoConsulta         = @mot,
        Diagnostico            = @diag,
        Tratamiento            = @trat,
-       AplicacionTratamiento  = @apli,
-       IdVeterinario          = @vet
+       AplicacionTratamiento  = @apli
  WHERE IdRegistroClinico = @id;";
 
                 crud.editarBD(sqlU,
@@ -218,7 +193,6 @@ UPDATE RegistroClinico
                     new SqlParameter("@diag", diag),
                     new SqlParameter("@trat", trat),
                     new SqlParameter("@apli", rec),
-                    new SqlParameter("@vet", _idVeterinarioSesion),
                     new SqlParameter("@id", _idRegistroClinicoExistente)
                 );
             }
@@ -226,13 +200,12 @@ UPDATE RegistroClinico
             {
                 const string sqlI = @"
 INSERT INTO RegistroClinico
-    (IdMascota, IdVeterinario, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento, FechaRegistro)
+    (IdMascota, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento, FechaRegistro)
 VALUES
-    (@m, @vet, @mot, @diag, @trat, @apli, @f);";
+    (@m, @mot, @diag, @trat, @apli, @f);";
 
                 crud.agregarBD(sqlI,
                     new SqlParameter("@m", idMascota),
-                    new SqlParameter("@vet", _idVeterinarioSesion),
                     new SqlParameter("@mot", mot),
                     new SqlParameter("@diag", diag),
                     new SqlParameter("@trat", trat),
