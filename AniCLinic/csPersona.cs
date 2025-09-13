@@ -13,6 +13,7 @@ namespace AniCLinic
 
     internal class csPersona
     {
+        int idPesona { get; set; }
         string nombre { get; set; }
         string apellido { get; set; }
         string celular { get; set; }
@@ -21,6 +22,11 @@ namespace AniCLinic
         string direccion { get; set; }
         byte[] foto { get; set; }
 
+        public int IdPersona
+        {
+            get { return idPesona; }
+            set { idPesona = value; }
+        }
         public string Nombre
         {
             get { return nombre; } 
@@ -69,7 +75,17 @@ namespace AniCLinic
             Direccion = dir;
             Foto = fot;
         }
-
+        public csPersona(int id, string nom, string ape, string cel, string ced, string cor, string dir, byte[] fot)
+        {
+            idPesona = id;
+            Nombre = nom;
+            Apellido = ape;
+            Celular = cel;
+            Cedula = ced;
+            Correo = cor;
+            Direccion = dir;
+            Foto = fot;
+        }
         public bool agregarPersona()
         {
             csCRUD conexionBD = new csCRUD();
@@ -129,7 +145,7 @@ namespace AniCLinic
             }
             return idPropietario;
         }
-        public int? obtenerIdPorCedula(string cedula)
+        public int obtenerIdPorCedula(string cedula)
         {
             try
             {
@@ -145,7 +161,7 @@ namespace AniCLinic
             {
                 MessageBox.Show("Error al buscar cédula: " + ex.Message);
             }
-            return null; 
+            return 0; 
         }
 
     }

@@ -22,13 +22,6 @@ namespace AniCLinic
 
             txtPassword.UseSystemPasswordChar = true;
 
-
-        }
-
-        public static class SesionActual
-        {
-            public static int IdEmpleado { get; set; }
-            public static string NombreEmpleado { get; set; }
         }
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
@@ -67,7 +60,7 @@ namespace AniCLinic
                          foto = (byte[])new ImageConverter().ConvertTo(Properties.Resources.user_fill, typeof(byte[]));
                     }
                 }
-                Menu menu = new Menu(this, nombre, foto, admin);
+                Menu menu = new Menu(this, idUsuario,nombre, foto, admin);
                 txtUsuario.Text = "";
                 txtPassword.Text = "";
                 this.Hide();

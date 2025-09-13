@@ -135,29 +135,6 @@ namespace AniCLinic
             }
             return 0;
         }
-
-        public DataTable ObtenerMascotaDetalladaPorId(int idMascota)
-        {
-            string sql = @"
-SELECT
-    M.IdMascota,
-    M.Nombre,
-    M.Especie,
-    M.Raza,
-    M.Sexo,
-    M.Edad,
-    M.PesoKg,
-    M.Discapacidad,
-    M.Imagen,
-    P.IdPersona,
-    P.Cedula,
-    P.Nombre AS NombreProp,
-    P.Apellido AS ApellidoProp,
-    (P.Nombre + ' ' + P.Apellido) AS Propietario
-FROM Mascota M
-INNER JOIN Persona P ON P.IdPersona = M.IdPersona
-WHERE M.IdMascota = @Id;";
-            return cargarBDData(sql, new SqlParameter("@Id", idMascota));
-        }
+        
     }
 }

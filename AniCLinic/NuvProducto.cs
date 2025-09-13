@@ -16,7 +16,7 @@ namespace AniCLinic
     {
         csCRUD crud = new csCRUD();
         csProducto prod;
-        SqlDataReader oDR;
+        SqlDataReader reader;
         Inventario fInventario;
         bool editar = false;
         int idProducto;
@@ -74,14 +74,14 @@ namespace AniCLinic
         }
         private void cargarProveedores()
         {
-            oDR = crud.EjecutarQuery("Select IdProveedor, NombreProveedor from Proveedor");
-            if (oDR != null)
+            reader = crud.EjecutarQuery("Select IdProveedor, NombreProveedor from Proveedor");
+            if (reader != null)
             {
-                while (oDR.Read())
+                while (reader.Read())
                 {
-                    int idP = oDR.GetInt32(0);
-                    string nomP = oDR.GetString(1);
-                    cmbProveedor.Items.Add(new ProveedorItem(idP, nomP));
+                    int idP = reader.GetInt32(0);
+                    string nomP = reader.GetString(1);
+                    cmbProveedor.Items.Add(new ProductoItem(idP, nomP));
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace AniCLinic
         {
             if (!editar)
             {
-                if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
+                if (cmbProveedor.SelectedItem is ProvedorItem proveedorSeleccionado)
                 {
                     int idProveedor = proveedorSeleccionado.idProveedor;
                     prod = new csProducto(
@@ -108,7 +108,7 @@ namespace AniCLinic
             }
             else
             {
-                if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
+                if (cmbProveedor.SelectedItem is ProvedorItem proveedorSeleccionado)
                 {
                     int idProveedor = proveedorSeleccionado.idProveedor;
                     prod = new csProducto(
@@ -149,11 +149,11 @@ namespace AniCLinic
         }
     }
 
-    public class ProveedorItem
+    public class ProvedorItem
     {
         public int idProveedor { get; set; }
         public string nombreProveedor { get; set; }
-        public ProveedorItem(int id, string nombre)
+        public ProvedorItem(int id, string nombre)
         {
             idProveedor = id;
             nombreProveedor = nombre;

@@ -16,16 +16,19 @@ namespace AniCLinic
     {
         Login login;
         bool esAdmin;
+        int idEmpleado;
         public Menu()
         {
             InitializeComponent();
         }
-        public Menu(Login l, string nom, byte[] foto, bool admin)
+        public Menu(Login l, int idEmp,string nom, byte[] foto, bool admin)
         {
             InitializeComponent();
             login = l;
             lblEmpleado.Text = nom;
             esAdmin = admin;
+            idEmpleado = idEmp;
+
             if (foto != null && foto.Length > 0)
             {
                 using (var ms = new MemoryStream(foto))
@@ -103,13 +106,6 @@ namespace AniCLinic
         private void btnReporteria_Click(object sender, EventArgs e)
         {
             panelReporteriaSubmenu.Visible = !panelReporteriaSubmenu.Visible;
-        }
-        private void PosicionarSubmenuJuntoA(Control anchor, Panel submenu)
-        {
-            var screenPoint = anchor.Parent.PointToScreen(anchor.Bounds.Location);
-            var formPoint = this.PointToClient(new Point(screenPoint.X + anchor.Width, screenPoint.Y));
-            submenu.Location = formPoint;
-            submenu.BringToFront();
         }
 
         private void btnHistorial_Click(object sender, EventArgs e)

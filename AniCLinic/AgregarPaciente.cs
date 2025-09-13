@@ -212,7 +212,7 @@ namespace AniCLinic
                 if (edicion)
                 {
                     var idCedula = new csPersona().obtenerIdPorCedula(txtCedula.Text);
-                    if (idCedula.HasValue && idCedula.Value != IdPropietario)
+                    if (idCedula > 0 && idCedula != IdPropietario)
                     {
                         MessageBox.Show("La cédula ingresada ya pertenece a otro propietario.");
                         return;
@@ -227,9 +227,9 @@ namespace AniCLinic
                 else
                 {
                     var idExistente = new csPersona().obtenerIdPorCedula(txtCedula.Text);
-                    if (idExistente.HasValue)
+                    if (idExistente <= 0)
                     {
-                        idPropietarioParaGuardar = idExistente.Value;
+                        idPropietarioParaGuardar = idExistente;
                     }
                     else
                     {
@@ -442,7 +442,8 @@ namespace AniCLinic
         private void txtPeso_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((char.IsDigit(e.KeyChar) && txtPeso.Text.Replace(",", "").Replace(".", "").Length >= 4)
-             || (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ',' && e.KeyChar != '.'))
+                || (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ',')
+                || (e.KeyChar == ',' && txtPeso.Text.Contains(",")))
             {
                 e.Handled = true;
             }
