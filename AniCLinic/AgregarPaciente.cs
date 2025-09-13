@@ -15,8 +15,8 @@ namespace AniCLinic
         csCRUD crud = new csCRUD();
         fPacientes fp;
 
-        public int IdMascota { get; set; }
-        public int IdPropietario { get; set; }
+        public int IdMascota;
+        public int IdPropietario = 0;
 
         private bool edicion = false;
         private byte[] _fotoMascotaOriginal = null;
@@ -227,7 +227,7 @@ namespace AniCLinic
                 else
                 {
                     var idExistente = new csPersona().obtenerIdPorCedula(txtCedula.Text);
-                    if (idExistente <= 0)
+                    if (idExistente < 0)
                     {
                         idPropietarioParaGuardar = idExistente;
                     }

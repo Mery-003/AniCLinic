@@ -120,7 +120,7 @@ namespace AniCLinic
             csCRUD crud = new csCRUD();
             return crud.agregarBD(
                 "INSERT INTO Mascota (Imagen, Nombre, Especie, Raza, Sexo, Edad, PesoKg, Discapacidad, IdPersona) " +
-                "VALUES (@Foto, @Nombre, @Especie, @Raza, @Sexo, @Edad, @Peso, @Discapacidad, @IdPropietario)",
+                "VALUES (@Foto, @Nombre, @Especie, @Raza, @Sexo, @Edad, @Peso, @Discapacidad, @IdPersona)",
                 new SqlParameter("@Foto", Foto),
                 new SqlParameter("@Nombre", Nombre),
                 new SqlParameter("@Especie", Especie),
@@ -129,7 +129,7 @@ namespace AniCLinic
                 new SqlParameter("@Edad", Edad),
                 new SqlParameter("@Peso", Peso),
                 new SqlParameter("@Discapacidad", Discapacidad),
-                new SqlParameter("@IdPropietario", IdPersona));
+                new SqlParameter("@IdPersona", IdPersona));
         }
 
         public bool editarMascota(int id)

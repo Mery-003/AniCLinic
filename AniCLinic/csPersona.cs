@@ -151,7 +151,7 @@ namespace AniCLinic
             {
                 csCRUD conexionBD = new csCRUD();
                 using (SqlDataReader r = conexionBD.EjecutarQuery(
-                    "SELECT IdPersona FROM Persona WHERE Cedula = '" + cedula + "'"))
+                    "SELECT IdPersona FROM Persona WHERE Cedula = " + cedula))
                 {
                     if (r != null && r.Read())
                         return Convert.ToInt32(r["IdPersona"]);
