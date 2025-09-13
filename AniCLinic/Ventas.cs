@@ -17,13 +17,29 @@ namespace AniCLinic
         csCRUD crud = new csCRUD();
         csProducto producto;
         csPersona persona;
+        csFactura factura;
+        csVenta venta;
         SqlDataReader reader;
+        int idEmpl;
         public Ventas()
         {
             InitializeComponent();
             visible(false);
             prepararGrid();
             cargarProductos();
+            cargarCmb();
+        }
+        public Ventas(int id)
+        {
+            idEmpl = id;
+            InitializeComponent();
+            visible(false);
+            prepararGrid();
+            cargarProductos();
+            cargarCmb();
+        }
+        public void cargarCmb()
+        {
             cmbCategoria.Items.AddRange(new object[]
             {
                 "Medicamentos",
@@ -31,6 +47,12 @@ namespace AniCLinic
                 "Alimentos",
                 "Accesorios",
                 "Higiene"
+            });
+            cmbMetodoPago.Items.AddRange(new object[]
+            {
+                "Efectivo",
+                "Transferencia",
+                "Tarjeta"
             });
         }
         public void prepararGrid()
@@ -111,25 +133,71 @@ namespace AniCLinic
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            decimal venta = 0;
-            decimal iva;
-            decimal totalVenta;
-            btnFinalizar.Location = new Point(873, 407);
-            dgvVentas.Size = new Size(811, 255);
-            visible(true);
-
-            foreach (DataGridViewRow fila in dgvVentas.Rows)
+            try
             {
-                if (fila.Cells["Total"].Value != null) 
+                if (txtCedula.Text.Length != 10 || string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    venta += Convert.ToDecimal(fila.Cells["Total"].Value);
+                    MessageBox.Show("Por favor ingrese un cliente para continuar");
+                    return;
                 }
+                if (dgvVentas.Rows.Count == 0)
+                {
+                    MessageBox.Show("No tiene ningun producto añadido para la venta.");
+                    return;
+                }
+                if (cmbMetodoPago.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Seleccione un metodo de pago");
+                    return;
+                }
+                var conf = MessageBox.Show("¿Desea finalizar la venta?", "Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (conf == DialogResult.Yes)
+                {
+                    decimal venta = 0;
+                    decimal iva;
+                    decimal totalVenta;
+                    btnFinalizar.Location = new Point(873, 407);
+                    dgvVentas.Size = new Size(811, 255);
+                    visible(true);
+
+                    foreach (DataGridViewRow fila in dgvVentas.Rows)
+                    {
+                        if (fila.Cells["Total"].Value != null)
+                        {
+                            venta += Convert.ToDecimal(fila.Cells["Total"].Value);
+                        }
+                    }
+                    iva = Math.Round(venta * 0.15m, 2);
+                    totalVenta = Math.Round(venta + iva, 2);
+                    string metodoPago = cmbMetodoPago.Text;
+                    lblTtlVenta.Text = "$ " + venta.ToString();
+                    lblIVA.Text = "$ " + iva.ToString();
+                    lblTotal.Text = "$ " + totalVenta.ToString();
+
+                    txtCedula.ReadOnly = true;
+                    txtCantidad.Text = "";
+                    txtCantidad.ReadOnly = true;
+                    cmbCategoria.SelectedIndex = -1;
+                    cmbCategoria.Enabled = false;
+                    cmbProducto.SelectedIndex = -1;
+                    cmbProducto.Enabled = false;
+                    cmbMetodoPago.SelectedIndex = -1;
+                    cmbMetodoPago.Enabled = false;
+                    btnAgregar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnFinalizar.Enabled = false;
+
+                    factura = new csFactura(persona.IdPersona, idEmpl, venta, iva, totalVenta, metodoPago);
+                    if (factura.agregarFactura())
+                        MessageBox.Show("Factura agregada correctamente.");
+                    else
+                        MessageBox.Show("Error al guardar la factura.");
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
-            iva = Math.Round(venta * 0.15m, 2);
-            totalVenta = Math.Round(venta + iva, 2);
-            lblTtlVenta.Text = venta.ToString();
-            lblIVA.Text = iva.ToString();
-            lblTotal.Text = totalVenta.ToString();
+            
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
@@ -144,11 +212,28 @@ namespace AniCLinic
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            producto = cargarProducto();
-            decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
-            decimal precioTotal = cantidad * producto.PrecioUnitario;
-            dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
-                producto.PrecioUnitario, cantidad, precioTotal);
+            try
+            {
+                int sumaRepetido;
+                producto = cargarProducto();
+                foreach (DataGridViewRow fila in dgvVentas.Rows)
+                {
+                    if (Convert.ToInt32(fila.Cells["ID"].Value) == producto.IdProducto)
+                    {
+                        sumaRepetido = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                        fila.Cells["Cantidad"].Value = sumaRepetido + Convert.ToInt32(txtCantidad.Text);
+                        fila.Cells["Total"].Value = Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario;
+                        return;
+                    }
+                }
+                decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
+                decimal precioTotal = cantidad * producto.PrecioUnitario;
+                dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
+                    producto.PrecioUnitario, cantidad, precioTotal);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void txtCedula_TextChanged(object sender, EventArgs e)
@@ -200,12 +285,16 @@ namespace AniCLinic
 
         private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbCategoria.SelectedIndex == -1)
+                return;
             cmbProducto.Items.Clear();
             cargarProductos(cmbCategoria.Text);
         }
 
         private void cmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbProducto.SelectedIndex == -1)
+                return;
             producto = cargarProducto();
             txtPrecio.Text = producto.PrecioUnitario.ToString();
         }

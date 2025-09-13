@@ -39,7 +39,7 @@ namespace AniCLinic
             string nombre = null;
             byte[] foto = null;
             csCRUD crud = new csCRUD();
-            int idUsuario = crud.login("Select * from Empleados", txtUsuario.Text, txtPassword.Text);
+            int idUsuario = crud.login("Select * from Empleados", txtUsuario.Text.Trim(), txtPassword.Text.Trim());
 
             if (idUsuario > 0)
             {
