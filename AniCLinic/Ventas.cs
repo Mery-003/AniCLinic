@@ -211,6 +211,10 @@ namespace AniCLinic
                         if (reader.Read())
                         {
                             int cantidadRestada = reader.GetInt32(0) - ventaAgg.CantidadVendida;
+                            crud.editarBD("Update Inventario set CantidadDisponible = @CantidadRestada Where IdProducto = @IdProducto",
+                                new SqlParameter("@CantidadRestada", cantidadRestada),
+                                new SqlParameter("@IdProducto", ventaAgg.IdProducto));
+                            reader.Close();
                         }
                         ventaAgg.obtenerId();
 
