@@ -129,6 +129,11 @@
     <Compile Include="DatosUsuario.Designer.cs">
       <DependentUpon>DatosUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="dsFactura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsFactura.xsd</DependentUpon>
+    </Compile>
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +163,12 @@
     </Compile>
     <Compile Include="fRegistroClinico.Designer.cs">
       <DependentUpon>fRegistroClinico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frFactura.Designer.cs">
+      <DependentUpon>frFactura.cs</DependentUpon>
     </Compile>
     <Compile Include="FUsuariosAdmin.cs">
       <SubType>Form</SubType>
@@ -263,6 +274,9 @@
     <EmbeddedResource Include="fRegistroClinico.resx">
       <DependentUpon>fRegistroClinico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frFactura.resx">
+      <DependentUpon>frFactura.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FUsuariosAdmin.resx">
       <DependentUpon>FUsuariosAdmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +320,17 @@
     <EmbeddedResource Include="VerHistorial.resx">
       <DependentUpon>VerHistorial.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="dsFactura.xsc">
+      <DependentUpon>dsFactura.xsd</DependentUpon>
+    </None>
+    <None Include="dsFactura.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFactura.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsFactura.xss">
+      <DependentUpon>dsFactura.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

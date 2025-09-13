@@ -169,6 +169,7 @@
             this.txtCantidad.SelectedText = "";
             this.txtCantidad.Size = new System.Drawing.Size(193, 36);
             this.txtCantidad.TabIndex = 114;
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // guna2HtmlLabel1
             // 
@@ -213,6 +214,7 @@
             this.txtPrecio.SelectedText = "";
             this.txtPrecio.Size = new System.Drawing.Size(193, 36);
             this.txtPrecio.TabIndex = 115;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // guna2HtmlLabel6
             // 

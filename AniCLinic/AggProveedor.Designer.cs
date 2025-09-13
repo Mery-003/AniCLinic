@@ -220,6 +220,7 @@
             this.txtCedula.SelectedText = "";
             this.txtCedula.Size = new System.Drawing.Size(193, 36);
             this.txtCedula.TabIndex = 123;
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // guna2HtmlLabel4
             // 
@@ -275,6 +276,7 @@
             this.txtTelefono.SelectedText = "";
             this.txtTelefono.Size = new System.Drawing.Size(193, 36);
             this.txtTelefono.TabIndex = 135;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // AggProveedor
             // 

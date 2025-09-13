@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -186,16 +187,8 @@ namespace AniCLinic
                 byte[] fotoM = ImageToBytesOrNull(picMascota.Image) ?? _fotoMascotaOriginal;
                 byte[] fotoP = ImageToBytesOrNull(picPropietario.Image) ?? _fotoPropietarioOriginal;
 
-                if (string.IsNullOrWhiteSpace(txtMascotaNombre.Text))
-                {
-                    MessageBox.Show("Ingrese el nombre de la mascota.");
+                if (!validar())
                     return;
-                }
-                if (string.IsNullOrWhiteSpace(txtCedula.Text))
-                {
-                    MessageBox.Show("Ingrese la cédula del propietario.");
-                    return;
-                }
 
                 csPersona pro = new csPersona(
                     txtNombreD.Text,
@@ -281,6 +274,75 @@ namespace AniCLinic
             {
                 MessageBox.Show("Error al guardar: " + ex.Message);
             }
+        }
+        private bool validar()
+        {
+            if (string.IsNullOrWhiteSpace(txtMascotaNombre.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtPeso.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtEdad.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtNombreD.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtApellido.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCelular.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (cmbEdadUnidad.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (cmbEspecie.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (cmbRaza.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (cmbSexo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            if (cmbDiscapacidad.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos obligatorios.");
+                return false;
+            }
+            return true;
         }
 
         private void RefrescarGridPacientes()
