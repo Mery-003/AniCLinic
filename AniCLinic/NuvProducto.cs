@@ -81,7 +81,7 @@ namespace AniCLinic
                 {
                     int idP = reader.GetInt32(0);
                     string nomP = reader.GetString(1);
-                    cmbProveedor.Items.Add(new ProductoItem(idP, nomP));
+                    cmbProveedor.Items.Add(new ProveedorItem(idP, nomP));
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace AniCLinic
         {
             if (!editar)
             {
-                if (cmbProveedor.SelectedItem is ProvedorItem proveedorSeleccionado)
+                if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
                 {
                     int idProveedor = proveedorSeleccionado.idProveedor;
                     prod = new csProducto(
@@ -108,7 +108,7 @@ namespace AniCLinic
             }
             else
             {
-                if (cmbProveedor.SelectedItem is ProvedorItem proveedorSeleccionado)
+                if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
                 {
                     int idProveedor = proveedorSeleccionado.idProveedor;
                     prod = new csProducto(
@@ -149,11 +149,11 @@ namespace AniCLinic
         }
     }
 
-    public class ProvedorItem
+    public class ProveedorItem
     {
         public int idProveedor { get; set; }
         public string nombreProveedor { get; set; }
-        public ProvedorItem(int id, string nombre)
+        public ProveedorItem(int id, string nombre)
         {
             idProveedor = id;
             nombreProveedor = nombre;

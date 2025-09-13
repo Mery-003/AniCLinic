@@ -207,7 +207,11 @@ namespace AniCLinic
                             MessageBox.Show("Error al guardar la venta");
                             return;
                         }
-                            
+                        SqlDataReader reader = crud.EjecutarQuery("Select CantidadDisponible from Inventario Where IdProducto = " + ventaAgg.IdProducto);
+                        if (reader.Read())
+                        {
+                            int cantidadRestada = reader.GetInt32(0) - ventaAgg.CantidadVendida;
+                        }
                         ventaAgg.obtenerId();
 
                         crud.agregarBD("Insert into DetalleFactura (IdFactura, IdVenta) values (@IdFactura, @IdVenta)",
