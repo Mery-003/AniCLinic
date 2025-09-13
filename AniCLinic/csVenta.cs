@@ -9,11 +9,17 @@ namespace AniCLinic
 {
     internal class csVenta
     {
+        int idVenta { get; set; }
         int idProducto { get; set; }
         int idPersona { get; set; }
         int idEmpl { get; set; }
         int cantidadVendida { get; set; }
         decimal precioUnitario { get; set; }
+        public int IdVenta
+        {
+            get { return idVenta; }
+            set { idVenta = value; }
+        }
         public int IdProducto
         {
             get { return idProducto; }
@@ -60,6 +66,14 @@ namespace AniCLinic
                 new SqlParameter("@IdEmpleado", IdEmpl),
                 new SqlParameter("@CantidadVendida", CantidadVendida),
                 new SqlParameter("@PrecioUnitario", PrecioUnitario));
+        }
+        public void obtenerId()
+        {
+            csCRUD crud = new csCRUD();
+            SqlDataReader reader = crud.EjecutarQuery("Select top 1 IdVenta from [Venta Inventario] Order by IdVenta desc");
+            if (reader.Read())
+                IdVenta = reader.GetInt32(0);
+            reader.Close();
         }
     }
 }

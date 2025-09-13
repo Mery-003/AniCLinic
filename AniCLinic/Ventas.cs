@@ -18,7 +18,7 @@ namespace AniCLinic
         csProducto producto;
         csPersona persona;
         csFactura factura;
-        csVenta venta;
+        csVenta ventaAgg;
         SqlDataReader reader;
         int idEmpl;
         public Ventas()
@@ -188,10 +188,33 @@ namespace AniCLinic
                     btnFinalizar.Enabled = false;
 
                     factura = new csFactura(persona.IdPersona, idEmpl, venta, iva, totalVenta, metodoPago);
-                    if (factura.agregarFactura())
-                        MessageBox.Show("Factura agregada correctamente.");
-                    else
+                    factura.obtenerNumFactura();
+                    if (!factura.agregarFactura())
+                    {
                         MessageBox.Show("Error al guardar la factura.");
+                        return;
+                    }
+                        
+                    factura.obtenerId();
+
+                    foreach (DataGridViewRow fila in dgvVentas.Rows)
+                    {
+                        ventaAgg = new csVenta(Convert.ToInt32(fila.Cells["ID"].Value),
+                            persona.IdPersona, idEmpl, Convert.ToInt32(fila.Cells["Cantidad"].Value),
+                            Convert.ToDecimal(fila.Cells["Precio"].Value));
+                        if (!ventaAgg.agregarVenta())
+                        {
+                            MessageBox.Show("Error al guardar la venta");
+                            return;
+                        }
+                            
+                        ventaAgg.obtenerId();
+
+                        crud.agregarBD("Insert into DetalleFactura (IdFactura, IdVenta) values (@IdFactura, @IdVenta)",
+                            new SqlParameter("@IdFactura", factura.IdFactura),
+                            new SqlParameter("@IdVenta", ventaAgg.IdVenta));
+                    }
+                    MessageBox.Show("Factura generada correctamente");
                 }
             } catch (Exception ex)
             {

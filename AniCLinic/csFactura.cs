@@ -71,8 +71,9 @@ namespace AniCLinic
         public bool agregarFactura()
         {
             csCRUD crud = new csCRUD();
-            return crud.agregarBD("INSERT INTO Factura (IdPersona, IdEmpleado, FechaFactura, Subtotal, IVA, Total, MetodoPago) " +
-                "VALUES (@IdPersona, @IdEmpleado, GETDATE(), @Subtotal, @IVA, @Total, @MetodoPago)",
+            return crud.agregarBD("INSERT INTO Factura (NumeroFactura, IdPersona, IdEmpleado, FechaFactura, Subtotal, IVA, Total, MetodoPago) " +
+                "VALUES (@NumeroFactura, @IdPersona, @IdEmpleado, GETDATE(), @Subtotal, @IVA, @Total, @MetodoPago)",
+                new SqlParameter("@NumeroFactura", NumeroFactura),
                 new SqlParameter("@IdPersona", IdPersona),
                 new SqlParameter("@IdEmpleado", IdEmpleado),
                 new SqlParameter("@Subtotal", Subtotal),
@@ -81,6 +82,32 @@ namespace AniCLinic
                 new SqlParameter("@MetodoPago", MetodoPago));
 
         }
-        public int
+        public void obtenerNumFactura()
+        {
+            csCRUD crud = new csCRUD();
+            SqlDataReader reader = crud.EjecutarQuery("Select top 1 NumeroFactura from Factura Order by IdFactura desc");
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    NumeroFactura = Convert.ToInt32(reader["NumeroFactura"]) + 1;
+                }
+                reader.Close();
+            }
+            else
+            {
+                NumeroFactura = 1000;
+            }
+        }
+        public void obtenerId()
+        {
+            csCRUD crud = new csCRUD();
+            SqlDataReader reader = crud.EjecutarQuery("Select top 1 IdFactura from Factura Order by IdFactura desc");
+            if (reader.Read())
+            {
+                IdFactura = Convert.ToInt32(reader["IdFactura"]);
+            }
+            reader.Close();
+        }
     }
 }
