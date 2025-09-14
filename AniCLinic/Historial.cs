@@ -35,10 +35,9 @@ namespace AniCLinic
             g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             g.RowHeadersVisible = false;
             g.AllowUserToAddRows = false;
-            g.AutoGenerateColumns = true;                       // igual que fPacientes
+            g.AutoGenerateColumns = true;                       
             g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // estética similar a tus otros grids
             g.DataBindingComplete += (s, e) =>
             {
                 if (g.Columns.Contains("ID"))
@@ -51,7 +50,6 @@ namespace AniCLinic
 
         private void CargarPacientes(string filtro = "")
         {
-            // MISMO SELECT que en fPacientes (pero sin columnas de botones)
             string sql = @"
 SELECT 
     M.IdMascota AS ID,
@@ -89,12 +87,10 @@ ORDER BY M.IdMascota DESC;";
 
             var drv = (DataRowView)dgvHistorial.CurrentRow.DataBoundItem;
 
-            // OJO: ahora las columnas se llaman como en fPacientes
             int idMascota = Convert.ToInt32(drv["ID"]);
             string nombreMascota = Convert.ToString(drv["Nombre"]);
             string propietario = Convert.ToString(drv["Propietario"]);
 
-            // Todas las fichas del RC de esa mascota (ordenadas)
             string sql = @"
 SELECT 
     rc.IdRegistroClinico,
@@ -112,7 +108,6 @@ ORDER BY rc.FechaRegistro DESC, rc.IdRegistroClinico DESC;";
                 return;
             }
 
-            // Abre el formulario de selección de fechas “bonito”
             using (var picker = new HistorialFecha(dt, $"{nombreMascota} — {propietario}"))
             {
                 if (picker.ShowDialog(this) == DialogResult.OK && picker.SelectedIdRegistroClinico > 0)

@@ -30,10 +30,8 @@ namespace AniCLinic
             txtRazaCita.ReadOnly = true;
             txtHora.ReadOnly = true;
 
-            // Cédula con búsqueda reutilizable
             UxBuscarCedulaHelper.Wire(txtCedulaCita, BuscarPorCedula);
 
-            // Mascota -> especie/raza
             cmbMascotaCita.SelectedIndexChanged += (s, e) =>
             {
                 if (cmbMascotaCita.SelectedIndex >= 0 && _mascotasDT != null)
@@ -46,25 +44,20 @@ namespace AniCLinic
                 }
             };
 
-            // Fecha
             dtpFecha.ValueChanged += (s, e) => txtHora.Clear();
             dtpFecha.CloseUp += (s, e) => { txtHora.Clear(); AbrirSelectorHora(); };
 
-            // Hora
             txtHora.Click += (s, e) => AbrirSelectorHora();
 
-            // Botones
             btnAceptar.Click += (s, e) => Guardar();
             btnCancelar.Click += (s, e) => { this.DialogResult = DialogResult.Cancel; this.Close(); };
 
-            // Restricciones iniciales de fecha
             AplicarRestriccionFechaMinima();
 
             if (_idCitaEdit.HasValue)
                 CargarCita(_idCitaEdit.Value);
         }
 
-        // MinDate dinámico según hora actual
         private void AplicarRestriccionFechaMinima()
         {
             var ahora = DateTime.Now;
@@ -117,23 +110,19 @@ namespace AniCLinic
 
         private void AbrirSelectorHora()
         {
-            // revalida si ya pasó la hora
             AplicarRestriccionFechaMinima(); 
             var hhmm = ElegirHora(dtpFecha.Value.Date);
             if (!string.IsNullOrEmpty(hhmm))
                 txtHora.Text = hhmm;
         }
 
-        // cuadro de horas
         private string ElegirHora(DateTime dia)
         {
-            // Horas ocupadas en BD
             var ocupadasDT = CedulaUtils.HorasOcupadas(dia);
             var ocupadas = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
             foreach (DataRow r in ocupadasDT.Rows)
                 ocupadas.Add(Convert.ToString(r["Hora"]));
 
-            // Si es hoy, arrancar desde la siguiente media hora (y nunca antes de apertura)
             TimeSpan inicio = APERTURA;
             if (dia == DateTime.Today)
             {
@@ -141,7 +130,6 @@ namespace AniCLinic
                 if (s > inicio) inicio = s;
             }
 
-            // Si ya terminó la jornada de hoy, saltar al día siguiente
             if (dia == DateTime.Today && inicio >= CIERRE)
             {
                 MessageBox.Show("La jornada de hoy ya finalizó. Programando para el día siguiente.");
@@ -210,7 +198,6 @@ namespace AniCLinic
                 panel.Controls.Add(btn);
                 total++;
                 t = t.Add(TimeSpan.FromMinutes(30));
-                // no mostrar 17:30
                 if (t.Hours == 17 && t.Minutes == 30) break;
             }
 
@@ -250,7 +237,6 @@ namespace AniCLinic
                 return; 
             }
 
-            // Validaciones de negocio
             var ts = TimeSpan.ParseExact(txtHora.Text, @"hh\:mm", CultureInfo.InvariantCulture);
             if (!(ts >= APERTURA && ts <= CIERRE && (ts.Minutes == 0 || ts.Minutes == 30)))
             { MessageBox.Show("Hora fuera de horario (07:00–17:00) o no es múltiplo de 30 min."); return; }
@@ -275,7 +261,6 @@ namespace AniCLinic
             if (CedulaUtils.ExisteChoqueHorario(fechaSel, txtHora.Text, _idCitaEdit))
             { MessageBox.Show("Esa hora ya está ocupada."); return; }
 
-            // Guardar
             var db = new csConexionBD();
             try
             {
@@ -345,7 +330,6 @@ namespace AniCLinic
                     txtCedulaCita.Text = Convert.ToString(r["Cedula"]);
                     txtPropietarioCita.Text = Convert.ToString(r["Propietario"]);
 
-                    // recargar mascotas del propietario
                     BuscarPorCedula(txtCedulaCita.Text.Trim());
                     cmbMascotaCita.SelectedValue = Convert.ToInt32(r["IdMascota"]);
 

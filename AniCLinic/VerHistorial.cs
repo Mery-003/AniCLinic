@@ -10,7 +10,6 @@ namespace AniCLinic
     {
         private readonly int _idRC;
 
-        // Usa este ctor desde HistorialFecha
         public VerHistorial(int idRegistroClinico)
         {
             _idRC = idRegistroClinico;
@@ -49,7 +48,6 @@ WHERE rc.IdRegistroClinico = @id;";
 
                 var r = dt.Rows[0];
 
-                // Seteo seguro por nombre de control (usa los tuyos si coinciden)
                 SetTextSafe("lblFechas", ToFecha(r, "FechaRegistro"));
                 SetTextSafe("lblPacientes", Convert.ToString(r["Mascota"] ?? ""));
                 SetTextSafe("lblPropietarios", Convert.ToString(r["Propietario"] ?? ""));
@@ -73,7 +71,6 @@ WHERE rc.IdRegistroClinico = @id;";
             return Convert.ToString(r[col]);
         }
 
-        // Busca recursivamente un control por nombre y asigna el texto
         private void SetTextSafe(string controlName, string value)
         {
             var ctrl = FindControlRec(this, controlName);

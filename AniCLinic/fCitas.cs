@@ -8,7 +8,6 @@ namespace AniCLinic
 {
     public partial class fCitas : Form
     {
-        // Usamos el mismo helper que en fPacientes
         private readonly csCRUD _crud = new csCRUD();
 
         public fCitas()
@@ -33,7 +32,6 @@ namespace AniCLinic
             dgvCitas.DataBindingComplete -= DgvCitas_DataBindingComplete;
             dgvCitas.DataBindingComplete += DgvCitas_DataBindingComplete;
 
-            // === Búsqueda en vivo como fPacientes ===
             txtBuscar.TextChanged -= txtBuscar_TextChanged;
             txtBuscar.TextChanged += txtBuscar_TextChanged;
         }
@@ -48,7 +46,6 @@ namespace AniCLinic
             dgvCitas.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvCitas.Columns.Clear();
 
-            // Id (clave)
             dgvCitas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colIdCita",
@@ -58,12 +55,10 @@ namespace AniCLinic
                 ReadOnly = true
             });
 
-            // Campos de vista
             dgvCitas.Columns.Add(MkText("Mascota", "Mascota", 120));
             dgvCitas.Columns.Add(MkText("Especie", "Especie", 100));
             dgvCitas.Columns.Add(MkText("Raza", "Raza", 120));
 
-            // FECHA y HORA (calculadas)
             dgvCitas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colFecha",
@@ -85,7 +80,6 @@ namespace AniCLinic
             dgvCitas.Columns.Add(MkText("Motivo", "Motivo", 220));
             dgvCitas.Columns.Add(MkText("Propietario", "Propietario", 160));
 
-            // Botones
             dgvCitas.Columns.Add(new DataGridViewButtonColumn
             {
                 Name = "colEditar",
@@ -104,7 +98,6 @@ namespace AniCLinic
                 Width = 80
             });
 
-            // Ocultas para lógica/filtro
             dgvCitas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colFechaHoraOculta",
@@ -114,7 +107,6 @@ namespace AniCLinic
                 ReadOnly = true
             });
 
-            // Cedula del propietario (para filtrar) si viene desde SQL
             dgvCitas.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "colCedulaOculta",
@@ -134,14 +126,12 @@ namespace AniCLinic
                 ReadOnly = true
             };
 
-        // Búsqueda 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             var filtro = (txtBuscar.Text ?? string.Empty).Trim();
             CargarData(filtro);
         }
 
-        // Cargar/recargar datos DESDE SQL 
         private void CargarData(string filtro = "")
         {
             string sql = @"
@@ -163,10 +153,8 @@ WHERE (@Filtro = ''
        OR M.Nombre LIKE @Filtro + '%')
 ORDER BY C.FechaHora DESC;";
 
-            // Cargamos DataTable como en fPacientes
             var dt = _crud.cargarBDData(sql, new SqlParameter("@Filtro", filtro));
 
-            // Asegurar columnas Fecha/Hora visibles y reglas de edición
             PrepararFechasHorasYBind(dt);
         }
 
@@ -178,7 +166,6 @@ ORDER BY C.FechaHora DESC;";
                 return;
             }
 
-            // Asegurar columnas visibles "Fecha" y "Hora"
             if (!dt.Columns.Contains("Fecha")) dt.Columns.Add("Fecha", typeof(string));
             if (!dt.Columns.Contains("Hora")) dt.Columns.Add("Hora", typeof(string));
 
@@ -218,13 +205,11 @@ ORDER BY C.FechaHora DESC;";
         {
             fh = default;
 
-            // FECHA
             DateTime fecha;
             if (fechaObj is DateTime fd) fecha = fd.Date;
             else if (!DateTime.TryParse(Convert.ToString(fechaObj), out fecha)) return false;
             else fecha = fecha.Date;
 
-            // HORA
             TimeSpan hora;
             if (horaObj is TimeSpan hs) hora = hs;
             else
@@ -242,7 +227,6 @@ ORDER BY C.FechaHora DESC;";
             return true;
         }
 
-        // Estética y reglas de botones
         private void DgvCitas_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             AplicarReglasEditarPorFecha();
@@ -266,7 +250,6 @@ ORDER BY C.FechaHora DESC;";
 
                 if (!esActualOFutura)
                 {
-                    // Reemplazar botón por texto "Cita Antigua" 
                     var celda = new DataGridViewTextBoxCell { Value = "Cita Antigua" };
                     row.Cells["colEditar"] = celda;             // 1) asignar a la fila
                     row.Cells["colEditar"].ReadOnly = true;      // 2) ahora sí, marcar ReadOnly
@@ -279,7 +262,6 @@ ORDER BY C.FechaHora DESC;";
                     if (!(row.Cells["colEditar"] is DataGridViewButtonCell))
                         row.Cells["colEditar"] = new DataGridViewButtonCell { Value = "Editar" };
 
-                    // Restablecer estilos
                     row.Cells["colEditar"].Style.BackColor = dgvCitas.DefaultCellStyle.BackColor;
                     row.Cells["colEditar"].Style.SelectionBackColor = dgvCitas.DefaultCellStyle.SelectionBackColor;
                     row.Cells["colEditar"].Style.ForeColor = dgvCitas.DefaultCellStyle.ForeColor;
@@ -287,7 +269,6 @@ ORDER BY C.FechaHora DESC;";
             }
         }
 
-        // Acciones de botones
         private void btnNuvCita_Click(object sender, EventArgs e)
         {
             using (var frm = new AggCita())
@@ -309,7 +290,6 @@ ORDER BY C.FechaHora DESC;";
             {
                 var id = Convert.ToInt32(dgvCitas.Rows[e.RowIndex].Cells["colIdCita"].Value);
 
-                // Seguridad: solo permitir si es actual/futura
                 var raw = dgvCitas.Rows[e.RowIndex].Cells["colFechaHoraOculta"]?.Value;
                 DateTime? fh = null;
                 if (raw != null && raw != DBNull.Value)

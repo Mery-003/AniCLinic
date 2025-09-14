@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnVer = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.txtMascotaNombre = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -56,25 +55,6 @@
             this.btnVer.Size = new System.Drawing.Size(131, 41);
             this.btnVer.TabIndex = 16;
             this.btnVer.Text = "Ver Historial";
-            // 
-            // guna2CircleButton1
-            // 
-            this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.Location = new System.Drawing.Point(1006, 16);
-            this.guna2CircleButton1.Name = "guna2CircleButton1";
-            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton1.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton1.TabIndex = 54;
-            this.guna2CircleButton1.UseTransparentBackground = true;
             // 
             // guna2Separator1
             // 
@@ -179,7 +159,6 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1059, 614);
             this.Controls.Add(this.dgvHistorial);
-            this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.txtMascotaNombre);
             this.Controls.Add(this.guna2HtmlLabel2);
@@ -195,7 +174,6 @@
 
         #endregion
         private Guna.UI2.WinForms.Guna2GradientButton btnVer;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2TextBox txtMascotaNombre;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;

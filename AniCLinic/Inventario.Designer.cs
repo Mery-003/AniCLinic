@@ -37,7 +37,6 @@
             this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.dgvInventario = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventario)).BeginInit();
             this.SuspendLayout();
             // 
@@ -178,32 +177,12 @@
             this.dgvInventario.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvInventario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInventario_CellContentClick);
             // 
-            // guna2CircleButton1
-            // 
-            this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.Location = new System.Drawing.Point(997, 12);
-            this.guna2CircleButton1.Name = "guna2CircleButton1";
-            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton1.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton1.TabIndex = 109;
-            this.guna2CircleButton1.UseTransparentBackground = true;
-            // 
             // Inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1043, 575);
-            this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.dgvInventario);
             this.Controls.Add(this.btnAggProd);
             this.Controls.Add(this.btnMasProd);
@@ -227,6 +206,5 @@
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvInventario;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
     }
 }

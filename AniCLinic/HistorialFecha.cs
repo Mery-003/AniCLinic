@@ -10,10 +10,6 @@ namespace AniCLinic
         private readonly DataTable _fichas;
         public int SelectedIdRegistroClinico { get; private set; }
 
-        // Si usas diseñador, asegúrate de tener:
-        // ListView lvFichas; Label lblPaciente; Button btnAceptar, btnCancelar.
-
-        // Ctor usado desde Historial.cs
         public HistorialFecha(DataTable fichas, string nombrePaciente = "")
         {
             _fichas = fichas ?? throw new ArgumentNullException(nameof(fichas));

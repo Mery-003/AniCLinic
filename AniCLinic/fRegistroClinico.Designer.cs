@@ -40,20 +40,17 @@
             this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvHoy = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.txtBuscarHoy = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvProximas = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.txtBuscarProximas = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.dgvAnteriores = new Guna.UI2.WinForms.Guna2DataGridView();
             this.txtBuscarAnteriores = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.dgvAnteriores = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoy)).BeginInit();
@@ -98,7 +95,6 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tabPage1.Controls.Add(this.dgvHoy);
-            this.tabPage1.Controls.Add(this.guna2CircleButton1);
             this.tabPage1.Controls.Add(this.txtBuscarHoy);
             this.tabPage1.Controls.Add(this.guna2Separator1);
             this.tabPage1.ForeColor = System.Drawing.SystemColors.Control;
@@ -161,25 +157,6 @@
             this.dgvHoy.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvHoy.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // guna2CircleButton1
-            // 
-            this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.Location = new System.Drawing.Point(987, 6);
-            this.guna2CircleButton1.Name = "guna2CircleButton1";
-            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton1.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton1.TabIndex = 54;
-            this.guna2CircleButton1.UseTransparentBackground = true;
-            // 
             // txtBuscarHoy
             // 
             this.txtBuscarHoy.BackColor = System.Drawing.Color.Transparent;
@@ -217,7 +194,6 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dgvProximas);
-            this.tabPage2.Controls.Add(this.guna2CircleButton2);
             this.tabPage2.Controls.Add(this.txtBuscarProximas);
             this.tabPage2.Controls.Add(this.guna2Separator2);
             this.tabPage2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -281,25 +257,6 @@
             this.dgvProximas.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvProximas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // guna2CircleButton2
-            // 
-            this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton2.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton2.Location = new System.Drawing.Point(987, 6);
-            this.guna2CircleButton2.Name = "guna2CircleButton2";
-            this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton2.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton2.TabIndex = 56;
-            this.guna2CircleButton2.UseTransparentBackground = true;
-            // 
             // txtBuscarProximas
             // 
             this.txtBuscarProximas.BackColor = System.Drawing.Color.Transparent;
@@ -337,7 +294,6 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dgvAnteriores);
-            this.tabPage3.Controls.Add(this.guna2CircleButton3);
             this.tabPage3.Controls.Add(this.txtBuscarAnteriores);
             this.tabPage3.Controls.Add(this.guna2Separator3);
             this.tabPage3.Location = new System.Drawing.Point(4, 44);
@@ -347,70 +303,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Anteriores";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // guna2CircleButton3
-            // 
-            this.guna2CircleButton3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton3.BackgroundImage = global::AniCLinic.Properties.Resources._189264;
-            this.guna2CircleButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.guna2CircleButton3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton3.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton3.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton3.Location = new System.Drawing.Point(987, 7);
-            this.guna2CircleButton3.Name = "guna2CircleButton3";
-            this.guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton3.Size = new System.Drawing.Size(34, 28);
-            this.guna2CircleButton3.TabIndex = 56;
-            this.guna2CircleButton3.UseTransparentBackground = true;
-            // 
-            // txtBuscarAnteriores
-            // 
-            this.txtBuscarAnteriores.BackColor = System.Drawing.Color.Transparent;
-            this.txtBuscarAnteriores.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.txtBuscarAnteriores.BorderRadius = 15;
-            this.txtBuscarAnteriores.BorderThickness = 2;
-            this.txtBuscarAnteriores.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscarAnteriores.DefaultText = "";
-            this.txtBuscarAnteriores.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBuscarAnteriores.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBuscarAnteriores.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscarAnteriores.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscarAnteriores.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarAnteriores.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBuscarAnteriores.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarAnteriores.Location = new System.Drawing.Point(340, 7);
-            this.txtBuscarAnteriores.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBuscarAnteriores.Name = "txtBuscarAnteriores";
-            this.txtBuscarAnteriores.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.txtBuscarAnteriores.PlaceholderText = "Buscar...";
-            this.txtBuscarAnteriores.SelectedText = "";
-            this.txtBuscarAnteriores.Size = new System.Drawing.Size(331, 36);
-            this.txtBuscarAnteriores.TabIndex = 54;
-            this.txtBuscarAnteriores.Tag = "";
-            // 
-            // guna2Separator3
-            // 
-            this.guna2Separator3.FillColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2Separator3.FillThickness = 2;
-            this.guna2Separator3.Location = new System.Drawing.Point(-18, 50);
-            this.guna2Separator3.Name = "guna2Separator3";
-            this.guna2Separator3.Size = new System.Drawing.Size(1068, 10);
-            this.guna2Separator3.TabIndex = 55;
-            // 
-            // guna2HtmlLabel3
-            // 
-            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(413, 13);
-            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(237, 36);
-            this.guna2HtmlLabel3.TabIndex = 51;
-            this.guna2HtmlLabel3.Text = "Registro Clinico";
             // 
             // dgvAnteriores
             // 
@@ -464,6 +356,51 @@
             this.dgvAnteriores.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvAnteriores.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // txtBuscarAnteriores
+            // 
+            this.txtBuscarAnteriores.BackColor = System.Drawing.Color.Transparent;
+            this.txtBuscarAnteriores.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.txtBuscarAnteriores.BorderRadius = 15;
+            this.txtBuscarAnteriores.BorderThickness = 2;
+            this.txtBuscarAnteriores.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscarAnteriores.DefaultText = "";
+            this.txtBuscarAnteriores.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscarAnteriores.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscarAnteriores.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscarAnteriores.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscarAnteriores.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscarAnteriores.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscarAnteriores.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscarAnteriores.Location = new System.Drawing.Point(340, 7);
+            this.txtBuscarAnteriores.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBuscarAnteriores.Name = "txtBuscarAnteriores";
+            this.txtBuscarAnteriores.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.txtBuscarAnteriores.PlaceholderText = "Buscar...";
+            this.txtBuscarAnteriores.SelectedText = "";
+            this.txtBuscarAnteriores.Size = new System.Drawing.Size(331, 36);
+            this.txtBuscarAnteriores.TabIndex = 54;
+            this.txtBuscarAnteriores.Tag = "";
+            // 
+            // guna2Separator3
+            // 
+            this.guna2Separator3.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.guna2Separator3.FillThickness = 2;
+            this.guna2Separator3.Location = new System.Drawing.Point(-18, 50);
+            this.guna2Separator3.Name = "guna2Separator3";
+            this.guna2Separator3.Size = new System.Drawing.Size(1068, 10);
+            this.guna2Separator3.TabIndex = 55;
+            // 
+            // guna2HtmlLabel3
+            // 
+            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(413, 13);
+            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(237, 36);
+            this.guna2HtmlLabel3.TabIndex = 51;
+            this.guna2HtmlLabel3.Text = "Registro Clinico";
+            // 
             // fRegistroClinico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,11 +432,8 @@
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscarHoy;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscarProximas;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscarAnteriores;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator3;
         private Guna.UI2.WinForms.Guna2DataGridView dgvHoy;

@@ -10,7 +10,7 @@ namespace AniCLinic
 {
     public partial class fRegistroClinico : Form
     {
-        private const int VENTANA_HOY_MIN = 20;   // +20 min para permanecer en HOY
+        private const int VENTANA_HOY_MIN = 20;   
 
         private DataTable _dtHoy, _dtProximas, _dtAnteriores;
 
@@ -18,7 +18,6 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            // Un solo manejador de clics por grid
             try { dgvHoy.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvProximas.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvAnteriores.CellContentClick -= Grid_ButtonClick; } catch { }
@@ -35,7 +34,6 @@ namespace AniCLinic
             dgvProximas.DataBindingComplete += (s, e) => QuitarFilaNueva(dgvProximas);
             dgvAnteriores.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvAnteriores); DecorarAnterioresSegunRegistro(); };
 
-            // Cursor mano solo sobre botones en Anteriores
             dgvAnteriores.CellMouseEnter += (s, e) =>
             {
                 if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -140,7 +138,6 @@ namespace AniCLinic
 
         private void RecargarColeccionesDesdeBD()
         {
-            // Debe traer: IdCita, IdMascota, Mascota, Especie, Raza, Fecha, Hora, Motivo, Propietario, (opcional CedulaPropietario), y/o FechaHora
             var all = CedulaUtils.CitasListado();
 
             if (!all.Columns.Contains("Estado"))
@@ -173,7 +170,6 @@ namespace AniCLinic
                     continue;
                 }
 
-                // d == hoy
                 bool tieneReg = RC_ExisteParaCita(idCita > 0 ? (int?)idCita : null, idMascota, fh);
 
                 if (!tieneReg && fh.AddMinutes(VENTANA_HOY_MIN) >= ahora)
@@ -249,7 +245,6 @@ namespace AniCLinic
 
             var grid = (DataGridView)sender;
 
-            // Si no es botón (ej. "Sin registro"), salir
             if (!(grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) ||
                 !(grid.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell))
                 return;
@@ -257,21 +252,18 @@ namespace AniCLinic
             var info = ObtenerCitaInfoDesdeFila(grid, e.RowIndex);
             if (info == null) return;
 
-            // Registrar (HOY) → abrir en blanco (AggRegistroClinico ya no precarga nada)
             if (grid == dgvHoy && grid.Columns[e.ColumnIndex].Name == "colRegistrar")
             {
                 using (var frm = new AggRegistroClinico(info, false))
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
                     {
-                        // Recolocar datasets
                         RecargarTodo();
                     }
                 }
                 return;
             }
 
-            // Editar (ANTERIORES)
             if (grid == dgvAnteriores && grid.Columns[e.ColumnIndex].Name == "colEditar")
             {
                 using (var frm = new AggRegistroClinico(info, true))
@@ -282,7 +274,6 @@ namespace AniCLinic
                 return;
             }
 
-            // Eliminar (ANTERIORES) → borra RC de ESA cita y la cita
             if (grid == dgvAnteriores && grid.Columns[e.ColumnIndex].Name == "colEliminar")
             {
                 if (MessageBox.Show("¿Eliminar el registro clínico y su cita vinculada?",
@@ -333,7 +324,6 @@ namespace AniCLinic
 
                 bool tiene = RC_ExisteParaCita(idCita > 0 ? (int?)idCita : null, idMascota, fechaHora);
 
-                // Editar
                 if (!tiene)
                 {
                     var txtCell = new DataGridViewTextBoxCell { Value = "Sin registro" };
@@ -352,7 +342,6 @@ namespace AniCLinic
                     row.Cells["colEditar"].Style.ForeColor = dgvAnteriores.DefaultCellStyle.ForeColor;
                 }
 
-                // Eliminar (siempre botón)
                 if (!(row.Cells["colEliminar"] is DataGridViewButtonCell))
                     row.Cells["colEliminar"] = new DataGridViewButtonCell();
                 row.Cells["colEliminar"].ReadOnly = false;
@@ -364,7 +353,6 @@ namespace AniCLinic
         #endregion
 
         #region DB helpers (usando IdCita solo para consultar)
-        // ¿Existe RC para esa CITA?
         private bool RC_ExisteParaCita(int? idCita, int idMascota, DateTime fechaHora)
         {
             var db = new csConexionBD();
@@ -405,10 +393,6 @@ WHERE IdMascota = @m
             finally { db.cerrarConexion(); }
         }
 
-        // Borrar RC de ESA cita
-        // Borra el RC que corresponde EXACTAMENTE a esa cita.
-        // Si viene IdCita, usamos un JOIN para localizar el IdRegistroClinico y lo borramos por Id.
-        // Si no hay IdCita, igualamos por IdMascota + FechaHora al minuto.
         private int RC_DeletePorCita(int? idCita, int idMascota, DateTime fechaHora)
         {
             var db = new csConexionBD();
@@ -462,7 +446,6 @@ SELECT @@ROWCOUNT;";
         }
 
 
-        // Eliminar cita por IdCita si existe; si no, resolver por mascota+fecha (más cercano)
         private int Cita_DeleteByIdOCriterios(int? idCita, int idMascota, DateTime fechaHora)
         {
             const string sql = @"
@@ -645,7 +628,6 @@ END";
         #endregion
     }
 
-    // Modelo simple para pasar datos
     public class CitaInfo
     {
         public int IdCita { get; set; }

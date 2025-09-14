@@ -41,13 +41,10 @@ namespace AniCLinic
             btnAceptar.Click += BtnGuardar_Click;
             btnCancelar.Click += BtnCancelar_Click;
 
-            // Cabecera
             CargarCabeceraDesdeCita();
 
-            // Contenido del RC:
             if (_isEdit)
             {
-                // Solo en EDITAR: cargar el RC exacto de ESTA cita
                 CargarRegistroClinicoPorCita(
                     _info.IdCita > 0 ? (int?)_info.IdCita : null,
                     ResolverIdMascotaRobusto(_info),
@@ -56,7 +53,6 @@ namespace AniCLinic
             }
             else
             {
-                // En REGISTRAR: abrir SIEMPRE en blanco
                 LimpiarCampos();
             }
         }
@@ -66,7 +62,6 @@ namespace AniCLinic
             InitializeComponent();
         }
 
-        // --------- Cabecera ----------
         private void CargarCabeceraDesdeCita()
         {
             if (txtPropietario != null) txtPropietario.Text = _info.Propietario ?? "";
@@ -80,10 +75,8 @@ namespace AniCLinic
             if (txtDiagnostico != null) txtDiagnostico.Clear();
             if (txtTratamiento != null) txtTratamiento.Clear();
             if (txtReceta != null) txtReceta.Clear();
-            // (txtMotivo es de cabecera y queda en ReadOnly con el motivo de la cita)
         }
 
-        // --------- Carga del RC de ESA cita ----------
         private void CargarRegistroClinicoPorCita(int? idCita, int idMascota, DateTime fechaHora)
         {
             var crud = new csCRUD();
@@ -92,7 +85,6 @@ namespace AniCLinic
 
             if (idCita.HasValue)
             {
-                // Emparejar por IdCita (JOIN) y misma fecha/hora (al minuto)
                 const string sql = @"
 SELECT TOP(1) rc.IdRegistroClinico, rc.MotivoConsulta, rc.Diagnostico, rc.Tratamiento, rc.AplicacionTratamiento
 FROM RegistroClinico rc
@@ -105,7 +97,6 @@ ORDER BY rc.IdRegistroClinico DESC;";
 
             if (dt == null || dt.Rows.Count == 0)
             {
-                // Sin IdCita o no encontrado → emparejar por mascota + fecha/hora exacta (al minuto)
                 const string sql2 = @"
 SELECT TOP(1) IdRegistroClinico, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento
 FROM RegistroClinico
@@ -119,7 +110,6 @@ ORDER BY IdRegistroClinico DESC;";
 
             if (dt == null || dt.Rows.Count == 0)
             {
-                // Fallback (solo para casos viejos guardados sin hora): último RC del mismo día
                 const string sql3 = @"
 SELECT TOP(1) IdRegistroClinico, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento
 FROM RegistroClinico
@@ -145,7 +135,6 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             }
         }
 
-        // --------- Botones ----------
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -209,7 +198,6 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             return true;
         }
 
-        // --------- Guardar (INSERT/UPDATE) ----------
         private void GuardarRegistroClinico()
         {
             var crud = new csCRUD();
@@ -223,7 +211,6 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             if (idMascota <= 0)
                 throw new InvalidOperationException("No se pudo resolver la mascota asociada.");
 
-            // ⚠️ Guardar con FECHA Y HORA DE LA CITA (no solo la fecha)
             DateTime fechaHoraCita = _info.FechaHora;
 
             if (_idRegistroClinicoExistente > 0)
@@ -256,12 +243,11 @@ VALUES
                     new SqlParameter("@diag", diag),
                     new SqlParameter("@trat", trat),
                     new SqlParameter("@apli", rec),
-                    new SqlParameter("@fh", fechaHoraCita)   // << guarda fecha+hora
+                    new SqlParameter("@fh", fechaHoraCita)   
                 );
             }
         }
 
-        // --------- Resolver IdMascota ----------
         private int ResolverIdMascotaRobusto(CitaInfo info)
         {
             if (info.IdMascota > 0) return info.IdMascota;

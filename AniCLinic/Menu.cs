@@ -46,24 +46,6 @@ namespace AniCLinic
                 btnAdministrador.Enabled = false;
         }
 
-        private void btnMaximizarMenu_Click(object sender, EventArgs e)
-        {
-            btnMaximizarMenu.Visible = false;
-            btnMinimizarMenu.Visible = true;
-            PanelMenu.Visible = false;
-            PanelMenu.Width = 248;
-            guna2Transition1.ShowSync(PanelMenu);
-        }
-
-        private void btnMinimizarMenu_Click(object sender, EventArgs e)
-        {
-            PanelMenu.Visible = false;
-            btnMinimizarMenu.Visible = false;
-            btnMaximizarMenu.Visible = true;
-            PanelMenu.Width = 50;
-            guna2Transition1.ShowSync(PanelMenu);
-        }
-
         public void AbrirEnPanel(Panel contenedor, Form hijo)
         {
             foreach (Control c in contenedor.Controls) c.Dispose();

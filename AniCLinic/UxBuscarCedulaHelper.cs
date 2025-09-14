@@ -6,10 +6,8 @@ namespace AniCLinic
 {
     internal static class UxBuscarCedulaHelper
     {
-        // Acepta cualquier Control (TextBox, Guna2TextBox, etc.)
         public static void Wire(Control txt, Action<string> onBuscar)
         {
-            // Intenta fijar MaxLength=10 si la propiedad existe
             var p = txt.GetType().GetProperty("MaxLength", BindingFlags.Public | BindingFlags.Instance);
             if (p != null && p.CanWrite) p.SetValue(txt, 10);
 
