@@ -61,5 +61,17 @@ namespace AniCLinic
             frFactura factura = new frFactura(Convert.ToInt32(txtFactura.Text));
             factura.ShowDialog();
         }
+
+        private void frReportes_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

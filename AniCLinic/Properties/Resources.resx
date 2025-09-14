@@ -130,6 +130,9 @@
   <data name="folder-user-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-user-fill2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="3003596" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3003596.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="3391036" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3391036.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,6 +145,9 @@
   <data name="dossier-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dossier-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Captura de pantalla 2025-09-13 214914" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Captura de pantalla 2025-09-13 214914.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="home-heart-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\home-heart-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,14 +157,20 @@
   <data name="Captura de pantalla 2025-09-10 012747" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Captura de pantalla 2025-09-10 012747.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="9068699" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\9068699.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Captura de pantalla 2025-09-13 2149371" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Captura de pantalla 2025-09-13 2149371.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="841791" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\841791.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="key-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\key-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="33910361" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\33910361.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Captura de pantalla 2025-09-13 215124" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Captura de pantalla 2025-09-13 215124.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="file-3-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file-3-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -168,6 +180,9 @@
   </data>
   <data name="5735833" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5735833.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="9068699" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\9068699.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="delete-bin-6-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete-bin-6-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,11 +208,14 @@
   <data name="delete-bin-5-line (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete-bin-5-line (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="3003596" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\3003596.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Captura de pantalla 2025-09-13 214937" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Captura de pantalla 2025-09-13 214937.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="688538" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\688538.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Captura de pantalla 2025-09-13 215031" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Captura de pantalla 2025-09-13 215031.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shake-hands-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shake-hands-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,6 +232,9 @@
   <data name="Captura de pantalla 2025-09-10 012905" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Captura de pantalla 2025-09-10 012905.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pngtree-dog-paw-with-dots-in-orange-colors-with-flatline-style-vector-png-image_12296221" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pngtree-dog-paw-with-dots-in-orange-colors-with-flatline-style-vector-png-image_12296221.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="box-1-fill1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\box-1-fill2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -229,10 +250,7 @@
   <data name="folder-lock-fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-lock-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="33910361" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\33910361.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pngtree-dog-paw-with-dots-in-orange-colors-with-flatline-style-vector-png-image_12296221" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pngtree-dog-paw-with-dots-in-orange-colors-with-flatline-style-vector-png-image_12296221.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Captura de pantalla 2025-09-13 215228" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Captura de pantalla 2025-09-13 215228.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

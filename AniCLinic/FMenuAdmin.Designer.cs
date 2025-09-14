@@ -69,7 +69,7 @@
             // 
             this.btnDiseño.Animated = true;
             this.btnDiseño.BackColor = System.Drawing.Color.Transparent;
-            this.btnDiseño.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_10_012944;
+            this.btnDiseño.BackgroundImage = global::AniCLinic.Properties.Resources.Captura_de_pantalla_2025_09_13_214914;
             this.btnDiseño.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDiseño.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnDiseño.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;

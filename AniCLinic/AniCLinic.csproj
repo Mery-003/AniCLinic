@@ -491,6 +491,12 @@
     <None Include="Resources\3003596.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-09-13 214914.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-13 214937.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-13 2149371.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-13 215031.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-13 215124.png" />
+    <None Include="Resources\Captura de pantalla 2025-09-13 215228.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
