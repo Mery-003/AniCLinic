@@ -117,6 +117,21 @@
     <Compile Include="csProveedor.cs" />
     <Compile Include="csUsuario.cs" />
     <Compile Include="csVenta.cs" />
+    <Compile Include="dsListaProductos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsListaProductos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsReporteFinancieroProductos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReporteFinancieroProductos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsReporteFinancieroAño.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReporteFinancieroAño.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DatosAcceso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +184,18 @@
     </Compile>
     <Compile Include="frFactura.Designer.cs">
       <DependentUpon>frFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frReporteFinanciero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frReporteFinanciero.Designer.cs">
+      <DependentUpon>frReporteFinanciero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frReportes.Designer.cs">
+      <DependentUpon>frReportes.cs</DependentUpon>
     </Compile>
     <Compile Include="FUsuariosAdmin.cs">
       <SubType>Form</SubType>
@@ -277,6 +304,12 @@
     <EmbeddedResource Include="frFactura.resx">
       <DependentUpon>frFactura.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frReporteFinanciero.resx">
+      <DependentUpon>frReporteFinanciero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frReportes.resx">
+      <DependentUpon>frReportes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FUsuariosAdmin.resx">
       <DependentUpon>FUsuariosAdmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -312,6 +345,9 @@
       <DependentUpon>Proveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rptFactura.rdlc" />
+    <EmbeddedResource Include="rptListaProductos.rdlc" />
+    <EmbeddedResource Include="rptReporteAño.rdlc" />
+    <EmbeddedResource Include="rptReporteProducto.rdlc" />
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>
     </EmbeddedResource>
@@ -321,6 +357,39 @@
     <EmbeddedResource Include="VerHistorial.resx">
       <DependentUpon>VerHistorial.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="dsListaProductos.xsc">
+      <DependentUpon>dsListaProductos.xsd</DependentUpon>
+    </None>
+    <None Include="dsListaProductos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsListaProductos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsListaProductos.xss">
+      <DependentUpon>dsListaProductos.xsd</DependentUpon>
+    </None>
+    <None Include="dsReporteFinancieroProductos.xsc">
+      <DependentUpon>dsReporteFinancieroProductos.xsd</DependentUpon>
+    </None>
+    <None Include="dsReporteFinancieroProductos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReporteFinancieroProductos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsReporteFinancieroProductos.xss">
+      <DependentUpon>dsReporteFinancieroProductos.xsd</DependentUpon>
+    </None>
+    <None Include="dsReporteFinancieroAño.xsc">
+      <DependentUpon>dsReporteFinancieroAño.xsd</DependentUpon>
+    </None>
+    <None Include="dsReporteFinancieroAño.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReporteFinancieroAño.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsReporteFinancieroAño.xss">
+      <DependentUpon>dsReporteFinancieroAño.xsd</DependentUpon>
+    </None>
     <None Include="dsFactura.xsc">
       <DependentUpon>dsFactura.xsd</DependentUpon>
     </None>

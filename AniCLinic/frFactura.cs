@@ -40,7 +40,6 @@ namespace AniCLinic
             rvwFactura.LocalReport.DataSources.Add(dataset);
             dataset.Value = dt;
             rvwFactura.LocalReport.Refresh();
-            this.rvwFactura.RefreshReport();
 
             this.rvwFactura.RefreshReport();
         }

@@ -1,6 +1,6 @@
 ﻿namespace AniCLinic
 {
-    partial class frFactura
+    partial class frReporteFinanciero
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rvwFactura = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.rvwReporteAño = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
-            // rvwFactura
+            // rvwReporteAño
             // 
-            this.rvwFactura.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rvwFactura.Location = new System.Drawing.Point(0, 0);
-            this.rvwFactura.Name = "rvwFactura";
-            this.rvwFactura.ServerReport.BearerToken = null;
-            this.rvwFactura.Size = new System.Drawing.Size(553, 450);
-            this.rvwFactura.TabIndex = 0;
+            this.rvwReporteAño.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rvwReporteAño.Location = new System.Drawing.Point(0, 0);
+            this.rvwReporteAño.Name = "rvwReporteAño";
+            this.rvwReporteAño.ServerReport.BearerToken = null;
+            this.rvwReporteAño.Size = new System.Drawing.Size(668, 490);
+            this.rvwReporteAño.TabIndex = 0;
             // 
-            // frFactura
+            // frReporteFinanciero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 450);
-            this.Controls.Add(this.rvwFactura);
-            this.Name = "frFactura";
-            this.Text = "frFactura";
-            this.Load += new System.EventHandler(this.frFactura_Load);
+            this.ClientSize = new System.Drawing.Size(668, 490);
+            this.Controls.Add(this.rvwReporteAño);
+            this.Name = "frReporteFinanciero";
+            this.Text = "frReporteFinanciero";
+            this.Load += new System.EventHandler(this.frReporteFinanciero_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Microsoft.Reporting.WinForms.ReportViewer rvwFactura;
+        private Microsoft.Reporting.WinForms.ReportViewer rvwReporteAño;
     }
 }

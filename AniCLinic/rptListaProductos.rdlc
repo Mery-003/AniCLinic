@@ -9,7 +9,7 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.675cm</Width>
+              <Width>5.65233cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -24,23 +24,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Cantidad">
+                    <Textbox Name="ID">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Cantidad.Value</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                              </Style>
+                              <Value>=Fields!ID.Value</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Cantidad</rd:DefaultName>
+                      <rd:DefaultName>ID</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -56,23 +54,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Producto">
+                    <Textbox Name="Nombre">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Producto.Value</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                              </Style>
+                              <Value>=Fields!Nombre.Value</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Producto</rd:DefaultName>
+                      <rd:DefaultName>Nombre</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -96,9 +92,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Precio.Value</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -120,23 +114,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Total">
+                    <Textbox Name="Cantidad">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Total.Value</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                              </Style>
+                              <Value>=Fields!Cantidad.Value</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Total</rd:DefaultName>
+                      <rd:DefaultName>Cantidad</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -169,230 +161,24 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>dsFactura</DataSetName>
-        <Left>0.69016cm</Left>
+        <DataSetName>dsListaProductos</DataSetName>
+        <Left>1.06659cm</Left>
         <Height>0.6cm</Height>
-        <Width>13.175cm</Width>
+        <Width>13.15233cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox16">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>SubTotal:</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox16</rd:DefaultName>
-        <Top>2.48681cm</Top>
-        <Left>8.5212cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.87042cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox17">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>IVA:</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox16</rd:DefaultName>
-        <Top>3.12208cm</Top>
-        <Left>8.5212cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.87042cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox18">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Total de Venta:</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox16</rd:DefaultName>
-        <Top>3.75736cm</Top>
-        <Left>8.23016cm</Left>
-        <Height>0.86403cm</Height>
-        <Width>3.16146cm</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox47">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!Subtotal.Value</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox47</rd:DefaultName>
-        <Top>2.48681cm</Top>
-        <Left>11.39162cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.5cm</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox49">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!IVA.Value</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox49</rd:DefaultName>
-        <Top>3.12208cm</Top>
-        <Left>11.39162cm</Left>
-        <Height>0.63528cm</Height>
-        <Width>2.5cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox50">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!TotalVenta.Value</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox50</rd:DefaultName>
-        <Top>3.75736cm</Top>
-        <Left>11.4269cm</Left>
-        <Height>0.86403cm</Height>
-        <Width>2.5cm</Width>
-        <ZIndex>6</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
     </ReportItems>
-    <Height>1.89247in</Height>
+    <Height>2.20833in</Height>
     <Style />
   </Body>
-  <Width>5.82651in</Width>
+  <Width>6.08333in</Width>
   <Page>
     <PageHeader>
-      <Height>3.42787cm</Height>
+      <Height>3.86292cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -403,7 +189,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Factura</Value>
+                  <Value>Lista de Productos</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <FontSize>20pt</FontSize>
@@ -417,10 +203,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.36724cm</Top>
-          <Left>5.34458cm</Left>
+          <Top>0.37919cm</Top>
+          <Left>5.12276cm</Left>
           <Height>1.10271cm</Height>
-          <Width>4.24625cm</Width>
+          <Width>9.485cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -452,8 +238,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>1.46995cm</Top>
-          <Left>5.34458cm</Left>
+          <Top>1.48191cm</Top>
+          <Left>7.84309cm</Left>
           <Height>0.89104cm</Height>
           <Width>4.24625cm</Width>
           <ZIndex>1</ZIndex>
@@ -471,10 +257,10 @@
           <Source>Embedded</Source>
           <Value>ImagendeWhatsApp20250807alas001956_2ba549bd1</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.20863cm</Top>
-          <Left>0.94933cm</Left>
-          <Height>2.38139cm</Height>
-          <Width>2.24083cm</Width>
+          <Top>0.34392cm</Top>
+          <Left>1.06659cm</Left>
+          <Height>2.51361cm</Height>
+          <Width>2.37312cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -489,7 +275,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Cantidad</Value>
+                  <Value>Id</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <Color>White</Color>
@@ -502,8 +288,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
-          <Top>2.82787cm</Top>
-          <Left>0.69016cm</Left>
+          <Top>3.26292cm</Top>
+          <Left>1.04392cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <ZIndex>3</ZIndex>
@@ -538,8 +324,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
-          <Top>2.82787cm</Top>
-          <Left>3.19016cm</Left>
+          <Top>3.26292cm</Top>
+          <Left>3.54392cm</Left>
           <Height>0.6cm</Height>
           <Width>5.675cm</Width>
           <ZIndex>4</ZIndex>
@@ -561,7 +347,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Precio Unitario</Value>
+                  <Value>Precio </Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <Color>White</Color>
@@ -574,8 +360,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
-          <Top>2.82787cm</Top>
-          <Left>8.86516cm</Left>
+          <Top>3.26292cm</Top>
+          <Left>9.21892cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <ZIndex>5</ZIndex>
@@ -597,7 +383,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Total</Value>
+                  <Value>Cantidad</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
                     <Color>White</Color>
@@ -610,8 +396,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
-          <Top>2.82787cm</Top>
-          <Left>11.36516cm</Left>
+          <Top>3.26292cm</Top>
+          <Left>11.71892cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <ZIndex>6</ZIndex>
@@ -634,7 +420,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.87855cm</Height>
+      <Height>2.09021cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -657,8 +443,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>0.69016cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>1.04392cm</Left>
           <Height>0.6cm</Height>
           <Width>3.16146cm</Width>
           <Style>
@@ -690,8 +476,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>4.80412cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>4.81392cm</Left>
           <Height>0.6cm</Height>
           <Width>3.16146cm</Width>
           <ZIndex>1</ZIndex>
@@ -724,8 +510,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>7.96558cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>7.97538cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <ZIndex>2</ZIndex>
@@ -758,8 +544,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>10.7037cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>11.05746cm</Left>
           <Height>0.6cm</Height>
           <Width>1.03188cm</Width>
           <ZIndex>3</ZIndex>
@@ -792,8 +578,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox24</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>13.32308cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>13.67684cm</Left>
           <Height>0.6cm</Height>
           <Width>1.07125cm</Width>
           <ZIndex>4</ZIndex>
@@ -826,8 +612,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>12.71453cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>13.06829cm</Left>
           <Height>0.6cm</Height>
           <Width>0.60855cm</Width>
           <ZIndex>5</ZIndex>
@@ -860,8 +646,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox26</rd:DefaultName>
-          <Top>0.53771cm</Top>
-          <Left>11.71383cm</Left>
+          <Top>0.37469cm</Top>
+          <Left>12.06758cm</Left>
           <Height>0.6cm</Height>
           <Width>0.96542cm</Width>
           <ZIndex>6</ZIndex>
@@ -893,58 +679,42 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="dsFactura">
+    <DataSource Name="dsListaProductos">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>fbdf8e50-8812-4afe-8def-b52efe9f0c3a</rd:DataSourceID>
+      <rd:DataSourceID>7f193013-7e33-4b63-868c-c162986e8ab9</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsFactura">
+    <DataSet Name="dsListaProductos">
       <Query>
-        <DataSourceName>dsFactura</DataSourceName>
+        <DataSourceName>dsListaProductos</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="Cantidad">
-          <DataField>Cantidad</DataField>
+        <Field Name="ID">
+          <DataField>ID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Producto">
-          <DataField>Producto</DataField>
+        <Field Name="Nombre">
+          <DataField>Nombre</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Precio">
           <DataField>Precio</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Total">
-          <DataField>Total</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="NumeroF">
-          <DataField>NumeroF</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Subtotal">
-          <DataField>Subtotal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IVA">
-          <DataField>IVA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TotalVenta">
-          <DataField>TotalVenta</DataField>
+        <Field Name="Cantidad">
+          <DataField>Cantidad</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsFactura</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Ronal\source\repos\Mery-003\AniCLinic\AniCLinic\dsFactura.xsd</rd:SchemaPath>
-        <rd:TableName>dtFactura</rd:TableName>
+        <rd:DataSetName>dsListaProductos</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Ronal\source\repos\Mery-003\AniCLinic\AniCLinic\dsListaProductos.xsd</rd:SchemaPath>
+        <rd:TableName>dtListaProducto</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -1005,5 +775,5 @@ ooooKEZQ6FWGQc8eoNfNWr/sS6NqerXt4mpSQpcTvMsYx8gZiQPwzX0tSfnUSinuI8w0H9nbwnotzHcS
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>e37408a4-4c71-43f1-badb-0c91d79861fe</rd:ReportID>
+  <rd:ReportID>b6ed2472-2f1f-4945-9f7e-369716aa5446</rd:ReportID>
 </Report>
