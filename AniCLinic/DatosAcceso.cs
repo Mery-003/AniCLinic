@@ -42,16 +42,9 @@ namespace AniCLinic
 
         private void btnGuardarR_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text.Length < 5)
-            {
-                MessageBox.Show("Usuario demasiado corto.");
+            if (!validar())
                 return;
-            }
-            if (txtContraseña.Text.Length < 8)
-            {
-                MessageBox.Show("Contraseña muy debil.");
-                return;
-            }
+
             admin = (cmbCargo.SelectedIndex == 0);
 
             usuario = new csUsuario(
@@ -84,6 +77,40 @@ namespace AniCLinic
             }
 
             this.Close();
+        }
+        private bool validar()
+        {
+            if (txtUsuario.Text.Length < 5)
+            {
+                MessageBox.Show("Usuario demasiado corto.");
+                return false;
+            }
+            if (txtContraseña.Text.Length < 8)
+            {
+                MessageBox.Show("Contraseña muy debil.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtUsuario.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtContraseña.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtSueldo.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (cmbCargo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Seleccione un cargo.");
+                return false;
+            }
+            return true;
         }
     }
 }

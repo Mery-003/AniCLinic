@@ -77,7 +77,35 @@ namespace AniCLinic
             }
             return persona;
         }
-
+        private bool validar()
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtApellido.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCelular.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            return true;
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -85,6 +113,8 @@ namespace AniCLinic
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (!validar())
+                return;
             persona = new csPersona(
                 txtNombre.Text,
                 txtApellido.Text,
