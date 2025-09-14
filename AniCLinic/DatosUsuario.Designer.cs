@@ -88,6 +88,7 @@
             this.txtApellido.SelectedText = "";
             this.txtApellido.Size = new System.Drawing.Size(202, 36);
             this.txtApellido.TabIndex = 112;
+            this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
             // 
             // guna2HtmlLabel9
             // 
@@ -133,6 +134,7 @@
             this.txtCelular.SelectedText = "";
             this.txtCelular.Size = new System.Drawing.Size(201, 36);
             this.txtCelular.TabIndex = 108;
+            this.txtCelular.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCelular_KeyPress);
             // 
             // txtCedula
             // 
@@ -156,6 +158,7 @@
             this.txtCedula.SelectedText = "";
             this.txtCedula.Size = new System.Drawing.Size(203, 36);
             this.txtCedula.TabIndex = 107;
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // guna2HtmlLabel4
             // 
@@ -212,6 +215,7 @@
             this.txtNombre.SelectedText = "";
             this.txtNombre.Size = new System.Drawing.Size(201, 36);
             this.txtNombre.TabIndex = 113;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // txtCorreo
             // 

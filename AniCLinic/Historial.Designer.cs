@@ -89,6 +89,7 @@
             this.txtMascotaNombre.Size = new System.Drawing.Size(331, 36);
             this.txtMascotaNombre.TabIndex = 52;
             this.txtMascotaNombre.Tag = "";
+            this.txtMascotaNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMascotaNombre_KeyPress);
             // 
             // guna2HtmlLabel2
             // 

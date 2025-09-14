@@ -117,5 +117,17 @@ ORDER BY rc.FechaRegistro DESC, rc.IdRegistroClinico DESC;";
                 }
             }
         }
+
+        private void txtMascotaNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+        }
     }
 }

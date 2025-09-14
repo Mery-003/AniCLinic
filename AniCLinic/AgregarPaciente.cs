@@ -342,6 +342,16 @@ namespace AniCLinic
                 MessageBox.Show("Llene todos los campos obligatorios.");
                 return false;
             }
+            if (txtCedula.Text.Length < 10)
+            {
+                MessageBox.Show("Cedula incorrecta.");
+                return false;
+            }
+            if (txtCelular.Text.Length < 10)
+            {
+                MessageBox.Show("Celular incorrecto.");
+                return false;
+            }
             return true;
         }
 
@@ -524,6 +534,42 @@ namespace AniCLinic
             if ((!char.IsDigit(e.KeyChar) || txtCedula.Text.Length >= 10) && e.KeyChar != 8)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void txtMascotaNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void txtNombreD_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
             }
         }
     }

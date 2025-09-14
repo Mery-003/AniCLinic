@@ -74,31 +74,8 @@ namespace AniCLinic
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
-            {
-                MessageBox.Show("Llene todos los campos.");
+            if (!validar())
                 return;
-            }
-            if (string.IsNullOrWhiteSpace(txtCedula.Text))
-            {
-                MessageBox.Show("Llene todos los campos.");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
-            {
-                MessageBox.Show("Llene todos los campos.");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
-            {
-                MessageBox.Show("Llene todos los campos.");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtDireccion.Text))
-            {
-                MessageBox.Show("Llene todos los campos.");
-                return;
-            }
 
             if (!edicion)
             {
@@ -130,6 +107,45 @@ namespace AniCLinic
             }
             this.Close();
         }
+        private bool validar()
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtDireccion.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return false;
+            }
+            if (txtCedula.Text.Length < 10)
+            {
+                MessageBox.Show("Ingrese una cedula correcta.");
+                return false;
+            }
+            if (txtTelefono.Text.Length < 10)
+            {
+                MessageBox.Show("Ingrese una cedula correcta.");
+                return false;
+            }
+            return true;
+        }
 
         private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -144,6 +160,18 @@ namespace AniCLinic
             if ((!char.IsDigit(e.KeyChar) || txtTelefono.Text.Length >= 10) && e.KeyChar != 8)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
             }
         }
     }

@@ -42,6 +42,16 @@ namespace AniCLinic
 
         private void btnGuardarR_Click(object sender, EventArgs e)
         {
+            if (txtUsuario.Text.Length < 5)
+            {
+                MessageBox.Show("Usuario demasiado corto.");
+                return;
+            }
+            if (txtContraseña.Text.Length < 8)
+            {
+                MessageBox.Show("Contraseña muy debil.");
+                return;
+            }
             admin = (cmbCargo.SelectedIndex == 0);
 
             usuario = new csUsuario(

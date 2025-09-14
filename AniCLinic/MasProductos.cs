@@ -63,6 +63,14 @@ namespace AniCLinic
             }
             this.Close();
         }
+
+        private void txtMasProd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtMasProd.Text.Length >= 5) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
     }
 
     public class Productos

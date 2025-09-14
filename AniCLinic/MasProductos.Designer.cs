@@ -110,6 +110,7 @@
             this.txtMasProd.SelectedText = "";
             this.txtMasProd.Size = new System.Drawing.Size(426, 36);
             this.txtMasProd.TabIndex = 125;
+            this.txtMasProd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMasProd_KeyPress);
             // 
             // btnGuardar
             // 
