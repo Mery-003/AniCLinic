@@ -42,5 +42,24 @@ namespace AniCLinic
             frReporteFinanciero reporte = new frReporteFinanciero(txtAño.Text, "ListaProducto");
             reporte.ShowDialog();
         }
+
+        private void btnFacturas_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtId.Text))
+            {
+                MessageBox.Show("Ingrese un id.");
+                return;
+            }
+            frFactura factura = new frFactura(Convert.ToInt32(txtId.Text));
+            factura.ShowDialog();
+        }
+
+        private void txtId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtId.Text.Length >= 5) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
