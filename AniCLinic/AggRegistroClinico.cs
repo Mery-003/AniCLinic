@@ -16,20 +16,18 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            _info = info ?? throw new ArgumentNullException("info");
+            _info = info ?? throw new ArgumentNullException(nameof(info));
             _isEdit = isEdit;
 
-            // Cabecera
+            // Cabecera y botones
             Text = _isEdit ? "Editar Registro Clínico" : "Registrar Atención";
             this.AcceptButton = btnAceptar;
             this.CancelButton = btnCancelar;
 
-            // ReadOnly para cabecera
             if (txtPropietario != null) txtPropietario.ReadOnly = true;
             if (txtMascota != null) txtMascota.ReadOnly = true;
             if (txtMotivo != null) txtMotivo.ReadOnly = true;
 
-            // Receta multilínea con scroll y saltos de línea
             if (txtReceta != null)
             {
                 txtReceta.Multiline = true;
@@ -38,15 +36,29 @@ namespace AniCLinic
                 txtReceta.WordWrap = true;
             }
 
-            // Eventos
             try { btnAceptar.Click -= BtnGuardar_Click; } catch { }
             try { btnCancelar.Click -= BtnCancelar_Click; } catch { }
             btnAceptar.Click += BtnGuardar_Click;
             btnCancelar.Click += BtnCancelar_Click;
 
-            // Carga de datos en pantalla
+            // Cabecera
             CargarCabeceraDesdeCita();
-            CargarRegistroClinicoDelDia(_info.IdMascota, _info.FechaHora.Date);
+
+            // Contenido del RC:
+            if (_isEdit)
+            {
+                // Solo en EDITAR: cargar el RC exacto de ESTA cita
+                CargarRegistroClinicoPorCita(
+                    _info.IdCita > 0 ? (int?)_info.IdCita : null,
+                    ResolverIdMascotaRobusto(_info),
+                    _info.FechaHora
+                );
+            }
+            else
+            {
+                // En REGISTRAR: abrir SIEMPRE en blanco
+                LimpiarCampos();
+            }
         }
 
         public AggRegistroClinico()
@@ -54,7 +66,7 @@ namespace AniCLinic
             InitializeComponent();
         }
 
-        // --------- Cabecera (solo nombre de la mascota) ----------
+        // --------- Cabecera ----------
         private void CargarCabeceraDesdeCita()
         {
             if (txtPropietario != null) txtPropietario.Text = _info.Propietario ?? "";
@@ -62,27 +74,66 @@ namespace AniCLinic
             if (txtMotivo != null) txtMotivo.Text = _info.Motivo ?? "";
         }
 
-        // --------- Carga previa del registro clínico del día (si existe) ----------
-        private void CargarRegistroClinicoDelDia(int idMascota, DateTime fecha)
+        private void LimpiarCampos()
         {
-            if (idMascota <= 0) idMascota = ResolverIdMascotaRobusto(_info);
+            _idRegistroClinicoExistente = 0;
+            if (txtDiagnostico != null) txtDiagnostico.Clear();
+            if (txtTratamiento != null) txtTratamiento.Clear();
+            if (txtReceta != null) txtReceta.Clear();
+            // (txtMotivo es de cabecera y queda en ReadOnly con el motivo de la cita)
+        }
 
-            string sql = @"
+        // --------- Carga del RC de ESA cita ----------
+        private void CargarRegistroClinicoPorCita(int? idCita, int idMascota, DateTime fechaHora)
+        {
+            var crud = new csCRUD();
+
+            DataTable dt = null;
+
+            if (idCita.HasValue)
+            {
+                // Emparejar por IdCita (JOIN) y misma fecha/hora (al minuto)
+                const string sql = @"
+SELECT TOP(1) rc.IdRegistroClinico, rc.MotivoConsulta, rc.Diagnostico, rc.Tratamiento, rc.AplicacionTratamiento
+FROM RegistroClinico rc
+JOIN GestionCita c ON c.IdCita = @c
+WHERE rc.IdMascota = c.IdMascota
+  AND DATEDIFF(MINUTE, rc.FechaRegistro, c.FechaHora) = 0
+ORDER BY rc.IdRegistroClinico DESC;";
+                dt = crud.cargarBDData(sql, new SqlParameter("@c", idCita.Value));
+            }
+
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                // Sin IdCita o no encontrado → emparejar por mascota + fecha/hora exacta (al minuto)
+                const string sql2 = @"
 SELECT TOP(1) IdRegistroClinico, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento
 FROM RegistroClinico
-WHERE IdMascota = @m AND CONVERT(date, FechaRegistro) = @f
+WHERE IdMascota = @m
+  AND DATEDIFF(MINUTE, FechaRegistro, @fh) = 0
+ORDER BY IdRegistroClinico DESC;";
+                dt = crud.cargarBDData(sql2,
+                        new SqlParameter("@m", idMascota),
+                        new SqlParameter("@fh", fechaHora));
+            }
+
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                // Fallback (solo para casos viejos guardados sin hora): último RC del mismo día
+                const string sql3 = @"
+SELECT TOP(1) IdRegistroClinico, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento
+FROM RegistroClinico
+WHERE IdMascota = @m AND CONVERT(date, FechaRegistro) = CONVERT(date, @fh)
 ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
+                dt = crud.cargarBDData(sql3,
+                        new SqlParameter("@m", idMascota),
+                        new SqlParameter("@fh", fechaHora));
+            }
 
-            var crud = new csCRUD();
-            var dt = crud.cargarBDData(sql,
-                new SqlParameter("@m", idMascota),
-                new SqlParameter("@f", fecha));
-
-            if (dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
             {
                 var row = dt.Rows[0];
                 _idRegistroClinicoExistente = Convert.ToInt32(row["IdRegistroClinico"]);
-
                 if (txtMotivo != null) txtMotivo.Text = Convert.ToString(row["MotivoConsulta"] ?? "");
                 if (txtDiagnostico != null) txtDiagnostico.Text = Convert.ToString(row["Diagnostico"] ?? "");
                 if (txtTratamiento != null) txtTratamiento.Text = Convert.ToString(row["Tratamiento"] ?? "");
@@ -90,7 +141,7 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             }
             else
             {
-                _idRegistroClinicoExistente = 0;
+                LimpiarCampos();
             }
         }
 
@@ -106,7 +157,6 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             try
             {
                 if (!ValidarCamposObligatorios()) return;
-
                 GuardarRegistroClinico();
                 DialogResult = DialogResult.OK;
                 Close();
@@ -125,12 +175,11 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
 
         private bool ValidarCamposObligatorios()
         {
-            // Motivo puede venir de la cita; si lo vacías, también lo exigimos
             if (txtMotivo != null && string.IsNullOrWhiteSpace(txtMotivo.Text))
             {
                 MessageBox.Show("Ingrese el motivo de la consulta.", "Validación",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtMotivo.Focus();
+                txtMotivo?.Focus();
                 return false;
             }
 
@@ -138,7 +187,7 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             {
                 MessageBox.Show("Ingrese el diagnóstico.", "Validación",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (txtDiagnostico != null) txtDiagnostico.Focus();
+                txtDiagnostico?.Focus();
                 return false;
             }
 
@@ -146,7 +195,7 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             {
                 MessageBox.Show("Ingrese el tratamiento.", "Validación",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (txtTratamiento != null) txtTratamiento.Focus();
+                txtTratamiento?.Focus();
                 return false;
             }
 
@@ -154,11 +203,9 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             {
                 MessageBox.Show("Ingrese la receta / aplicación del tratamiento.", "Validación",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (txtReceta != null) txtReceta.Focus();
+                txtReceta?.Focus();
                 return false;
             }
-
-            // ✅ Veterinario eliminado: no validamos ni mostramos avisos
             return true;
         }
 
@@ -176,7 +223,8 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             if (idMascota <= 0)
                 throw new InvalidOperationException("No se pudo resolver la mascota asociada.");
 
-            DateTime fecha = _info.FechaHora.Date;
+            // ⚠️ Guardar con FECHA Y HORA DE LA CITA (no solo la fecha)
+            DateTime fechaHoraCita = _info.FechaHora;
 
             if (_idRegistroClinicoExistente > 0)
             {
@@ -187,7 +235,6 @@ UPDATE RegistroClinico
        Tratamiento            = @trat,
        AplicacionTratamiento  = @apli
  WHERE IdRegistroClinico = @id;";
-
                 crud.editarBD(sqlU,
                     new SqlParameter("@mot", mot),
                     new SqlParameter("@diag", diag),
@@ -202,20 +249,19 @@ UPDATE RegistroClinico
 INSERT INTO RegistroClinico
     (IdMascota, MotivoConsulta, Diagnostico, Tratamiento, AplicacionTratamiento, FechaRegistro)
 VALUES
-    (@m, @mot, @diag, @trat, @apli, @f);";
-
+    (@m, @mot, @diag, @trat, @apli, @fh);";
                 crud.agregarBD(sqlI,
                     new SqlParameter("@m", idMascota),
                     new SqlParameter("@mot", mot),
                     new SqlParameter("@diag", diag),
                     new SqlParameter("@trat", trat),
                     new SqlParameter("@apli", rec),
-                    new SqlParameter("@f", fecha)
+                    new SqlParameter("@fh", fechaHoraCita)   // << guarda fecha+hora
                 );
             }
         }
 
-        // --------- Resolver IdMascota (robusto, sin joins a Persona) ----------
+        // --------- Resolver IdMascota ----------
         private int ResolverIdMascotaRobusto(CitaInfo info)
         {
             if (info.IdMascota > 0) return info.IdMascota;
@@ -246,7 +292,6 @@ VALUES
             finally { db.cerrarConexion(); }
         }
 
-        // Prioriza la mascota que tenga cita en esa fecha; si no hay, toma cualquiera con ese nombre.
         private int ResolverIdMascotaPorNombreYFecha(string nombreMascota, DateTime fechaCita)
         {
             if (string.IsNullOrWhiteSpace(nombreMascota)) return 0;
@@ -262,9 +307,8 @@ FROM base b
 LEFT JOIN dbo.GestionCita c
        ON c.IdMascota = b.IdMascota
       AND CONVERT(date, c.FechaHora) = @f
-ORDER BY CASE WHEN c.IdCita IS NULL THEN 1 ELSE 0 END,  -- prefiero con cita ese día
+ORDER BY CASE WHEN c.IdCita IS NULL THEN 1 ELSE 0 END,
          b.IdMascota DESC;";
-
             var db = new csConexionBD();
             db.abrirConexion();
             try
@@ -280,7 +324,6 @@ ORDER BY CASE WHEN c.IdCita IS NULL THEN 1 ELSE 0 END,  -- prefiero con cita ese
             finally { db.cerrarConexion(); }
         }
 
-        // Diseñador
         private void AggRegistroClinico_Load(object sender, EventArgs e) { }
     }
 }

@@ -4,14 +4,13 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic; // <-- agregado
+using System.Collections.Generic;
 
 namespace AniCLinic
 {
     public partial class fRegistroClinico : Form
     {
-        // Columna auxiliar para "forzar" que la fila tenga RC justo después de registrar
-        private const string COL_TIENE_REG = "__TieneRegistroClinico";
+        private const int VENTANA_HOY_MIN = 20;   // +20 min para permanecer en HOY
 
         private DataTable _dtHoy, _dtProximas, _dtAnteriores;
 
@@ -19,7 +18,7 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            // Solo CellContentClick para evitar doble apertura
+            // Un solo manejador de clics por grid
             try { dgvHoy.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvProximas.CellContentClick -= Grid_ButtonClick; } catch { }
             try { dgvAnteriores.CellContentClick -= Grid_ButtonClick; } catch { }
@@ -32,9 +31,17 @@ namespace AniCLinic
             dgvProximas.CellContentClick += Grid_ButtonClick;
             dgvAnteriores.CellContentClick += Grid_ButtonClick;
 
-            dgvHoy.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvHoy); };
-            dgvProximas.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvProximas); };
+            dgvHoy.DataBindingComplete += (s, e) => QuitarFilaNueva(dgvHoy);
+            dgvProximas.DataBindingComplete += (s, e) => QuitarFilaNueva(dgvProximas);
             dgvAnteriores.DataBindingComplete += (s, e) => { QuitarFilaNueva(dgvAnteriores); DecorarAnterioresSegunRegistro(); };
+
+            // Cursor mano solo sobre botones en Anteriores
+            dgvAnteriores.CellMouseEnter += (s, e) =>
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                    dgvAnteriores.Cursor = dgvAnteriores.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell ? Cursors.Hand : Cursors.Default;
+            };
+            dgvAnteriores.CellMouseLeave += (s, e) => dgvAnteriores.Cursor = Cursors.Default;
 
             WireBusquedas();
             RecargarTodo();
@@ -55,16 +62,7 @@ namespace AniCLinic
         }
 
         private DataGridViewTextBoxColumn MkText(string header, string prop, int width)
-        {
-            return new DataGridViewTextBoxColumn
-            {
-                Name = prop,
-                HeaderText = header,
-                DataPropertyName = prop,
-                Width = width,
-                ReadOnly = true
-            };
-        }
+            => new DataGridViewTextBoxColumn { Name = prop, HeaderText = header, DataPropertyName = prop, Width = width, ReadOnly = true };
 
         private DataGridViewTextBoxColumn MkHidden(string prop)
         {
@@ -73,17 +71,8 @@ namespace AniCLinic
             return c;
         }
 
-        private static DataGridViewButtonColumn MkBtn(string name, string text, int width = 110)
-        {
-            return new DataGridViewButtonColumn
-            {
-                Name = name,
-                HeaderText = "",
-                Text = text,
-                UseColumnTextForButtonValue = true,
-                Width = width
-            };
-        }
+        private static DataGridViewButtonColumn MkBtn(string name, string text, int width = 100)
+            => new DataGridViewButtonColumn { Name = name, HeaderText = "", Text = text, UseColumnTextForButtonValue = true, Width = width };
 
         private void PrepararGrid_Hoy(DataGridView grid)
         {
@@ -97,7 +86,7 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkBtn("colRegistrar", "Registrar", 110));
+            grid.Columns.Add(MkBtn("colRegistrar", "Registrar"));
         }
 
         private void PrepararGrid_Proximas(DataGridView grid)
@@ -112,7 +101,7 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-            grid.Columns.Add(MkText("Estado", "Estado", 100)); // solo Próximas
+            grid.Columns.Add(MkText("Estado", "Estado", 100));
         }
 
         private void PrepararGrid_Anteriores(DataGridView grid)
@@ -127,10 +116,6 @@ namespace AniCLinic
             grid.Columns.Add(MkText("Hora", "Hora", 70));
             grid.Columns.Add(MkText("Motivo", "Motivo", 220));
             grid.Columns.Add(MkText("Propietario", "Propietario", 160));
-
-            // ⬇️ Columna oculta que “marca” que la fila ya tiene RC (override hasta recargar BD)
-            grid.Columns.Add(MkHidden(COL_TIENE_REG));
-
             grid.Columns.Add(MkBtn("colEditar", "Editar", 95));
             grid.Columns.Add(MkBtn("colEliminar", "Eliminar", 95));
         }
@@ -143,12 +128,11 @@ namespace AniCLinic
         }
         #endregion
 
-        #region Carga / separación
+        #region Carga / separación (+20 minutos)
         private void RecargarTodo()
         {
             RecargarColeccionesDesdeBD();
 
-            // Búsqueda activa
             AplicarBusqueda(dgvHoy, _dtHoy, txtBuscarHoy == null ? null : txtBuscarHoy.Text);
             AplicarBusqueda(dgvProximas, _dtProximas, txtBuscarProximas == null ? null : txtBuscarProximas.Text);
             AplicarBusqueda(dgvAnteriores, _dtAnteriores, txtBuscarAnteriores == null ? null : txtBuscarAnteriores.Text);
@@ -156,52 +140,48 @@ namespace AniCLinic
 
         private void RecargarColeccionesDesdeBD()
         {
-            var all = CedulaUtils.CitasListado(); // trae IdCita, IdMascota, Mascota, Especie, Raza, Fecha/Hora, Motivo, Propietario...
-
-            // === nuevo: añadimos cédula del propietario al dataset base ===
-            AgregarCedulasPropietario(all);
+            // Debe traer: IdCita, IdMascota, Mascota, Especie, Raza, Fecha, Hora, Motivo, Propietario, (opcional CedulaPropietario), y/o FechaHora
+            var all = CedulaUtils.CitasListado();
 
             if (!all.Columns.Contains("Estado"))
                 all.Columns.Add("Estado", typeof(string));
 
             var hoy = DateTime.Today;
+            var ahora = DateTime.Now;
 
             _dtHoy = all.Clone();
             _dtProximas = all.Clone();
             _dtAnteriores = all.Clone();
 
-            // aseguro columna oculta en tablas (por si movemos filas a mano)
-            EnsureTieneRegCol(_dtHoy);
-            EnsureTieneRegCol(_dtProximas);
-            EnsureTieneRegCol(_dtAnteriores);
-
             foreach (DataRow r in all.Rows)
             {
-                DateTime f;
-                if (!TryParseFecha(r, out f)) continue;
-                var d = f.Date;
+                if (!TryParseFechaHora(r, out DateTime fh)) continue;
 
-                if (d > hoy) r["Estado"] = "Próximo";
-
+                var d = fh.Date;
                 int idMascota = ToInt(r, "IdMascota");
-                bool tieneReg = RC_ExistePara(idMascota, d); // consulta real
+                int idCita = ToInt(r, "IdCita");
 
-                if (d == hoy)
+                if (d > hoy)
                 {
-                    if (tieneReg) _dtAnteriores.Rows.Add((object[])r.ItemArray.Clone());
-                    else _dtHoy.Rows.Add((object[])r.ItemArray.Clone());
-                }
-                else if (d > hoy)
-                {
+                    r["Estado"] = "Próximo";
                     _dtProximas.Rows.Add((object[])r.ItemArray.Clone());
+                    continue;
                 }
-                else
+                if (d < hoy)
                 {
                     _dtAnteriores.Rows.Add((object[])r.ItemArray.Clone());
+                    continue;
                 }
+
+                // d == hoy
+                bool tieneReg = RC_ExisteParaCita(idCita > 0 ? (int?)idCita : null, idMascota, fh);
+
+                if (!tieneReg && fh.AddMinutes(VENTANA_HOY_MIN) >= ahora)
+                    _dtHoy.Rows.Add((object[])r.ItemArray.Clone());
+                else
+                    _dtAnteriores.Rows.Add((object[])r.ItemArray.Clone());
             }
 
-            // Hoy y Anteriores no muestran Estado → elimino del DataTable (no del grid)
             if (_dtHoy.Columns.Contains("Estado")) _dtHoy.Columns.Remove("Estado");
             if (_dtAnteriores.Columns.Contains("Estado")) _dtAnteriores.Columns.Remove("Estado");
 
@@ -210,67 +190,6 @@ namespace AniCLinic
             dgvAnteriores.DataSource = _dtAnteriores;
 
             DecorarAnterioresSegunRegistro();
-        }
-
-        private void EnsureTieneRegCol(DataTable dt)
-        {
-            if (dt == null) return;
-            if (!dt.Columns.Contains(COL_TIENE_REG))
-                dt.Columns.Add(COL_TIENE_REG, typeof(bool));
-        }
-
-        // ===== NUEVO: completa la columna CedulaPropietario para permitir buscar por cédula =====
-        private void AgregarCedulasPropietario(DataTable all)
-        {
-            if (all == null) return;
-
-            if (!all.Columns.Contains("CedulaPropietario"))
-                all.Columns.Add("CedulaPropietario", typeof(string));
-
-            // Reunimos todos los IdMascota presentes
-            var ids = all.AsEnumerable()
-                         .Select(r => ToInt(r, "IdMascota"))
-                         .Where(id => id > 0)
-                         .Distinct()
-                         .ToList();
-
-            if (ids.Count == 0) return;
-
-            // Consulta única (JOIN Mascota -> Persona) para traer la cédula por IdMascota
-            string idList = string.Join(",", ids);
-            string sql = @"
-SELECT m.IdMascota, p.Cedula
-FROM dbo.Mascota m
-INNER JOIN dbo.Persona p ON p.IdPersona = m.IdPersona
-WHERE m.IdMascota IN (" + idList + @");";
-
-            var map = new Dictionary<int, string>();
-
-            var db = new csConexionBD();
-            db.abrirConexion();
-            try
-            {
-                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
-                using (var rd = cmd.ExecuteReader())
-                {
-                    while (rd.Read())
-                    {
-                        int id = Convert.ToInt32(rd["IdMascota"]);
-                        string ced = Convert.ToString(rd["Cedula"] ?? "");
-                        map[id] = ced;
-                    }
-                }
-            }
-            finally { db.cerrarConexion(); }
-
-            // Aplicamos la cédula a cada fila
-            foreach (DataRow r in all.Rows)
-            {
-                int id = ToInt(r, "IdMascota");
-                string cedula;
-                if (id > 0 && map.TryGetValue(id, out cedula))
-                    r["CedulaPropietario"] = cedula ?? "";
-            }
         }
         #endregion
 
@@ -303,13 +222,11 @@ WHERE m.IdMascota IN (" + idList + @");";
             var t = (term ?? "").Trim();
             if (t.Length == 0) { grid.DataSource = baseTable; return; }
 
-            // Campos permitidos para buscar (incluye cédula si la tienes cargada)
             string[] campos = { "IdCita", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
             var cols = campos.Where(c => baseTable.Columns.Contains(c)).ToArray();
 
             var val = t.Replace("'", "''");
 
-            // Si la columna NO es string (número, bool, DateTime, etc.), convierto a texto antes de usar LIKE
             var exprParts = cols.Select(c =>
             {
                 var col = baseTable.Columns[c];
@@ -323,56 +240,32 @@ WHERE m.IdMascota IN (" + idList + @");";
 
             grid.DataSource = new DataView(baseTable) { RowFilter = expr };
         }
-
         #endregion
 
-        #region Clicks botones (Registrar/Editar/Eliminar)
+        #region Clicks botones
         private void Grid_ButtonClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
             var grid = (DataGridView)sender;
-            if (!(grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) return;
+
+            // Si no es botón (ej. "Sin registro"), salir
+            if (!(grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn) ||
+                !(grid.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell))
+                return;
 
             var info = ObtenerCitaInfoDesdeFila(grid, e.RowIndex);
             if (info == null) return;
 
-            // Registrar (HOY)
+            // Registrar (HOY) → abrir en blanco (AggRegistroClinico ya no precarga nada)
             if (grid == dgvHoy && grid.Columns[e.ColumnIndex].Name == "colRegistrar")
             {
                 using (var frm = new AggRegistroClinico(info, false))
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
                     {
-                        // 1) quitar de Hoy
-                        var dv = grid.DataSource as DataView;
-                        DataRowView drv = null;
-                        if (dv != null) drv = dv[e.RowIndex];
-                        else if (grid.Rows[e.RowIndex].DataBoundItem is DataRowView d0) drv = d0;
-
-                        if (drv != null)
-                        {
-                            var nueva = _dtAnteriores.NewRow();
-                            nueva.ItemArray = (object[])drv.Row.ItemArray.Clone();
-                            // 2) marcar override para mostrar Editar sin esperar recargar BD
-                            EnsureTieneRegCol(_dtAnteriores);
-                            nueva[COL_TIENE_REG] = true;
-                            _dtAnteriores.Rows.Add(nueva);
-
-                            drv.Row.Delete();
-                            _dtHoy.AcceptChanges();
-                            _dtAnteriores.AcceptChanges();
-
-                            // Rebind para refrescar vistas y decorado
-                            dgvHoy.DataSource = _dtHoy;
-                            dgvAnteriores.DataSource = _dtAnteriores;
-                            DecorarAnterioresSegunRegistro();
-                        }
-                        else
-                        {
-                            // fallback: recarga general
-                            RecargarTodo();
-                        }
+                        // Recolocar datasets
+                        RecargarTodo();
                     }
                 }
                 return;
@@ -384,32 +277,34 @@ WHERE m.IdMascota IN (" + idList + @");";
                 using (var frm = new AggRegistroClinico(info, true))
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        // ya estaba en anteriores; solo redecorar por si cambió algo
                         DecorarAnterioresSegunRegistro();
-                    }
                 }
                 return;
             }
 
-            // Eliminar (ANTERIORES)
+            // Eliminar (ANTERIORES) → borra RC de ESA cita y la cita
             if (grid == dgvAnteriores && grid.Columns[e.ColumnIndex].Name == "colEliminar")
             {
-                if (MessageBox.Show("¿Eliminar el registro clínico de esta cita?",
+                if (MessageBox.Show("¿Eliminar el registro clínico y su cita vinculada?",
                     "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
-                        RC_DeleteByMascotaFechaOCita(info.IdCita > 0 ? (int?)info.IdCita : null,
-                                                     info.IdMascota,
-                                                     info.FechaHora);
-                        // quitar override si lo hubiera
-                        var dv = grid.DataSource as DataView;
-                        DataRowView drv = dv != null ? dv[e.RowIndex] : (grid.Rows[e.RowIndex].DataBoundItem as DataRowView);
-                        if (drv != null && drv.Row.Table.Columns.Contains(COL_TIENE_REG))
-                            drv.Row[COL_TIENE_REG] = false;
+                        int rcBorrados = RC_DeletePorCita(
+                            info.IdCita > 0 ? (int?)info.IdCita : null,
+                            info.IdMascota,
+                            info.FechaHora);
 
-                        DecorarAnterioresSegunRegistro();
+                        int citasBorradas = Cita_DeleteByIdOCriterios(
+                            info.IdCita > 0 ? (int?)info.IdCita : null,
+                            info.IdMascota,
+                            info.FechaHora);
+
+                        QuitarFilaDelData(grid, e.RowIndex);
+                        RefrescarFormularioCitasSiAbierto();
+
+                        MessageBox.Show("Eliminación completada.", "OK",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
@@ -421,7 +316,7 @@ WHERE m.IdMascota IN (" + idList + @");";
         }
         #endregion
 
-        #region Decorado de ANTERIORES (mostrar Editar/Sin registro)
+        #region Decorado de ANTERIORES (Editar/Sin registro)
         private void DecorarAnterioresSegunRegistro()
         {
             if (dgvAnteriores.Rows.Count == 0) return;
@@ -430,20 +325,15 @@ WHERE m.IdMascota IN (" + idList + @");";
             {
                 if (row.IsNewRow) continue;
 
-                DateTime fecha = ParseDateFromRow(dgvAnteriores, row.Index);
+                if (!TryGetFechaHoraFromGridRow(dgvAnteriores, row.Index, out DateTime fechaHora))
+                    fechaHora = ParseDateFromRow(dgvAnteriores, row.Index);
+
                 int idMascota = ToInt(row.Cells["IdMascota"]?.Value);
+                int idCita = ToInt(row.Cells["IdCita"]?.Value);
 
-                // Leer override desde la celda oculta (si existe)
-                bool overrideTiene = false;
-                if (dgvAnteriores.Columns.Contains(COL_TIENE_REG))
-                {
-                    var val = row.Cells[COL_TIENE_REG]?.Value;
-                    if (val is bool b) overrideTiene = b;
-                }
+                bool tiene = RC_ExisteParaCita(idCita > 0 ? (int?)idCita : null, idMascota, fechaHora);
 
-                bool tiene = overrideTiene || RC_ExistePara(idMascota, fecha);
-
-                // ===== Editar =====
+                // Editar
                 if (!tiene)
                 {
                     var txtCell = new DataGridViewTextBoxCell { Value = "Sin registro" };
@@ -462,7 +352,7 @@ WHERE m.IdMascota IN (" + idList + @");";
                     row.Cells["colEditar"].Style.ForeColor = dgvAnteriores.DefaultCellStyle.ForeColor;
                 }
 
-                // ===== Eliminar (siempre botón) =====
+                // Eliminar (siempre botón)
                 if (!(row.Cells["colEliminar"] is DataGridViewButtonCell))
                     row.Cells["colEliminar"] = new DataGridViewButtonCell();
                 row.Cells["colEliminar"].ReadOnly = false;
@@ -473,39 +363,127 @@ WHERE m.IdMascota IN (" + idList + @");";
         }
         #endregion
 
-        #region CRUD/DB helpers (registro clínico)
-        private bool RC_ExistePara(int idMascota, DateTime fecha)
+        #region DB helpers (usando IdCita solo para consultar)
+        // ¿Existe RC para esa CITA?
+        private bool RC_ExisteParaCita(int? idCita, int idMascota, DateTime fechaHora)
         {
-            if (idMascota <= 0) return false;
-            const string sql = @"SELECT TOP(1) 1
-                                 FROM RegistroClinico
-                                 WHERE IdMascota=@m AND CONVERT(date, FechaRegistro)=@f;";
             var db = new csConexionBD();
             db.abrirConexion();
             try
             {
-                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                if (idCita.HasValue)
                 {
-                    cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
-                    cmd.Parameters.Add("@f", SqlDbType.Date).Value = fecha.Date;
-                    var o = cmd.ExecuteScalar();
-                    return o != null && o != DBNull.Value;
+                    const string sqlJoin = @"
+SELECT TOP(1) 1
+FROM RegistroClinico rc
+JOIN GestionCita c ON c.IdCita = @c
+WHERE rc.IdMascota = c.IdMascota
+  AND DATEDIFF(MINUTE, rc.FechaRegistro, c.FechaHora) = 0;";
+                    using (var cmd = new SqlCommand(sqlJoin, db.obtenerConexion()))
+                    {
+                        cmd.Parameters.Add("@c", SqlDbType.Int).Value = idCita.Value;
+                        var o = cmd.ExecuteScalar();
+                        return o != null && o != DBNull.Value;
+                    }
+                }
+                else
+                {
+                    const string sql = @"
+SELECT TOP(1) 1
+FROM RegistroClinico
+WHERE IdMascota = @m
+  AND DATEDIFF(MINUTE, FechaRegistro, @fh) = 0;";
+                    using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                    {
+                        cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
+                        cmd.Parameters.Add("@fh", SqlDbType.DateTime).Value = fechaHora;
+                        var o = cmd.ExecuteScalar();
+                        return o != null && o != DBNull.Value;
+                    }
                 }
             }
             finally { db.cerrarConexion(); }
         }
 
-        private void RC_DeleteByMascotaFechaOCita(int? idCita, int idMascota, DateTime fecha)
+        // Borrar RC de ESA cita
+        // Borra el RC que corresponde EXACTAMENTE a esa cita.
+        // Si viene IdCita, usamos un JOIN para localizar el IdRegistroClinico y lo borramos por Id.
+        // Si no hay IdCita, igualamos por IdMascota + FechaHora al minuto.
+        private int RC_DeletePorCita(int? idCita, int idMascota, DateTime fechaHora)
+        {
+            var db = new csConexionBD();
+            db.abrirConexion();
+            try
+            {
+                if (idCita.HasValue)
+                {
+                    const string sql = @"
+DECLARE @rid int;
+SELECT TOP(1) @rid = rc.IdRegistroClinico
+FROM RegistroClinico rc
+JOIN GestionCita c ON c.IdCita = @c
+WHERE rc.IdMascota = c.IdMascota
+  AND DATEDIFF(MINUTE, rc.FechaRegistro, c.FechaHora) = 0
+ORDER BY rc.IdRegistroClinico DESC;
+
+IF @rid IS NOT NULL
+BEGIN
+    DELETE FROM RegistroClinico WHERE IdRegistroClinico = @rid;
+    SELECT @@ROWCOUNT;
+END
+ELSE
+BEGIN
+    SELECT 0;
+END";
+                    using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                    {
+                        cmd.Parameters.Add("@c", SqlDbType.Int).Value = idCita.Value;
+                        var o = cmd.ExecuteScalar();
+                        return (o == null || o == DBNull.Value) ? 0 : Convert.ToInt32(o);
+                    }
+                }
+                else
+                {
+                    const string sql = @"
+DELETE TOP(1) FROM RegistroClinico
+WHERE IdMascota = @m
+  AND DATEDIFF(MINUTE, FechaRegistro, @fh) = 0;
+SELECT @@ROWCOUNT;";
+                    using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                    {
+                        cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
+                        cmd.Parameters.Add("@fh", SqlDbType.DateTime).Value = fechaHora;
+                        var o = cmd.ExecuteScalar();
+                        return (o == null || o == DBNull.Value) ? 0 : Convert.ToInt32(o);
+                    }
+                }
+            }
+            finally { db.cerrarConexion(); }
+        }
+
+
+        // Eliminar cita por IdCita si existe; si no, resolver por mascota+fecha (más cercano)
+        private int Cita_DeleteByIdOCriterios(int? idCita, int idMascota, DateTime fechaHora)
         {
             const string sql = @"
-;WITH x AS (
-  SELECT TOP(1) *
-  FROM RegistroClinico
-  WHERE (IdCita = @c AND @c IS NOT NULL)
-     OR (IdCita IS NULL AND IdMascota=@m AND CONVERT(date, FechaRegistro)=@f)
-  ORDER BY FechaRegistro DESC, IdRegistroClinico DESC
-)
-DELETE FROM x;";
+DECLARE @id int = @c;
+IF @id IS NULL
+BEGIN
+    SELECT TOP(1) @id = IdCita
+    FROM dbo.GestionCita
+    WHERE IdMascota=@m AND CONVERT(date, FechaHora)=CONVERT(date, @fh)
+    ORDER BY ABS(DATEDIFF(MINUTE, FechaHora, @fh)) ASC, FechaHora DESC, IdCita DESC;
+END
+
+IF @id IS NOT NULL
+BEGIN
+    DELETE FROM dbo.GestionCita WHERE IdCita=@id;
+    SELECT 1;
+END
+ELSE
+BEGIN
+    SELECT 0;
+END";
             var db = new csConexionBD();
             db.abrirConexion();
             try
@@ -514,8 +492,9 @@ DELETE FROM x;";
                 {
                     cmd.Parameters.Add("@c", SqlDbType.Int).Value = idCita.HasValue ? (object)idCita.Value : DBNull.Value;
                     cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
-                    cmd.Parameters.Add("@f", SqlDbType.Date).Value = fecha.Date;
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Add("@fh", SqlDbType.DateTime).Value = fechaHora;
+                    var o = cmd.ExecuteScalar();
+                    return (o == null || o == DBNull.Value) ? 0 : Convert.ToInt32(o);
                 }
             }
             finally { db.cerrarConexion(); }
@@ -523,25 +502,104 @@ DELETE FROM x;";
         #endregion
 
         #region Utilidades
+        private void QuitarFilaDelData(DataGridView grid, int rowIndex)
+        {
+            try
+            {
+                var dv = grid.DataSource as DataView;
+                var drv = dv != null ? dv[rowIndex] : (grid.Rows[rowIndex].DataBoundItem as DataRowView);
+
+                if (drv != null)
+                {
+                    drv.Delete();
+                    drv.Row.Table.AcceptChanges();
+                }
+                else if (rowIndex >= 0 && rowIndex < grid.Rows.Count)
+                {
+                    grid.Rows.RemoveAt(rowIndex);
+                }
+            }
+            catch { }
+
+            if (grid == dgvAnteriores) DecorarAnterioresSegunRegistro();
+        }
+
+        private void RefrescarFormularioCitasSiAbierto()
+        {
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is fCitas citas)
+                {
+                    citas.RefrescarListado();
+                    break;
+                }
+            }
+        }
+
         private DateTime ParseDateFromRow(DataGridView grid, int rowIndex)
         {
             DateTime f = DateTime.Today;
             if (rowIndex < 0 || rowIndex >= grid.Rows.Count) return f;
-            DateTime tmp;
-            string v = Convert.ToString(grid.Rows[rowIndex].Cells["Fecha"].Value);
-            if (DateTime.TryParse(v, out tmp)) f = tmp.Date;
+            if (DateTime.TryParse(Convert.ToString(grid.Rows[rowIndex].Cells["Fecha"].Value), out DateTime tmp))
+                f = tmp.Date;
             return f;
         }
 
-        private bool TryParseFecha(DataRow r, out DateTime fecha)
+        private bool TryParseFechaHora(DataRow r, out DateTime fh)
         {
-            fecha = DateTime.MinValue;
-            DateTime tmp;
-            if (r.Table.Columns.Contains("Fecha") && DateTime.TryParse(Convert.ToString(r["Fecha"]), out tmp))
-            { fecha = tmp.Date; return true; }
-            if (r.Table.Columns.Contains("FechaHora") && DateTime.TryParse(Convert.ToString(r["FechaHora"]), out tmp))
-            { fecha = tmp.Date; return true; }
-            return false;
+            fh = DateTime.MinValue;
+
+            if (r.Table.Columns.Contains("FechaHora") &&
+                DateTime.TryParse(Convert.ToString(r["FechaHora"]), out DateTime fh1))
+            { fh = fh1; return true; }
+
+            if (!(r.Table.Columns.Contains("Fecha") &&
+                  DateTime.TryParse(Convert.ToString(r["Fecha"]), out DateTime fx)))
+                return false;
+
+            TimeSpan hora = TimeSpan.Zero;
+            if (r.Table.Columns.Contains("Hora"))
+            {
+                var vh = Convert.ToString(r["Hora"]);
+                if (!string.IsNullOrWhiteSpace(vh))
+                {
+                    if (!TimeSpan.TryParse(vh, out hora) && DateTime.TryParse(vh, out DateTime ht))
+                        hora = ht.TimeOfDay;
+                }
+            }
+
+            fh = fx.Date.Add(hora);
+            return true;
+        }
+
+        private bool TryGetFechaHoraFromGridRow(DataGridView grid, int rowIndex, out DateTime fechaHora)
+        {
+            fechaHora = DateTime.MinValue;
+            if (rowIndex < 0 || rowIndex >= grid.Rows.Count) return false;
+
+            if (grid.Rows[rowIndex].DataBoundItem is DataRowView drv)
+            {
+                var t = drv.Row.Table;
+                if (t.Columns.Contains("FechaHora") &&
+                    DateTime.TryParse(Convert.ToString(drv["FechaHora"]), out DateTime fh))
+                { fechaHora = fh; return true; }
+            }
+
+            DateTime f;
+            var vf = Convert.ToString(grid.Rows[rowIndex].Cells["Fecha"]?.Value);
+            if (!DateTime.TryParse(vf, out f)) return false;
+            f = f.Date;
+
+            TimeSpan h = TimeSpan.Zero;
+            var vh = Convert.ToString(grid.Rows[rowIndex].Cells["Hora"]?.Value);
+            if (!string.IsNullOrWhiteSpace(vh))
+            {
+                if (!TimeSpan.TryParse(vh, out h) && DateTime.TryParse(vh, out DateTime ht))
+                    h = ht.TimeOfDay;
+            }
+
+            fechaHora = f.Add(h);
+            return true;
         }
 
         private CitaInfo ObtenerCitaInfoDesdeFila(DataGridView grid, int rowIndex)
@@ -557,15 +615,8 @@ DELETE FROM x;";
             string prop = Convert.ToString(Get("Propietario"));
             string mot = Convert.ToString(Get("Motivo"));
 
-            DateTime fecha = DateTime.Today; DateTime.TryParse(Convert.ToString(Get("Fecha")), out fecha);
-
-            TimeSpan hora = TimeSpan.Zero;
-            var vh = Convert.ToString(Get("Hora"));
-            if (!string.IsNullOrWhiteSpace(vh))
-            {
-                DateTime ht;
-                if (!TimeSpan.TryParse(vh, out hora) && DateTime.TryParse(vh, out ht)) hora = ht.TimeOfDay;
-            }
+            if (!TryGetFechaHoraFromGridRow(grid, rowIndex, out DateTime fechaHora))
+                fechaHora = DateTime.Today;
 
             if (idCita <= 0 && idMascota <= 0 && string.IsNullOrEmpty(masc)) return null;
 
@@ -578,7 +629,7 @@ DELETE FROM x;";
                 Raza = raz,
                 Propietario = prop,
                 Motivo = mot,
-                FechaHora = (fecha == DateTime.MinValue ? DateTime.Today : fecha.Date).Add(hora)
+                FechaHora = fechaHora
             };
         }
 

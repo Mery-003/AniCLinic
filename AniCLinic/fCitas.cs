@@ -357,6 +357,10 @@ ORDER BY C.FechaHora DESC;";
                 db.cerrarConexion();
             }
         }
+        public void RefrescarListado()
+        {
+            CargarData((txtBuscar.Text ?? string.Empty).Trim());
+        }
 
         private void guna2HtmlLabel2_Click(object sender, EventArgs e) { }
     }

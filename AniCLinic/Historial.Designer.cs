@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnAggPaciente = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.btnVer = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.txtMascotaNombre = new Guna.UI2.WinForms.Guna2TextBox();
@@ -40,22 +40,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnAggPaciente
+            // btnVer
             // 
-            this.btnAggPaciente.BorderRadius = 19;
-            this.btnAggPaciente.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnAggPaciente.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnAggPaciente.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAggPaciente.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnAggPaciente.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnAggPaciente.FillColor2 = System.Drawing.Color.DarkOliveGreen;
-            this.btnAggPaciente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAggPaciente.ForeColor = System.Drawing.Color.White;
-            this.btnAggPaciente.Location = new System.Drawing.Point(832, 75);
-            this.btnAggPaciente.Name = "btnAggPaciente";
-            this.btnAggPaciente.Size = new System.Drawing.Size(131, 41);
-            this.btnAggPaciente.TabIndex = 16;
-            this.btnAggPaciente.Text = "Ver Historial";
+            this.btnVer.BorderRadius = 19;
+            this.btnVer.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnVer.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnVer.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnVer.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnVer.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnVer.FillColor2 = System.Drawing.Color.DarkOliveGreen;
+            this.btnVer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVer.ForeColor = System.Drawing.Color.White;
+            this.btnVer.Location = new System.Drawing.Point(832, 75);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(131, 41);
+            this.btnVer.TabIndex = 16;
+            this.btnVer.Text = "Ver Historial";
             // 
             // guna2CircleButton1
             // 
@@ -171,7 +171,6 @@
             this.dgvHistorial.ThemeStyle.RowsStyle.Height = 22;
             this.dgvHistorial.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvHistorial.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvHistorial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentas_CellContentClick);
             // 
             // Historial
             // 
@@ -184,7 +183,7 @@
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.txtMascotaNombre);
             this.Controls.Add(this.guna2HtmlLabel2);
-            this.Controls.Add(this.btnAggPaciente);
+            this.Controls.Add(this.btnVer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Historial";
             this.Text = "Historial";
@@ -195,7 +194,7 @@
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2GradientButton btnAggPaciente;
+        private Guna.UI2.WinForms.Guna2GradientButton btnVer;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2TextBox txtMascotaNombre;
