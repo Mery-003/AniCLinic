@@ -153,6 +153,21 @@ namespace AniCLinic
                 var conf = MessageBox.Show("¿Desea finalizar la venta?", "Venta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (conf == DialogResult.Yes)
                 {
+                    foreach (DataGridViewRow fila in dgvVentas.Rows)
+                    {
+                        SqlDataReader reader = crud.EjecutarQuery("Select CantidadDisponible, NombreProducto from Inventario where IdProducto = " +
+                            Convert.ToInt32(fila.Cells["ID"].Value));
+                        if (reader.Read())
+                        {
+                            if(reader.GetInt32(0) < Convert.ToInt32(fila.Cells["Cantidad"].Value))
+                            {
+                                MessageBox.Show("Error no tiene suficientes " + reader.GetString(1) + " en el inventario. \n" +
+                                    "Actualmente cuenta con " + reader.GetInt32(0) + " Unidades disponibles disponibles.");
+                                reader.Close();
+                                return;
+                            }
+                        }
+                    }
                     decimal venta = 0;
                     decimal iva;
                     decimal totalVenta;
@@ -207,7 +222,15 @@ namespace AniCLinic
                             MessageBox.Show("Error al guardar la venta");
                             return;
                         }
-                            
+                        SqlDataReader reader = crud.EjecutarQuery("Select CantidadDisponible from Inventario Where IdProducto = " + ventaAgg.IdProducto);
+                        if (reader.Read())
+                        {
+                            int cantidadRestada = reader.GetInt32(0) - ventaAgg.CantidadVendida;
+                            crud.editarBD("Update Inventario set CantidadDisponible = @CantidadRestada Where IdProducto = @IdProducto",
+                                new SqlParameter("@CantidadRestada", cantidadRestada),
+                                new SqlParameter("@IdProducto", ventaAgg.IdProducto));
+                            reader.Close();
+                        }
                         ventaAgg.obtenerId();
 
                         crud.agregarBD("Insert into DetalleFactura (IdFactura, IdVenta) values (@IdFactura, @IdVenta)",
@@ -329,6 +352,12 @@ namespace AniCLinic
                 DataGridViewRow fila = dgvVentas.Rows[0];
                 dgvVentas.Rows.Remove(fila);
             }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            frFactura frFac = new frFactura(factura.IdFactura);
+            frFac.ShowDialog();
         }
     }
     public class ProductoItem

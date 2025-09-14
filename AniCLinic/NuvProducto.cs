@@ -81,52 +81,95 @@ namespace AniCLinic
                 {
                     int idP = reader.GetInt32(0);
                     string nomP = reader.GetString(1);
-                    cmbProveedor.Items.Add(new ProductoItem(idP, nomP));
+                    cmbProveedor.Items.Add(new ProveedorItem(idP, nomP));
                 }
             }
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (!editar)
+            try
             {
-                if (cmbProveedor.SelectedItem is ProvedorItem proveedorSeleccionado)
+                if (!validar())
+                    return;
+                if (!editar)
                 {
-                    int idProveedor = proveedorSeleccionado.idProveedor;
-                    prod = new csProducto(
-                    idProveedor,
-                    txtNomProducto.Text,
-                    txtDescripcion.Text,
-                    cmbCategoria.Text,
-                    Convert.ToDecimal(txtPrecio.Text),
-                    Convert.ToInt32(txtCantidad.Text));
+                    if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
+                    {
+                        int idProveedor = proveedorSeleccionado.idProveedor;
+                        prod = new csProducto(
+                        idProveedor,
+                        txtNomProducto.Text,
+                        txtDescripcion.Text,
+                        cmbCategoria.Text,
+                        Convert.ToDecimal(txtPrecio.Text),
+                        Convert.ToInt32(txtCantidad.Text));
 
-                    if (prod.agregarProducto())
-                        MessageBox.Show("Producto agregado correctamente.");
-                    else
-                        MessageBox.Show("Error al guardar un producto");
+                        if (prod.agregarProducto())
+                            MessageBox.Show("Producto agregado correctamente.");
+                        else
+                            MessageBox.Show("Error al guardar un producto");
+                    }
                 }
-            }
-            else
+                else
+                {
+                    if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
+                    {
+                        int idProveedor = proveedorSeleccionado.idProveedor;
+                        prod = new csProducto(
+                        idProveedor,
+                        txtNomProducto.Text,
+                        txtDescripcion.Text,
+                        cmbCategoria.Text,
+                        Convert.ToDecimal(txtPrecio.Text),
+                        Convert.ToInt32(txtCantidad.Text));
+
+                        if (prod.editarProducto(idProducto))
+                            MessageBox.Show("Producto editado correctamente.");
+                        else
+                            MessageBox.Show("Error al editar el producto");
+                    }
+                }
+                this.Close();
+            } catch (Exception ex)
             {
-                if (cmbProveedor.SelectedItem is ProvedorItem proveedorSeleccionado)
-                {
-                    int idProveedor = proveedorSeleccionado.idProveedor;
-                    prod = new csProducto(
-                    idProveedor,
-                    txtNomProducto.Text,
-                    txtDescripcion.Text,
-                    cmbCategoria.Text,
-                    Convert.ToDecimal(txtPrecio.Text),
-                    Convert.ToInt32(txtCantidad.Text));
-
-                    if (prod.editarProducto(idProducto))
-                        MessageBox.Show("Producto editado correctamente.");
-                    else
-                        MessageBox.Show("Error al editar el producto");
-                }
+                MessageBox.Show(ex.Message);
             }
-            this.Close();
         }
+        private bool validar()
+        {
+            if (string.IsNullOrWhiteSpace(txtNomProducto.Text))
+            {
+                MessageBox.Show("Llene todos los campos");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtCantidad.Text))
+            {
+                MessageBox.Show("Llene todos los campos");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtPrecio.Text))
+            {
+                MessageBox.Show("Llene todos los campos");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+            {
+                MessageBox.Show("Llene todos los campos");
+                return false;
+            }
+            if (cmbCategoria.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos");
+                return false;
+            }
+            if (cmbProveedor.SelectedIndex == -1)
+            {
+                MessageBox.Show("Llene todos los campos");
+                return false;
+            }
+            return true;
+        }
+
         private csProducto CargarProducto(int id)
         {
             prod = null;
@@ -147,13 +190,31 @@ namespace AniCLinic
             }
             return prod;
         }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtCantidad.Text.Length >= 5) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((char.IsDigit(e.KeyChar) && txtPrecio.Text.Replace(",", "").Replace(".", "").Length >= 6)
+                || (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != ',')
+                || (e.KeyChar == ',' && txtPrecio.Text.Contains(",")))
+            {
+                e.Handled = true;
+            }
+        }
     }
 
-    public class ProvedorItem
+    public class ProveedorItem
     {
         public int idProveedor { get; set; }
         public string nombreProveedor { get; set; }
-        public ProvedorItem(int id, string nombre)
+        public ProveedorItem(int id, string nombre)
         {
             idProveedor = id;
             nombreProveedor = nombre;

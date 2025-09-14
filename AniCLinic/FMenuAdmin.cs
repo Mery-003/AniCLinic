@@ -34,6 +34,11 @@ namespace AniCLinic
         {
             menu.AbrirEnPanel(panel, new FUsuariosAdmin());
         }
+
+        private void btnDiseño_Click(object sender, EventArgs e)
+        {
+            menu.AbrirEnPanel(panel, new frReportes());
+        }
     }
 
 }

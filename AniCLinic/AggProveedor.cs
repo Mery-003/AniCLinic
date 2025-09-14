@@ -74,6 +74,32 @@ namespace AniCLinic
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtDireccion.Text))
+            {
+                MessageBox.Show("Llene todos los campos.");
+                return;
+            }
+
             if (!edicion)
             {
                 proveedor = new csProveedor(
@@ -103,6 +129,22 @@ namespace AniCLinic
                     MessageBox.Show("Error al editar el Proveedor.");
             }
             this.Close();
+        }
+
+        private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtCedula.Text.Length >= 10) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtTelefono.Text.Length >= 10) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

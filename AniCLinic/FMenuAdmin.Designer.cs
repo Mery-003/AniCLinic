@@ -82,6 +82,7 @@
             this.btnDiseño.Name = "btnDiseño";
             this.btnDiseño.Size = new System.Drawing.Size(253, 241);
             this.btnDiseño.TabIndex = 119;
+            this.btnDiseño.Click += new System.EventHandler(this.btnDiseño_Click);
             // 
             // btnUsuarios
             // 

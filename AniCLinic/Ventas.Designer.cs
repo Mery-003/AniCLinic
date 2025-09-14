@@ -159,7 +159,7 @@
             // 
             // cmbProducto
             // 
-            this.cmbProducto.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.cmbProducto.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cmbProducto.BorderColor = System.Drawing.Color.Silver;
             this.cmbProducto.BorderRadius = 19;
             this.cmbProducto.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -178,7 +178,7 @@
             // 
             // cmbCategoria
             // 
-            this.cmbCategoria.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.cmbCategoria.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cmbCategoria.BorderColor = System.Drawing.Color.Silver;
             this.cmbCategoria.BorderRadius = 19;
             this.cmbCategoria.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -197,7 +197,7 @@
             // 
             // txtCantidad
             // 
-            this.txtCantidad.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtCantidad.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtCantidad.BorderColor = System.Drawing.Color.Silver;
             this.txtCantidad.BorderRadius = 20;
             this.txtCantidad.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -253,7 +253,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtNombre.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtNombre.BorderColor = System.Drawing.Color.Silver;
             this.txtNombre.BorderRadius = 20;
             this.txtNombre.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -276,7 +276,7 @@
             // 
             // txtCelular
             // 
-            this.txtCelular.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtCelular.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtCelular.BorderColor = System.Drawing.Color.Silver;
             this.txtCelular.BorderRadius = 20;
             this.txtCelular.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -299,7 +299,7 @@
             // 
             // txtCedula
             // 
-            this.txtCedula.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtCedula.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtCedula.BorderColor = System.Drawing.Color.Silver;
             this.txtCedula.BorderRadius = 20;
             this.txtCedula.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -367,7 +367,7 @@
             // 
             // txtCorreo
             // 
-            this.txtCorreo.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtCorreo.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtCorreo.BorderColor = System.Drawing.Color.Silver;
             this.txtCorreo.BorderRadius = 20;
             this.txtCorreo.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -401,7 +401,7 @@
             // 
             // txtPrecio
             // 
-            this.txtPrecio.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtPrecio.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.txtPrecio.BorderColor = System.Drawing.Color.Silver;
             this.txtPrecio.BorderRadius = 20;
             this.txtPrecio.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -479,7 +479,7 @@
             // 
             // lblTtlVno
             // 
-            this.lblTtlVno.BackColor = System.Drawing.Color.Transparent;
+            this.lblTtlVno.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lblTtlVno.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblTtlVno.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTtlVno.Location = new System.Drawing.Point(701, 466);
@@ -490,7 +490,7 @@
             // 
             // lblTtlVenta
             // 
-            this.lblTtlVenta.BackColor = System.Drawing.Color.Transparent;
+            this.lblTtlVenta.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lblTtlVenta.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblTtlVenta.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTtlVenta.Location = new System.Drawing.Point(776, 466);
@@ -501,7 +501,7 @@
             // 
             // lblIVAno
             // 
-            this.lblIVAno.BackColor = System.Drawing.Color.Transparent;
+            this.lblIVAno.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lblIVAno.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblIVAno.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblIVAno.Location = new System.Drawing.Point(702, 494);
@@ -512,7 +512,7 @@
             // 
             // lblIVA
             // 
-            this.lblIVA.BackColor = System.Drawing.Color.Transparent;
+            this.lblIVA.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lblIVA.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblIVA.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblIVA.Location = new System.Drawing.Point(776, 494);
@@ -523,7 +523,7 @@
             // 
             // lblTotalno
             // 
-            this.lblTotalno.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotalno.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lblTotalno.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblTotalno.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTotalno.Location = new System.Drawing.Point(721, 519);
@@ -534,7 +534,7 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lblTotal.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTotal.Location = new System.Drawing.Point(776, 519);
@@ -559,10 +559,11 @@
             this.btnImprimir.Size = new System.Drawing.Size(151, 41);
             this.btnImprimir.TabIndex = 156;
             this.btnImprimir.Text = "Imprimir";
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // cmbMetodoPago
             // 
-            this.cmbMetodoPago.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.cmbMetodoPago.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.cmbMetodoPago.BorderColor = System.Drawing.Color.Silver;
             this.cmbMetodoPago.BorderRadius = 19;
             this.cmbMetodoPago.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -593,7 +594,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1059, 620);
             this.Controls.Add(this.guna2HtmlLabel8);
             this.Controls.Add(this.cmbMetodoPago);
