@@ -295,6 +295,8 @@ namespace AniCLinic {
             
             private global::System.Data.DataColumn columnTotalVenta;
             
+            private global::System.Data.DataColumn columnNombre;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtFacturaDataTable() {
@@ -394,6 +396,14 @@ namespace AniCLinic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NombreColumn {
+                get {
+                    return this.columnNombre;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace AniCLinic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtFacturaRow AdddtFacturaRow(string Cantidad, string Producto, string Precio, string Total, string NumeroF, string Subtotal, string IVA, string TotalVenta) {
+            public dtFacturaRow AdddtFacturaRow(string Cantidad, string Producto, string Precio, string Total, string NumeroF, string Subtotal, string IVA, string TotalVenta, string Nombre) {
                 dtFacturaRow rowdtFacturaRow = ((dtFacturaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Cantidad,
@@ -439,7 +449,8 @@ namespace AniCLinic {
                         NumeroF,
                         Subtotal,
                         IVA,
-                        TotalVenta};
+                        TotalVenta,
+                        Nombre};
                 rowdtFacturaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtFacturaRow);
                 return rowdtFacturaRow;
@@ -470,6 +481,7 @@ namespace AniCLinic {
                 this.columnSubtotal = base.Columns["Subtotal"];
                 this.columnIVA = base.Columns["IVA"];
                 this.columnTotalVenta = base.Columns["TotalVenta"];
+                this.columnNombre = base.Columns["Nombre"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,6 +503,8 @@ namespace AniCLinic {
                 base.Columns.Add(this.columnIVA);
                 this.columnTotalVenta = new global::System.Data.DataColumn("TotalVenta", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalVenta);
+                this.columnNombre = new global::System.Data.DataColumn("Nombre", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombre);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -761,6 +775,22 @@ namespace AniCLinic {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Nombre {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtFactura.NombreColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Nombre\' de la tabla \'dtFactura\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtFactura.NombreColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsCantidadNull() {
                 return this.IsNull(this.tabledtFactura.CantidadColumn);
             }
@@ -853,6 +883,18 @@ namespace AniCLinic {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTotalVentaNull() {
                 this[this.tabledtFactura.TotalVentaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNombreNull() {
+                return this.IsNull(this.tabledtFactura.NombreColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNombreNull() {
+                this[this.tabledtFactura.NombreColumn] = global::System.Convert.DBNull;
             }
         }
         

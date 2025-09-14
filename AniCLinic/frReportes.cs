@@ -19,7 +19,7 @@ namespace AniCLinic
 
         private void txtAño_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((!char.IsDigit(e.KeyChar) || txtAño.Text.Length >= 10) && e.KeyChar != 8)
+            if ((!char.IsDigit(e.KeyChar) || txtAño.Text.Length >= 4) && e.KeyChar != 8)
             {
                 e.Handled = true;
             }
@@ -41,6 +41,25 @@ namespace AniCLinic
         {
             frReporteFinanciero reporte = new frReporteFinanciero(txtAño.Text, "ListaProducto");
             reporte.ShowDialog();
+        }
+
+        private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtFactura.Text.Length >= 4) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtFactura.Text))
+            {
+                MessageBox.Show("Ingrese un id de factura.");
+                return;
+            }
+            frFactura factura = new frFactura(Convert.ToInt32(txtFactura.Text));
+            factura.ShowDialog();
         }
     }
 }

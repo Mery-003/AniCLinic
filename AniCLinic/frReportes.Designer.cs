@@ -36,6 +36,9 @@
             this.lblReportes = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtAño = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtFactura = new Guna.UI2.WinForms.Guna2TextBox();
             this.SuspendLayout();
             // 
             // btnMes
@@ -46,7 +49,7 @@
             this.btnMes.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnMes.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnMes.ForeColor = System.Drawing.Color.White;
-            this.btnMes.Location = new System.Drawing.Point(75, 221);
+            this.btnMes.Location = new System.Drawing.Point(180, 221);
             this.btnMes.Name = "btnMes";
             this.btnMes.Size = new System.Drawing.Size(212, 130);
             this.btnMes.TabIndex = 0;
@@ -61,7 +64,7 @@
             this.btnProducto.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnProducto.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnProducto.ForeColor = System.Drawing.Color.White;
-            this.btnProducto.Location = new System.Drawing.Point(408, 221);
+            this.btnProducto.Location = new System.Drawing.Point(180, 380);
             this.btnProducto.Name = "btnProducto";
             this.btnProducto.Size = new System.Drawing.Size(212, 130);
             this.btnProducto.TabIndex = 1;
@@ -76,7 +79,7 @@
             this.btnListaProductos.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnListaProductos.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnListaProductos.ForeColor = System.Drawing.Color.White;
-            this.btnListaProductos.Location = new System.Drawing.Point(750, 221);
+            this.btnListaProductos.Location = new System.Drawing.Point(624, 221);
             this.btnListaProductos.Name = "btnListaProductos";
             this.btnListaProductos.Size = new System.Drawing.Size(212, 130);
             this.btnListaProductos.TabIndex = 2;
@@ -146,12 +149,64 @@
             this.txtAño.TabIndex = 141;
             this.txtAño.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAño_KeyPress);
             // 
+            // guna2Button1
+            // 
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.Location = new System.Drawing.Point(624, 380);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(212, 130);
+            this.guna2Button1.TabIndex = 143;
+            this.guna2Button1.Text = "FACTURAS";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(851, 411);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(152, 19);
+            this.guna2HtmlLabel1.TabIndex = 145;
+            this.guna2HtmlLabel1.Text = "Ingrese un id de Factura";
+            // 
+            // txtFactura
+            // 
+            this.txtFactura.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.txtFactura.BorderColor = System.Drawing.Color.Silver;
+            this.txtFactura.BorderRadius = 20;
+            this.txtFactura.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtFactura.DefaultText = "";
+            this.txtFactura.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtFactura.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtFactura.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtFactura.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtFactura.FillColor = System.Drawing.Color.LightGray;
+            this.txtFactura.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtFactura.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtFactura.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtFactura.Location = new System.Drawing.Point(863, 436);
+            this.txtFactura.Name = "txtFactura";
+            this.txtFactura.PlaceholderText = "";
+            this.txtFactura.SelectedText = "";
+            this.txtFactura.Size = new System.Drawing.Size(122, 36);
+            this.txtFactura.TabIndex = 144;
+            this.txtFactura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.guna2TextBox1_KeyPress);
+            // 
             // frReportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1024, 522);
+            this.Controls.Add(this.guna2HtmlLabel1);
+            this.Controls.Add(this.txtFactura);
+            this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.guna2HtmlLabel3);
             this.Controls.Add(this.txtAño);
             this.Controls.Add(this.guna2Separator2);
@@ -178,5 +233,8 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblReportes;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2TextBox txtAño;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2TextBox txtFactura;
     }
 }
