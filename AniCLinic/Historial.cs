@@ -54,8 +54,8 @@ namespace AniCLinic
 SELECT 
     M.IdMascota AS ID,
     M.Nombre,
-    M.Especie,
-    M.Raza,
+    E.Especie,
+    R.Raza,
     M.Sexo,
     M.Edad,
     M.PesoKg,
@@ -63,6 +63,8 @@ SELECT
     (P.Nombre + ' ' + P.Apellido) AS Propietario
 FROM Mascota M
 INNER JOIN Persona P ON P.IdPersona = M.IdPersona
+INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie
+INNER JOIN Raza      R ON R.IdRaza = M.IdRaza
 WHERE (@Filtro = '' 
        OR P.Cedula LIKE @Filtro + '%'
        OR P.Nombre LIKE @Filtro + '%'

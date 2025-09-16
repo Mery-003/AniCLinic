@@ -20,7 +20,9 @@ namespace AniCLinic
         }
         private void CargarDatosC(string filtro = "")
         {
-            string sentencia = "Select IdMascota, Nombre, Especie, Raza, Sexo, Edad, Discapacidad from Mascota " +
+            string sentencia = "Select M.IdMascota, M.Nombre, E.Especie, R.Raza, M.Sexo, M.Edad, M.Discapacidad from Mascota M " +
+                "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie " +
+                "INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
                 "where Nombre like @filtro + '%'";
             dgvCarnet.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@filtro", filtro));
             ConfigurarColumnas();
@@ -82,7 +84,10 @@ namespace AniCLinic
 
             int idMascota = Convert.ToInt32(rowView["IdMascota"]);
 
-            SqlDataReader reader = crud.EjecutarQuery("Select * from Mascota Where IdMascota = " + idMascota);
+            SqlDataReader reader = crud.EjecutarQuery("Select * from Mascota M" +
+                " INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie  " +
+                " INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
+                " Where IdMascota = " + idMascota);
             
             try
             {

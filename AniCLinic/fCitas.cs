@@ -140,18 +140,20 @@ SELECT
     C.FechaHora,
     C.Motivo,
     M.Nombre AS Mascota,
-    M.Especie,
-    M.Raza,
+    E.Especie,
+    R.Raza,
     (P.Nombre + ' ' + P.Apellido) AS Propietario,
     P.Cedula AS CedulaPropietario
 FROM GestionCita C
 INNER JOIN Mascota   M ON M.IdMascota = C.IdMascota
 INNER JOIN Persona   P ON P.IdPersona = M.IdPersona
+INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie
+INNER JOIN Raza      R ON R.IdRaza = M.IdRaza
 WHERE (@Filtro = '' 
        OR P.Cedula LIKE @Filtro + '%'
        OR P.Nombre LIKE @Filtro + '%'
        OR M.Nombre LIKE @Filtro + '%')
-ORDER BY C.FechaHora DESC;";
+ORDER BY C.FechaHora DESC";
 
             var dt = _crud.cargarBDData(sql, new SqlParameter("@Filtro", filtro));
 
