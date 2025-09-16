@@ -31,22 +31,13 @@ namespace AniCLinic
 
         private void CargarData(string filtro = "")
         {
-            string sql = @"
-SELECT 
-    M.IdMascota AS ID,
-    M.Nombre,
-    M.Especie,
-    M.Raza,
-    M.Sexo,
-    M.Edad,
-    M.PesoKg,
-    M.Discapacidad,
-    (P.Nombre + ' ' + P.Apellido) AS Propietario
-FROM Mascota M
-INNER JOIN Persona P ON P.IdPersona = M.IdPersona
-WHERE (@Filtro ='' OR P.Cedula LIKE @Filtro + '%' OR P.Nombre LIKE @Filtro + '%' 
-OR M.Nombre LIKE @Filtro + '%')
-ORDER BY M.IdMascota DESC;";
+            string sql = @"Select M.IdMascota as ID, M.Nombre, E.Especie, R.Raza, M.Sexo, M.Edad, M.PesoKg, 
+M.Discapacidad, (P.Nombre + ' ' + P.Apellido) as Propietario from Mascota M
+Inner Join Persona P ON P.IdPersona=M.IdPersona
+Inner Join Especie E ON E.IdEspecie=M.IdEspecie
+Inner Join Raza R ON R.IdRaza=M.IdRaza
+Where M.Nombre like @Filtro + '%' OR P.Nombre like @Filtro + '%' OR P.Cedula like @Filtro + '%'
+Order by M.IdMascota Desc";
 
             dgvPacientes.DataSource = _crud.cargarBDData(sql, new SqlParameter("@Filtro", filtro));
 
