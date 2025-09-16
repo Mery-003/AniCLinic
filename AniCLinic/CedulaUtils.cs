@@ -53,17 +53,22 @@ namespace AniCLinic
         public static DataTable CitasListado()
         {
             string sql = @"
-            SELECT  g.IdCita,
-                    m.Nombre                                  AS Mascota,
-                    m.Especie, m.Raza,
-                    CONVERT(date, g.FechaHora)                AS Fecha,
-                    CONVERT(varchar(5), g.FechaHora, 108)     AS Hora,
-                    g.Motivo,
-                    (p.Nombre + ' ' + p.Apellido)             AS Propietario
-            FROM dbo.GestionCita g
-            JOIN dbo.Mascota     m ON m.IdMascota = g.IdMascota
-            JOIN dbo.Persona     p ON p.IdPersona = m.IdPersona
-            ORDER BY g.FechaHora DESC;";
+            SELECT c.IdCita,
+        m.IdMascota,
+        m.Nombre AS Mascota,
+        e.Especie,    
+        r.Raza,           
+        CONVERT(date, c.FechaHora) AS Fecha,
+        CONVERT(varchar(5), c.FechaHora, 108) AS Hora,
+        c.Motivo,
+        (p.Nombre + ' ' + p.Apellido) AS Propietario,
+        p.Cedula AS CedulaPropietario
+        FROM GestionCita c
+        INNER JOIN Mascota m ON c.IdMascota = m.IdMascota
+        LEFT JOIN Especie e ON m.IdEspecie = e.IdEspecie
+        LEFT JOIN Raza r ON m.IdRaza = r.IdRaza
+        INNER JOIN Persona p ON m.IdPersona = p.IdPersona
+        ORDER BY c.FechaHora DESC";
 
             return crud.cargarBDData(sql);
         }
