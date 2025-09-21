@@ -13,7 +13,6 @@ namespace AniCLinic
         {
             InitializeComponent();
 
-            // Grids solo lectura
             PrepararGrid(dgvPropietarios);
             PrepararGrid(dgvMascotas);
 
@@ -23,7 +22,6 @@ namespace AniCLinic
                 RefrescarMascotas();
             };
 
-            // Abrir formularios
             btnPropietarios.Click += (s, e) =>
             {
                 using (var f = new AggPropietario(this, 0))
@@ -54,25 +52,9 @@ namespace AniCLinic
         public void RefrescarPropietarios()
         {
             string sql = @"
-IF OBJECT_ID('dbo.Empleado','U') IS NOT NULL
-BEGIN
-    SELECT p.IdPersona AS ID,
-           (p.Nombre + ' ' + p.Apellido) AS Propietario,
-           p.Cedula AS [C.I.],
-           p.Celular AS Celular
-    FROM Persona p
-    WHERE NOT EXISTS(SELECT 1 FROM dbo.Empleado e WHERE e.IdPersona = p.IdPersona)
-    ORDER BY p.Nombre, p.Apellido;
-END
-ELSE
-BEGIN
-    SELECT p.IdPersona AS ID,
-           (p.Nombre + ' ' + p.Apellido) AS Propietario,
-           p.Cedula AS [C.I.],
-           p.Celular AS Celular
-    FROM Persona p
-    ORDER BY p.Nombre, p.Apellido;
-END";
+Select P.IdPersona as ID, (P.Nombre + ' ' + P.Apellido) as Propietario,
+P.Cedula, P.Celular, P.Correo from Mascota M
+Inner Join Persona P ON M.IdPersona=P.IdPersona";
             dgvPropietarios.Columns.Clear();
             dgvPropietarios.DataSource = _crud.cargarBDData(sql);
             AgregarColumnasAccion(dgvPropietarios);

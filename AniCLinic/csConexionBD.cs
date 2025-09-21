@@ -32,7 +32,7 @@ namespace AniCLinic
 
         public csConexionBD()
         {
-            servidor = "MERY\\SQLEXPRESS";
+            servidor = "ROONY\\SQLEXPRESS";
             basedatos = "AniClinic";
             usuario = "sa";
             clave = "abcdef";

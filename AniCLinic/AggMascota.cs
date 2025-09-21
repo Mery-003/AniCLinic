@@ -25,7 +25,7 @@ namespace AniCLinic
             btnSeleccionarFotoMascota.Click += btnSeleccionarFotoMascota_Click;
             btnGuardarMascota.Click += btnGuardarMascota_Click;
             btnCancelarMascota.Click += (s, e) => this.Close();
-
+            
             txtPeso.KeyPress += (s, e) =>
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
