@@ -89,6 +89,18 @@
     <Compile Include="AggCita.Designer.cs">
       <DependentUpon>AggCita.cs</DependentUpon>
     </Compile>
+    <Compile Include="AggMascota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggMascota.Designer.cs">
+      <DependentUpon>AggMascota.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggPropietario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AggPropietario.Designer.cs">
+      <DependentUpon>AggPropietario.cs</DependentUpon>
+    </Compile>
     <Compile Include="AggProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,12 +112,6 @@
     </Compile>
     <Compile Include="AggRegistroClinico.Designer.cs">
       <DependentUpon>AggRegistroClinico.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AgregarPaciente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AgregarPaciente.Designer.cs">
-      <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="CedulaUtils.cs" />
     <Compile Include="csConexionBD.cs" />
@@ -184,6 +190,12 @@
     </Compile>
     <Compile Include="frFactura.Designer.cs">
       <DependentUpon>frFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FRMListaPropietario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMListaPropietario.Designer.cs">
+      <DependentUpon>FRMListaPropietario.cs</DependentUpon>
     </Compile>
     <Compile Include="frReporteFinanciero.cs">
       <SubType>Form</SubType>
@@ -277,14 +289,17 @@
     <EmbeddedResource Include="AggCita.resx">
       <DependentUpon>AggCita.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AggMascota.resx">
+      <DependentUpon>AggMascota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AggPropietario.resx">
+      <DependentUpon>AggPropietario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AggProveedor.resx">
       <DependentUpon>AggProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AggRegistroClinico.resx">
       <DependentUpon>AggRegistroClinico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AgregarPaciente.resx">
-      <DependentUpon>AgregarPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DatosAcceso.resx">
       <DependentUpon>DatosAcceso.cs</DependentUpon>
@@ -309,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frFactura.resx">
       <DependentUpon>frFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMListaPropietario.resx">
+      <DependentUpon>FRMListaPropietario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frReporteFinanciero.resx">
       <DependentUpon>frReporteFinanciero.cs</DependentUpon>

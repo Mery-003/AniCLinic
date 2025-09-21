@@ -359,6 +359,11 @@ namespace AniCLinic
             frFactura frFac = new frFactura(factura.IdFactura);
             frFac.ShowDialog();
         }
+
+        private void Ventas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     public class ProductoItem
     {

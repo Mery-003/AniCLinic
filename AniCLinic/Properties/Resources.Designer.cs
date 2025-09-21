@@ -443,6 +443,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap istockphoto_923170288_612x612 {
+            get {
+                object obj = ResourceManager.GetObject("istockphoto-923170288-612x612", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap key_fill {
             get {
                 object obj = ResourceManager.GetObject("key-fill", resourceCulture);

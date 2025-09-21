@@ -33,9 +33,9 @@
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lvFichas = new System.Windows.Forms.ListView();
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.lvFichas = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -63,17 +63,6 @@
             this.guna2HtmlLabel9.Size = new System.Drawing.Size(182, 34);
             this.guna2HtmlLabel9.TabIndex = 103;
             this.guna2HtmlLabel9.Text = "Registro Clínico";
-            // 
-            // lvFichas
-            // 
-            this.lvFichas.BackColor = System.Drawing.Color.LightGray;
-            this.lvFichas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvFichas.Font = new System.Drawing.Font("Segoe UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvFichas.Location = new System.Drawing.Point(26, 61);
-            this.lvFichas.Name = "lvFichas";
-            this.lvFichas.Size = new System.Drawing.Size(511, 248);
-            this.lvFichas.TabIndex = 104;
-            this.lvFichas.UseCompatibleStateImageBehavior = false;
             // 
             // btnAceptar
             // 
@@ -111,6 +100,18 @@
             this.btnCancelar.TabIndex = 135;
             this.btnCancelar.Text = "Cancelar";
             // 
+            // lvFichas
+            // 
+            this.lvFichas.BackColor = System.Drawing.Color.LightGray;
+            this.lvFichas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvFichas.Font = new System.Drawing.Font("Segoe UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvFichas.HideSelection = false;
+            this.lvFichas.Location = new System.Drawing.Point(26, 61);
+            this.lvFichas.Name = "lvFichas";
+            this.lvFichas.Size = new System.Drawing.Size(511, 248);
+            this.lvFichas.TabIndex = 104;
+            this.lvFichas.UseCompatibleStateImageBehavior = false;
+            // 
             // HistorialFecha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,8 +136,8 @@
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private System.Windows.Forms.ListView lvFichas;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
+        private System.Windows.Forms.ListView lvFichas;
     }
 }

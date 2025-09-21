@@ -66,7 +66,7 @@
             this.guna2TabControl1.Controls.Add(this.tabPage2);
             this.guna2TabControl1.Controls.Add(this.tabPage3);
             this.guna2TabControl1.ItemSize = new System.Drawing.Size(100, 40);
-            this.guna2TabControl1.Location = new System.Drawing.Point(12, 13);
+            this.guna2TabControl1.Location = new System.Drawing.Point(12, 12);
             this.guna2TabControl1.Name = "guna2TabControl1";
             this.guna2TabControl1.SelectedIndex = 0;
             this.guna2TabControl1.Size = new System.Drawing.Size(1035, 589);

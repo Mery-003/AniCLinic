@@ -1,0 +1,208 @@
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+
+namespace AniCLinic
+{
+    public partial class AggPropietario : Form
+    {
+        private readonly csCRUD _crud = new csCRUD();
+        private readonly fPacientes _parent;
+        private readonly int _idPersona; // 0 = nuevo
+
+        public AggPropietario(fPacientes parent, int idPersona = 0)
+        {
+            InitializeComponent();
+            _parent = parent;
+            _idPersona = idPersona;
+
+            // Eventos UI
+            btnSeleccionarFoto.Click += btnSeleccionarFoto_Click;
+            btnGuardarPropietario.Click += btnGuardarPropietario_Click;
+            btnCancelarPropietario.Click += (s, e) => this.Close();
+
+            // Solo números y hasta 10 dígitos
+            txtCelular.KeyPress += SoloNumero_KeyPress;
+            txtCedula.KeyPress += SoloNumero_KeyPress;
+            txtCelular.TextChanged += Limitar10;
+            txtCedula.TextChanged += Limitar10;
+
+            if (_idPersona > 0) CargarPropietario(_idPersona);
+            else Limpiar();
+        }
+
+        private void Limpiar()
+        {
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            txtCelular.Text = "";
+            txtCedula.Text = "";
+            txtCorreo.Text = "";
+            txtDireccion.Text = "";
+            if (picPropietario != null) picPropietario.Image = null;
+        }
+
+        private static void SoloNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+        private static void Limitar10(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb != null && tb.Text.Length > 10) tb.Text = tb.Text.Substring(0, 10);
+            var gtb = sender as Guna.UI2.WinForms.Guna2TextBox;
+            if (gtb != null && gtb.Text.Length > 10) gtb.Text = gtb.Text.Substring(0, 10);
+        }
+
+        private static byte[] ImageToBytesOrNull(Image img)
+        {
+            if (img == null) return null;
+            using (var ms = new MemoryStream())
+            {
+                img.Save(ms, img.RawFormat);
+                return ms.ToArray();
+            }
+        }
+        private static Image BytesToImageOrNull(object blob)
+        {
+            if (blob == null || blob == DBNull.Value) return null;
+            try { using (var ms = new MemoryStream((byte[])blob)) return Image.FromStream(ms); }
+            catch { return null; }
+        }
+
+        private void CargarPropietario(int idPersona)
+        {
+            string sql = @"
+SELECT IdPersona, Nombre, Apellido, Celular, Cedula, Correo, DireccionDomiciliaria, Imagen
+FROM Persona WHERE IdPersona = " + idPersona;
+
+            SqlDataReader rd = null;
+            try
+            {
+                rd = _crud.EjecutarQuery(sql);
+                if (rd != null && rd.Read())
+                {
+                    txtNombre.Text = rd["Nombre"] + "";
+                    txtApellido.Text = rd["Apellido"] + "";
+                    txtCelular.Text = rd["Celular"] + "";
+                    txtCedula.Text = rd["Cedula"] + "";
+                    txtCorreo.Text = rd["Correo"] + "";
+                    txtDireccion.Text = rd["DireccionDomiciliaria"] + "";
+                    if (picPropietario != null)
+                    {
+                        var img = BytesToImageOrNull(rd["Imagen"]);
+                        picPropietario.Image = img;
+                        if (img != null) picPropietario.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                }
+                else MessageBox.Show("No se encontró el propietario.");
+            }
+            finally
+            {
+                if (rd != null) rd.Close();
+                try { _crud.conexion.cerrarConexion(); } catch { }
+            }
+        }
+
+        private bool Validar()
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text)) { MessageBox.Show("Ingrese el nombre."); return false; }
+            if (string.IsNullOrWhiteSpace(txtApellido.Text)) { MessageBox.Show("Ingrese el apellido."); return false; }
+            if (string.IsNullOrWhiteSpace(txtCelular.Text)) { MessageBox.Show("Ingrese el celular."); return false; }
+            if (string.IsNullOrWhiteSpace(txtCedula.Text)) { MessageBox.Show("Ingrese la cédula."); return false; }
+            if (txtCelular.Text.Trim().Length > 10) { MessageBox.Show("Celular debe tener máx. 10 dígitos."); return false; }
+            if (txtCedula.Text.Trim().Length > 10) { MessageBox.Show("C.I. debe tener máx. 10 dígitos."); return false; }
+            if (!string.IsNullOrWhiteSpace(txtCorreo.Text))
+            {
+                if (!Regex.IsMatch(txtCorreo.Text.Trim(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                { MessageBox.Show("Correo no válido."); return false; }
+            }
+            return true;
+        }
+
+        private void btnSeleccionarFoto_Click(object sender, EventArgs e)
+        {
+            if (picPropietario == null) return;
+            using (var ofd = new OpenFileDialog { Filter = "Imágenes|*.jpg;*.jpeg;*.png;*.bmp" })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        picPropietario.Image = Image.FromFile(ofd.FileName);
+                        picPropietario.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                    catch { MessageBox.Show("No se pudo cargar la imagen."); }
+                }
+            }
+        }
+
+        private bool CedulaDuplicada(string ci, int excluirId = 0)
+        {
+            string sql = excluirId > 0
+                ? "SELECT COUNT(1) FROM Persona WHERE Cedula=@ci AND IdPersona<>@id"
+                : "SELECT COUNT(1) FROM Persona WHERE Cedula=@ci";
+            DataTable dt = _crud.cargarBDData(sql, new SqlParameter("@ci", ci), new SqlParameter("@id", excluirId));
+            int n = (dt != null && dt.Rows.Count > 0) ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+            return n > 0;
+        }
+
+        private void btnGuardarPropietario_Click(object sender, EventArgs e)
+        {
+            if (!Validar()) return;
+
+            if (_idPersona > 0 && CedulaDuplicada(txtCedula.Text.Trim(), _idPersona))
+            { MessageBox.Show("La cédula ya pertenece a otro propietario."); return; }
+            if (_idPersona == 0 && CedulaDuplicada(txtCedula.Text.Trim()))
+            { MessageBox.Show("La cédula ya existe."); return; }
+
+            object correo = string.IsNullOrWhiteSpace(txtCorreo.Text) ? (object)DBNull.Value : txtCorreo.Text.Trim();
+            object direccion = string.IsNullOrWhiteSpace(txtDireccion.Text) ? (object)DBNull.Value : txtDireccion.Text.Trim();
+            SqlParameter pImg = new SqlParameter("@Imagen", SqlDbType.VarBinary);
+            pImg.Value = (object)ImageToBytesOrNull(picPropietario == null ? null : picPropietario.Image) ?? DBNull.Value;
+
+            if (_idPersona > 0)
+            {
+                string up = @"UPDATE Persona SET
+                              Nombre=@n, Apellido=@a, Celular=@cel, Cedula=@ci,
+                              Correo=@co, DireccionDomiciliaria=@dir, Imagen=@Imagen
+                              WHERE IdPersona=@id;";
+                bool ok = _crud.editarBD(up,
+                    new SqlParameter("@n", txtNombre.Text.Trim()),
+                    new SqlParameter("@a", txtApellido.Text.Trim()),
+                    new SqlParameter("@cel", txtCelular.Text.Trim()),
+                    new SqlParameter("@ci", txtCedula.Text.Trim()),
+                    new SqlParameter("@co", correo),
+                    new SqlParameter("@dir", direccion),
+                    pImg,
+                    new SqlParameter("@id", _idPersona));
+                if (!ok) { MessageBox.Show("No se pudo actualizar."); return; }
+                MessageBox.Show("Propietario actualizado.");
+            }
+            else
+            {
+                string ins = @"INSERT INTO Persona
+                               (Nombre, Apellido, Celular, Cedula, Correo, DireccionDomiciliaria, Imagen)
+                               VALUES (@n, @a, @cel, @ci, @co, @dir, @Imagen);";
+                bool ok = _crud.agregarBD(ins,
+                    new SqlParameter("@n", txtNombre.Text.Trim()),
+                    new SqlParameter("@a", txtApellido.Text.Trim()),
+                    new SqlParameter("@cel", txtCelular.Text.Trim()),
+                    new SqlParameter("@ci", txtCedula.Text.Trim()),
+                    new SqlParameter("@co", correo),
+                    new SqlParameter("@dir", direccion),
+                    pImg);
+                if (!ok) { MessageBox.Show("No se pudo registrar."); return; }
+                MessageBox.Show("Propietario registrado.");
+            }
+
+            try { _parent.RefrescarPropietarios(); } catch { }
+            this.Close();
+        }
+    }
+}
