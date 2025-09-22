@@ -69,14 +69,17 @@ Inner Join Persona P ON M.IdPersona=P.IdPersona";
             string sql = @"
 SELECT m.IdMascota AS ID,
        m.Nombre AS Mascota,
-       m.IdEspecie AS Especie,
-       m.IdRaza AS Raza,
+       e.Especie,
+       r.Raza,
        m.Sexo AS Sexo,
        DATEDIFF(YEAR, m.FechaNacimiento, GETDATE()) AS [Edad (años)],
-       (p.Nombre + ' ' + p.Apellido) AS Propietario
+       m.Discapacidad, 
+       (p.Nombre + ' ' + p.Apellido) AS Propietario 
 FROM Mascota m
 INNER JOIN Persona p ON p.IdPersona = m.IdPersona
-ORDER BY m.IdMascota DESC;";
+INNER JOIN Especie e ON e.IdEspecie = m.IdEspecie 
+INNER JOIN Raza r ON r.IdRaza = m.IdRaza 
+ORDER BY m.IdMascota DESC";
             dgvMascotas.Columns.Clear();
             dgvMascotas.DataSource = _crud.cargarBDData(sql);
             AgregarColumnasAccion(dgvMascotas);

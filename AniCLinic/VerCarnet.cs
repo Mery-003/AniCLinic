@@ -10,36 +10,38 @@ namespace AniCLinic
     public partial class VerCarnet : Form
     {
         public VerCarnet() { }
-        public VerCarnet(csMascota mascota)
+        public VerCarnet(SqlDataReader reader)
         {
             InitializeComponent();
             DateTime fecha = DateTime.Now;
-            lblNombres.Text = mascota.Nombre;
-            lblEspecie.Text = mascota.Especie;
-            lblRaza.Text = mascota.Raza;
-            lblSexo.Text = mascota.Sexo;
-            lblEdad.Text = mascota.Edad;
-            lblDiscapacidad.Text = mascota.Especie;
-            lblFechaEmision.Text = fecha.ToString("dd/MM/yyyy");
-            if (mascota.Foto != null && mascota.Foto.Length > 0)
+            try
             {
-                try
+                if (reader.Read())
                 {
-                    picFoto.Image = Image.FromStream(new MemoryStream(mascota.Foto));
-                    picFoto.SizeMode = PictureBoxSizeMode.Zoom;
+                    lblNombres.Text = reader["Nombre"].ToString();
+                    lblDiscapacidad.Text = reader["Discapacidad"].ToString();
+                    lblEdad.Text = reader["Edad"].ToString() + " Años";
+                    lblEspecie.Text = reader["Especie"].ToString();
+                    lblFechaEmision.Text = fecha.ToString("yyyy/MM/dd");
+                    lblRaza.Text = reader["Raza"].ToString();
+                    lblSexo.Text = reader["Sexo"].ToString();
+                    if (!reader.IsDBNull(reader.GetOrdinal("Imagen")))
+                    {
+                        picFoto.Image = Image.FromStream(new MemoryStream((byte[])reader["Imagen"]));
+                        picFoto.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                    else
+                    {
+                        picFoto.Image = Resources._1084899;
+                        picFoto.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
                 }
-                catch
-                {
-                    picFoto.Image = Resources._1084899;
-                }
-            }
-            else
+            } 
+            catch (Exception ex) 
             {
-                picFoto.Image = Resources._1084899;
+                MessageBox.Show(ex.Message);
             }
         }
-        
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -57,7 +57,7 @@ SELECT
     E.Especie,
     R.Raza,
     M.Sexo,
-    M.Edad,
+    FLOOR(DATEDIFF(DAY, M.FechaNacimiento, GETDATE()) / 365.25) AS Edad,
     M.PesoKg,
     M.Discapacidad,
     (P.Nombre + ' ' + P.Apellido) AS Propietario

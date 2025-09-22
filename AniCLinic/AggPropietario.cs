@@ -62,9 +62,11 @@ namespace AniCLinic
         private static byte[] ImageToBytesOrNull(Image img)
         {
             if (img == null) return null;
+
             using (var ms = new MemoryStream())
+            using (var bmp = new Bitmap(img))
             {
-                img.Save(ms, img.RawFormat);
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 return ms.ToArray();
             }
         }
@@ -93,11 +95,14 @@ FROM Persona WHERE IdPersona = " + idPersona;
                     txtCedula.Text = rd["Cedula"] + "";
                     txtCorreo.Text = rd["Correo"] + "";
                     txtDireccion.Text = rd["DireccionDomiciliaria"] + "";
-                    if (picPropietario != null)
+                    if (rd["Imagen"] != DBNull.Value)
                     {
-                        var img = BytesToImageOrNull(rd["Imagen"]);
-                        picPropietario.Image = img;
-                        if (img != null) picPropietario.SizeMode = PictureBoxSizeMode.StretchImage;
+                        using (var ms = new MemoryStream((byte[])rd["Imagen"]))
+                        using (var tempImg = Image.FromStream(ms))
+                        {
+                            picPropietario.Image = new Bitmap(tempImg);
+                            picPropietario.SizeMode = PictureBoxSizeMode.StretchImage;
+                        }
                     }
                 }
                 else MessageBox.Show("No se encontró el propietario.");

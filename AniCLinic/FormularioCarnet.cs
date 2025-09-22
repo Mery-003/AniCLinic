@@ -10,7 +10,6 @@ namespace AniCLinic
     public partial class FormularioCarnet : Form
     {
         csCRUD crud = new csCRUD();
-        csMascota mascota;
         bool botonesAgregados = false;
         public FormularioCarnet()
         {
@@ -20,7 +19,9 @@ namespace AniCLinic
         }
         private void CargarDatosC(string filtro = "")
         {
-            string sentencia = "Select M.IdMascota, M.Nombre, E.Especie, R.Raza, M.Sexo, M.Edad, M.Discapacidad from Mascota M " +
+            string sentencia = "Select M.IdMascota, M.Nombre, E.Especie, R.Raza, M.Sexo, M.FechaNacimiento " +
+                "as [Fecha de Nacimiento], M.Discapacidad, FLOOR(DATEDIFF(DAY, M.FechaNacimiento, GETDATE()) / 365.25) AS [Edad (Años)] " +
+                "from Mascota M " +
                 "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie " +
                 "INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
                 "where Nombre like @filtro + '%'";
@@ -84,37 +85,13 @@ namespace AniCLinic
 
             int idMascota = Convert.ToInt32(rowView["IdMascota"]);
 
-            SqlDataReader reader = crud.EjecutarQuery("Select * from Mascota M" +
+            SqlDataReader reader = crud.EjecutarQuery("Select *, FLOOR(DATEDIFF(DAY, M.FechaNacimiento, GETDATE()) / 365.25) AS Edad from Mascota M" +
                 " INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie  " +
                 " INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
                 " Where IdMascota = " + idMascota);
             
-            try
-            {
-                if (reader.Read())
-                {
-                    string pesoS = reader["PesoKg"].ToString();
-                    var culture = CultureInfo.CurrentCulture;
-                    decimal peso = Convert.ToDecimal(pesoS, culture);
-                    mascota = new csMascota(
-                        reader["Nombre"].ToString(),
-                        reader["Especie"].ToString(),
-                        reader["Raza"].ToString(),
-                        reader["Sexo"].ToString(),
-                        reader["Edad"].ToString(),
-                        peso,
-                        reader["Discapacidad"].ToString(),
-                        (byte[])reader["Imagen"]
-                        );
-                }
-                    
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
 
-            VerCarnet carnet = new VerCarnet(mascota);
+            VerCarnet carnet = new VerCarnet(reader);
             carnet.ShowDialog();
         }
     }

@@ -103,20 +103,20 @@ namespace AniCLinic
         private void CargarCombos()
         {
             // Especie
-            string colEsp = ColTextoTabla("Especie");
-            string exprEsp = colEsp == null ? "CAST(IdEspecie AS nvarchar(20))" : "[" + colEsp + "]";
-            using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdEspecie, " + exprEsp + " AS Texto FROM Especie ORDER BY 2"))
+            using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdEspecie, Especie FROM Especie ORDER BY Especie"))
             {
                 DataTable dt = new DataTable();
                 if (dr != null) dt.Load(dr);
                 if (dr != null) dr.Close(); try { _crud.conexion.cerrarConexion(); } catch { }
-                cmbEspecie.DisplayMember = "Texto";
-                cmbEspecie.ValueMember = "IdEspecie";
+
+                cmbEspecie.DisplayMember = "Especie";   // Mostrar nombre
+                cmbEspecie.ValueMember = "IdEspecie";   // Guardar Id
                 cmbEspecie.DataSource = dt;
             }
 
+            // Inicializar combo raza vacío
             cmbRaza.DataSource = CrearTablaPH("IdRaza");
-            cmbRaza.DisplayMember = "Texto";
+            cmbRaza.DisplayMember = "Raza";
             cmbRaza.ValueMember = "IdRaza";
 
             cmbEspecie.SelectedIndexChanged += (s, e) => CargarRazas();
@@ -130,17 +130,17 @@ namespace AniCLinic
                 cmbRaza.SelectedIndex = -1;
                 return;
             }
-            int idEsp = Convert.ToInt32(cmbEspecie.SelectedValue);
-            string colR = ColTextoTabla("Raza");
-            string exprR = colR == null ? "CAST(IdRaza AS nvarchar(20))" : "[" + colR + "]";
 
-            using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdRaza, " + exprR + " AS Texto FROM Raza WHERE IdEspecie=" + idEsp + " ORDER BY 2"))
+            int idEsp = Convert.ToInt32(cmbEspecie.SelectedValue);
+
+            using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdRaza, Raza FROM Raza WHERE IdEspecie=" + idEsp + " ORDER BY Raza"))
             {
                 DataTable dt = new DataTable();
                 if (dr != null) dt.Load(dr);
                 if (dr != null) dr.Close(); try { _crud.conexion.cerrarConexion(); } catch { }
-                cmbRaza.DisplayMember = "Texto";
-                cmbRaza.ValueMember = "IdRaza";
+
+                cmbRaza.DisplayMember = "Raza";   // Mostrar nombre
+                cmbRaza.ValueMember = "IdRaza";   // Guardar Id
                 cmbRaza.DataSource = dt;
             }
         }
@@ -149,10 +149,12 @@ namespace AniCLinic
         {
             string sql = @"
 SELECT m.IdMascota, m.IdPersona, m.Imagen, m.Nombre, m.Sexo, m.PesoKg, m.Discapacidad,
-       m.IdEspecie, m.IdRaza, m.FechaNacimiento,
+       e. IdEspecie, e.Especie, r.IdRaza, r.Raza, m.FechaNacimiento,
        p.Nombre AS PNombre, p.Apellido AS PApellido, p.Cedula AS PCedula
 FROM Mascota m
 INNER JOIN Persona p ON p.IdPersona = m.IdPersona
+INNER JOIN Especie e ON e.IdEspecie = m.IdEspecie 
+INNER JOIN Raza r ON r.IdRaza = m.IdRaza
 WHERE m.IdMascota = " + id;
 
             using (SqlDataReader rd = _crud.EjecutarQuery(sql))
@@ -176,17 +178,24 @@ WHERE m.IdMascota = " + id;
                         cmbDiscapacidad.Items.Add("Motora");
                         cmbDiscapacidad.Items.Add("Cognitiva");
                     }
-                    cmbDiscapacidad.Text = rd["Discapacidad"] == DBNull.Value ? "Ninguna" : (rd["Discapacidad"] + "");
+                    string discapacidad = rd["Discapacidad"] == DBNull.Value ? "Ninguna" : rd["Discapacidad"].ToString();
+
+                    if (cmbDiscapacidad.Items.Contains(discapacidad))
+                        cmbDiscapacidad.SelectedItem = discapacidad;
+                    else
+                        cmbDiscapacidad.SelectedItem = "Ninguna";
 
                     if (rd["FechaNacimiento"] != DBNull.Value)
                         dtpFechaNacimiento.Value = Convert.ToDateTime(rd["FechaNacimiento"]);
 
                     if (rd["IdEspecie"] != DBNull.Value)
                     {
-                        cmbEspecie.SelectedValue = Convert.ToInt32(rd["IdEspecie"]);
+                        cmbEspecie.SelectedValue = rd["IdEspecie"]; 
                         CargarRazas();
+
+                        if (rd["IdRaza"] != DBNull.Value)
+                            cmbRaza.SelectedValue = rd["IdRaza"];
                     }
-                    if (rd["IdRaza"] != DBNull.Value) cmbRaza.SelectedValue = Convert.ToInt32(rd["IdRaza"]);
 
                     if (rd["Imagen"] != DBNull.Value)
                     {
@@ -259,7 +268,7 @@ WHERE m.IdMascota = " + id;
             string sexo = cmbSexo.Text.Trim();
             decimal? peso = string.IsNullOrWhiteSpace(txtPeso.Text) ? (decimal?)null
                 : Convert.ToDecimal(txtPeso.Text.Replace(',', '.'), CultureInfo.InvariantCulture);
-            string disc = (cmbDiscapacidad.Text ?? "Ninguna").Trim();
+            string disc = (cmbDiscapacidad.Text ?? "Ninguna");
             DateTime fnac = dtpFechaNacimiento.Value.Date;
             SqlParameter pImg = new SqlParameter("@Imagen", SqlDbType.VarBinary) { Value = (object)ImgToBytes(picMascota.Image) ?? DBNull.Value };
 
@@ -296,7 +305,14 @@ WHERE m.IdMascota = " + id;
                 MessageBox.Show("Mascota registrada.");
             }
 
-            try { _parent.RefrescarMascotas(); } catch { }
+            try 
+            { 
+                _parent.RefrescarMascotas();
+                _parent.RefrescarPropietarios();
+            } catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message);
+            }
             this.Close();
         }
     }
