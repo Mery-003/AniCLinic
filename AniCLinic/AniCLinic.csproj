@@ -190,6 +190,12 @@
     <Compile Include="frFactura.Designer.cs">
       <DependentUpon>frFactura.cs</DependentUpon>
     </Compile>
+    <Compile Include="FRMListaMascota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMListaMascota.Designer.cs">
+      <DependentUpon>FRMListaMascota.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRMListaPropietario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frFactura.resx">
       <DependentUpon>frFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMListaMascota.resx">
+      <DependentUpon>FRMListaMascota.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FRMListaPropietario.resx">
       <DependentUpon>FRMListaPropietario.cs</DependentUpon>
