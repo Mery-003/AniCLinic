@@ -62,7 +62,7 @@ namespace AniCLinic
 
             cmbEspecie.SelectedIndex = -1;
             cmbRaza.DataSource = CrearTablaPH("IdRaza");
-            cmbRaza.DisplayMember = "Texto";
+            cmbRaza.DisplayMember = "Raza";
             cmbRaza.ValueMember = "IdRaza";
             cmbRaza.SelectedIndex = -1;
 
@@ -73,10 +73,10 @@ namespace AniCLinic
         {
             DataTable t = new DataTable();
             t.Columns.Add(id, typeof(int));
-            t.Columns.Add("Texto", typeof(string));
+            t.Columns.Add("Raza", typeof(string));
             DataRow r = t.NewRow();
             r[id] = DBNull.Value;
-            r["Texto"] = "-- Seleccione --";
+            r["Raza"] = "-- Seleccione --";
             t.Rows.Add(r);
             return t;
         }

@@ -26,7 +26,7 @@ namespace AniCLinic
             string sentencia = "Select E.IdEmpleado, (P.Nombre + ' ' + P.Apellido) as Nombre, P.Cedula ,E.Usuario, " +
                 "P.Correo, P.DireccionDomiciliaria, Case Administrador when 1 then 'Si' else 'no' end as Administrador " +
                 "from Empleados E inner join Persona P on E.IdPersona=P.IdPersona " +
-                "Where P.Nombre like (@filtro + '%') or P.Cedula like (@filtro + '%')";
+                "Where P.Nombre + ' ' + P.Apellido like (@filtro + '%') or P.Cedula like (@filtro + '%')";
             dgvUsuarios.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@filtro", filtro));
             configurarColumnas();
         }

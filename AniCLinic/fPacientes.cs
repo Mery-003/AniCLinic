@@ -49,12 +49,13 @@ namespace AniCLinic
         }
 
         // ====================== PROPIETARIOS ======================
-        public void RefrescarPropietarios()
+        public void RefrescarPropietarios(string filtro = "")
         {
             string sql = @"
 Select P.IdPersona as ID, (P.Nombre + ' ' + P.Apellido) as Propietario,
 P.Cedula, P.Celular, P.Correo from Mascota M
-Inner Join Persona P ON M.IdPersona=P.IdPersona";
+Inner Join Persona P ON M.IdPersona=P.IdPersona 
+Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR P.Cedula like '" + filtro + "' + '%'";
             dgvPropietarios.Columns.Clear();
             dgvPropietarios.DataSource = _crud.cargarBDData(sql);
             AgregarColumnasAccion(dgvPropietarios);
@@ -64,7 +65,7 @@ Inner Join Persona P ON M.IdPersona=P.IdPersona";
         }
 
         // ======================== MASCOTAS ========================
-        public void RefrescarMascotas()
+        public void RefrescarMascotas(string filtro = "")
         {
             string sql = @"
 SELECT m.IdMascota AS ID,
@@ -79,7 +80,8 @@ FROM Mascota m
 INNER JOIN Persona p ON p.IdPersona = m.IdPersona
 INNER JOIN Especie e ON e.IdEspecie = m.IdEspecie 
 INNER JOIN Raza r ON r.IdRaza = m.IdRaza 
-ORDER BY m.IdMascota DESC";
+Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR m.Nombre like '" + filtro + "' + '%' " +
+" ORDER BY m.IdMascota DESC";
             dgvMascotas.Columns.Clear();
             dgvMascotas.DataSource = _crud.cargarBDData(sql);
             AgregarColumnasAccion(dgvMascotas);
@@ -169,6 +171,16 @@ ORDER BY m.IdMascota DESC";
                     RefrescarMascotas();
                 }
             }
+        }
+
+        private void txtBuscarPropietarios_TextChanged(object sender, EventArgs e)
+        {
+            RefrescarPropietarios(txtBuscarPropietarios.Text);
+        }
+
+        private void txtBuscarMascotas_TextChanged(object sender, EventArgs e)
+        {
+            RefrescarMascotas(txtBuscarMascotas.Text);
         }
     }
 }

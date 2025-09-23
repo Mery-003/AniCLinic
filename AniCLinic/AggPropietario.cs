@@ -53,10 +53,27 @@ namespace AniCLinic
         }
         private static void Limitar10(object sender, EventArgs e)
         {
-            var tb = sender as TextBox;
-            if (tb != null && tb.Text.Length > 10) tb.Text = tb.Text.Substring(0, 10);
-            var gtb = sender as Guna.UI2.WinForms.Guna2TextBox;
-            if (gtb != null && gtb.Text.Length > 10) gtb.Text = gtb.Text.Substring(0, 10);
+            if (sender is TextBox tb)
+            {
+                int pos = tb.SelectionStart;
+
+                if (tb.Text.Length > 10)
+                {
+                    tb.Text = tb.Text.Substring(0, 10);
+                    tb.SelectionStart = Math.Min(pos, tb.Text.Length);
+                }
+            }
+
+            if (sender is Guna.UI2.WinForms.Guna2TextBox gtb)
+            {
+                int pos = gtb.SelectionStart;
+
+                if (gtb.Text.Length > 10)
+                {
+                    gtb.Text = gtb.Text.Substring(0, 10);
+                    gtb.SelectionStart = Math.Min(pos, gtb.Text.Length);
+                }
+            }
         }
 
         private static byte[] ImageToBytesOrNull(Image img)
