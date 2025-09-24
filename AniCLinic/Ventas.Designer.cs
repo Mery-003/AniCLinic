@@ -32,12 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvVentas = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbProducto = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cmbCategoria = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtCantidad = new Guna.UI2.WinForms.Guna2TextBox();
@@ -75,6 +69,13 @@
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,6 +98,7 @@
             this.Nombre,
             this.Descripcion,
             this.Precio,
+            this.Iva,
             this.Cantidad,
             this.Total});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -135,36 +137,6 @@
             this.dgvVentas.ThemeStyle.RowsStyle.Height = 22;
             this.dgvVentas.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvVentas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
             // 
             // cmbProducto
             // 
@@ -507,9 +479,9 @@
             this.lblTtlVenta.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTtlVenta.Location = new System.Drawing.Point(691, 268);
             this.lblTtlVenta.Name = "lblTtlVenta";
-            this.lblTtlVenta.Size = new System.Drawing.Size(72, 19);
+            this.lblTtlVenta.Size = new System.Drawing.Size(21, 19);
             this.lblTtlVenta.TabIndex = 151;
-            this.lblTtlVenta.Text = "lblTtlVenta";
+            this.lblTtlVenta.Text = "$ 0";
             // 
             // lblIVAno
             // 
@@ -529,9 +501,9 @@
             this.lblIVA.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblIVA.Location = new System.Drawing.Point(691, 296);
             this.lblIVA.Name = "lblIVA";
-            this.lblIVA.Size = new System.Drawing.Size(40, 19);
+            this.lblIVA.Size = new System.Drawing.Size(21, 19);
             this.lblIVA.TabIndex = 153;
-            this.lblIVA.Text = "lvlIVA";
+            this.lblIVA.Text = "$ 0";
             // 
             // lblTotalno
             // 
@@ -551,9 +523,9 @@
             this.lblTotal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTotal.Location = new System.Drawing.Point(691, 321);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(51, 19);
+            this.lblTotal.Size = new System.Drawing.Size(21, 19);
             this.lblTotal.TabIndex = 155;
-            this.lblTotal.Text = "lblTotal";
+            this.lblTotal.Text = "$ 0";
             // 
             // btnImprimir
             // 
@@ -720,6 +692,41 @@
             this.guna2Button2.TabIndex = 165;
             this.guna2Button2.UseTransparentBackground = true;
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            // 
+            // Iva
+            // 
+            this.Iva.HeaderText = "IVA";
+            this.Iva.Name = "Iva";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            // 
             // Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -804,12 +811,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTotalno;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTotal;
         private Guna.UI2.WinForms.Guna2GradientButton btnImprimir;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private Guna.UI2.WinForms.Guna2ComboBox cmbMetodoPago;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2Button guna2Button9;
@@ -821,5 +822,12 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator3;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Iva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
     }
 }

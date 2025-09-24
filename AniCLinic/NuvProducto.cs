@@ -89,8 +89,11 @@ namespace AniCLinic
         {
             try
             {
+                decimal iva = 0;
                 if (!validar())
                     return;
+                if (cmbCategoria.SelectedIndex == 1 || cmbCategoria.SelectedIndex == 3 || cmbCategoria.SelectedIndex == 4)
+                    iva = 0.15m;
                 if (!editar)
                 {
                     if (cmbProveedor.SelectedItem is ProveedorItem proveedorSeleccionado)
@@ -102,6 +105,7 @@ namespace AniCLinic
                         txtDescripcion.Text,
                         cmbCategoria.Text,
                         Convert.ToDecimal(txtPrecio.Text),
+                        iva,
                         Convert.ToInt32(txtCantidad.Text));
 
                         if (prod.agregarProducto())
@@ -121,6 +125,7 @@ namespace AniCLinic
                         txtDescripcion.Text,
                         cmbCategoria.Text,
                         Convert.ToDecimal(txtPrecio.Text),
+                        iva,
                         Convert.ToInt32(txtCantidad.Text));
 
                         if (prod.editarProducto(idProducto))
@@ -184,6 +189,7 @@ namespace AniCLinic
                         reader["Descripcion"].ToString(),
                         reader["Categoria"].ToString(),
                         Convert.ToDecimal(reader["PrecioUnitario"]),
+                        Convert.ToDecimal(reader["Iva"]),
                         Convert.ToInt32(reader["CantidadDisponible"])
                         );
                 }

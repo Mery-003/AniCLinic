@@ -17,6 +17,7 @@ namespace AniCLinic
         string descripcion { get; set; }
         string categoria { get; set; }
         decimal precioUnitario { get; set; }
+        decimal iva { get; set; }
         int cantidad { get; set; }
         public int IdProducto
         {
@@ -48,21 +49,27 @@ namespace AniCLinic
             get { return precioUnitario; }
             set { precioUnitario = value; }
         }
+        public decimal Iva
+        {
+            get { return iva; }
+            set { iva = value; }
+        }
         public int Cantidad
         {
             get { return cantidad; }
             set { cantidad = value; }
         }
-        public csProducto(int idProv, string nombre, string descr, string cat, decimal preUni, int cant)
+        public csProducto(int idProv, string nombre, string descr, string cat, decimal preUni, decimal iva, int cant)
         {
             IdProveedor = idProv;
             NombreProducto = nombre;
             Descripcion = descr;
             Categoria = cat;
             PrecioUnitario = preUni;
+            Iva = iva;
             Cantidad = cant;
         }
-        public csProducto(int idProd, int idProv, string nombre, string descr, string cat, decimal preUni, int cant)
+        public csProducto(int idProd, int idProv, string nombre, string descr, string cat, decimal preUni, decimal iva, int cant)
         {
             IdProducto = idProd;
             IdProveedor = idProv;
@@ -70,31 +77,35 @@ namespace AniCLinic
             Descripcion = descr;
             Categoria = cat;
             PrecioUnitario = preUni;
+            Iva = iva;
             Cantidad = cant;
         }
         public bool agregarProducto()
         {
             csCRUD crud = new csCRUD();
-            return crud.agregarBD("Insert into Inventario (IdProveedor, NombreProducto, Descripcion, Categoria, PrecioUnitario, CantidadDisponible) " +
-                "values (@IdProveedor, @NombreP, @Descripcion, @Categoria, @Precio, @Cantidad)", 
+            return crud.agregarBD("Insert into Inventario (IdProveedor, NombreProducto, Descripcion, " +
+                "Categoria, PrecioUnitario, Iva, CantidadDisponible) " +
+                "values (@IdProveedor, @NombreP, @Descripcion, @Categoria, @Precio, @Iva, @Cantidad)", 
                 new SqlParameter("@IdProveedor", IdProveedor),
                 new SqlParameter("@NombreP", NombreProducto),
                 new SqlParameter("@Descripcion", Descripcion),
                 new SqlParameter("@Categoria", Categoria),
                 new SqlParameter("@Precio", PrecioUnitario),
+                new SqlParameter("@Iva", Iva),
                 new SqlParameter("@Cantidad", Cantidad));
         }
         public bool editarProducto(int id)
         {
             csCRUD crud = new csCRUD();
             return crud.editarBD("Update Inventario set IdProveedor = @IdProveedor, NombreProducto = @Nombre, Descripcion = @Descripcion, " +
-                "Categoria = @Categoria, PrecioUnitario = @Precio, CantidadDisponible = @Cantidad " +
+                "Categoria = @Categoria, PrecioUnitario = @Precio, Iva = @Iva, CantidadDisponible = @Cantidad " +
                 "Where IdProducto = @Id",
                 new SqlParameter("@IdProveedor", IdProveedor),
                 new SqlParameter("@Nombre", NombreProducto),
                 new SqlParameter("@Descripcion", Descripcion),
                 new SqlParameter("@Categoria", Categoria),
                 new SqlParameter("@Precio", PrecioUnitario),
+                new SqlParameter("@Iva", Iva),
                 new SqlParameter("@Cantidad", Cantidad),
                 new SqlParameter("@Id", id));
         }

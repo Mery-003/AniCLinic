@@ -25,34 +25,34 @@ namespace AniCLinic
         public Ventas()
         {
             InitializeComponent();
-            visible(false);
             prepararGrid();
             cargarProductos();
             cargarCmb();
+            btnImprimir.Enabled = false;
         }
         public Ventas(int id)
         {
             idEmpl = id;
             InitializeComponent();
-            visible(false);
             prepararGrid();
             cargarProductos();
             cargarCmb();
+            btnImprimir.Enabled = false;
         }
         public Ventas(int id, decimal valor, bool vieneCita)
         {
             idEmpl = id;
             InitializeComponent();
-            visible(false);
             prepararGrid();
             cargarProductos();
             cargarCmb();
+            btnImprimir.Enabled = false;
             try
             {
                 decimal cantidad = 1;
-                decimal precioTotal = cantidad * valor;
+                decimal precioTotal = cantidad * valor * (1+0.15m);
                 dgvVentas.Rows.Add(1, "Cita", "Valor de la cita",
-                    valor, cantidad, precioTotal);
+                    valor, 0.15, cantidad, precioTotal);
             }
             catch (Exception ex)
             {
@@ -97,16 +97,6 @@ namespace AniCLinic
             dgvVentas.Columns["Cantidad"].Width = 80;
             dgvVentas.Columns["Total"].Width = 80;
         }
-        private void visible(bool bvisible)
-        {
-            lblIVA.Visible = bvisible;
-            lblIVAno.Visible = bvisible;
-            lblTotalno.Visible = bvisible;
-            lblTotal.Visible = bvisible;
-            lblTtlVenta.Visible = bvisible;
-            lblTtlVno.Visible = bvisible;
-            btnImprimir.Visible = bvisible;
-        }
         private void cargarProductos(string categ = "")
         {
             reader = crud.EjecutarQuery("Select IdProducto, NombreProducto from Inventario Where Categoria like '" + categ + "%'");
@@ -137,6 +127,7 @@ namespace AniCLinic
                         reader["Descripcion"].ToString(),
                         reader["Categoria"].ToString(),
                         Convert.ToDecimal(reader["PrecioUnitario"]),
+                        Convert.ToDecimal(reader["Iva"]),
                         Convert.ToInt32(reader["CantidadDisponible"])
                         );
                 }
@@ -144,6 +135,31 @@ namespace AniCLinic
             else 
                 producto = null;
             return producto;
+        }
+        private void actualizarPrecio()
+        {
+            decimal venta = 0;
+            decimal iva = 0;
+            decimal totalVenta;
+            foreach (DataGridViewRow fila in dgvVentas.Rows)
+            {
+                if (fila.Cells["Precio"].Value != null && fila.Cells["Cantidad"].Value != null && fila.Cells["IVA"].Value != null)
+                {
+                    decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
+                    int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                    decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+
+                    decimal subtotal = precio * cantidad;
+                    decimal ivaFila = subtotal * ivaPorcentaje;
+
+                    venta += subtotal;
+                    iva += ivaFila;
+                }
+            }
+            totalVenta = Math.Round(venta + iva, 2);
+            lblTtlVenta.Text = "$ " + venta.ToString();
+            lblIVA.Text = "$ " + iva.ToString();
+            lblTotal.Text = "$ " + totalVenta.ToString();
         }
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -191,20 +207,26 @@ namespace AniCLinic
                         }
                     }
                     decimal venta = 0;
-                    decimal iva;
+                    decimal iva = 0;
                     decimal totalVenta;
-                    btnFinalizar.Location = new Point(873, 407);
-                    dgvVentas.Size = new Size(811, 255);
-                    visible(true);
+
+                    btnImprimir.Enabled = true;
 
                     foreach (DataGridViewRow fila in dgvVentas.Rows)
                     {
-                        if (fila.Cells["Total"].Value != null)
+                        if (fila.Cells["Precio"].Value != null && fila.Cells["Cantidad"].Value != null && fila.Cells["IVA"].Value != null)
                         {
-                            venta += Convert.ToDecimal(fila.Cells["Total"].Value);
+                            decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
+                            int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                            decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+
+                            decimal subtotal = precio * cantidad;
+                            decimal ivaFila = subtotal * ivaPorcentaje;
+
+                            venta += subtotal;
+                            iva += ivaFila;
                         }
                     }
-                    iva = Math.Round(venta * 0.15m, 2);
                     totalVenta = Math.Round(venta + iva, 2);
                     string metodoPago = cmbMetodoPago.Text;
                     lblTtlVenta.Text = "$ " + venta.ToString();
@@ -290,14 +312,17 @@ namespace AniCLinic
                     {
                         sumaRepetido = Convert.ToInt32(fila.Cells["Cantidad"].Value);
                         fila.Cells["Cantidad"].Value = sumaRepetido + Convert.ToInt32(txtCantidad.Text);
-                        fila.Cells["Total"].Value = Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario;
+                        fila.Cells["Total"].Value = Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario * (1 + producto.Iva);
+                        actualizarPrecio();
                         return;
                     }
                 }
                 decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
-                decimal precioTotal = cantidad * producto.PrecioUnitario;
+                decimal precioTotal = cantidad * producto.PrecioUnitario * (1 + producto.Iva);
+                precioTotal = Math.Round(precioTotal, 2);
                 dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
-                    producto.PrecioUnitario, cantidad, precioTotal);
+                    producto.PrecioUnitario, producto.Iva,cantidad, precioTotal);
+                actualizarPrecio();
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
