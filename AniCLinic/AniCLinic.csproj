@@ -273,6 +273,12 @@
     <Compile Include="SesionActual.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UxBuscarCedulaHelper.cs" />
+    <Compile Include="ValorCita.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValorCita.Designer.cs">
+      <DependentUpon>ValorCita.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -383,6 +389,9 @@
     <EmbeddedResource Include="rptListaProductos.rdlc" />
     <EmbeddedResource Include="rptReporteAño.rdlc" />
     <EmbeddedResource Include="rptReporteProducto.rdlc" />
+    <EmbeddedResource Include="ValorCita.resx">
+      <DependentUpon>ValorCita.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>
     </EmbeddedResource>
@@ -523,6 +532,7 @@
     <None Include="Resources\Captura de pantalla 2025-09-13 215031.png" />
     <None Include="Resources\Captura de pantalla 2025-09-13 215124.png" />
     <None Include="Resources\Captura de pantalla 2025-09-13 215228.png" />
+    <None Include="Resources\istockphoto-923170288-612x6121.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AggMascota));
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
@@ -635,6 +636,7 @@
             // guna2HtmlLabel4
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2HtmlLabel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(41, 39);
@@ -646,6 +648,8 @@
             // btnAbrirListaPropietario
             // 
             this.btnAbrirListaPropietario.BackColor = System.Drawing.Color.Transparent;
+            this.btnAbrirListaPropietario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAbrirListaPropietario.BackgroundImage")));
+            this.btnAbrirListaPropietario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnAbrirListaPropietario.BorderRadius = 14;
             this.btnAbrirListaPropietario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnAbrirListaPropietario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -656,11 +660,14 @@
             this.btnAbrirListaPropietario.FillColor2 = System.Drawing.Color.RoyalBlue;
             this.btnAbrirListaPropietario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAbrirListaPropietario.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnAbrirListaPropietario.Image = global::AniCLinic.Properties.Resources._3003596;
+            this.btnAbrirListaPropietario.ImageSize = new System.Drawing.Size(25, 25);
             this.btnAbrirListaPropietario.Location = new System.Drawing.Point(63, 69);
             this.btnAbrirListaPropietario.Name = "btnAbrirListaPropietario";
             this.btnAbrirListaPropietario.Size = new System.Drawing.Size(44, 37);
             this.btnAbrirListaPropietario.TabIndex = 132;
             this.btnAbrirListaPropietario.UseTransparentBackground = true;
+            this.btnAbrirListaPropietario.Click += new System.EventHandler(this.btnAbrirListaPropietario_Click_1);
             // 
             // dtpFechaNacimiento
             // 

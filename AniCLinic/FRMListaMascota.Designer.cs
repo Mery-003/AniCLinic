@@ -35,12 +35,12 @@
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
-            this.txtBuscarPropietario = new Guna.UI2.WinForms.Guna2TextBox();
-            this.dgvListaPropietario = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.txtBuscarMascota = new Guna.UI2.WinForms.Guna2TextBox();
+            this.dgvListaMascota = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaPropietario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListaMascota)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -58,36 +58,36 @@
             // 
             this.guna2Elipse1.BorderRadius = 50;
             // 
-            // txtBuscarPropietario
+            // txtBuscarMascota
             // 
-            this.txtBuscarPropietario.BackColor = System.Drawing.Color.Transparent;
-            this.txtBuscarPropietario.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.txtBuscarPropietario.BorderRadius = 15;
-            this.txtBuscarPropietario.BorderThickness = 2;
-            this.txtBuscarPropietario.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscarPropietario.DefaultText = "";
-            this.txtBuscarPropietario.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBuscarPropietario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBuscarPropietario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscarPropietario.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscarPropietario.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarPropietario.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBuscarPropietario.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarPropietario.Location = new System.Drawing.Point(238, 17);
-            this.txtBuscarPropietario.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtBuscarPropietario.Name = "txtBuscarPropietario";
-            this.txtBuscarPropietario.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.txtBuscarPropietario.PlaceholderText = "Buscar...";
-            this.txtBuscarPropietario.SelectedText = "";
-            this.txtBuscarPropietario.Size = new System.Drawing.Size(280, 36);
-            this.txtBuscarPropietario.TabIndex = 147;
-            this.txtBuscarPropietario.Tag = "";
+            this.txtBuscarMascota.BackColor = System.Drawing.Color.Transparent;
+            this.txtBuscarMascota.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.txtBuscarMascota.BorderRadius = 15;
+            this.txtBuscarMascota.BorderThickness = 2;
+            this.txtBuscarMascota.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscarMascota.DefaultText = "";
+            this.txtBuscarMascota.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscarMascota.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscarMascota.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscarMascota.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscarMascota.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscarMascota.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscarMascota.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscarMascota.Location = new System.Drawing.Point(238, 17);
+            this.txtBuscarMascota.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBuscarMascota.Name = "txtBuscarMascota";
+            this.txtBuscarMascota.PlaceholderForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.txtBuscarMascota.PlaceholderText = "Buscar...";
+            this.txtBuscarMascota.SelectedText = "";
+            this.txtBuscarMascota.Size = new System.Drawing.Size(280, 36);
+            this.txtBuscarMascota.TabIndex = 147;
+            this.txtBuscarMascota.Tag = "";
             // 
-            // dgvListaPropietario
+            // dgvListaMascota
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvListaPropietario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvListaPropietario.BackgroundColor = System.Drawing.Color.LightGray;
+            this.dgvListaMascota.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvListaMascota.BackgroundColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -95,9 +95,9 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvListaPropietario.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvListaPropietario.ColumnHeadersHeight = 4;
-            this.dgvListaPropietario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvListaMascota.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvListaMascota.ColumnHeadersHeight = 4;
+            this.dgvListaMascota.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -105,34 +105,34 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvListaPropietario.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvListaPropietario.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvListaPropietario.Location = new System.Drawing.Point(25, 65);
-            this.dgvListaPropietario.Name = "dgvListaPropietario";
-            this.dgvListaPropietario.RowHeadersVisible = false;
-            this.dgvListaPropietario.Size = new System.Drawing.Size(523, 230);
-            this.dgvListaPropietario.TabIndex = 146;
-            this.dgvListaPropietario.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvListaPropietario.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvListaPropietario.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvListaPropietario.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvListaPropietario.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvListaPropietario.ThemeStyle.BackColor = System.Drawing.Color.LightGray;
-            this.dgvListaPropietario.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvListaPropietario.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.dgvListaPropietario.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvListaPropietario.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvListaPropietario.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvListaPropietario.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvListaPropietario.ThemeStyle.HeaderStyle.Height = 4;
-            this.dgvListaPropietario.ThemeStyle.ReadOnly = false;
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.Height = 22;
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvListaPropietario.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvListaMascota.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvListaMascota.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvListaMascota.Location = new System.Drawing.Point(25, 65);
+            this.dgvListaMascota.Name = "dgvListaMascota";
+            this.dgvListaMascota.RowHeadersVisible = false;
+            this.dgvListaMascota.Size = new System.Drawing.Size(523, 230);
+            this.dgvListaMascota.TabIndex = 146;
+            this.dgvListaMascota.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvListaMascota.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.dgvListaMascota.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.dgvListaMascota.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.dgvListaMascota.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.dgvListaMascota.ThemeStyle.BackColor = System.Drawing.Color.LightGray;
+            this.dgvListaMascota.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvListaMascota.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.dgvListaMascota.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvListaMascota.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvListaMascota.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.dgvListaMascota.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.dgvListaMascota.ThemeStyle.HeaderStyle.Height = 4;
+            this.dgvListaMascota.ThemeStyle.ReadOnly = false;
+            this.dgvListaMascota.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.dgvListaMascota.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvListaMascota.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvListaMascota.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvListaMascota.ThemeStyle.RowsStyle.Height = 22;
+            this.dgvListaMascota.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.dgvListaMascota.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
             // btnAceptar
             // 
@@ -187,15 +187,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(581, 383);
-            this.Controls.Add(this.txtBuscarPropietario);
-            this.Controls.Add(this.dgvListaPropietario);
+            this.Controls.Add(this.txtBuscarMascota);
+            this.Controls.Add(this.dgvListaMascota);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.guna2HtmlLabel9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FRMListaMascota";
             this.Text = "FRMListaMascota";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaPropietario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListaMascota)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,8 +206,8 @@
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
-        private Guna.UI2.WinForms.Guna2TextBox txtBuscarPropietario;
-        private Guna.UI2.WinForms.Guna2DataGridView dgvListaPropietario;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscarMascota;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvListaMascota;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;

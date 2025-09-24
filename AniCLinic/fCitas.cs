@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -16,8 +17,6 @@ namespace AniCLinic
 
             PrepararGrid();
             WireEvents();
-
-
             CargarData();
         }
 
@@ -42,7 +41,7 @@ namespace AniCLinic
             dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCitas.MultiSelect = false;
             dgvCitas.AllowUserToAddRows = false;
-            dgvCitas.ReadOnly = true; // solo lectura
+            dgvCitas.ReadOnly = true;
             dgvCitas.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvCitas.Columns.Clear();
 
@@ -55,8 +54,8 @@ namespace AniCLinic
                 ReadOnly = true
             });
 
-            dgvCitas.Columns.Add(MkText("Mascota", "Mascota", 120));
-            dgvCitas.Columns.Add(MkText("Especie", "Especie", 100));
+            dgvCitas.Columns.Add(MkText("Mascota", "Mascota", 140));
+            dgvCitas.Columns.Add(MkText("Especie", "Especie", 110));
             dgvCitas.Columns.Add(MkText("Raza", "Raza", 120));
 
             dgvCitas.Columns.Add(new DataGridViewTextBoxColumn
@@ -77,8 +76,8 @@ namespace AniCLinic
                 ReadOnly = true
             });
 
-            dgvCitas.Columns.Add(MkText("Motivo", "Motivo", 220));
-            dgvCitas.Columns.Add(MkText("Propietario", "Propietario", 160));
+            dgvCitas.Columns.Add(MkText("Motivo", "Motivo", 240));
+            dgvCitas.Columns.Add(MkText("Propietario", "Propietario", 200));
 
             dgvCitas.Columns.Add(new DataGridViewButtonColumn
             {
@@ -107,14 +106,8 @@ namespace AniCLinic
                 ReadOnly = true
             });
 
-            dgvCitas.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "colCedulaOculta",
-                HeaderText = "CedulaPropietario",
-                DataPropertyName = "CedulaPropietario",
-                Visible = false,
-                ReadOnly = true
-            });
+            // IMPORTANTE: Quitamos la columna de cédula oculta, ya no se usa.
+            // (Si la quisieras de regreso, vuelve a agregarla aquí y en el SELECT).
         }
 
         private DataGridViewTextBoxColumn MkText(string header, string prop, int width) =>
@@ -128,12 +121,23 @@ namespace AniCLinic
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            var filtro = (txtBuscar.Text ?? string.Empty).Trim();
-            CargarData(filtro);
+            CargarData((txtBuscar.Text ?? string.Empty).Trim());
         }
 
         private void CargarData(string filtro = "")
         {
+            // Armamos patrón “%texto%”. Si está vacío, enviamos "" para desactivar WHERE.
+            string patron = string.IsNullOrWhiteSpace(filtro) ? "" : $"%{filtro}%";
+
+            // Intento básico de separar "nombre apellido" (dos tokens) para coincidir ambos
+            string a = "", b = "";
+            var partes = (filtro ?? "").Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (partes.Length >= 2)
+            {
+                a = $"%{partes[0]}%";
+                b = $"%{partes[1]}%";
+            }
+
             string sql = @"
 SELECT
     C.IdCita,
@@ -142,20 +146,48 @@ SELECT
     M.Nombre AS Mascota,
     E.Especie,
     R.Raza,
-    (P.Nombre + ' ' + P.Apellido) AS Propietario,
-    P.Cedula AS CedulaPropietario
-FROM GestionCita C
-INNER JOIN Mascota   M ON M.IdMascota = C.IdMascota
-INNER JOIN Persona   P ON P.IdPersona = M.IdPersona
-INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie
-INNER JOIN Raza      R ON R.IdRaza = M.IdRaza
-WHERE (@Filtro = '' 
-       OR P.Cedula LIKE @Filtro + '%'
-       OR P.Nombre LIKE @Filtro + '%'
-       OR M.Nombre LIKE @Filtro + '%')
-ORDER BY C.FechaHora DESC";
+    (P.Nombre + ' ' + P.Apellido) AS Propietario
+FROM dbo.GestionCita C
+INNER JOIN dbo.Mascota M ON M.IdMascota = C.IdMascota
+INNER JOIN dbo.Persona P ON P.IdPersona = M.IdPersona
+INNER JOIN dbo.Especie E ON E.IdEspecie = M.IdEspecie
+INNER JOIN dbo.Raza    R ON R.IdRaza    = M.IdRaza
+WHERE
+    (@Filtro = '' 
+      OR M.Nombre LIKE @Filtro
+      OR E.Especie LIKE @Filtro
+      OR R.Raza LIKE @Filtro
+      OR P.Nombre LIKE @Filtro
+      OR P.Apellido LIKE @Filtro
+      OR (P.Nombre + ' ' + P.Apellido) LIKE @Filtro
+      OR (P.Apellido + ' ' + P.Nombre) LIKE @Filtro
+      OR (@A <> '' AND @B <> '' AND (
+            (P.Nombre  LIKE @A AND P.Apellido LIKE @B) OR
+            (P.Nombre  LIKE @B AND P.Apellido LIKE @A)
+         ))
+    )
+ORDER BY C.FechaHora DESC;";
 
-            var dt = _crud.cargarBDData(sql, new SqlParameter("@Filtro", filtro));
+            DataTable dt;
+            try
+            {
+                dt = _crud.cargarBDData(
+                    sql,
+                    new SqlParameter("@Filtro", patron),
+                    new SqlParameter("@A", a),
+                    new SqlParameter("@B", b)
+                );
+            }
+            catch (Exception)
+            {
+                // Fallback mínimo si hubiera cambio de esquema: sin especie/raza en filtro.
+                dt = _crud.cargarBDData(
+                    sql,
+                    new SqlParameter("@Filtro", patron),
+                    new SqlParameter("@A", a),
+                    new SqlParameter("@B", b)
+                );
+            }
 
             PrepararFechasHorasYBind(dt);
         }
@@ -253,11 +285,11 @@ ORDER BY C.FechaHora DESC";
                 if (!esActualOFutura)
                 {
                     var celda = new DataGridViewTextBoxCell { Value = "Cita Antigua" };
-                    row.Cells["colEditar"] = celda;             // 1) asignar a la fila
-                    row.Cells["colEditar"].ReadOnly = true;      // 2) ahora sí, marcar ReadOnly
-                    row.Cells["colEditar"].Style.BackColor = Color.FromArgb(255, 235, 238);         // rojo claro
-                    row.Cells["colEditar"].Style.SelectionBackColor = Color.FromArgb(255, 205, 210); // rojo claro selección
-                    row.Cells["colEditar"].Style.ForeColor = Color.FromArgb(183, 28, 28);           // rojo oscuro
+                    row.Cells["colEditar"] = celda;
+                    row.Cells["colEditar"].ReadOnly = true;
+                    row.Cells["colEditar"].Style.BackColor = Color.FromArgb(255, 235, 238);
+                    row.Cells["colEditar"].Style.SelectionBackColor = Color.FromArgb(255, 205, 210);
+                    row.Cells["colEditar"].Style.ForeColor = Color.FromArgb(183, 28, 28);
                 }
                 else
                 {
@@ -276,9 +308,7 @@ ORDER BY C.FechaHora DESC";
             using (var frm = new AggCita())
             {
                 if (frm.ShowDialog(this) == DialogResult.OK)
-                {
                     CargarData((txtBuscar.Text ?? string.Empty).Trim());
-                }
             }
         }
 
@@ -295,17 +325,14 @@ ORDER BY C.FechaHora DESC";
                 var raw = dgvCitas.Rows[e.RowIndex].Cells["colFechaHoraOculta"]?.Value;
                 DateTime? fh = null;
                 if (raw != null && raw != DBNull.Value)
-                {
-                    try { fh = Convert.ToDateTime(raw); } catch { fh = null; }
-                }
+                { try { fh = Convert.ToDateTime(raw); } catch { fh = null; } }
+
                 if (!fh.HasValue || fh.Value < DateTime.Now) return;
 
                 using (var frm = new AggCita(id))
                 {
                     if (frm.ShowDialog(this) == DialogResult.OK)
-                    {
                         CargarData((txtBuscar.Text ?? string.Empty).Trim());
-                    }
                 }
             }
             else if (colName == "colEliminar")
@@ -339,6 +366,7 @@ ORDER BY C.FechaHora DESC";
                 db.cerrarConexion();
             }
         }
+
         public void RefrescarListado()
         {
             CargarData((txtBuscar.Text ?? string.Empty).Trim());

@@ -51,6 +51,8 @@
             this.txtBuscarAnteriores = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnEmergencia = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoy)).BeginInit();
@@ -93,7 +95,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Window;
+            this.tabPage1.Controls.Add(this.btnEmergencia);
+            this.tabPage1.Controls.Add(this.guna2HtmlLabel4);
             this.tabPage1.Controls.Add(this.dgvHoy);
             this.tabPage1.Controls.Add(this.txtBuscarHoy);
             this.tabPage1.Controls.Add(this.guna2Separator1);
@@ -404,6 +408,35 @@
             this.guna2HtmlLabel3.TabIndex = 51;
             this.guna2HtmlLabel3.Text = "Registro Clinico";
             // 
+            // guna2HtmlLabel4
+            // 
+            this.guna2HtmlLabel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2HtmlLabel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.Crimson;
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(893, 1);
+            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(120, 21);
+            this.guna2HtmlLabel4.TabIndex = 133;
+            this.guna2HtmlLabel4.Text = "EMERGENCIA";
+            // 
+            // btnEmergencia
+            // 
+            this.btnEmergencia.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnEmergencia.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnEmergencia.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnEmergencia.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnEmergencia.FillColor = System.Drawing.Color.Transparent;
+            this.btnEmergencia.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnEmergencia.ForeColor = System.Drawing.Color.White;
+            this.btnEmergencia.Image = global::AniCLinic.Properties.Resources.istockphoto_923170288_612x6121;
+            this.btnEmergencia.ImageSize = new System.Drawing.Size(65, 65);
+            this.btnEmergencia.Location = new System.Drawing.Point(920, 21);
+            this.btnEmergencia.Name = "btnEmergencia";
+            this.btnEmergencia.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btnEmergencia.Size = new System.Drawing.Size(69, 65);
+            this.btnEmergencia.TabIndex = 134;
+            // 
             // fRegistroClinico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -417,6 +450,7 @@
             this.Text = "fRegistroClinico";
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoy)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProximas)).EndInit();
@@ -442,5 +476,7 @@
         private Guna.UI2.WinForms.Guna2DataGridView dgvHoy;
         private Guna.UI2.WinForms.Guna2DataGridView dgvProximas;
         private Guna.UI2.WinForms.Guna2DataGridView dgvAnteriores;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
+        private Guna.UI2.WinForms.Guna2CircleButton btnEmergencia;
     }
 }

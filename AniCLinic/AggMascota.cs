@@ -15,6 +15,9 @@ namespace AniCLinic
         private readonly int _idMascota;
         private int _idPersonaSeleccionada;
 
+        // NUEVO: exponer Id de mascota guardada
+        public int IdMascotaGuardada { get; private set; } = 0;
+
         public AggMascota(fPacientes parent, int idMascota = 0)
         {
             InitializeComponent();
@@ -25,7 +28,7 @@ namespace AniCLinic
             btnSeleccionarFotoMascota.Click += btnSeleccionarFotoMascota_Click;
             btnGuardarMascota.Click += btnGuardarMascota_Click;
             btnCancelarMascota.Click += (s, e) => this.Close();
-            
+
             txtPeso.KeyPress += (s, e) =>
             {
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
@@ -38,6 +41,27 @@ namespace AniCLinic
             CargarCombos();
             if (_idMascota > 0) CargarMascota(_idMascota);
             else LimpiarNuevo();
+        }
+
+        // NUEVO: permite preseleccionar un propietario por Id (para el flujo de emergencia)
+        public void PreseleccionarPropietario(int idPersona)
+        {
+            _idPersonaSeleccionada = idPersona;
+            try
+            {
+                var dt = _crud.cargarBDData(
+                    "SELECT Nombre, Apellido, Cedula FROM Persona WHERE IdPersona=@id;",
+                    new SqlParameter("@id", idPersona));
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    string nom = Convert.ToString(dt.Rows[0]["Nombre"] ?? "");
+                    string ape = Convert.ToString(dt.Rows[0]["Apellido"] ?? "");
+                    string ci = Convert.ToString(dt.Rows[0]["Cedula"] ?? "");
+                    txtPropietarioNombre.Text = (nom + " " + ape).Trim();
+                    txtPropietarioCI.Text = ci;
+                }
+            }
+            catch { /* noop */ }
         }
 
         private void LimpiarNuevo()
@@ -81,25 +105,6 @@ namespace AniCLinic
             return t;
         }
 
-        // detectar columna de texto en Especie/Raza
-        private string ColTextoTabla(string tabla)
-        {
-            DataTable dt = _crud.cargarBDData(
-                "SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=@t",
-                new SqlParameter("@t", tabla));
-            if (dt == null) return null;
-
-            string[] pref = { "Nombre", "Descripcion", "NombreEspecie", "NombreRaza" };
-            for (int i = 0; i < pref.Length; i++) if (dt.Select("COLUMN_NAME='" + pref[i] + "'").Length > 0) return pref[i];
-
-            foreach (DataRow r in dt.Rows)
-            {
-                string tipo = (r["DATA_TYPE"] + "").ToLower();
-                if (tipo.Contains("char") || tipo.Contains("text")) return r["COLUMN_NAME"] + "";
-            }
-            return null;
-        }
-
         private void CargarCombos()
         {
             // Especie
@@ -109,8 +114,8 @@ namespace AniCLinic
                 if (dr != null) dt.Load(dr);
                 if (dr != null) dr.Close(); try { _crud.conexion.cerrarConexion(); } catch { }
 
-                cmbEspecie.DisplayMember = "Especie";   // Mostrar nombre
-                cmbEspecie.ValueMember = "IdEspecie";   // Guardar Id
+                cmbEspecie.DisplayMember = "Especie";
+                cmbEspecie.ValueMember = "IdEspecie";
                 cmbEspecie.DataSource = dt;
             }
 
@@ -139,8 +144,8 @@ namespace AniCLinic
                 if (dr != null) dt.Load(dr);
                 if (dr != null) dr.Close(); try { _crud.conexion.cerrarConexion(); } catch { }
 
-                cmbRaza.DisplayMember = "Raza";   // Mostrar nombre
-                cmbRaza.ValueMember = "IdRaza";   // Guardar Id
+                cmbRaza.DisplayMember = "Raza";
+                cmbRaza.ValueMember = "IdRaza";
                 cmbRaza.DataSource = dt;
             }
         }
@@ -190,7 +195,7 @@ WHERE m.IdMascota = " + id;
 
                     if (rd["IdEspecie"] != DBNull.Value)
                     {
-                        cmbEspecie.SelectedValue = rd["IdEspecie"]; 
+                        cmbEspecie.SelectedValue = rd["IdEspecie"];
                         CargarRazas();
 
                         if (rd["IdRaza"] != DBNull.Value)
@@ -258,6 +263,7 @@ WHERE m.IdMascota = " + id;
             return true;
         }
 
+        // REEMPLAZADO COMPLETO (devuelve OK + IdMascotaGuardada)
         private void btnGuardarMascota_Click(object sender, EventArgs e)
         {
             if (!Validar()) return;
@@ -287,6 +293,7 @@ WHERE m.IdMascota = " + id;
                     new SqlParameter("@f", fnac),
                     new SqlParameter("@id", _idMascota));
                 if (!ok) { MessageBox.Show("No se pudo actualizar."); return; }
+                IdMascotaGuardada = _idMascota;
                 MessageBox.Show("Mascota actualizada.");
             }
             else
@@ -302,18 +309,34 @@ WHERE m.IdMascota = " + id;
                     new SqlParameter("@e", idEsp), new SqlParameter("@r", idRaza),
                     new SqlParameter("@f", fnac));
                 if (!ok) { MessageBox.Show("No se pudo registrar."); return; }
+
+                // Recuperar id de la mascota insertada (última por IdPersona+Nombre)
+                DataTable dt = _crud.cargarBDData(@"
+                    SELECT TOP(1) IdMascota FROM Mascota 
+                    WHERE IdPersona=@per AND Nombre=@n 
+                    ORDER BY IdMascota DESC;",
+                    new SqlParameter("@per", _idPersonaSeleccionada),
+                    new SqlParameter("@n", nombre));
+                if (dt != null && dt.Rows.Count > 0)
+                    IdMascotaGuardada = Convert.ToInt32(dt.Rows[0][0]);
+
                 MessageBox.Show("Mascota registrada.");
             }
 
-            try 
-            { 
-                _parent.RefrescarMascotas();
-                _parent.RefrescarPropietarios();
-            } catch (Exception ex) 
-            { 
-                MessageBox.Show(ex.Message);
+            try
+            {
+                _parent?.RefrescarMascotas();
+                _parent?.RefrescarPropietarios();
             }
+            catch { }
+
+            this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void btnAbrirListaPropietario_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

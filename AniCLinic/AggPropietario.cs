@@ -14,6 +14,9 @@ namespace AniCLinic
         private readonly fPacientes _parent;
         private readonly int _idPersona; // 0 = nuevo
 
+        // NUEVO: exponer el Id del propietario guardado
+        public int IdPersonaGuardado { get; private set; } = 0;
+
         public AggPropietario(fPacientes parent, int idPersona = 0)
         {
             InitializeComponent();
@@ -174,6 +177,7 @@ FROM Persona WHERE IdPersona = " + idPersona;
             return n > 0;
         }
 
+        // REEMPLAZADO COMPLETO (devuelve OK + IdPersonaGuardado)
         private void btnGuardarPropietario_Click(object sender, EventArgs e)
         {
             if (!Validar()) return;
@@ -185,8 +189,8 @@ FROM Persona WHERE IdPersona = " + idPersona;
 
             object correo = string.IsNullOrWhiteSpace(txtCorreo.Text) ? (object)DBNull.Value : txtCorreo.Text.Trim();
             object direccion = string.IsNullOrWhiteSpace(txtDireccion.Text) ? (object)DBNull.Value : txtDireccion.Text.Trim();
-            SqlParameter pImg = new SqlParameter("@Imagen", SqlDbType.VarBinary);
-            pImg.Value = (object)ImageToBytesOrNull(picPropietario == null ? null : picPropietario.Image) ?? DBNull.Value;
+            SqlParameter pImg = new SqlParameter("@Imagen", SqlDbType.VarBinary)
+            { Value = (object)ImageToBytesOrNull(picPropietario == null ? null : picPropietario.Image) ?? DBNull.Value };
 
             if (_idPersona > 0)
             {
@@ -204,7 +208,11 @@ FROM Persona WHERE IdPersona = " + idPersona;
                     pImg,
                     new SqlParameter("@id", _idPersona));
                 if (!ok) { MessageBox.Show("No se pudo actualizar."); return; }
+                IdPersonaGuardado = _idPersona;
                 MessageBox.Show("Propietario actualizado.");
+                try { _parent?.RefrescarPropietarios(); } catch { }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else
             {
@@ -220,11 +228,18 @@ FROM Persona WHERE IdPersona = " + idPersona;
                     new SqlParameter("@dir", direccion),
                     pImg);
                 if (!ok) { MessageBox.Show("No se pudo registrar."); return; }
-                MessageBox.Show("Propietario registrado.");
-            }
 
-            try { _parent.RefrescarPropietarios(); } catch { }
-            this.Close();
+                // Recuperar Id por cédula (única)
+                DataTable dt = _crud.cargarBDData("SELECT IdPersona FROM Persona WHERE Cedula=@ci;",
+                    new SqlParameter("@ci", txtCedula.Text.Trim()));
+                if (dt != null && dt.Rows.Count > 0)
+                    IdPersonaGuardado = Convert.ToInt32(dt.Rows[0][0]);
+
+                MessageBox.Show("Propietario registrado.");
+                try { _parent?.RefrescarPropietarios(); } catch { }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }

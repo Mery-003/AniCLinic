@@ -33,7 +33,6 @@
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtCedulaCita = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtRazaCita = new Guna.UI2.WinForms.Guna2TextBox();
@@ -48,14 +47,15 @@
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.cmbMascotaCita = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtHora = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtPropietarioCita = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnListaMascota = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtMascotaCita = new Guna.UI2.WinForms.Guna2TextBox();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -83,31 +83,6 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(50, 34);
             this.guna2HtmlLabel1.TabIndex = 2;
             this.guna2HtmlLabel1.Text = "Cita";
-            // 
-            // txtCedulaCita
-            // 
-            this.txtCedulaCita.BackColor = System.Drawing.Color.Transparent;
-            this.txtCedulaCita.BorderColor = System.Drawing.Color.SeaGreen;
-            this.txtCedulaCita.BorderRadius = 12;
-            this.txtCedulaCita.BorderThickness = 2;
-            this.txtCedulaCita.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCedulaCita.DefaultText = "";
-            this.txtCedulaCita.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCedulaCita.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCedulaCita.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCedulaCita.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCedulaCita.FillColor = System.Drawing.Color.Snow;
-            this.txtCedulaCita.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCedulaCita.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtCedulaCita.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtCedulaCita.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCedulaCita.Location = new System.Drawing.Point(214, 36);
-            this.txtCedulaCita.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCedulaCita.Name = "txtCedulaCita";
-            this.txtCedulaCita.PlaceholderText = "";
-            this.txtCedulaCita.SelectedText = "";
-            this.txtCedulaCita.Size = new System.Drawing.Size(139, 30);
-            this.txtCedulaCita.TabIndex = 36;
             // 
             // guna2HtmlLabel3
             // 
@@ -334,24 +309,6 @@
             this.guna2HtmlLabel9.TabIndex = 99;
             this.guna2HtmlLabel9.Text = "Propietario:";
             // 
-            // cmbMascotaCita
-            // 
-            this.cmbMascotaCita.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.cmbMascotaCita.BorderColor = System.Drawing.Color.Silver;
-            this.cmbMascotaCita.BorderRadius = 19;
-            this.cmbMascotaCita.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbMascotaCita.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMascotaCita.FillColor = System.Drawing.Color.LightGray;
-            this.cmbMascotaCita.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cmbMascotaCita.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cmbMascotaCita.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmbMascotaCita.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.cmbMascotaCita.ItemHeight = 30;
-            this.cmbMascotaCita.Location = new System.Drawing.Point(49, 112);
-            this.cmbMascotaCita.Name = "cmbMascotaCita";
-            this.cmbMascotaCita.Size = new System.Drawing.Size(147, 36);
-            this.cmbMascotaCita.TabIndex = 98;
-            // 
             // guna2HtmlLabel10
             // 
             this.guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent;
@@ -446,16 +403,62 @@
             this.txtPropietarioCita.Size = new System.Drawing.Size(148, 36);
             this.txtPropietarioCita.TabIndex = 103;
             // 
+            // btnListaMascota
+            // 
+            this.btnListaMascota.BackColor = System.Drawing.Color.Transparent;
+            this.btnListaMascota.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnListaMascota.BorderRadius = 14;
+            this.btnListaMascota.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnListaMascota.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnListaMascota.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnListaMascota.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnListaMascota.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnListaMascota.FillColor = System.Drawing.Color.DarkCyan;
+            this.btnListaMascota.FillColor2 = System.Drawing.Color.PaleGreen;
+            this.btnListaMascota.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnListaMascota.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnListaMascota.Image = global::AniCLinic.Properties.Resources._3003596;
+            this.btnListaMascota.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnListaMascota.Location = new System.Drawing.Point(304, 30);
+            this.btnListaMascota.Name = "btnListaMascota";
+            this.btnListaMascota.Size = new System.Drawing.Size(44, 37);
+            this.btnListaMascota.TabIndex = 134;
+            this.btnListaMascota.UseTransparentBackground = true;
+            // 
             // guna2HtmlLabel2
             // 
-            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.guna2HtmlLabel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2HtmlLabel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.SeaGreen;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(187, 40);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(230, 37);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(23, 19);
-            this.guna2HtmlLabel2.TabIndex = 104;
-            this.guna2HtmlLabel2.Text = "C.I:";
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(63, 21);
+            this.guna2HtmlLabel2.TabIndex = 133;
+            this.guna2HtmlLabel2.Text = "Listado";
+            // 
+            // txtMascotaCita
+            // 
+            this.txtMascotaCita.BackColor = System.Drawing.Color.Transparent;
+            this.txtMascotaCita.BorderRadius = 19;
+            this.txtMascotaCita.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMascotaCita.DefaultText = "";
+            this.txtMascotaCita.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtMascotaCita.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtMascotaCita.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMascotaCita.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMascotaCita.FillColor = System.Drawing.Color.LightGray;
+            this.txtMascotaCita.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMascotaCita.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtMascotaCita.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtMascotaCita.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMascotaCita.Location = new System.Drawing.Point(47, 112);
+            this.txtMascotaCita.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.txtMascotaCita.Name = "txtMascotaCita";
+            this.txtMascotaCita.PlaceholderText = "";
+            this.txtMascotaCita.SelectedText = "";
+            this.txtMascotaCita.Size = new System.Drawing.Size(148, 36);
+            this.txtMascotaCita.TabIndex = 135;
             // 
             // AggCita
             // 
@@ -463,13 +466,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(417, 523);
+            this.Controls.Add(this.txtMascotaCita);
+            this.Controls.Add(this.btnListaMascota);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.txtPropietarioCita);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.guna2HtmlLabel9);
-            this.Controls.Add(this.cmbMascotaCita);
             this.Controls.Add(this.guna2HtmlLabel10);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.guna2TextBox5);
@@ -485,7 +489,6 @@
             this.Controls.Add(this.txtRazaCita);
             this.Controls.Add(this.guna2HtmlLabel4);
             this.Controls.Add(this.guna2HtmlLabel3);
-            this.Controls.Add(this.txtCedulaCita);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AggCita";
@@ -502,7 +505,6 @@
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2TextBox txtCedulaCita;
         private Guna.UI2.WinForms.Guna2TextBox txtRazaCita;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
@@ -518,12 +520,13 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbMascotaCita;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox txtPropietarioCita;
+        private Guna.UI2.WinForms.Guna2GradientButton btnListaMascota;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2TextBox txtMascotaCita;
     }
 }

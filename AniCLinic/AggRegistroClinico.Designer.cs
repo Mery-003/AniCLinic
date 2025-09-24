@@ -51,7 +51,8 @@
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.fechahistorial = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnListaMascota = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -220,7 +221,7 @@
             this.txtReceta.Name = "txtReceta";
             this.txtReceta.PlaceholderText = "";
             this.txtReceta.SelectedText = "";
-            this.txtReceta.Size = new System.Drawing.Size(310, 69);
+            this.txtReceta.Size = new System.Drawing.Size(310, 78);
             this.txtReceta.TabIndex = 56;
             // 
             // guna2HtmlLabel6
@@ -246,7 +247,7 @@
             this.btnCancelar.FillColor2 = System.Drawing.Color.Silver;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnCancelar.Location = new System.Drawing.Point(78, 402);
+            this.btnCancelar.Location = new System.Drawing.Point(78, 419);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(91, 45);
             this.btnCancelar.TabIndex = 91;
@@ -330,7 +331,7 @@
             this.btnAceptar.FillColor2 = System.Drawing.Color.LimeGreen;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAceptar.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnAceptar.Location = new System.Drawing.Point(202, 404);
+            this.btnAceptar.Location = new System.Drawing.Point(202, 421);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(91, 45);
             this.btnAceptar.TabIndex = 100;
@@ -341,7 +342,7 @@
             this.guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel9.Font = new System.Drawing.Font("Segoe UI Black", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel9.ForeColor = System.Drawing.Color.SeaGreen;
-            this.guna2HtmlLabel9.Location = new System.Drawing.Point(39, 17);
+            this.guna2HtmlLabel9.Location = new System.Drawing.Point(32, 17);
             this.guna2HtmlLabel9.Name = "guna2HtmlLabel9";
             this.guna2HtmlLabel9.Size = new System.Drawing.Size(182, 34);
             this.guna2HtmlLabel9.TabIndex = 101;
@@ -352,23 +353,48 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             // 
-            // fechahistorial
+            // btnListaMascota
             // 
-            this.fechahistorial.BackColor = System.Drawing.Color.Transparent;
-            this.fechahistorial.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fechahistorial.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.fechahistorial.Location = new System.Drawing.Point(41, 52);
-            this.fechahistorial.Name = "fechahistorial";
-            this.fechahistorial.Size = new System.Drawing.Size(38, 19);
-            this.fechahistorial.TabIndex = 93;
-            this.fechahistorial.Text = "Fecha";
+            this.btnListaMascota.BackColor = System.Drawing.Color.Transparent;
+            this.btnListaMascota.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnListaMascota.BorderRadius = 14;
+            this.btnListaMascota.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnListaMascota.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnListaMascota.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnListaMascota.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnListaMascota.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnListaMascota.FillColor = System.Drawing.Color.DarkCyan;
+            this.btnListaMascota.FillColor2 = System.Drawing.Color.PaleGreen;
+            this.btnListaMascota.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnListaMascota.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnListaMascota.Image = global::AniCLinic.Properties.Resources._3003596;
+            this.btnListaMascota.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnListaMascota.Location = new System.Drawing.Point(311, 17);
+            this.btnListaMascota.Name = "btnListaMascota";
+            this.btnListaMascota.Size = new System.Drawing.Size(44, 37);
+            this.btnListaMascota.TabIndex = 136;
+            this.btnListaMascota.UseTransparentBackground = true;
+            // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2HtmlLabel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.SeaGreen;
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(244, 24);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(63, 21);
+            this.guna2HtmlLabel1.TabIndex = 135;
+            this.guna2HtmlLabel1.Text = "Listado";
             // 
             // AggRegistroClinico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(387, 470);
+            this.ClientSize = new System.Drawing.Size(387, 494);
+            this.Controls.Add(this.btnListaMascota);
+            this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.guna2HtmlLabel9);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.label3);
@@ -376,7 +402,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtMascota);
             this.Controls.Add(this.guna2HtmlLabel8);
-            this.Controls.Add(this.fechahistorial);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.txtReceta);
             this.Controls.Add(this.guna2HtmlLabel6);
@@ -420,7 +445,8 @@
         private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2GradientButton btnAceptar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2HtmlLabel fechahistorial;
         private System.Windows.Forms.Timer timer1;
+        private Guna.UI2.WinForms.Guna2GradientButton btnListaMascota;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

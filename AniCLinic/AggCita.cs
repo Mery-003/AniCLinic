@@ -10,12 +10,12 @@ namespace AniCLinic
     public partial class AggCita : Form
     {
         private int? _idCitaEdit;
-        private DataTable _mascotasDT;
+        private int? _idMascotaSel;  // <-- NUEVO: Id de mascota seleccionada
 
         private const string ESTADO_NUEVO = "Pendiente";
 
         private static readonly TimeSpan APERTURA = new TimeSpan(7, 0, 0);
-        private static readonly TimeSpan CIERRE = new TimeSpan(17, 0, 0);
+        private static readonly TimeSpan CIERRE   = new TimeSpan(17, 0, 0);
 
         public AggCita() : this(null) { }
 
@@ -25,31 +25,21 @@ namespace AniCLinic
 
             _idCitaEdit = idCita;
 
+            txtMascotaCita.ReadOnly     = true; // reemplaza al combo
             txtPropietarioCita.ReadOnly = true;
-            txtEspecieCita.ReadOnly = true;
-            txtRazaCita.ReadOnly = true;
-            txtHora.ReadOnly = true;
+            txtEspecieCita.ReadOnly     = true;
+            txtRazaCita.ReadOnly        = true;
+            txtHora.ReadOnly            = true;
 
-            UxBuscarCedulaHelper.Wire(txtCedulaCita, BuscarPorCedula);
+            // Wire del selector de mascota:
+            btnListaMascota.Click += (s, e) => AbrirListaMascota();
 
-            cmbMascotaCita.SelectedIndexChanged += (s, e) =>
-            {
-                if (cmbMascotaCita.SelectedIndex >= 0 && _mascotasDT != null)
-                {
-                    if (cmbMascotaCita.SelectedItem is DataRowView drv)
-                    {
-                        txtEspecieCita.Text = Convert.ToString(drv["Especie"]);
-                        txtRazaCita.Text = Convert.ToString(drv["Raza"]);
-                    }
-                }
-            };
-
+            // Fecha/hora
             dtpFecha.ValueChanged += (s, e) => txtHora.Clear();
-            dtpFecha.CloseUp += (s, e) => { txtHora.Clear(); AbrirSelectorHora(); };
+            dtpFecha.CloseUp      += (s, e) => { txtHora.Clear(); AbrirSelectorHora(); };
+            txtHora.Click         += (s, e) => AbrirSelectorHora();
 
-            txtHora.Click += (s, e) => AbrirSelectorHora();
-
-            btnAceptar.Click += (s, e) => Guardar();
+            btnAceptar.Click  += (s, e) => Guardar();
             btnCancelar.Click += (s, e) => { this.DialogResult = DialogResult.Cancel; this.Close(); };
 
             AplicarRestriccionFechaMinima();
@@ -58,10 +48,25 @@ namespace AniCLinic
                 CargarCita(_idCitaEdit.Value);
         }
 
+        private void AbrirListaMascota()
+        {
+            using (var frm = new FRMListaMascota())
+            {
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    _idMascotaSel           = frm.IdMascotaSel;
+                    txtMascotaCita.Text     = frm.MascotaSel;
+                    txtPropietarioCita.Text = frm.PropietarioSel;
+                    txtEspecieCita.Text     = frm.EspecieSel;
+                    txtRazaCita.Text        = frm.RazaSel;
+                }
+            }
+        }
+
         private void AplicarRestriccionFechaMinima()
         {
             var ahora = DateTime.Now;
-            var min = DateTime.Today;
+            var min  = DateTime.Today;
             if (ahora.TimeOfDay >= CIERRE)
                 min = DateTime.Today.AddDays(1);
 
@@ -80,37 +85,9 @@ namespace AniCLinic
             return new TimeSpan(t.Hour, t.Minute, 0);
         }
 
-        private void BuscarPorCedula(string cedula)
-        {
-            if (!CedulaUtils.CedulaValida(cedula))
-            {
-                MessageBox.Show("Ingrese una cédula válida de 10 dígitos.");
-                return;
-            }
-
-            _mascotasDT = CedulaUtils.MascotasPorCedula(cedula);
-            cmbMascotaCita.DataSource = _mascotasDT;
-            cmbMascotaCita.DisplayMember = "Mascota";
-            cmbMascotaCita.ValueMember = "IdMascota";
-
-            if (_mascotasDT.Rows.Count > 0)
-            {
-                txtPropietarioCita.Text = Convert.ToString(_mascotasDT.Rows[0]["Propietario"]);
-                cmbMascotaCita.SelectedIndex = 0;
-            }
-            else
-            {
-                txtPropietarioCita.Clear();
-                txtEspecieCita.Clear();
-                txtRazaCita.Clear();
-                cmbMascotaCita.DataSource = null;
-                MessageBox.Show("No se encontraron mascotas para esa cédula.");
-            }
-        }
-
         private void AbrirSelectorHora()
         {
-            AplicarRestriccionFechaMinima(); 
+            AplicarRestriccionFechaMinima();
             var hhmm = ElegirHora(dtpFecha.Value.Date);
             if (!string.IsNullOrEmpty(hhmm))
                 txtHora.Text = hhmm;
@@ -118,7 +95,7 @@ namespace AniCLinic
 
         private string ElegirHora(DateTime dia)
         {
-            var ocupadasDT = CedulaUtils.HorasOcupadas(dia);
+            var ocupadasDT = CedulaUtils.HorasOcupadas(dia); // Si tu helper depende de cédula, cámbialo por un método general por fecha
             var ocupadas = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
             foreach (DataRow r in ocupadasDT.Rows)
                 ocupadas.Add(Convert.ToString(r["Hora"]));
@@ -148,10 +125,10 @@ namespace AniCLinic
             };
             frm.Deactivate += (s, e) => frm.Close();
 
-            var p = txtHora.PointToScreen(new Point(0, txtHora.Height));
+            var p  = txtHora.PointToScreen(new Point(0, txtHora.Height));
             var wa = Screen.FromControl(this).WorkingArea;
-            int x = Math.Min(Math.Max(wa.Left, p.X), wa.Right - frm.Width);
-            int y = Math.Min(Math.Max(wa.Top, p.Y), wa.Bottom - frm.Height);
+            int x = Math.Min(Math.Max(wa.Left,  p.X), wa.Right  - frm.Width);
+            int y = Math.Min(Math.Max(wa.Top,   p.Y), wa.Bottom - frm.Height);
             frm.Location = new Point(x, y);
 
             var panel = new FlowLayoutPanel
@@ -185,13 +162,13 @@ namespace AniCLinic
                 if (fueraHorario || ocupada)
                 {
                     btn.Enabled = false;
-                    btn.BackColor = Color.MistyRose;
-                    btn.ForeColor = Color.Maroon;
+                    btn.BackColor = System.Drawing.Color.MistyRose;
+                    btn.ForeColor = System.Drawing.Color.Maroon;
                 }
                 else
                 {
-                    btn.BackColor = Color.Honeydew;
-                    btn.ForeColor = Color.DarkGreen;
+                    btn.BackColor = System.Drawing.Color.Honeydew;
+                    btn.ForeColor = System.Drawing.Color.DarkGreen;
                     btn.Click += (s, e) => { seleccionado = hhmm; frm.Close(); };
                 }
 
@@ -211,55 +188,55 @@ namespace AniCLinic
 
         private void Guardar()
         {
-            var ced = txtCedulaCita.Text.Trim();
-            if (!CedulaUtils.CedulaValida(ced))
-            { 
-                MessageBox.Show("Cédula inválida."); 
-                txtCedulaCita.Focus(); return; 
-            }
-
-            if (cmbMascotaCita.SelectedIndex < 0 || cmbMascotaCita.SelectedValue == null)
-            { 
-                MessageBox.Show("Seleccione una mascota.");
-                return; 
+            if (!_idMascotaSel.HasValue)
+            {
+                MessageBox.Show("Seleccione una mascota (botón Lista).");
+                btnListaMascota.Focus();
+                return;
             }
 
             if (string.IsNullOrWhiteSpace(txtHora.Text))
-            { 
-                MessageBox.Show("Seleccione una hora."); 
-                return; 
+            {
+                MessageBox.Show("Seleccione una hora.");
+                return;
             }
 
             if (string.IsNullOrWhiteSpace(txtMotivo.Text))
-            { 
-                MessageBox.Show("Ingrese el motivo."); 
-                txtMotivo.Focus(); 
-                return; 
+            {
+                MessageBox.Show("Ingrese el motivo.");
+                txtMotivo.Focus();
+                return;
             }
 
             var ts = TimeSpan.ParseExact(txtHora.Text, @"hh\:mm", CultureInfo.InvariantCulture);
             if (!(ts >= APERTURA && ts <= CIERRE && (ts.Minutes == 0 || ts.Minutes == 30)))
-            { MessageBox.Show("Hora fuera de horario (07:00–17:00) o no es múltiplo de 30 min."); return; }
+            {
+                MessageBox.Show("Hora fuera de horario (07:00–17:00) o no es múltiplo de 30 min.");
+                return;
+            }
 
             var fechaSel = dtpFecha.Value.Date;
             var ahora = DateTime.Now;
             if (fechaSel < DateTime.Today)
-            { 
-                MessageBox.Show("No se permiten días pasados."); 
-                return; 
+            {
+                MessageBox.Show("No se permiten días pasados.");
+                return;
             }
 
             if (fechaSel == DateTime.Today && ts < SiguienteMediaHora(ahora))
-            { 
-                MessageBox.Show("La hora seleccionada ya pasó."); 
-                return; 
+            {
+                MessageBox.Show("La hora seleccionada ya pasó.");
+                return;
             }
 
             var fechaHora = fechaSel.Add(ts);
-            int idMascota = Convert.ToInt32(cmbMascotaCita.SelectedValue);
+            int idMascota = _idMascotaSel.Value;
 
             if (CedulaUtils.ExisteChoqueHorario(fechaSel, txtHora.Text, _idCitaEdit))
-            { MessageBox.Show("Esa hora ya está ocupada."); return; }
+            {
+                MessageBox.Show("Esa hora ya está ocupada.");
+                return;
+            }
 
             var db = new csConexionBD();
             try
@@ -313,29 +290,37 @@ namespace AniCLinic
             {
                 db.abrirConexion();
                 using (var da = new SqlDataAdapter(@"
-                    SELECT g.IdCita, p.Cedula,
-                           m.IdMascota, m.Nombre as Mascota, m.Especie, m.Raza,
-                           g.FechaHora, g.Motivo,
-                           (p.Nombre + ' ' + p.Apellido) AS Propietario
-                    FROM dbo.GestionCita g
-                    JOIN dbo.Mascota m  ON m.IdMascota = g.IdMascota
-                    JOIN dbo.Persona p  ON p.IdPersona = m.IdPersona
-                    WHERE g.IdCita = @id;", db.obtenerConexion()))
+    SELECT g.IdCita,
+           m.IdMascota,
+           m.Nombre AS Mascota,
+           e.Especie AS Especie,
+           r.Raza    AS Raza,
+           (p.Nombre + ' ' + p.Apellido) AS Propietario,
+           g.FechaHora,
+           g.Motivo
+    FROM dbo.GestionCita g
+    JOIN dbo.Mascota m  ON m.IdMascota = g.IdMascota
+    JOIN dbo.Persona p  ON p.IdPersona = m.IdPersona
+    LEFT JOIN dbo.Especie e ON e.IdEspecie = m.IdEspecie
+    LEFT JOIN dbo.Raza    r ON r.IdRaza    = m.IdRaza
+    WHERE g.IdCita = @id;", db.obtenerConexion()))
+
                 {
                     da.SelectCommand.Parameters.AddWithValue("@id", idCita);
                     var dt = new DataTable(); da.Fill(dt);
                     if (dt.Rows.Count == 0) return;
+
                     var r = dt.Rows[0];
 
-                    txtCedulaCita.Text = Convert.ToString(r["Cedula"]);
+                    _idMascotaSel           = Convert.ToInt32(r["IdMascota"]);
+                    txtMascotaCita.Text     = Convert.ToString(r["Mascota"]);
                     txtPropietarioCita.Text = Convert.ToString(r["Propietario"]);
-
-                    BuscarPorCedula(txtCedulaCita.Text.Trim());
-                    cmbMascotaCita.SelectedValue = Convert.ToInt32(r["IdMascota"]);
+                    txtEspecieCita.Text     = Convert.ToString(r["Especie"]);
+                    txtRazaCita.Text        = Convert.ToString(r["Raza"]);
 
                     DateTime fh = Convert.ToDateTime(r["FechaHora"]);
                     dtpFecha.Value = fh.Date;
-                    txtHora.Text = fh.ToString("HH:mm");
+                    txtHora.Text   = fh.ToString("HH:mm");
 
                     txtMotivo.Text = Convert.ToString(r["Motivo"]);
                 }
