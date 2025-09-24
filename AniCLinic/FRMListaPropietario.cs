@@ -9,7 +9,6 @@ namespace AniCLinic
     {
         private readonly csCRUD _crud = new csCRUD();
 
-        // valores de selección
         public int IdPersonaSel { get; private set; }
         public string NombreSel { get; private set; }
         public string ApellidoSel { get; private set; }
@@ -39,27 +38,13 @@ namespace AniCLinic
         private void CargarLista()
         {
             string sql = @"
-IF OBJECT_ID('dbo.Empleado','U') IS NOT NULL
-BEGIN
-    SELECT p.IdPersona AS ID,
-           p.Nombre,
-           p.Apellido,
-           p.Cedula AS [C.I.],
-           p.Celular
-    FROM Persona p
-    WHERE NOT EXISTS(SELECT 1 FROM dbo.Empleado e WHERE e.IdPersona = p.IdPersona)
-    ORDER BY p.Nombre, p.Apellido;
-END
-ELSE
-BEGIN
-    SELECT p.IdPersona AS ID,
-           p.Nombre,
-           p.Apellido,
-           p.Cedula AS [C.I.],
-           p.Celular
-    FROM Persona p
-    ORDER BY p.Nombre, p.Apellido;
-END";
+Select IdPersona AS ID,
+           Nombre,
+           Apellido,
+           Cedula AS [C.I.],
+           Celular 
+from Persona
+Order by Nombre, Apellido";
             dgvListaPropietario.DataSource = _crud.cargarBDData(sql);
             if (dgvListaPropietario.Columns.Contains("ID")) dgvListaPropietario.Columns["ID"].Width = 60;
             if (dgvListaPropietario.Columns.Contains("C.I.")) dgvListaPropietario.Columns["C.I."].Width = 130;
@@ -81,7 +66,11 @@ END";
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (dgvListaPropietario.CurrentRow == null) { MessageBox.Show("Seleccione un propietario."); return; }
+            if (dgvListaPropietario.CurrentRow == null) 
+            { 
+                MessageBox.Show("Seleccione un propietario."); 
+                return; 
+            }
             IdPersonaSel = Convert.ToInt32(dgvListaPropietario.CurrentRow.Cells["ID"].Value);
             NombreSel = dgvListaPropietario.CurrentRow.Cells["Nombre"].Value + "";
             ApellidoSel = dgvListaPropietario.CurrentRow.Cells["Apellido"].Value + "";

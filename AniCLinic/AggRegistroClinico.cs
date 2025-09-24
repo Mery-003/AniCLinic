@@ -13,11 +13,9 @@ namespace AniCLinic
 
         private int _idRegistroClinicoExistente = 0;
 
-        // Conserva el constructor antiguo para compatibilidad
         public AggRegistroClinico(CitaInfo info, bool isEdit)
             : this(info, isEdit, false) { }
 
-        // Nuevo: admite el flag esEmergencia
         public AggRegistroClinico(CitaInfo info, bool isEdit, bool esEmergencia)
         {
             InitializeComponent();
@@ -28,14 +26,13 @@ namespace AniCLinic
             _isEdit = isEdit;
             _esEmergencia = esEmergencia;
 
-            // Cabecera y botones
             Text = _isEdit ? "Editar Registro Clínico" : "Registrar Atención";
             this.AcceptButton = btnAceptar;
             this.CancelButton = btnCancelar;
 
             if (txtPropietario != null) txtPropietario.ReadOnly = true;
             if (txtMascota != null) txtMascota.ReadOnly = true;
-            if (txtMotivo != null) txtMotivo.ReadOnly = false;   // editable, pero autollenamos en emergencia
+            if (txtMotivo != null) txtMotivo.ReadOnly = false; 
 
             if (txtReceta != null)
             {
@@ -45,22 +42,41 @@ namespace AniCLinic
                 txtReceta.WordWrap = true;
             }
 
-            try { btnAceptar.Click -= BtnGuardar_Click; } catch { }
-            try { btnCancelar.Click -= BtnCancelar_Click; } catch { }
+            try 
+            { 
+                btnAceptar.Click -= BtnGuardar_Click; 
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            try 
+            { 
+                btnCancelar.Click -= BtnCancelar_Click; 
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             btnAceptar.Click += BtnGuardar_Click;
             btnCancelar.Click += BtnCancelar_Click;
 
-            // Botón Lista Mascota solo visible en emergencia
             if (btnListaMascota != null)
             {
                 btnListaMascota.Visible = _esEmergencia;
-                try { btnListaMascota.Click -= BtnListaMascota_Click; } catch { }
+                try 
+                { 
+                    btnListaMascota.Click -= BtnListaMascota_Click; 
+                } 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 btnListaMascota.Click += BtnListaMascota_Click;
             }
 
             CargarCabeceraDesdeCita();
 
-            // Autollenar motivo si es emergencia
             if (_esEmergencia && txtMotivo != null && string.IsNullOrWhiteSpace(txtMotivo.Text))
                 txtMotivo.Text = "Emergencia";
 
@@ -176,9 +192,16 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
         {
             try
             {
-                if (!ValidarCamposObligatorios()) return;
+                if (!ValidarCamposObligatorios()) 
+                    return;
                 GuardarRegistroClinico();
                 DialogResult = DialogResult.OK;
+                if (!_isEdit)
+                {
+                    ValorCita vC = new ValorCita();
+                    this.Close();
+                    vC.ShowDialog();
+                }
                 Close();
             }
             catch (SqlException ex)
@@ -246,15 +269,15 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             string trat = (txtTratamiento != null) ? (txtTratamiento.Text ?? "").Trim() : "";
             string rec  = (txtReceta != null)      ? (txtReceta.Text ?? "").Trim()      : "";
 
-            // Fuerza "Emergencia" si es flujo de emergencia o si viene vacío
-            if (_esEmergencia && string.IsNullOrWhiteSpace(mot)) mot = "Emergencia";
-            if (string.IsNullOrWhiteSpace(mot)) mot = "Emergencia";
+            if (_esEmergencia && string.IsNullOrWhiteSpace(mot)) 
+                mot = "Emergencia";
+            if (string.IsNullOrWhiteSpace(mot)) 
+                mot = "Emergencia";
 
             int idMascota = ResolverIdMascotaRobusto(_info);
             if (idMascota <= 0)
                 throw new InvalidOperationException("No se pudo resolver la mascota asociada.");
 
-            // Para emergencias usamos la fecha/hora del info o ahora (si viniera default)
             DateTime fechaHora = _info.FechaHora != default ? _info.FechaHora : DateTime.Now;
 
             if (_idRegistroClinicoExistente > 0)
@@ -290,6 +313,7 @@ VALUES
                     new SqlParameter("@fh", fechaHora)
                 );
             }
+            
         }
 
         private int ResolverIdMascotaRobusto(CitaInfo info)
@@ -297,7 +321,8 @@ VALUES
             if (info.IdMascota > 0) return info.IdMascota;
 
             int id = ResolverIdMascotaPorCita(info.IdCita);
-            if (id > 0) return id;
+            if (id > 0) 
+                return id;
 
             id = ResolverIdMascotaPorNombreYFecha(info.Mascota, info.FechaHora.Date);
             return id;

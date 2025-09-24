@@ -16,7 +16,7 @@ namespace AniCLinic
     {
         Login login;
         bool esAdmin;
-        int idEmpleado;
+        public int idEmpleado;
         public Menu()
         {
             InitializeComponent();

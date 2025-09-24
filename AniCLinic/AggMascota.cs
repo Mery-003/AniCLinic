@@ -15,7 +15,6 @@ namespace AniCLinic
         private readonly int _idMascota;
         private int _idPersonaSeleccionada;
 
-        // NUEVO: exponer Id de mascota guardada
         public int IdMascotaGuardada { get; private set; } = 0;
 
         public AggMascota(fPacientes parent, int idMascota = 0)
@@ -61,7 +60,10 @@ namespace AniCLinic
                     txtPropietarioCI.Text = ci;
                 }
             }
-            catch { /* noop */ }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void LimpiarNuevo()
@@ -141,8 +143,18 @@ namespace AniCLinic
             using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdRaza, Raza FROM Raza WHERE IdEspecie=" + idEsp + " ORDER BY Raza"))
             {
                 DataTable dt = new DataTable();
-                if (dr != null) dt.Load(dr);
-                if (dr != null) dr.Close(); try { _crud.conexion.cerrarConexion(); } catch { }
+                if (dr != null) 
+                    dt.Load(dr);
+                if (dr != null) 
+                    dr.Close(); 
+                try 
+                { 
+                    _crud.conexion.cerrarConexion(); 
+                } 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
                 cmbRaza.DisplayMember = "Raza";
                 cmbRaza.ValueMember = "IdRaza";
@@ -232,16 +244,28 @@ WHERE m.IdMascota = " + id;
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    try { picMascota.Image = Image.FromFile(ofd.FileName); picMascota.SizeMode = PictureBoxSizeMode.StretchImage; }
-                    catch { MessageBox.Show("No se pudo cargar la imagen."); }
+                    try 
+                    { 
+                        picMascota.Image = Image.FromFile(ofd.FileName); 
+                        picMascota.SizeMode = PictureBoxSizeMode.StretchImage; 
+                    }
+                    catch 
+                    { 
+                        MessageBox.Show("No se pudo cargar la imagen."); 
+                    }
                 }
             }
         }
 
         private static byte[] ImgToBytes(Image img)
         {
-            if (img == null) return null;
-            using (var ms = new MemoryStream()) { img.Save(ms, img.RawFormat); return ms.ToArray(); }
+            if (img == null) 
+                return null;
+            using (var ms = new MemoryStream()) 
+            { 
+                img.Save(ms, img.RawFormat); 
+                return ms.ToArray(); 
+            }
         }
 
         private bool Validar()
@@ -258,12 +282,14 @@ WHERE m.IdMascota = " + id;
             {
                 decimal d;
                 if (!decimal.TryParse(txtPeso.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out d))
-                { MessageBox.Show("Peso inválido."); return false; }
+                { 
+                    MessageBox.Show("Peso inválido."); 
+                    return false; 
+                }
             }
             return true;
         }
 
-        // REEMPLAZADO COMPLETO (devuelve OK + IdMascotaGuardada)
         private void btnGuardarMascota_Click(object sender, EventArgs e)
         {
             if (!Validar()) return;
@@ -310,7 +336,6 @@ WHERE m.IdMascota = " + id;
                     new SqlParameter("@f", fnac));
                 if (!ok) { MessageBox.Show("No se pudo registrar."); return; }
 
-                // Recuperar id de la mascota insertada (última por IdPersona+Nombre)
                 DataTable dt = _crud.cargarBDData(@"
                     SELECT TOP(1) IdMascota FROM Mascota 
                     WHERE IdPersona=@per AND Nombre=@n 
@@ -328,7 +353,10 @@ WHERE m.IdMascota = " + id;
                 _parent?.RefrescarMascotas();
                 _parent?.RefrescarPropietarios();
             }
-            catch { }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(ex.Message); 
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Close();

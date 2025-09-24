@@ -21,6 +21,7 @@ namespace AniCLinic
         csVenta ventaAgg;
         SqlDataReader reader;
         int idEmpl;
+        bool vieneCita;
         public Ventas()
         {
             InitializeComponent();
@@ -37,6 +38,27 @@ namespace AniCLinic
             prepararGrid();
             cargarProductos();
             cargarCmb();
+        }
+        public Ventas(int id, decimal valor, bool vieneCita)
+        {
+            idEmpl = id;
+            InitializeComponent();
+            visible(false);
+            prepararGrid();
+            cargarProductos();
+            cargarCmb();
+            try
+            {
+                decimal cantidad = 1;
+                decimal precioTotal = cantidad * valor;
+                dgvVentas.Rows.Add(1, "Cita", "Valor de la cita",
+                    valor, cantidad, precioTotal);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            this.vieneCita = vieneCita;
         }
         public void cargarCmb()
         {
@@ -347,6 +369,15 @@ namespace AniCLinic
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (vieneCita && dgvVentas.SelectedRows.Count > 0)
+            {
+                DataGridViewRow fila = dgvVentas.Rows[0];
+                if (Convert.ToInt32(fila.Cells["ID"].Value) == 1)
+                {
+                    MessageBox.Show("No se puede eliminar la cita", "Advertencia", MessageBoxButtons.OK);
+                    return;
+                }
+            }
             if(dgvVentas.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dgvVentas.Rows[0];

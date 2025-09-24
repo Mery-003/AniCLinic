@@ -12,7 +12,7 @@ namespace AniCLinic
     {
         private readonly csCRUD _crud = new csCRUD();
         private readonly fPacientes _parent;
-        private readonly int _idPersona; // 0 = nuevo
+        private readonly int _idPersona; 
 
         // NUEVO: exponer el Id del propietario guardado
         public int IdPersonaGuardado { get; private set; } = 0;
