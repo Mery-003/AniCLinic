@@ -17,7 +17,7 @@ namespace AniCLinic
             InitializeComponent();
             
         }
-
+        //
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (txtValorCita.Text.Length <= 0)

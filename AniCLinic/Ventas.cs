@@ -350,7 +350,7 @@ namespace AniCLinic
                 e.Handled = true;
             }
         }
-
+        //
         private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbCategoria.SelectedIndex == -1)

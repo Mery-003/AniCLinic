@@ -655,7 +655,7 @@
             this.guna2Button1.FillColor = System.Drawing.Color.WhiteSmoke;
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(25, 131);
+            this.guna2Button1.Location = new System.Drawing.Point(25, 130);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(488, 249);
             this.guna2Button1.TabIndex = 161;
@@ -714,7 +714,7 @@
             this.guna2Button2.FillColor = System.Drawing.Color.WhiteSmoke;
             this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(541, 129);
+            this.guna2Button2.Location = new System.Drawing.Point(541, 128);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(488, 249);
             this.guna2Button2.TabIndex = 165;
