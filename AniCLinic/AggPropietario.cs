@@ -12,7 +12,7 @@ namespace AniCLinic
     {
         private readonly csCRUD _crud = new csCRUD();
         private readonly fPacientes _parent;
-        private readonly int _idPersona; 
+        private readonly int _idPersona;
 
         // NUEVO: exponer el Id del propietario guardado
         public int IdPersonaGuardado { get; private set; } = 0;
@@ -54,6 +54,7 @@ namespace AniCLinic
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
+
         private static void Limitar10(object sender, EventArgs e)
         {
             if (sender is TextBox tb)
@@ -90,6 +91,7 @@ namespace AniCLinic
                 return ms.ToArray();
             }
         }
+
         private static Image BytesToImageOrNull(object blob)
         {
             if (blob == null || blob == DBNull.Value) return null;
@@ -134,19 +136,30 @@ FROM Persona WHERE IdPersona = " + idPersona;
             }
         }
 
+        // ✅ Validar: correo obligatorio + formato
         private bool Validar()
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text)) { MessageBox.Show("Ingrese el nombre."); return false; }
             if (string.IsNullOrWhiteSpace(txtApellido.Text)) { MessageBox.Show("Ingrese el apellido."); return false; }
             if (string.IsNullOrWhiteSpace(txtCelular.Text)) { MessageBox.Show("Ingrese el celular."); return false; }
             if (string.IsNullOrWhiteSpace(txtCedula.Text)) { MessageBox.Show("Ingrese la cédula."); return false; }
+
             if (txtCelular.Text.Trim().Length > 10) { MessageBox.Show("Celular debe tener máx. 10 dígitos."); return false; }
             if (txtCedula.Text.Trim().Length > 10) { MessageBox.Show("C.I. debe tener máx. 10 dígitos."); return false; }
-            if (!string.IsNullOrWhiteSpace(txtCorreo.Text))
+
+            if (string.IsNullOrWhiteSpace(txtCorreo.Text))
             {
-                if (!Regex.IsMatch(txtCorreo.Text.Trim(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                { MessageBox.Show("Correo no válido."); return false; }
+                MessageBox.Show("Ingrese el correo electrónico (obligatorio).");
+                return false;
             }
+
+            string correo = txtCorreo.Text.Trim();
+            if (!Regex.IsMatch(correo, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Correo no válido. Ejemplo: nombre@dominio.com");
+                return false;
+            }
+
             return true;
         }
 
@@ -177,7 +190,18 @@ FROM Persona WHERE IdPersona = " + idPersona;
             return n > 0;
         }
 
-        // REEMPLAZADO COMPLETO (devuelve OK + IdPersonaGuardado)
+        // ✅ Nuevo: correo duplicado
+        private bool CorreoDuplicado(string email, int excluirId = 0)
+        {
+            string sql = excluirId > 0
+                ? "SELECT COUNT(1) FROM Persona WHERE Correo=@co AND IdPersona<>@id"
+                : "SELECT COUNT(1) FROM Persona WHERE Correo=@co";
+            DataTable dt = _crud.cargarBDData(sql, new SqlParameter("@co", email), new SqlParameter("@id", excluirId));
+            int n = (dt != null && dt.Rows.Count > 0) ? Convert.ToInt32(dt.Rows[0][0]) : 0;
+            return n > 0;
+        }
+
+        // ✅ Guardar con correo obligatorio + duplicado
         private void btnGuardarPropietario_Click(object sender, EventArgs e)
         {
             if (!Validar()) return;
@@ -187,7 +211,12 @@ FROM Persona WHERE IdPersona = " + idPersona;
             if (_idPersona == 0 && CedulaDuplicada(txtCedula.Text.Trim()))
             { MessageBox.Show("La cédula ya existe."); return; }
 
-            object correo = string.IsNullOrWhiteSpace(txtCorreo.Text) ? (object)DBNull.Value : txtCorreo.Text.Trim();
+            if (_idPersona > 0 && CorreoDuplicado(txtCorreo.Text.Trim(), _idPersona))
+            { MessageBox.Show("El correo ya pertenece a otro propietario."); return; }
+            if (_idPersona == 0 && CorreoDuplicado(txtCorreo.Text.Trim()))
+            { MessageBox.Show("El correo ya existe."); return; }
+
+            string correo = txtCorreo.Text.Trim(); // obligatorio y validado
             object direccion = string.IsNullOrWhiteSpace(txtDireccion.Text) ? (object)DBNull.Value : txtDireccion.Text.Trim();
             SqlParameter pImg = new SqlParameter("@Imagen", SqlDbType.VarBinary)
             { Value = (object)ImageToBytesOrNull(picPropietario == null ? null : picPropietario.Image) ?? DBNull.Value };
@@ -229,7 +258,6 @@ FROM Persona WHERE IdPersona = " + idPersona;
                     pImg);
                 if (!ok) { MessageBox.Show("No se pudo registrar."); return; }
 
-                // Recuperar Id por cédula (única)
                 DataTable dt = _crud.cargarBDData("SELECT IdPersona FROM Persona WHERE Cedula=@ci;",
                     new SqlParameter("@ci", txtCedula.Text.Trim()));
                 if (dt != null && dt.Rows.Count > 0)

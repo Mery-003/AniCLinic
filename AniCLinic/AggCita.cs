@@ -10,42 +10,85 @@ namespace AniCLinic
     public partial class AggCita : Form
     {
         private int? _idCitaEdit;
-        private int? _idMascotaSel;  // <-- NUEVO: Id de mascota seleccionada
+        private int? _idMascotaSel;           // Id de mascota seleccionada
+        private bool _abrirValorAlGuardar;    // << SOLO true cuando viene desde Registro Clínico
+
+        // Props opcionales para sugerencias
+        public string MotivoSugerido { get; set; }
+        public DateTime? FechaSugerida { get; set; }
 
         private const string ESTADO_NUEVO = "Pendiente";
-
         private static readonly TimeSpan APERTURA = new TimeSpan(7, 0, 0);
-        private static readonly TimeSpan CIERRE   = new TimeSpan(17, 0, 0);
+        private static readonly TimeSpan CIERRE = new TimeSpan(17, 0, 0);
 
         public AggCita() : this(null) { }
 
         public AggCita(int? idCita)
         {
             InitializeComponent();
-
             _idCitaEdit = idCita;
-
-            txtMascotaCita.ReadOnly     = true; // reemplaza al combo
-            txtPropietarioCita.ReadOnly = true;
-            txtEspecieCita.ReadOnly     = true;
-            txtRazaCita.ReadOnly        = true;
-            txtHora.ReadOnly            = true;
-
-            // Wire del selector de mascota:
-            btnListaMascota.Click += (s, e) => AbrirListaMascota();
-
-            // Fecha/hora
-            dtpFecha.ValueChanged += (s, e) => txtHora.Clear();
-            dtpFecha.CloseUp      += (s, e) => { txtHora.Clear(); AbrirSelectorHora(); };
-            txtHora.Click         += (s, e) => AbrirSelectorHora();
-
-            btnAceptar.Click  += (s, e) => Guardar();
-            btnCancelar.Click += (s, e) => { this.DialogResult = DialogResult.Cancel; this.Close(); };
-
-            AplicarRestriccionFechaMinima();
+            _abrirValorAlGuardar = false; // <- desde el módulo principal: NO abrir ValorCita
+            PrepararUIComun();
 
             if (_idCitaEdit.HasValue)
                 CargarCita(_idCitaEdit.Value);
+        }
+
+        // Constructor cuando venimos desde Registro Clínico
+        public AggCita(int idMascotaSel, string mascotaSel, string propietarioSel, string especieSel, string razaSel, bool abrirValorAlGuardar = true)
+        {
+            InitializeComponent();
+            _idCitaEdit = null;
+            _abrirValorAlGuardar = abrirValorAlGuardar; // true en ese flujo
+            PrepararUIComun();
+
+            _idMascotaSel = idMascotaSel;
+            txtMascotaCita.Text = mascotaSel ?? "";
+            txtPropietarioCita.Text = propietarioSel ?? "";
+            txtEspecieCita.Text = especieSel ?? "";
+            txtRazaCita.Text = razaSel ?? "";
+
+            // Completar especie/raza si faltan
+            if (string.IsNullOrWhiteSpace(txtEspecieCita.Text) || string.IsNullOrWhiteSpace(txtRazaCita.Text))
+                CargarEspecieYRazaPorIdMascota(_idMascotaSel.Value);
+
+            // Sugerencias (si se setean desde el caller)
+            AplicarSugerencias();
+
+            txtHora.Clear();
+        }
+
+        private void PrepararUIComun()
+        {
+            txtMascotaCita.ReadOnly = true;
+            txtPropietarioCita.ReadOnly = true;
+            txtEspecieCita.ReadOnly = true;
+            txtRazaCita.ReadOnly = true;
+            txtHora.ReadOnly = true;
+
+            btnListaMascota.Click += (s, e) => AbrirListaMascota();
+
+            dtpFecha.ValueChanged += (s, e) => txtHora.Clear();
+            dtpFecha.CloseUp += (s, e) => { txtHora.Clear(); AbrirSelectorHora(); };
+            txtHora.Click += (s, e) => AbrirSelectorHora();
+
+            btnAceptar.Click += (s, e) => Guardar();
+            btnCancelar.Click += (s, e) => { this.DialogResult = DialogResult.Cancel; this.Close(); };
+
+            AplicarRestriccionFechaMinima();
+        }
+
+        private void AplicarSugerencias()
+        {
+            if (!string.IsNullOrWhiteSpace(MotivoSugerido) && string.IsNullOrWhiteSpace(txtMotivo.Text))
+                txtMotivo.Text = MotivoSugerido;
+
+            if (FechaSugerida.HasValue)
+            {
+                var f = FechaSugerida.Value.Date;
+                if (f < dtpFecha.MinDate) f = dtpFecha.MinDate;
+                dtpFecha.Value = f;
+            }
         }
 
         private void AbrirListaMascota()
@@ -54,11 +97,14 @@ namespace AniCLinic
             {
                 if (frm.ShowDialog(this) == DialogResult.OK)
                 {
-                    _idMascotaSel           = frm.IdMascotaSel;
-                    txtMascotaCita.Text     = frm.MascotaSel;
+                    _idMascotaSel = frm.IdMascotaSel;
+                    txtMascotaCita.Text = frm.MascotaSel;
                     txtPropietarioCita.Text = frm.PropietarioSel;
-                    txtEspecieCita.Text     = frm.EspecieSel;
-                    txtRazaCita.Text        = frm.RazaSel;
+                    txtEspecieCita.Text = frm.EspecieSel;
+                    txtRazaCita.Text = frm.RazaSel;
+
+                    if (string.IsNullOrWhiteSpace(txtEspecieCita.Text) || string.IsNullOrWhiteSpace(txtRazaCita.Text))
+                        CargarEspecieYRazaPorIdMascota(_idMascotaSel.Value);
                 }
             }
         }
@@ -66,7 +112,7 @@ namespace AniCLinic
         private void AplicarRestriccionFechaMinima()
         {
             var ahora = DateTime.Now;
-            var min  = DateTime.Today;
+            var min = DateTime.Today;
             if (ahora.TimeOfDay >= CIERRE)
                 min = DateTime.Today.AddDays(1);
 
@@ -95,7 +141,7 @@ namespace AniCLinic
 
         private string ElegirHora(DateTime dia)
         {
-            var ocupadasDT = CedulaUtils.HorasOcupadas(dia); // Si tu helper depende de cédula, cámbialo por un método general por fecha
+            var ocupadasDT = CedulaUtils.HorasOcupadas(dia);
             var ocupadas = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
             foreach (DataRow r in ocupadasDT.Rows)
                 ocupadas.Add(Convert.ToString(r["Hora"]));
@@ -125,10 +171,10 @@ namespace AniCLinic
             };
             frm.Deactivate += (s, e) => frm.Close();
 
-            var p  = txtHora.PointToScreen(new Point(0, txtHora.Height));
+            var p = txtHora.PointToScreen(new Point(0, txtHora.Height));
             var wa = Screen.FromControl(this).WorkingArea;
-            int x = Math.Min(Math.Max(wa.Left,  p.X), wa.Right  - frm.Width);
-            int y = Math.Min(Math.Max(wa.Top,   p.Y), wa.Bottom - frm.Height);
+            int x = Math.Min(Math.Max(wa.Left, p.X), wa.Right - frm.Width);
+            int y = Math.Min(Math.Max(wa.Top, p.Y), wa.Bottom - frm.Height);
             frm.Location = new Point(x, y);
 
             var panel = new FlowLayoutPanel
@@ -272,8 +318,22 @@ namespace AniCLinic
                     }
                 }
 
+                // SOLO si venimos desde Registro Clínico abrimos ValorCita
+                if (_abrirValorAlGuardar)
+                {
+                    try
+                    {
+                        using (var vC = new ValorCita())
+                        {
+                            vC.ShowDialog(this);
+                        }
+                    }
+                    catch { /* si no existe, continuar sin romper */ }
+                }
+
                 MessageBox.Show("Cita guardada.");
                 DialogResult = DialogResult.OK;
+                Close();
             }
             catch (Exception ex)
             {
@@ -304,7 +364,6 @@ namespace AniCLinic
     LEFT JOIN dbo.Especie e ON e.IdEspecie = m.IdEspecie
     LEFT JOIN dbo.Raza    r ON r.IdRaza    = m.IdRaza
     WHERE g.IdCita = @id;", db.obtenerConexion()))
-
                 {
                     da.SelectCommand.Parameters.AddWithValue("@id", idCita);
                     var dt = new DataTable(); da.Fill(dt);
@@ -312,20 +371,44 @@ namespace AniCLinic
 
                     var r = dt.Rows[0];
 
-                    _idMascotaSel           = Convert.ToInt32(r["IdMascota"]);
-                    txtMascotaCita.Text     = Convert.ToString(r["Mascota"]);
+                    _idMascotaSel = Convert.ToInt32(r["IdMascota"]);
+                    txtMascotaCita.Text = Convert.ToString(r["Mascota"]);
                     txtPropietarioCita.Text = Convert.ToString(r["Propietario"]);
-                    txtEspecieCita.Text     = Convert.ToString(r["Especie"]);
-                    txtRazaCita.Text        = Convert.ToString(r["Raza"]);
+                    txtEspecieCita.Text = Convert.ToString(r["Especie"]);
+                    txtRazaCita.Text = Convert.ToString(r["Raza"]);
 
                     DateTime fh = Convert.ToDateTime(r["FechaHora"]);
                     dtpFecha.Value = fh.Date;
-                    txtHora.Text   = fh.ToString("HH:mm");
+                    txtHora.Text = fh.ToString("HH:mm");
 
                     txtMotivo.Text = Convert.ToString(r["Motivo"]);
+
+                    // Por si venimos con sugerencias (no debería sobreescribir si ya hay valores)
+                    AplicarSugerencias();
                 }
             }
             finally { db.cerrarConexion(); }
+        }
+
+        private void CargarEspecieYRazaPorIdMascota(int idMascota)
+        {
+            var db = new csCRUD();
+            var dt = db.cargarBDData(@"
+        SELECT e.Especie, r.Raza
+        FROM Mascota m
+        LEFT JOIN Especie e ON e.IdEspecie = m.IdEspecie
+        LEFT JOIN Raza    r ON r.IdRaza    = m.IdRaza
+        WHERE m.IdMascota = @id;",
+                new SqlParameter("@id", idMascota));
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                var r = dt.Rows[0];
+                if (txtEspecieCita != null && string.IsNullOrWhiteSpace(txtEspecieCita.Text))
+                    txtEspecieCita.Text = Convert.ToString(r["Especie"]);
+                if (txtRazaCita != null && string.IsNullOrWhiteSpace(txtRazaCita.Text))
+                    txtRazaCita.Text = Convert.ToString(r["Raza"]);
+            }
         }
     }
 }
