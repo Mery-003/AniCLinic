@@ -50,10 +50,25 @@ namespace AniCLinic
             btnImprimir.Enabled = false;
             try
             {
-                decimal cantidad = 1;
-                decimal precioTotal = cantidad * valor * (1+0.15m);
-                dgvVentas.Rows.Add(1, "Cita", "Valor de la cita",
-                    valor, 0.15, cantidad, precioTotal);
+                reader = crud.EjecutarQuery("Select * from Inventario Where IdProducto = 1");
+                if (reader.Read() && reader != null)
+                {
+                    producto = new csProducto(
+                        Convert.ToInt32(reader["IdProducto"]),
+                        Convert.ToInt32(reader["IdProveedor"]),
+                        reader["NombreProducto"].ToString(),
+                        reader["Descripcion"].ToString(),
+                        reader["Categoria"].ToString(),
+                        Convert.ToDecimal(reader["PrecioUnitario"]),
+                        Convert.ToDecimal(reader["Iva"]),
+                        Convert.ToInt32(reader["CantidadDisponible"])
+                        );
+                }
+                decimal precioTotal = 1 * producto.PrecioUnitario * (1 + producto.Iva);
+                precioTotal = Math.Round(precioTotal, 2);
+                dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
+                    producto.PrecioUnitario, producto.Iva, 1, precioTotal);
+                actualizarPrecio();
             }
             catch (Exception ex)
             {
@@ -200,6 +215,10 @@ namespace AniCLinic
                         {
                             if(reader.GetInt32(0) < Convert.ToInt32(fila.Cells["Cantidad"].Value))
                             {
+                                if (Convert.ToInt32(fila.Cells["IdProducto"].Value) == 1)
+                                {
+                                    break;
+                                }
                                 MessageBox.Show("Error no tiene suficientes " + reader.GetString(1) + " en el inventario. \n" +
                                     "Actualmente cuenta con " + reader.GetInt32(0) + " Unidades disponibles disponibles.");
                                 reader.Close();
@@ -397,7 +416,7 @@ namespace AniCLinic
         {
             if (vieneCita && dgvVentas.SelectedRows.Count > 0)
             {
-                DataGridViewRow fila = dgvVentas.Rows[0];
+                DataGridViewRow fila = dgvVentas.CurrentRow;
                 if (Convert.ToInt32(fila.Cells["ID"].Value) == 1)
                 {
                     MessageBox.Show("No se puede eliminar la cita", "Advertencia", MessageBoxButtons.OK);
