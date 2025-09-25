@@ -36,7 +36,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtCorreo = new Guna.UI2.WinForms.Guna2TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.txtApellido = new Guna.UI2.WinForms.Guna2TextBox();
             this.picPropietario = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnAceptar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.label4 = new System.Windows.Forms.Label();
-            this.guna2Button13 = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
             this.txtCedula = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button12 = new Guna.UI2.WinForms.Guna2Button();
@@ -57,14 +55,17 @@
             this.txtDireccion = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2Button9 = new Guna.UI2.WinForms.Guna2Button();
             this.txtNombre = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.guna2Button9 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Button13 = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancelarPropietario = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnGuardarPropietario = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CustomGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPropietario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Elipse1
@@ -85,6 +86,7 @@
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2CustomGradientPanel1.Controls.Add(this.guna2HtmlLabel1);
             this.guna2CustomGradientPanel1.Controls.Add(this.label8);
             this.guna2CustomGradientPanel1.Controls.Add(this.txtCorreo);
             this.guna2CustomGradientPanel1.Controls.Add(this.label11);
@@ -160,18 +162,6 @@
             this.label11.Size = new System.Drawing.Size(16, 20);
             this.label11.TabIndex = 161;
             this.label11.Text = "*";
-            // 
-            // guna2CirclePictureBox5
-            // 
-            this.guna2CirclePictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox5.FillColor = System.Drawing.Color.LightGray;
-            this.guna2CirclePictureBox5.ImageRotate = 0F;
-            this.guna2CirclePictureBox5.Location = new System.Drawing.Point(104, 44);
-            this.guna2CirclePictureBox5.Name = "guna2CirclePictureBox5";
-            this.guna2CirclePictureBox5.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox5.Size = new System.Drawing.Size(187, 189);
-            this.guna2CirclePictureBox5.TabIndex = 149;
-            this.guna2CirclePictureBox5.TabStop = false;
             // 
             // txtApellido
             // 
@@ -337,23 +327,6 @@
             this.label4.TabIndex = 155;
             this.label4.Text = "*";
             // 
-            // guna2Button13
-            // 
-            this.guna2Button13.BorderRadius = 24;
-            this.guna2Button13.CausesValidation = false;
-            this.guna2Button13.DisabledState.BorderColor = System.Drawing.Color.LightGray;
-            this.guna2Button13.DisabledState.CustomBorderColor = System.Drawing.Color.LightGray;
-            this.guna2Button13.DisabledState.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button13.DisabledState.ForeColor = System.Drawing.Color.LightGray;
-            this.guna2Button13.Enabled = false;
-            this.guna2Button13.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button13.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button13.ForeColor = System.Drawing.Color.White;
-            this.guna2Button13.Location = new System.Drawing.Point(435, 302);
-            this.guna2Button13.Name = "guna2Button13";
-            this.guna2Button13.Size = new System.Drawing.Size(293, 154);
-            this.guna2Button13.TabIndex = 141;
-            // 
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Transparent;
@@ -497,23 +470,6 @@
             this.guna2HtmlLabel2.TabIndex = 148;
             this.guna2HtmlLabel2.Text = "Dirección:";
             // 
-            // guna2Button9
-            // 
-            this.guna2Button9.BorderRadius = 24;
-            this.guna2Button9.CausesValidation = false;
-            this.guna2Button9.DisabledState.BorderColor = System.Drawing.Color.LightGray;
-            this.guna2Button9.DisabledState.CustomBorderColor = System.Drawing.Color.LightGray;
-            this.guna2Button9.DisabledState.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button9.DisabledState.ForeColor = System.Drawing.Color.LightGray;
-            this.guna2Button9.Enabled = false;
-            this.guna2Button9.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button9.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button9.ForeColor = System.Drawing.Color.White;
-            this.guna2Button9.Location = new System.Drawing.Point(55, 322);
-            this.guna2Button9.Name = "guna2Button9";
-            this.guna2Button9.Size = new System.Drawing.Size(293, 53);
-            this.guna2Button9.TabIndex = 147;
-            // 
             // txtNombre
             // 
             this.txtNombre.BackColor = System.Drawing.Color.LightGray;
@@ -546,6 +502,52 @@
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(57, 19);
             this.guna2HtmlLabel4.TabIndex = 145;
             this.guna2HtmlLabel4.Text = "Nombre:";
+            // 
+            // guna2CirclePictureBox5
+            // 
+            this.guna2CirclePictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox5.FillColor = System.Drawing.Color.LightGray;
+            this.guna2CirclePictureBox5.ImageRotate = 0F;
+            this.guna2CirclePictureBox5.Location = new System.Drawing.Point(104, 44);
+            this.guna2CirclePictureBox5.Name = "guna2CirclePictureBox5";
+            this.guna2CirclePictureBox5.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox5.Size = new System.Drawing.Size(187, 189);
+            this.guna2CirclePictureBox5.TabIndex = 149;
+            this.guna2CirclePictureBox5.TabStop = false;
+            // 
+            // guna2Button9
+            // 
+            this.guna2Button9.BorderRadius = 24;
+            this.guna2Button9.CausesValidation = false;
+            this.guna2Button9.DisabledState.BorderColor = System.Drawing.Color.LightGray;
+            this.guna2Button9.DisabledState.CustomBorderColor = System.Drawing.Color.LightGray;
+            this.guna2Button9.DisabledState.FillColor = System.Drawing.Color.LightGray;
+            this.guna2Button9.DisabledState.ForeColor = System.Drawing.Color.LightGray;
+            this.guna2Button9.Enabled = false;
+            this.guna2Button9.FillColor = System.Drawing.Color.LightGray;
+            this.guna2Button9.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button9.ForeColor = System.Drawing.Color.White;
+            this.guna2Button9.Location = new System.Drawing.Point(55, 322);
+            this.guna2Button9.Name = "guna2Button9";
+            this.guna2Button9.Size = new System.Drawing.Size(293, 53);
+            this.guna2Button9.TabIndex = 147;
+            // 
+            // guna2Button13
+            // 
+            this.guna2Button13.BorderRadius = 24;
+            this.guna2Button13.CausesValidation = false;
+            this.guna2Button13.DisabledState.BorderColor = System.Drawing.Color.LightGray;
+            this.guna2Button13.DisabledState.CustomBorderColor = System.Drawing.Color.LightGray;
+            this.guna2Button13.DisabledState.FillColor = System.Drawing.Color.LightGray;
+            this.guna2Button13.DisabledState.ForeColor = System.Drawing.Color.LightGray;
+            this.guna2Button13.Enabled = false;
+            this.guna2Button13.FillColor = System.Drawing.Color.LightGray;
+            this.guna2Button13.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button13.ForeColor = System.Drawing.Color.White;
+            this.guna2Button13.Location = new System.Drawing.Point(435, 302);
+            this.guna2Button13.Name = "guna2Button13";
+            this.guna2Button13.Size = new System.Drawing.Size(293, 154);
+            this.guna2Button13.TabIndex = 141;
             // 
             // btnCancelarPropietario
             // 
@@ -587,6 +589,17 @@
             this.btnGuardarPropietario.Text = "Aceptar";
             this.btnGuardarPropietario.UseTransparentBackground = true;
             // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(449, 114);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(49, 19);
+            this.guna2HtmlLabel1.TabIndex = 163;
+            this.guna2HtmlLabel1.Text = "Cedula:";
+            // 
             // AggPropietario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -601,8 +614,8 @@
             this.Text = "AggPropietario";
             this.guna2CustomGradientPanel1.ResumeLayout(false);
             this.guna2CustomGradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPropietario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -642,5 +655,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelarPropietario;
         private Guna.UI2.WinForms.Guna2GradientButton btnGuardarPropietario;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }
