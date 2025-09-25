@@ -64,7 +64,14 @@ namespace AniCLinic
                 txtCantidad.Text = prod.Cantidad.ToString();
                 txtPrecio.Text = prod.PrecioUnitario.ToString();
                 cmbCategoria.Text = prod.Categoria;
-                cmbProveedor.Text = prod.IdProveedor.ToString();
+                foreach (ProveedorItem item in cmbProveedor.Items)
+                {
+                    if (item.idProveedor == prod.IdProveedor)
+                    {
+                        cmbProveedor.SelectedItem = item;
+                        break;
+                    }
+                }
             }
         }
 
