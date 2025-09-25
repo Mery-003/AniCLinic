@@ -153,8 +153,8 @@ namespace AniCLinic
                     decimal subtotal = precio * cantidad;
                     decimal ivaFila = subtotal * ivaPorcentaje;
 
-                    venta += subtotal;
-                    iva += ivaFila;
+                    venta += Math.Round(subtotal, 2);
+                    iva += Math.Round(ivaFila, 2);
                 }
             }
             totalVenta = Math.Round(venta + iva, 2);
@@ -313,7 +313,7 @@ namespace AniCLinic
                     {
                         sumaRepetido = Convert.ToInt32(fila.Cells["Cantidad"].Value);
                         fila.Cells["Cantidad"].Value = sumaRepetido + Convert.ToInt32(txtCantidad.Text);
-                        fila.Cells["Total"].Value = Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario * (1 + producto.Iva);
+                        fila.Cells["Total"].Value = Math.Round(Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario * (1 + producto.Iva), 2);
                         actualizarPrecio();
                         return;
                     }
