@@ -22,6 +22,7 @@ namespace AniCLinic
         SqlDataReader reader;
         int idEmpl;
         bool vieneCita;
+
         public Ventas()
         {
             InitializeComponent();
@@ -419,6 +420,17 @@ namespace AniCLinic
         private void Ventas_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAbrirListaPropietario_Click(object sender, EventArgs e)
+        {
+            using (var frm = new FMRListaPropietario())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    txtCedula.Text = frm.CedulaSel;
+                }
+            }
         }
     }
     public class ProductoItem

@@ -13,6 +13,7 @@ namespace AniCLinic
         public string NombreSel { get; private set; }
         public string ApellidoSel { get; private set; }
         public string CedulaSel { get; private set; }
+        public string CorreoSel { get; private set; }
 
         public FMRListaPropietario()
         {
@@ -42,7 +43,8 @@ Select IdPersona AS ID,
            Nombre,
            Apellido,
            Cedula AS [C.I.],
-           Celular 
+           Celular,
+           Correo
 from Persona
 Order by Nombre, Apellido";
             dgvListaPropietario.DataSource = _crud.cargarBDData(sql);
@@ -75,6 +77,7 @@ Order by Nombre, Apellido";
             NombreSel = dgvListaPropietario.CurrentRow.Cells["Nombre"].Value + "";
             ApellidoSel = dgvListaPropietario.CurrentRow.Cells["Apellido"].Value + "";
             CedulaSel = dgvListaPropietario.CurrentRow.Cells["C.I."].Value + "";
+            CorreoSel = dgvListaPropietario.CurrentRow.Cells["Correo"].Value + "";
             this.DialogResult = DialogResult.OK;
         }
     }

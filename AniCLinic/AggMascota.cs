@@ -362,9 +362,5 @@ WHERE m.IdMascota = " + id;
             this.Close();
         }
 
-        private void btnAbrirListaPropietario_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

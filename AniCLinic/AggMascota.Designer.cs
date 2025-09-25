@@ -667,7 +667,6 @@
             this.btnAbrirListaPropietario.Size = new System.Drawing.Size(44, 37);
             this.btnAbrirListaPropietario.TabIndex = 132;
             this.btnAbrirListaPropietario.UseTransparentBackground = true;
-            this.btnAbrirListaPropietario.Click += new System.EventHandler(this.btnAbrirListaPropietario_Click_1);
             // 
             // dtpFechaNacimiento
             // 
