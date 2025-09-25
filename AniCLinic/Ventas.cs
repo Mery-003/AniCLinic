@@ -215,7 +215,7 @@ namespace AniCLinic
                         {
                             if(reader.GetInt32(0) < Convert.ToInt32(fila.Cells["Cantidad"].Value))
                             {
-                                if (Convert.ToInt32(fila.Cells["IdProducto"].Value) == 1)
+                                if (Convert.ToInt32(fila.Cells["ID"].Value) == 1)
                                 {
                                     break;
                                 }
