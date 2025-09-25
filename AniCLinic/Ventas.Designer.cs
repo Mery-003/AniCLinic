@@ -78,6 +78,8 @@
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.btnAbrirListaPropietario = new Guna.UI2.WinForms.Guna2GradientButton();
+            this.lblDescuento = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblDescuentoNo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -503,7 +505,7 @@
             this.lblTtlVno.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblTtlVno.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTtlVno.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTtlVno.Location = new System.Drawing.Point(594, 268);
+            this.lblTtlVno.Location = new System.Drawing.Point(594, 247);
             this.lblTtlVno.Name = "lblTtlVno";
             this.lblTtlVno.Size = new System.Drawing.Size(76, 19);
             this.lblTtlVno.TabIndex = 150;
@@ -514,7 +516,7 @@
             this.lblTtlVenta.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblTtlVenta.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblTtlVenta.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTtlVenta.Location = new System.Drawing.Point(691, 268);
+            this.lblTtlVenta.Location = new System.Drawing.Point(691, 247);
             this.lblTtlVenta.Name = "lblTtlVenta";
             this.lblTtlVenta.Size = new System.Drawing.Size(21, 19);
             this.lblTtlVenta.TabIndex = 151;
@@ -525,7 +527,7 @@
             this.lblIVAno.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblIVAno.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIVAno.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblIVAno.Location = new System.Drawing.Point(595, 296);
+            this.lblIVAno.Location = new System.Drawing.Point(595, 275);
             this.lblIVAno.Name = "lblIVAno";
             this.lblIVAno.Size = new System.Drawing.Size(31, 19);
             this.lblIVAno.TabIndex = 152;
@@ -536,7 +538,7 @@
             this.lblIVA.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblIVA.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblIVA.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblIVA.Location = new System.Drawing.Point(691, 296);
+            this.lblIVA.Location = new System.Drawing.Point(691, 275);
             this.lblIVA.Name = "lblIVA";
             this.lblIVA.Size = new System.Drawing.Size(21, 19);
             this.lblIVA.TabIndex = 153;
@@ -547,7 +549,7 @@
             this.lblTotalno.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblTotalno.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalno.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTotalno.Location = new System.Drawing.Point(597, 321);
+            this.lblTotalno.Location = new System.Drawing.Point(597, 338);
             this.lblTotalno.Name = "lblTotalno";
             this.lblTotalno.Size = new System.Drawing.Size(50, 19);
             this.lblTotalno.TabIndex = 154;
@@ -558,7 +560,7 @@
             this.lblTotal.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTotal.Location = new System.Drawing.Point(691, 321);
+            this.lblTotal.Location = new System.Drawing.Point(691, 338);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(21, 19);
             this.lblTotal.TabIndex = 155;
@@ -753,12 +755,36 @@
             this.btnAbrirListaPropietario.UseTransparentBackground = true;
             this.btnAbrirListaPropietario.Click += new System.EventHandler(this.btnAbrirListaPropietario_Click);
             // 
+            // lblDescuento
+            // 
+            this.lblDescuento.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDescuento.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblDescuento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblDescuento.Location = new System.Drawing.Point(691, 307);
+            this.lblDescuento.Name = "lblDescuento";
+            this.lblDescuento.Size = new System.Drawing.Size(21, 19);
+            this.lblDescuento.TabIndex = 171;
+            this.lblDescuento.Text = "$ 0";
+            // 
+            // lblDescuentoNo
+            // 
+            this.lblDescuentoNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDescuentoNo.Font = new System.Drawing.Font("Segoe UI Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescuentoNo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblDescuentoNo.Location = new System.Drawing.Point(594, 307);
+            this.lblDescuentoNo.Name = "lblDescuentoNo";
+            this.lblDescuentoNo.Size = new System.Drawing.Size(81, 19);
+            this.lblDescuentoNo.TabIndex = 170;
+            this.lblDescuentoNo.Text = "DESCUENTO";
+            // 
             // Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1059, 614);
+            this.Controls.Add(this.lblDescuento);
+            this.Controls.Add(this.lblDescuentoNo);
             this.Controls.Add(this.btnAbrirListaPropietario);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblTotalno);
@@ -857,5 +883,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private Guna.UI2.WinForms.Guna2GradientButton btnAbrirListaPropietario;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblDescuento;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblDescuentoNo;
     }
 }

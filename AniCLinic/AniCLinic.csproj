@@ -122,6 +122,9 @@
     <Compile Include="csProveedor.cs" />
     <Compile Include="csUsuario.cs" />
     <Compile Include="csVenta.cs" />
+    <Compile Include="dsFactura.cs">
+      <DependentUpon>dsFactura.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsListaProductos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

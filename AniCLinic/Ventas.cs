@@ -67,7 +67,7 @@ namespace AniCLinic
                 decimal precioTotal = 1 * producto.PrecioUnitario * (1 + producto.Iva);
                 precioTotal = Math.Round(precioTotal, 2);
                 dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
-                    producto.PrecioUnitario, producto.Iva, 1, precioTotal);
+                    producto.PrecioUnitario, producto.Iva, 1, precioTotal, "");
                 actualizarPrecio();
             }
             catch (Exception ex)
@@ -80,17 +80,17 @@ namespace AniCLinic
         {
             cmbCategoria.Items.AddRange(new object[]
             {
-                "Medicamentos",
-                "Equipos Medicos",
-                "Alimentos",
-                "Accesorios",
-                "Higiene"
+            "Medicamentos",
+            "Equipos Medicos",
+            "Alimentos",
+            "Accesorios",
+            "Higiene"
             });
             cmbMetodoPago.Items.AddRange(new object[]
             {
-                "Efectivo",
-                "Transferencia",
-                "Tarjeta"
+            "Efectivo",
+            "Transferencia",
+            "Tarjeta"
             });
         }
         public void prepararGrid()
@@ -112,6 +112,15 @@ namespace AniCLinic
             dgvVentas.Columns["Precio"].Width = 80;
             dgvVentas.Columns["Cantidad"].Width = 80;
             dgvVentas.Columns["Total"].Width = 80;
+
+            if (!dgvVentas.Columns.Contains("Promocion"))
+            {
+                DataGridViewTextBoxColumn colPromo = new DataGridViewTextBoxColumn();
+                colPromo.Name = "Promocion";
+                colPromo.HeaderText = "Promoción";
+                colPromo.Width = 120;
+                dgvVentas.Columns.Add(colPromo);
+            }
         }
         private void cargarProductos(string categ = "")
         {
@@ -148,15 +157,77 @@ namespace AniCLinic
                         );
                 }
             }
-            else 
+            else
                 producto = null;
             return producto;
         }
+
+        private decimal aplicarPromocion(csProducto prod, decimal cantidad, out int idPromocion, out string promoDesc)
+        {
+            idPromocion = 0;
+            promoDesc = "";
+            decimal precioUnitario = prod.PrecioUnitario;
+            decimal subtotal = precioUnitario * cantidad;
+            decimal descuento = 0;
+
+            try
+            {
+                SqlDataReader promoReader = crud.EjecutarQuery($@"
+            SELECT TOP 1 IdPromocion, Nombre, Tipo, Valor, Categoria, IdProducto, CondicionExtra 
+            FROM Promocion
+            WHERE Activa = 1 
+              AND GETDATE() BETWEEN FechaInicio AND FechaFin
+              AND (Categoria = '{prod.Categoria}' OR IdProducto = {prod.IdProducto} OR Categoria IS NULL)
+            ORDER BY IdPromocion DESC");
+
+                if (promoReader != null && promoReader.Read())
+                {
+                    int promoId = Convert.ToInt32(promoReader["IdPromocion"]);
+                    string tipo = promoReader["Tipo"].ToString();
+                    decimal valor = promoReader["Valor"] != DBNull.Value ? Convert.ToDecimal(promoReader["Valor"]) : 0;
+                    string nombrePromo = promoReader["Nombre"].ToString();
+
+                    if (promoId == 2)
+                    {
+                        if (vieneCita && DateTime.Now.Month == 10) 
+                        {
+                            idPromocion = promoId;
+                            promoDesc = nombrePromo;
+
+                            if (tipo == "Descuento")
+                                descuento = subtotal * (valor / 100);
+                            else if (tipo == "Gratis")
+                                descuento = subtotal;
+                        }
+                    }
+                    else 
+                    {
+                        idPromocion = promoId;
+                        promoDesc = nombrePromo;
+
+                        if (tipo == "Descuento")
+                            descuento = subtotal * (valor / 100);
+                        else if (tipo == "Gratis")
+                            descuento = subtotal;
+                    }
+                }
+                promoReader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al aplicar promoción: " + ex.Message);
+            }
+
+            return Math.Round(subtotal - descuento, 2);
+        }
+
         private void actualizarPrecio()
         {
-            decimal venta = 0;
+            decimal subtotal = 0;
             decimal iva = 0;
+            decimal descuento = 0;
             decimal totalVenta;
+
             foreach (DataGridViewRow fila in dgvVentas.Rows)
             {
                 if (fila.Cells["Precio"].Value != null && fila.Cells["Cantidad"].Value != null && fila.Cells["IVA"].Value != null)
@@ -164,24 +235,60 @@ namespace AniCLinic
                     decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
                     int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
                     decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+                    decimal totalFila = Convert.ToDecimal(fila.Cells["Total"].Value);
 
-                    decimal subtotal = precio * cantidad;
-                    decimal ivaFila = subtotal * ivaPorcentaje;
+                    decimal subtotalFila = precio * cantidad;
+                    decimal ivaFila = totalFila - (totalFila / (1 + ivaPorcentaje)); 
+                    decimal descuentoFila = subtotalFila - (totalFila / (1 + ivaPorcentaje));
 
-                    venta += Math.Round(subtotal, 2);
+                    subtotal += subtotalFila;
                     iva += Math.Round(ivaFila, 2);
+                    descuento += Math.Round(descuentoFila, 2);
                 }
             }
-            totalVenta = Math.Round(venta + iva, 2);
-            lblTtlVenta.Text = "$ " + venta.ToString();
-            lblIVA.Text = "$ " + iva.ToString();
-            lblTotal.Text = "$ " + totalVenta.ToString();
+
+            totalVenta = Math.Round((subtotal - descuento) + iva, 2);
+
+            lblTtlVenta.Text = "$ " + subtotal.ToString("N2");
+            lblIVA.Text = "$ " + iva.ToString("N2");
+            lblDescuento.Text = "$ " + descuento.ToString("N2");
+            lblTotal.Text = "$ " + totalVenta.ToString("N2");
         }
-        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if ((!char.IsDigit(e.KeyChar) || txtCantidad.Text.Length >= 4) && e.KeyChar != 8)
+            try
             {
-                e.Handled = true;
+                int sumaRepetido;
+                producto = cargarProducto();
+                foreach (DataGridViewRow fila in dgvVentas.Rows)
+                {
+                    if (Convert.ToInt32(fila.Cells["ID"].Value) == producto.IdProducto)
+                    {
+                        sumaRepetido = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                        fila.Cells["Cantidad"].Value = sumaRepetido + Convert.ToInt32(txtCantidad.Text);
+                        fila.Cells["Total"].Value = Math.Round(Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario * (1 + producto.Iva), 2);
+                        actualizarPrecio();
+                        return;
+                    }
+                }
+
+                decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
+
+                int idPromo;
+                string promoDesc;
+                decimal precioConPromo = aplicarPromocion(producto, cantidad, out idPromo, out promoDesc);
+
+                decimal precioTotal = Math.Round(precioConPromo * (1 + producto.Iva), 2);
+
+                dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
+                    producto.PrecioUnitario, producto.Iva, cantidad, precioTotal, promoDesc);
+
+                actualizarPrecio();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -213,7 +320,7 @@ namespace AniCLinic
                             Convert.ToInt32(fila.Cells["ID"].Value));
                         if (reader.Read())
                         {
-                            if(reader.GetInt32(0) < Convert.ToInt32(fila.Cells["Cantidad"].Value))
+                            if (reader.GetInt32(0) < Convert.ToInt32(fila.Cells["Cantidad"].Value))
                             {
                                 if (Convert.ToInt32(fila.Cells["ID"].Value) == 1)
                                 {
@@ -226,32 +333,43 @@ namespace AniCLinic
                             }
                         }
                     }
-                    decimal venta = 0;
-                    decimal iva = 0;
-                    decimal totalVenta;
+                    
 
                     btnImprimir.Enabled = true;
 
+                    decimal subtotal = 0;
+                    decimal ivaTotal = 0;
+                    decimal totalVenta;
+                    decimal descuento = 0;
+                    decimal descuentoTotal = 0;
+
                     foreach (DataGridViewRow fila in dgvVentas.Rows)
                     {
-                        if (fila.Cells["Precio"].Value != null && fila.Cells["Cantidad"].Value != null && fila.Cells["IVA"].Value != null)
+                        if (fila.Cells["Precio"].Value != null && fila.Cells["Cantidad"].Value != null && fila.Cells["IVA"].Value != null && fila.Cells["Total"].Value != null)
                         {
                             decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
                             int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
                             decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+                            decimal totalFila = Convert.ToDecimal(fila.Cells["Total"].Value);
 
-                            decimal subtotal = precio * cantidad;
-                            decimal ivaFila = subtotal * ivaPorcentaje;
+                            decimal subtotalFila = precio * cantidad;
+                            decimal ivaFila = totalFila - (totalFila / (1 + ivaPorcentaje));
+                            decimal descuentoFila = subtotalFila - (totalFila / (1 + ivaPorcentaje));
 
-                            venta += subtotal;
-                            iva += ivaFila;
+                            subtotal += subtotalFila;
+                            ivaTotal += Math.Round(ivaFila, 2);
+                            descuentoTotal += Math.Round(descuentoFila, 2);
                         }
                     }
-                    totalVenta = Math.Round(venta + iva, 2);
+
+                    totalVenta = Math.Round((subtotal - descuentoTotal) + ivaTotal, 2);
+
+                    lblTtlVenta.Text = "$ " + subtotal.ToString("N2");
+                    lblIVA.Text = "$ " + ivaTotal.ToString("N2");
+                    lblDescuento.Text = "$ " + descuentoTotal.ToString("N2");
+                    lblTotal.Text = "$ " + totalVenta.ToString("N2");
+
                     string metodoPago = cmbMetodoPago.Text;
-                    lblTtlVenta.Text = "$ " + venta.ToString();
-                    lblIVA.Text = "$ " + iva.ToString();
-                    lblTotal.Text = "$ " + totalVenta.ToString();
 
                     txtCedula.ReadOnly = true;
                     txtCantidad.Text = "";
@@ -266,14 +384,20 @@ namespace AniCLinic
                     btnEliminar.Enabled = false;
                     btnFinalizar.Enabled = false;
 
-                    factura = new csFactura(persona.IdPersona, idEmpl, venta, iva, totalVenta, metodoPago);
+                    factura = new csFactura(persona.IdPersona,
+                                        idEmpl,
+                                        subtotal,   
+                                        ivaTotal,     
+                                        totalVenta,   
+                                        metodoPago
+                                        );
                     factura.obtenerNumFactura();
                     if (!factura.agregarFactura())
                     {
                         MessageBox.Show("Error al guardar la factura.");
                         return;
                     }
-                        
+
                     factura.obtenerId();
 
                     foreach (DataGridViewRow fila in dgvVentas.Rows)
@@ -300,14 +424,45 @@ namespace AniCLinic
                         crud.agregarBD("Insert into DetalleFactura (IdFactura, IdVenta) values (@IdFactura, @IdVenta)",
                             new SqlParameter("@IdFactura", factura.IdFactura),
                             new SqlParameter("@IdVenta", ventaAgg.IdVenta));
+
+                        if (fila.Cells["Promocion"].Value != null && fila.Cells["Promocion"].Value.ToString() != "")
+                        {
+                            SqlDataReader promoReader = crud.EjecutarQuery("SELECT TOP 1 IdPromocion FROM Promocion WHERE Nombre = '" + fila.Cells["Promocion"].Value.ToString() + "'");
+                            if (promoReader != null && promoReader.Read())
+                            {
+                                int idPromo = promoReader.GetInt32(0);
+                                decimal precioSinPromo = Convert.ToDecimal(fila.Cells["Precio"].Value) * Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                                decimal precioConPromo = Convert.ToDecimal(fila.Cells["Total"].Value);
+                                descuento = precioSinPromo - precioConPromo;
+
+                                SqlDataReader promoExist = crud.EjecutarQuery("SELECT COUNT(*) FROM FacturaPromocion WHERE IdFactura = " + factura.IdFactura + " AND IdPromocion = " + idPromo);
+                                if (promoExist.Read() && promoExist.GetInt32(0) == 0)
+                                {
+                                    crud.agregarBD("INSERT INTO FacturaPromocion (IdFactura, IdPromocion, Descuento) VALUES (@IdFactura, @IdPromocion, @Descuento)",
+                                        new SqlParameter("@IdFactura", factura.IdFactura),
+                                        new SqlParameter("@IdPromocion", idPromo),
+                                        new SqlParameter("@Descuento", descuento));
+                                }
+                                promoExist.Close();
+                            }
+                            promoReader.Close();
+                        }
                     }
                     MessageBox.Show("Factura generada correctamente");
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+        }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar) || txtCantidad.Text.Length >= 4) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
@@ -320,45 +475,16 @@ namespace AniCLinic
             }
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int sumaRepetido;
-                producto = cargarProducto();
-                foreach (DataGridViewRow fila in dgvVentas.Rows)
-                {
-                    if (Convert.ToInt32(fila.Cells["ID"].Value) == producto.IdProducto)
-                    {
-                        sumaRepetido = Convert.ToInt32(fila.Cells["Cantidad"].Value);
-                        fila.Cells["Cantidad"].Value = sumaRepetido + Convert.ToInt32(txtCantidad.Text);
-                        fila.Cells["Total"].Value = Math.Round(Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario * (1 + producto.Iva), 2);
-                        actualizarPrecio();
-                        return;
-                    }
-                }
-                decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
-                decimal precioTotal = cantidad * producto.PrecioUnitario * (1 + producto.Iva);
-                precioTotal = Math.Round(precioTotal, 2);
-                dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
-                    producto.PrecioUnitario, producto.Iva,cantidad, precioTotal);
-                actualizarPrecio();
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void txtCedula_TextChanged(object sender, EventArgs e)
         {
-            if(txtCedula.Text.Length == 10)
+            if (txtCedula.Text.Length == 10)
             {
                 persona = new csPersona();
                 int id = persona.obtenerIdPorCedula(txtCedula.Text);
                 reader = crud.EjecutarQuery("Select * from Persona where IdPersona = " + id);
-                if(reader != null)
+                if (reader != null)
                 {
-                    if(reader.Read())
+                    if (reader.Read())
                     {
                         byte[] foto = null;
                         if (reader["Imagen"] != DBNull.Value)
@@ -395,7 +521,7 @@ namespace AniCLinic
                 e.Handled = true;
             }
         }
-        //
+
         private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbCategoria.SelectedIndex == -1)
@@ -423,7 +549,7 @@ namespace AniCLinic
                     return;
                 }
             }
-            if(dgvVentas.SelectedRows.Count > 0)
+            if (dgvVentas.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dgvVentas.CurrentRow;
                 dgvVentas.Rows.Remove(fila);
@@ -452,6 +578,7 @@ namespace AniCLinic
             }
         }
     }
+
     public class ProductoItem
     {
         public int idProducto { get; set; }
