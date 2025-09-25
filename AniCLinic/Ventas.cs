@@ -425,7 +425,7 @@ namespace AniCLinic
             }
             if(dgvVentas.SelectedRows.Count > 0)
             {
-                DataGridViewRow fila = dgvVentas.Rows[0];
+                DataGridViewRow fila = dgvVentas.CurrentRow;
                 dgvVentas.Rows.Remove(fila);
             }
         }
