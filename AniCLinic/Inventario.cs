@@ -26,7 +26,7 @@ namespace AniCLinic
         public void cargarDataI(string filtro = "")
         {
             string sentencia = "Select * from Inventario " +
-                "Where NombreProducto like @filtro + '%'";
+                "Where NombreProducto like @filtro + '%' AND IdProducto != 1";
             dgvInventario.DataSource = crud.cargarBDData(sentencia, new SqlParameter ("@filtro", filtro));
             configurarColumnas();
         }
