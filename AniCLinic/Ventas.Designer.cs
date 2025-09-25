@@ -31,7 +31,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ventas));
             this.dgvVentas = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbProducto = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cmbCategoria = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtCantidad = new Guna.UI2.WinForms.Guna2TextBox();
@@ -69,13 +77,7 @@
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAbrirListaPropietario = new Guna.UI2.WinForms.Guna2GradientButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -137,6 +139,41 @@
             this.dgvVentas.ThemeStyle.RowsStyle.Height = 22;
             this.dgvVentas.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvVentas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            // 
+            // Iva
+            // 
+            this.Iva.HeaderText = "IVA";
+            this.Iva.Name = "Iva";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
             // 
             // cmbProducto
             // 
@@ -247,12 +284,12 @@
             this.txtNombre.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtNombre.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNombre.Location = new System.Drawing.Point(541, 66);
+            this.txtNombre.Location = new System.Drawing.Point(566, 66);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.PlaceholderText = "";
             this.txtNombre.ReadOnly = true;
             this.txtNombre.SelectedText = "";
-            this.txtNombre.Size = new System.Drawing.Size(215, 32);
+            this.txtNombre.Size = new System.Drawing.Size(200, 32);
             this.txtNombre.TabIndex = 137;
             // 
             // txtCelular
@@ -270,12 +307,12 @@
             this.txtCelular.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtCelular.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtCelular.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCelular.Location = new System.Drawing.Point(291, 66);
+            this.txtCelular.Location = new System.Drawing.Point(330, 66);
             this.txtCelular.Name = "txtCelular";
             this.txtCelular.PlaceholderText = "";
             this.txtCelular.ReadOnly = true;
             this.txtCelular.SelectedText = "";
-            this.txtCelular.Size = new System.Drawing.Size(215, 32);
+            this.txtCelular.Size = new System.Drawing.Size(200, 32);
             this.txtCelular.TabIndex = 138;
             // 
             // txtCedula
@@ -297,7 +334,7 @@
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.PlaceholderText = "";
             this.txtCedula.SelectedText = "";
-            this.txtCedula.Size = new System.Drawing.Size(215, 32);
+            this.txtCedula.Size = new System.Drawing.Size(200, 32);
             this.txtCedula.TabIndex = 139;
             this.txtCedula.TextChanged += new System.EventHandler(this.txtCedula_TextChanged);
             this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
@@ -307,7 +344,7 @@
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(549, 49);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(572, 49);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(113, 17);
             this.guna2HtmlLabel3.TabIndex = 140;
@@ -318,7 +355,7 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(299, 49);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(330, 49);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(44, 17);
             this.guna2HtmlLabel4.TabIndex = 141;
@@ -340,7 +377,7 @@
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.WhiteSmoke;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(804, 49);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(821, 49);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             this.guna2HtmlLabel6.Size = new System.Drawing.Size(44, 17);
             this.guna2HtmlLabel6.TabIndex = 144;
@@ -361,12 +398,12 @@
             this.txtCorreo.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtCorreo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtCorreo.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCorreo.Location = new System.Drawing.Point(794, 66);
+            this.txtCorreo.Location = new System.Drawing.Point(817, 66);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.PlaceholderText = "";
             this.txtCorreo.ReadOnly = true;
             this.txtCorreo.SelectedText = "";
-            this.txtCorreo.Size = new System.Drawing.Size(215, 32);
+            this.txtCorreo.Size = new System.Drawing.Size(200, 32);
             this.txtCorreo.TabIndex = 143;
             // 
             // guna2HtmlLabel7
@@ -692,40 +729,28 @@
             this.guna2Button2.TabIndex = 165;
             this.guna2Button2.UseTransparentBackground = true;
             // 
-            // ID
+            // btnAbrirListaPropietario
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            // 
-            // Iva
-            // 
-            this.Iva.HeaderText = "IVA";
-            this.Iva.Name = "Iva";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
+            this.btnAbrirListaPropietario.BackColor = System.Drawing.Color.Transparent;
+            this.btnAbrirListaPropietario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAbrirListaPropietario.BackgroundImage")));
+            this.btnAbrirListaPropietario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAbrirListaPropietario.BorderRadius = 14;
+            this.btnAbrirListaPropietario.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAbrirListaPropietario.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAbrirListaPropietario.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAbrirListaPropietario.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAbrirListaPropietario.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAbrirListaPropietario.FillColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAbrirListaPropietario.FillColor2 = System.Drawing.Color.RoyalBlue;
+            this.btnAbrirListaPropietario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnAbrirListaPropietario.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnAbrirListaPropietario.Image = global::AniCLinic.Properties.Resources._3003596;
+            this.btnAbrirListaPropietario.ImageSize = new System.Drawing.Size(25, 25);
+            this.btnAbrirListaPropietario.Location = new System.Drawing.Point(253, 61);
+            this.btnAbrirListaPropietario.Name = "btnAbrirListaPropietario";
+            this.btnAbrirListaPropietario.Size = new System.Drawing.Size(44, 37);
+            this.btnAbrirListaPropietario.TabIndex = 169;
+            this.btnAbrirListaPropietario.UseTransparentBackground = true;
             // 
             // Ventas
             // 
@@ -733,6 +758,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1059, 614);
+            this.Controls.Add(this.btnAbrirListaPropietario);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblTotalno);
             this.Controls.Add(this.lblIVA);
@@ -829,5 +855,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Iva;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private Guna.UI2.WinForms.Guna2GradientButton btnAbrirListaPropietario;
     }
 }

@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace AniCLinic
 {
@@ -84,8 +83,12 @@ namespace AniCLinic
             PrepararBase(grid);
             grid.Columns.Add(MkHidden("IdCita"));
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdRegistroClinico")); // oculto para lógica
-            grid.Columns.Add(MkText("Id", "IdRegistroClinico", 60)); // visible
+            grid.Columns.Add(MkHidden("IdRegistroClinico")); // para lógica
+
+            var colId = MkText("Id", "IdCitaMostrar", 60);  // <<< muestra Id de la cita
+            colId.Name = "Id";
+            colId.DefaultCellStyle.NullValue = "";
+            grid.Columns.Add(colId);
 
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
             grid.Columns.Add(MkText("Especie", "Especie", 100));
@@ -103,7 +106,11 @@ namespace AniCLinic
             grid.Columns.Add(MkHidden("IdCita"));
             grid.Columns.Add(MkHidden("IdMascota"));
             grid.Columns.Add(MkHidden("IdRegistroClinico"));
-            grid.Columns.Add(MkText("Id", "IdRegistroClinico", 60));
+
+            var colId = MkText("Id", "IdCitaMostrar", 60); // <<<
+            colId.Name = "Id";
+            colId.DefaultCellStyle.NullValue = "";
+            grid.Columns.Add(colId);
 
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
             grid.Columns.Add(MkText("Especie", "Especie", 100));
@@ -120,8 +127,13 @@ namespace AniCLinic
             PrepararBase(grid);
             grid.Columns.Add(MkHidden("IdCita"));
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdRegistroClinico"));
-            grid.Columns.Add(MkText("Id", "IdRegistroClinico", 60));
+            grid.Columns.Add(MkHidden("IdRegistroClinico")); // se usa para la lógica
+
+            // ⬇⬇ AQUI: el Id visible vuelve a ser el IdRegistroClinico
+            var colId = MkText("Id", "IdRegistroClinico", 60);
+            colId.Name = "Id";
+            colId.DefaultCellStyle.NullValue = ""; // si viene null, no muestra nada
+            grid.Columns.Add(colId);
 
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
             grid.Columns.Add(MkText("Especie", "Especie", 100));
@@ -133,6 +145,7 @@ namespace AniCLinic
             grid.Columns.Add(MkBtn("colEditar", "Editar", 95));
             grid.Columns.Add(MkBtn("colEliminar", "Eliminar", 95));
         }
+
 
         private void QuitarFilaNueva(DataGridView grid)
         {
@@ -168,26 +181,45 @@ namespace AniCLinic
             EnsureCol(all, "FechaHora", typeof(DateTime));
             EnsureCol(all, "Fecha", typeof(string));
             EnsureCol(all, "Hora", typeof(string));
-            EnsureCol(all, "IdRegistroClinico", typeof(int)); // NUEVA
+            EnsureCol(all, "IdRegistroClinico", typeof(int));
+            EnsureCol(all, "IdCitaMostrar", typeof(int)); // <<< para UI
 
             if (!all.Columns.Contains("Estado"))
                 all.Columns.Add("Estado", typeof(string));
 
-            // 1) Mezcla emergencias sin cita
+            // 1) Mezcla emergencias sin cita (si ya tienen cita exacta, no entran)
             AppendEmergenciasSinCita(all);
 
-            // 2) Completar IdRegistroClinico para filas que vienen desde citas
+            // 2) Completar IdRegistroClinico si falta
             foreach (DataRow r in all.Rows)
             {
                 if (!TryParseFechaHora(r, out DateTime fh)) continue;
-                int idRC = ToInt(r, "IdRegistroClinico");
-                if (idRC <= 0)
+                if (ToInt(r, "IdRegistroClinico") <= 0)
                 {
                     int idMascota = ToInt(r, "IdMascota");
                     int idCita = ToInt(r, "IdCita");
-                    idRC = RC_GetIdRegistroClinico(idCita > 0 ? (int?)idCita : null, idMascota, fh);
-                    r["IdRegistroClinico"] = idRC; // si no hay registro, queda 0
+                    var idRC = RC_GetIdRegistroClinico(idCita > 0 ? (int?)idCita : null, idMascota, fh);
+                    r["IdRegistroClinico"] = idRC;
                 }
+            }
+
+            // 2.1) Completar IdCita si falta, buscando por mascota + fecha más cercana (misma fecha)
+            foreach (DataRow r in all.Rows) // <<< NUEVO
+            {
+                if (!TryParseFechaHora(r, out DateTime fh)) continue;
+                if (ToInt(r, "IdCita") <= 0)
+                {
+                    int idMascota = ToInt(r, "IdMascota");
+                    int idCitaCercana = Cita_BuscarIdPorMascotaFechaCercana(idMascota, fh);
+                    if (idCitaCercana > 0) r["IdCita"] = idCitaCercana;
+                }
+            }
+
+            // 2.2) Calcular la columna de UI (si no hay cita, queda en blanco)
+            foreach (DataRow r in all.Rows)
+            {
+                int idCita = ToInt(r, "IdCita");
+                r["IdCitaMostrar"] = idCita > 0 ? (object)idCita : DBNull.Value;
             }
 
             var hoy = DateTime.Today;
@@ -197,7 +229,7 @@ namespace AniCLinic
             _dtProximas = all.Clone();
             _dtAnteriores = all.Clone();
 
-            // 3) Particionar en Hoy / Próximas / Anteriores
+            // 3) Particionar
             foreach (DataRow r in all.Rows)
             {
                 if (!TryParseFechaHora(r, out DateTime fh)) continue;
@@ -217,7 +249,6 @@ namespace AniCLinic
                     continue;
                 }
 
-                // Hoy: si ya hay registro clínico, va a Anteriores; si no, depende de la ventana de 20 min
                 if (idRC > 0)
                 {
                     _dtAnteriores.Rows.Add((object[])r.ItemArray.Clone());
@@ -234,6 +265,12 @@ namespace AniCLinic
 
             if (_dtHoy.Columns.Contains("Estado")) _dtHoy.Columns.Remove("Estado");
             if (_dtAnteriores.Columns.Contains("Estado")) _dtAnteriores.Columns.Remove("Estado");
+
+            foreach (DataRow r in _dtAnteriores.Rows)
+            {
+                if (ToInt(r, "IdRegistroClinico") <= 0)
+                    r["IdRegistroClinico"] = DBNull.Value;
+            }
 
             dgvHoy.DataSource = _dtHoy;
             dgvProximas.DataSource = _dtProximas;
@@ -272,7 +309,7 @@ namespace AniCLinic
             var t = (term ?? "").Trim();
             if (t.Length == 0) { grid.DataSource = baseTable; return; }
 
-            string[] campos = { "IdRegistroClinico", "IdCita", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
+            string[] campos = { "IdCitaMostrar", "IdCita", "IdRegistroClinico", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
             var cols = campos.Where(c => baseTable.Columns.Contains(c)).ToArray();
 
             var val = t.Replace("'", "''");
@@ -370,8 +407,8 @@ namespace AniCLinic
             {
                 if (row.IsNewRow) continue;
 
-                // Si hay IdRegistroClinico => se puede editar; si no, "Sin registro"
-                int idRC = ToInt(row.Cells["IdRegistroClinico"]?.Value);
+                int idRC = 0;
+                try { idRC = Convert.ToInt32(row.Cells["IdRegistroClinico"]?.Value ?? 0); } catch { idRC = 0; }
 
                 if (idRC <= 0)
                 {
@@ -444,6 +481,30 @@ ORDER BY IdRegistroClinico DESC;";
                         var o = cmd.ExecuteScalar();
                         return (o == null || o == DBNull.Value) ? 0 : Convert.ToInt32(o);
                     }
+                }
+            }
+            finally { db.cerrarConexion(); }
+        }
+
+        // <<< Nuevo: buscar IdCita por mascota y fecha más cercana en el mismo día
+        private int Cita_BuscarIdPorMascotaFechaCercana(int idMascota, DateTime fechaHora)
+        {
+            const string sql = @"
+SELECT TOP(1) IdCita
+FROM dbo.GestionCita
+WHERE IdMascota=@m AND CONVERT(date, FechaHora)=CONVERT(date, @fh)
+ORDER BY ABS(DATEDIFF(MINUTE, FechaHora, @fh)) ASC, FechaHora DESC, IdCita DESC;";
+
+            var db = new csConexionBD();
+            db.abrirConexion();
+            try
+            {
+                using (var cmd = new SqlCommand(sql, db.obtenerConexion()))
+                {
+                    cmd.Parameters.Add("@m", SqlDbType.Int).Value = idMascota;
+                    cmd.Parameters.Add("@fh", SqlDbType.DateTime).Value = fechaHora;
+                    var o = cmd.ExecuteScalar();
+                    return (o == null || o == DBNull.Value) ? 0 : Convert.ToInt32(o);
                 }
             }
             finally { db.cerrarConexion(); }
@@ -695,7 +756,8 @@ END";
             EnsureCol(all, "FechaHora", typeof(DateTime));
             EnsureCol(all, "Fecha", typeof(string));
             EnsureCol(all, "Hora", typeof(string));
-            EnsureCol(all, "IdRegistroClinico", typeof(int)); // clave para mostrar Id
+            EnsureCol(all, "IdRegistroClinico", typeof(int));
+            EnsureCol(all, "IdCitaMostrar", typeof(int));
 
             var crud = new csCRUD();
             var em = crud.cargarBDData(@"
@@ -725,10 +787,9 @@ WHERE NOT EXISTS (
             foreach (DataRow s in em.Rows)
             {
                 int idMascota = ToInt(s["IdMascota"]);
-                DateTime fh;
-                try { fh = Convert.ToDateTime(s["FechaHora"]); } catch { continue; }
+                if (!DateTime.TryParse(Convert.ToString(s["FechaHora"]), out DateTime fh)) continue;
 
-                // Evitar duplicados (IdMascota + FechaHora)
+                // Evitar duplicados (IdMascota + FechaHora aprox)
                 bool exists = false;
                 foreach (DataRow r in all.Rows)
                 {
@@ -739,7 +800,7 @@ WHERE NOT EXISTS (
                 if (exists) continue;
 
                 var nr = all.NewRow();
-                nr["IdCita"] = 0;
+                nr["IdCita"] = 0; // si existe, luego se completa por búsqueda cercana
                 nr["IdMascota"] = idMascota;
                 nr["IdRegistroClinico"] = ToInt(s["IdRegistroClinico"]);
                 nr["Mascota"] = Convert.ToString(s["Mascota"]);
@@ -748,26 +809,11 @@ WHERE NOT EXISTS (
                 nr["Propietario"] = Convert.ToString(s["Propietario"]);
                 if (all.Columns.Contains("CedulaPropietario"))
                     nr["CedulaPropietario"] = Convert.ToString(s["CedulaPropietario"]);
-
-                var motivo = Convert.ToString(s["Motivo"]);
-                nr["Motivo"] = string.IsNullOrWhiteSpace(motivo) ? "Emergencia" : motivo.Trim();
-
+                nr["Motivo"] = Convert.ToString(s["Motivo"])?.Trim() ?? "Emergencia";
                 nr["FechaHora"] = fh;
-
-                if (all.Columns.Contains("Fecha"))
-                {
-                    var c = all.Columns["Fecha"];
-                    if (c.DataType == typeof(DateTime)) nr["Fecha"] = fh.Date;
-                    else nr["Fecha"] = fh.ToString("dd/MM/yyyy");
-                }
-                if (all.Columns.Contains("Hora"))
-                {
-                    var c = all.Columns["Hora"];
-                    if (c.DataType == typeof(TimeSpan)) nr["Hora"] = fh.TimeOfDay;
-                    else if (c.DataType == typeof(DateTime)) nr["Hora"] = fh;
-                    else nr["Hora"] = fh.ToString("HH:mm");
-                }
-
+                nr["Fecha"] = fh.ToString("dd/MM/yyyy");
+                nr["Hora"] = fh.ToString("HH:mm");
+                nr["IdCitaMostrar"] = DBNull.Value;
                 all.Rows.Add(nr);
             }
         }
