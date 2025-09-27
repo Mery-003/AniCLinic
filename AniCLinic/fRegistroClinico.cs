@@ -83,9 +83,9 @@ namespace AniCLinic
             PrepararBase(grid);
             grid.Columns.Add(MkHidden("IdCita"));
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdRegistroClinico")); // para lógica
+            grid.Columns.Add(MkHidden("IdRegistroClinico"));
 
-            var colId = MkText("Id", "IdCitaMostrar", 60);  // <<< muestra Id de la cita
+            var colId = MkText("Id", "IdCitaMostrar", 60);  // SIEMPRE Id de la CITA
             colId.Name = "Id";
             colId.DefaultCellStyle.NullValue = "";
             grid.Columns.Add(colId);
@@ -107,7 +107,7 @@ namespace AniCLinic
             grid.Columns.Add(MkHidden("IdMascota"));
             grid.Columns.Add(MkHidden("IdRegistroClinico"));
 
-            var colId = MkText("Id", "IdCitaMostrar", 60); // <<<
+            var colId = MkText("Id", "IdCitaMostrar", 60);
             colId.Name = "Id";
             colId.DefaultCellStyle.NullValue = "";
             grid.Columns.Add(colId);
@@ -127,12 +127,12 @@ namespace AniCLinic
             PrepararBase(grid);
             grid.Columns.Add(MkHidden("IdCita"));
             grid.Columns.Add(MkHidden("IdMascota"));
-            grid.Columns.Add(MkHidden("IdRegistroClinico")); // se usa para la lógica
+            grid.Columns.Add(MkHidden("IdRegistroClinico"));
 
-            // ⬇⬇ AQUI: el Id visible vuelve a ser el IdRegistroClinico
-            var colId = MkText("Id", "IdRegistroClinico", 60);
+            // En ANTERIORES el Id visible es condicional (Emergencia => IdRegistroClinico; resto => IdCita)
+            var colId = MkText("Id", "IdVisible", 60);
             colId.Name = "Id";
-            colId.DefaultCellStyle.NullValue = ""; // si viene null, no muestra nada
+            colId.DefaultCellStyle.NullValue = "";
             grid.Columns.Add(colId);
 
             grid.Columns.Add(MkText("Mascota", "Mascota", 120));
@@ -145,7 +145,6 @@ namespace AniCLinic
             grid.Columns.Add(MkBtn("colEditar", "Editar", 95));
             grid.Columns.Add(MkBtn("colEliminar", "Eliminar", 95));
         }
-
 
         private void QuitarFilaNueva(DataGridView grid)
         {
@@ -182,7 +181,8 @@ namespace AniCLinic
             EnsureCol(all, "Fecha", typeof(string));
             EnsureCol(all, "Hora", typeof(string));
             EnsureCol(all, "IdRegistroClinico", typeof(int));
-            EnsureCol(all, "IdCitaMostrar", typeof(int)); // <<< para UI
+            EnsureCol(all, "IdCitaMostrar", typeof(int)); // para HOY/PRÓXIMAS
+            EnsureCol(all, "IdVisible", typeof(int));     // para ANTERIORES (condicional)
 
             if (!all.Columns.Contains("Estado"))
                 all.Columns.Add("Estado", typeof(string));
@@ -203,8 +203,8 @@ namespace AniCLinic
                 }
             }
 
-            // 2.1) Completar IdCita si falta, buscando por mascota + fecha más cercana (misma fecha)
-            foreach (DataRow r in all.Rows) // <<< NUEVO
+            // 2.1) Completar IdCita si falta (por mascota + misma fecha)
+            foreach (DataRow r in all.Rows)
             {
                 if (!TryParseFechaHora(r, out DateTime fh)) continue;
                 if (ToInt(r, "IdCita") <= 0)
@@ -215,11 +215,21 @@ namespace AniCLinic
                 }
             }
 
-            // 2.2) Calcular la columna de UI (si no hay cita, queda en blanco)
+            // 2.2) Calcular columnas de UI
             foreach (DataRow r in all.Rows)
             {
                 int idCita = ToInt(r, "IdCita");
+                int idRC = ToInt(r, "IdRegistroClinico");
+                string mot = Convert.ToString(r["Motivo"])?.Trim();
+
+                // Para HOY y PRÓXIMAS (siempre IdCita)
                 r["IdCitaMostrar"] = idCita > 0 ? (object)idCita : DBNull.Value;
+
+                // Para ANTERIORES: Emergencia con registro => IdRegistroClinico; resto => IdCita
+                if (!string.IsNullOrEmpty(mot) && mot.Equals("Emergencia", StringComparison.OrdinalIgnoreCase) && idRC > 0)
+                    r["IdVisible"] = idRC;
+                else
+                    r["IdVisible"] = idCita > 0 ? (object)idCita : DBNull.Value;
             }
 
             var hoy = DateTime.Today;
@@ -266,6 +276,7 @@ namespace AniCLinic
             if (_dtHoy.Columns.Contains("Estado")) _dtHoy.Columns.Remove("Estado");
             if (_dtAnteriores.Columns.Contains("Estado")) _dtAnteriores.Columns.Remove("Estado");
 
+            // Para el decorado “Editar / Sin registro” conservamos IdRegistroClinico
             foreach (DataRow r in _dtAnteriores.Rows)
             {
                 if (ToInt(r, "IdRegistroClinico") <= 0)
@@ -309,7 +320,7 @@ namespace AniCLinic
             var t = (term ?? "").Trim();
             if (t.Length == 0) { grid.DataSource = baseTable; return; }
 
-            string[] campos = { "IdCitaMostrar", "IdCita", "IdRegistroClinico", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
+            string[] campos = { "IdVisible", "IdCitaMostrar", "IdCita", "IdRegistroClinico", "Mascota", "Especie", "Raza", "Fecha", "Hora", "Motivo", "Propietario", "Estado", "CedulaPropietario" };
             var cols = campos.Where(c => baseTable.Columns.Contains(c)).ToArray();
 
             var val = t.Replace("'", "''");
@@ -486,7 +497,6 @@ ORDER BY IdRegistroClinico DESC;";
             finally { db.cerrarConexion(); }
         }
 
-        // <<< Nuevo: buscar IdCita por mascota y fecha más cercana en el mismo día
         private int Cita_BuscarIdPorMascotaFechaCercana(int idMascota, DateTime fechaHora)
         {
             const string sql = @"
@@ -758,6 +768,7 @@ END";
             EnsureCol(all, "Hora", typeof(string));
             EnsureCol(all, "IdRegistroClinico", typeof(int));
             EnsureCol(all, "IdCitaMostrar", typeof(int));
+            EnsureCol(all, "IdVisible", typeof(int));
 
             var crud = new csCRUD();
             var em = crud.cargarBDData(@"
@@ -789,7 +800,6 @@ WHERE NOT EXISTS (
                 int idMascota = ToInt(s["IdMascota"]);
                 if (!DateTime.TryParse(Convert.ToString(s["FechaHora"]), out DateTime fh)) continue;
 
-                // Evitar duplicados (IdMascota + FechaHora aprox)
                 bool exists = false;
                 foreach (DataRow r in all.Rows)
                 {
@@ -800,7 +810,7 @@ WHERE NOT EXISTS (
                 if (exists) continue;
 
                 var nr = all.NewRow();
-                nr["IdCita"] = 0; // si existe, luego se completa por búsqueda cercana
+                nr["IdCita"] = 0;
                 nr["IdMascota"] = idMascota;
                 nr["IdRegistroClinico"] = ToInt(s["IdRegistroClinico"]);
                 nr["Mascota"] = Convert.ToString(s["Mascota"]);
@@ -813,7 +823,11 @@ WHERE NOT EXISTS (
                 nr["FechaHora"] = fh;
                 nr["Fecha"] = fh.ToString("dd/MM/yyyy");
                 nr["Hora"] = fh.ToString("HH:mm");
+
+                // IdVisible para emergencias sin cita => IdRegistroClinico
                 nr["IdCitaMostrar"] = DBNull.Value;
+                nr["IdVisible"] = nr["IdRegistroClinico"];
+
                 all.Rows.Add(nr);
             }
         }
@@ -874,7 +888,7 @@ WHERE NOT EXISTS (
                     IdCita = 0,
                     IdMascota = 0,
                     FechaHora = DateTime.Now
-                }, false, true)) // emergencia=true
+                }, false, true))
                 {
                     if (reg.ShowDialog(this) == DialogResult.OK)
                         RecargarTodo();

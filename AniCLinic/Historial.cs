@@ -79,46 +79,24 @@ ORDER BY M.IdMascota DESC;";
 
         private void btnVer_Click(object sender, EventArgs e)
         {
-            if (dgvHistorial.CurrentRow == null ||
-                dgvHistorial.CurrentRow.DataBoundItem == null)
+            if (dgvHistorial.CurrentRow == null || dgvHistorial.CurrentRow.DataBoundItem == null)
             {
                 MessageBox.Show("Seleccione un paciente de la lista.", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
+            // Toma el Id de la mascota seleccionada en la grilla
             var drv = (DataRowView)dgvHistorial.CurrentRow.DataBoundItem;
+            int idMascota = Convert.ToInt32(drv["ID"]);   // viene de M.IdMascota AS ID
 
-            int idMascota = Convert.ToInt32(drv["ID"]);
-            string nombreMascota = Convert.ToString(drv["Nombre"]);
-            string propietario = Convert.ToString(drv["Propietario"]);
-
-            string sql = @"
-SELECT 
-    rc.IdRegistroClinico,
-    rc.FechaRegistro,
-    ISNULL(rc.MotivoConsulta,'') AS MotivoConsulta
-FROM RegistroClinico rc
-WHERE rc.IdMascota = @m
-ORDER BY rc.FechaRegistro DESC, rc.IdRegistroClinico DESC;";
-
-            var dt = _crud.cargarBDData(sql, new SqlParameter("@m", idMascota));
-            if (dt.Rows.Count == 0)
+            // Abre el formulario que contiene el ReportViewer
+            using (var frm = new frmHistorialMedicoReport(idMascota))
             {
-                MessageBox.Show("Esta mascota no tiene fichas registradas.", "Sin datos",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            using (var picker = new HistorialFecha(dt, $"{nombreMascota} — {propietario}"))
-            {
-                if (picker.ShowDialog(this) == DialogResult.OK && picker.SelectedIdRegistroClinico > 0)
-                {
-                    using (var ver = new VerHistorial(picker.SelectedIdRegistroClinico))
-                        ver.ShowDialog(this);
-                }
+                frm.ShowDialog(this);
             }
         }
+
 
         private void txtMascotaNombre_KeyPress(object sender, KeyPressEventArgs e)
         {

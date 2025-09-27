@@ -48,8 +48,6 @@
             this.lblFecha = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblFechas = new System.Windows.Forms.Label();
             this.guna2Button8 = new Guna.UI2.WinForms.Guna2Button();
-            this.lblPacientes = new System.Windows.Forms.Label();
-            this.lblPropietarios = new System.Windows.Forms.Label();
             this.lblDiagnosticos = new System.Windows.Forms.Label();
             this.lblMotivos = new System.Windows.Forms.Label();
             this.lblTratamientos = new System.Windows.Forms.Label();
@@ -58,8 +56,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.SuspendLayout();
@@ -260,37 +256,15 @@
             this.guna2Button8.ForeColor = System.Drawing.Color.White;
             this.guna2Button8.Location = new System.Drawing.Point(41, 75);
             this.guna2Button8.Name = "guna2Button8";
-            this.guna2Button8.Size = new System.Drawing.Size(497, 284);
+            this.guna2Button8.Size = new System.Drawing.Size(497, 220);
             this.guna2Button8.TabIndex = 105;
-            // 
-            // lblPacientes
-            // 
-            this.lblPacientes.AutoSize = true;
-            this.lblPacientes.BackColor = System.Drawing.Color.LightGray;
-            this.lblPacientes.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPacientes.Location = new System.Drawing.Point(175, 134);
-            this.lblPacientes.Name = "lblPacientes";
-            this.lblPacientes.Size = new System.Drawing.Size(59, 17);
-            this.lblPacientes.TabIndex = 106;
-            this.lblPacientes.Text = "Paciente";
-            // 
-            // lblPropietarios
-            // 
-            this.lblPropietarios.AutoSize = true;
-            this.lblPropietarios.BackColor = System.Drawing.Color.LightGray;
-            this.lblPropietarios.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPropietarios.Location = new System.Drawing.Point(175, 171);
-            this.lblPropietarios.Name = "lblPropietarios";
-            this.lblPropietarios.Size = new System.Drawing.Size(75, 17);
-            this.lblPropietarios.TabIndex = 107;
-            this.lblPropietarios.Text = "propietario";
             // 
             // lblDiagnosticos
             // 
             this.lblDiagnosticos.AutoSize = true;
             this.lblDiagnosticos.BackColor = System.Drawing.Color.LightGray;
             this.lblDiagnosticos.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiagnosticos.Location = new System.Drawing.Point(175, 245);
+            this.lblDiagnosticos.Location = new System.Drawing.Point(174, 171);
             this.lblDiagnosticos.Name = "lblDiagnosticos";
             this.lblDiagnosticos.Size = new System.Drawing.Size(78, 17);
             this.lblDiagnosticos.TabIndex = 108;
@@ -301,7 +275,7 @@
             this.lblMotivos.AutoSize = true;
             this.lblMotivos.BackColor = System.Drawing.Color.LightGray;
             this.lblMotivos.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMotivos.Location = new System.Drawing.Point(176, 208);
+            this.lblMotivos.Location = new System.Drawing.Point(175, 134);
             this.lblMotivos.Name = "lblMotivos";
             this.lblMotivos.Size = new System.Drawing.Size(51, 17);
             this.lblMotivos.TabIndex = 109;
@@ -312,7 +286,7 @@
             this.lblTratamientos.AutoSize = true;
             this.lblTratamientos.BackColor = System.Drawing.Color.LightGray;
             this.lblTratamientos.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTratamientos.Location = new System.Drawing.Point(175, 283);
+            this.lblTratamientos.Location = new System.Drawing.Point(174, 209);
             this.lblTratamientos.Name = "lblTratamientos";
             this.lblTratamientos.Size = new System.Drawing.Size(86, 17);
             this.lblTratamientos.TabIndex = 110;
@@ -324,7 +298,7 @@
             this.lblRecetas.AutoSize = true;
             this.lblRecetas.BackColor = System.Drawing.Color.LightGray;
             this.lblRecetas.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRecetas.Location = new System.Drawing.Point(177, 318);
+            this.lblRecetas.Location = new System.Drawing.Point(176, 244);
             this.lblRecetas.Name = "lblRecetas";
             this.lblRecetas.Size = new System.Drawing.Size(45, 17);
             this.lblRecetas.TabIndex = 111;
@@ -335,7 +309,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.LightGray;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(77, 317);
+            this.label1.Location = new System.Drawing.Point(76, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 17);
             this.label1.TabIndex = 118;
@@ -346,7 +320,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.LightGray;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(74, 282);
+            this.label2.Location = new System.Drawing.Point(73, 208);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 17);
             this.label2.TabIndex = 117;
@@ -358,7 +332,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.LightGray;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(75, 207);
+            this.label3.Location = new System.Drawing.Point(74, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 17);
             this.label3.TabIndex = 116;
@@ -369,33 +343,11 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.LightGray;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(74, 244);
+            this.label4.Location = new System.Drawing.Point(73, 170);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 17);
             this.label4.TabIndex = 115;
             this.label4.Text = "Diagnostico:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.LightGray;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(74, 170);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 17);
-            this.label5.TabIndex = 114;
-            this.label5.Text = "Propietario:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.LightGray;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(74, 133);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 17);
-            this.label6.TabIndex = 113;
-            this.label6.Text = "Paciente:";
             // 
             // label7
             // 
@@ -413,20 +365,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(581, 392);
+            this.ClientSize = new System.Drawing.Size(581, 321);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblRecetas);
             this.Controls.Add(this.lblTratamientos);
             this.Controls.Add(this.lblMotivos);
             this.Controls.Add(this.lblDiagnosticos);
-            this.Controls.Add(this.lblPropietarios);
-            this.Controls.Add(this.lblPacientes);
             this.Controls.Add(this.lblFechas);
             this.Controls.Add(this.guna2HtmlLabel9);
             this.Controls.Add(this.btnCerrar);
@@ -465,15 +413,11 @@
         private System.Windows.Forms.Label lblTratamientos;
         private System.Windows.Forms.Label lblMotivos;
         private System.Windows.Forms.Label lblDiagnosticos;
-        private System.Windows.Forms.Label lblPropietarios;
-        private System.Windows.Forms.Label lblPacientes;
         private System.Windows.Forms.Label lblRecetas;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
     }
 }

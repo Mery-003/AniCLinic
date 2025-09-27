@@ -237,12 +237,6 @@
     <Compile Include="Historial.Designer.cs">
       <DependentUpon>Historial.cs</DependentUpon>
     </Compile>
-    <Compile Include="HistorialFecha.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HistorialFecha.Designer.cs">
-      <DependentUpon>HistorialFecha.cs</DependentUpon>
-    </Compile>
     <Compile Include="Inventario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -361,9 +355,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HistorialFecha.resx">
-      <DependentUpon>HistorialFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario.resx">
       <DependentUpon>Inventario.cs</DependentUpon>

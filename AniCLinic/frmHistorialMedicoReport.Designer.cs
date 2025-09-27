@@ -37,14 +37,14 @@
             this.rvwHistorial.Location = new System.Drawing.Point(0, 0);
             this.rvwHistorial.Name = "rvwHistorial";
             this.rvwHistorial.ServerReport.BearerToken = null;
-            this.rvwHistorial.Size = new System.Drawing.Size(546, 450);
+            this.rvwHistorial.Size = new System.Drawing.Size(730, 480);
             this.rvwHistorial.TabIndex = 0;
             // 
             // frmHistorialMedicoReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(546, 450);
+            this.ClientSize = new System.Drawing.Size(730, 480);
             this.Controls.Add(this.rvwHistorial);
             this.Name = "frmHistorialMedicoReport";
             this.Text = "frmHistorialMedicoReport";
