@@ -127,6 +127,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsListaProductos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsRegistroClinico.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRegistroClinico.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsReporteFinancieroProductos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -273,12 +278,6 @@
     <Compile Include="SesionActual.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UxBuscarCedulaHelper.cs" />
-    <Compile Include="ValorCita.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ValorCita.Designer.cs">
-      <DependentUpon>ValorCita.cs</DependentUpon>
-    </Compile>
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,11 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="rptFactura.rdlc" />
     <EmbeddedResource Include="rptListaProductos.rdlc" />
+    <EmbeddedResource Include="rptRegistroClinico.rdlc" />
     <EmbeddedResource Include="rptReporteAño.rdlc" />
     <EmbeddedResource Include="rptReporteProducto.rdlc" />
-    <EmbeddedResource Include="ValorCita.resx">
-      <DependentUpon>ValorCita.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>
     </EmbeddedResource>
@@ -411,6 +408,17 @@
     </None>
     <None Include="dsListaProductos.xss">
       <DependentUpon>dsListaProductos.xsd</DependentUpon>
+    </None>
+    <None Include="dsRegistroClinico.xsc">
+      <DependentUpon>dsRegistroClinico.xsd</DependentUpon>
+    </None>
+    <None Include="dsRegistroClinico.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRegistroClinico.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsRegistroClinico.xss">
+      <DependentUpon>dsRegistroClinico.xsd</DependentUpon>
     </None>
     <None Include="dsReporteFinancieroProductos.xsc">
       <DependentUpon>dsReporteFinancieroProductos.xsd</DependentUpon>

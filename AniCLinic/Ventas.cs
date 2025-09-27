@@ -40,7 +40,7 @@ namespace AniCLinic
             cargarCmb();
             btnImprimir.Enabled = false;
         }
-        public Ventas(int id, decimal valor, bool vieneCita)
+        public Ventas(int id, bool vieneCita)
         {
             idEmpl = id;
             InitializeComponent();

@@ -198,9 +198,9 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
                 DialogResult = DialogResult.OK;
                 if (!_isEdit)
                 {
-                    ValorCita vC = new ValorCita();
+                    Menu menu = Application.OpenForms["Menu"] as Menu;
+                    menu.AbrirEnPanel(menu.pnlMenu1, new Ventas(menu.idEmpleado, true));
                     this.Close();
-                    vC.ShowDialog();
                 }
                 Close();
             }
