@@ -195,6 +195,12 @@
     <Compile Include="frFactura.Designer.cs">
       <DependentUpon>frFactura.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmHistorialMedicoReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHistorialMedicoReport.Designer.cs">
+      <DependentUpon>frmHistorialMedicoReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRMListaMascota.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frFactura.resx">
       <DependentUpon>frFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHistorialMedicoReport.resx">
+      <DependentUpon>frmHistorialMedicoReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FRMListaMascota.resx">
       <DependentUpon>FRMListaMascota.cs</DependentUpon>
