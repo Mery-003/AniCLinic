@@ -25,15 +25,14 @@ namespace AniCLinic
             btnPropietarios.Click += (s, e) =>
             {
                 using (var f = new AggPropietario(this, 0))
-                    f.ShowDialog();                    // sin Owner -> evita referencia circular
+                    f.ShowDialog();
             };
             btnMascotas.Click += (s, e) =>
             {
                 using (var f = new AggMascota(this, 0))
-                    f.ShowDialog();                    // sin Owner
+                    f.ShowDialog();
             };
 
-            // Click en botones de grillas
             dgvPropietarios.CellContentClick += dgvPropietarios_CellContentClick;
             dgvMascotas.CellContentClick += dgvMascotas_CellContentClick;
         }
@@ -48,7 +47,6 @@ namespace AniCLinic
             dgv.AutoGenerateColumns = true;
         }
 
-        // ====================== PROPIETARIOS ======================
         public void RefrescarPropietarios(string filtro = "")
         {
             string sql = @"
@@ -64,7 +62,6 @@ Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR P.Cedula like '
             if (dgvPropietarios.Columns.Contains("Celular")) dgvPropietarios.Columns["Celular"].Width = 140;
         }
 
-        // ======================== MASCOTAS ========================
         public void RefrescarMascotas(string filtro = "")
         {
             string sql = @"
@@ -73,20 +70,21 @@ SELECT m.IdMascota AS ID,
        e.Especie,
        r.Raza,
        m.Sexo AS Sexo,
-       DATEDIFF(YEAR, m.FechaNacimiento, GETDATE()) AS [Edad (años)],
-       m.Discapacidad, 
-       (p.Nombre + ' ' + p.Apellido) AS Propietario 
+       m.Discapacidad,
+       (p.Nombre + ' ' + p.Apellido) AS Propietario
 FROM Mascota m
 INNER JOIN Persona p ON p.IdPersona = m.IdPersona
-INNER JOIN Especie e ON e.IdEspecie = m.IdEspecie 
-INNER JOIN Raza r ON r.IdRaza = m.IdRaza 
-Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR m.Nombre like '" + filtro + "' + '%' " +
-" ORDER BY m.IdMascota DESC";
+INNER JOIN Especie e ON e.IdEspecie = m.IdEspecie
+INNER JOIN Raza r ON r.IdRaza = m.IdRaza
+WHERE p.Nombre + ' ' + p.Apellido LIKE '" + filtro + @"%' OR m.Nombre LIKE '" + filtro + @"%'
+ORDER BY m.IdMascota DESC";
+
             dgvMascotas.Columns.Clear();
             dgvMascotas.DataSource = _crud.cargarBDData(sql);
             AgregarColumnasAccion(dgvMascotas);
             if (dgvMascotas.Columns.Contains("ID")) dgvMascotas.Columns["ID"].Width = 60;
         }
+
 
         private static void AgregarColumnasAccion(DataGridView dgv)
         {
@@ -116,7 +114,6 @@ Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR m.Nombre like '
             }
         }
 
-        // Clicks
         private void dgvPropietarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -128,11 +125,10 @@ Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR m.Nombre like '
             if (colBtn.HeaderText == "Editar")
             {
                 using (var f = new AggPropietario(this, id))
-                    f.ShowDialog(); // sin Owner
+                    f.ShowDialog();
             }
             else if (colBtn.HeaderText == "Eliminar")
             {
-                // ¿tiene mascotas?
                 DataTable dt = _crud.cargarBDData("SELECT COUNT(1) FROM Mascota WHERE IdPersona=@id;", new SqlParameter("@id", id));
                 int n = (dt != null && dt.Rows.Count > 0) ? Convert.ToInt32(dt.Rows[0][0]) : 0;
 
@@ -161,7 +157,7 @@ Where P.Nombre + ' ' + P.Apellido like '" + filtro + "' + '%' OR m.Nombre like '
             if (colBtn.HeaderText == "Editar")
             {
                 using (var f = new AggMascota(this, id))
-                    f.ShowDialog(); // sin Owner
+                    f.ShowDialog();
             }
             else if (colBtn.HeaderText == "Eliminar")
             {

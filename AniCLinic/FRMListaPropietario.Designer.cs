@@ -181,7 +181,7 @@
             this.txtBuscarPropietario.TabIndex = 142;
             this.txtBuscarPropietario.Tag = "";
             // 
-            // FRMListaPropietario
+            // FMRListaPropietario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +193,8 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.guna2HtmlLabel9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FRMListaPropietario";
+            this.Name = "FMRListaPropietario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRMListaPropietario";
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaPropietario)).EndInit();
             this.ResumeLayout(false);

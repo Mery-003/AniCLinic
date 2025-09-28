@@ -194,6 +194,7 @@
             this.Controls.Add(this.guna2HtmlLabel9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FRMListaMascota";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRMListaMascota";
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMascota)).EndInit();
             this.ResumeLayout(false);

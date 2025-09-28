@@ -28,7 +28,6 @@ namespace AniCLinic
             {
                 var crud = new csCRUD();
 
-                // IMPORTANTE: incluye IdMascota porque el grupo del tablix lo usa
                 string sql = @"
 SELECT
     M.IdMascota                   AS IdMascota,
@@ -59,19 +58,14 @@ ORDER BY RC.FechaRegistro DESC, RC.IdRegistroClinico DESC;";
                     return;
                 }
 
-                // Configurar ReportViewer
                 rvwHistorial.Reset();
                 rvwHistorial.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
                 rvwHistorial.LocalReport.DataSources.Clear();
 
-                // RDLC embebido (ajusta si está en subcarpeta)
                 rvwHistorial.LocalReport.ReportEmbeddedResource = "AniCLinic.rptRegistroClinico.rdlc";
 
-                // DataSource: nombre EXACTO como en el RDLC
                 rvwHistorial.LocalReport.DataSources.Add(
                     new Microsoft.Reporting.WinForms.ReportDataSource("dsRegistroClinico", dt));
-
-                // *** NO parámetros aquí ***  (los quitaste del RDLC)
 
                 rvwHistorial.RefreshReport();
             }

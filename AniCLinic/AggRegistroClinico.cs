@@ -171,10 +171,8 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
                 if (!ValidarCamposObligatorios())
                     return;
 
-                // 1) Guardar/Actualizar Registro Clínico
                 GuardarRegistroClinico();
 
-                // 2) Abrir AggCita prellenado para la MISMA mascota (incluye especie/raza)
                 int idMascota = ResolverIdMascotaRobusto(_info);
                 if (idMascota <= 0)
                     throw new InvalidOperationException("No se pudo resolver la mascota asociada.");
@@ -198,14 +196,12 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
                     var res = frmCita.ShowDialog(this);
                     if (res == DialogResult.OK)
                     {
-                        // 3) Ir a ventas aquí (valor de la cita ya predeterminado en tu flujo)
                         Menu menu = Application.OpenForms["Menu"] as Menu;
                         if (menu != null)
                             menu.AbrirEnPanel(menu.pnlMenu1, new Ventas(menu.idEmpleado, true));
                     }
                 }
 
-                // 4) Cerrar este formulario
                 DialogResult = DialogResult.OK;
                 Close();
             }

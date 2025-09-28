@@ -168,7 +168,6 @@ namespace AniCLinic
         {
             var all = CedulaUtils.CitasListado();
 
-            // Asegura columnas requeridas
             EnsureCol(all, "IdCita", typeof(int));
             EnsureCol(all, "IdMascota", typeof(int));
             EnsureCol(all, "Mascota", typeof(string));
@@ -181,16 +180,14 @@ namespace AniCLinic
             EnsureCol(all, "Fecha", typeof(string));
             EnsureCol(all, "Hora", typeof(string));
             EnsureCol(all, "IdRegistroClinico", typeof(int));
-            EnsureCol(all, "IdCitaMostrar", typeof(int)); // para HOY/PRÓXIMAS
-            EnsureCol(all, "IdVisible", typeof(int));     // para ANTERIORES (condicional)
+            EnsureCol(all, "IdCitaMostrar", typeof(int)); 
+            EnsureCol(all, "IdVisible", typeof(int));    
 
             if (!all.Columns.Contains("Estado"))
                 all.Columns.Add("Estado", typeof(string));
 
-            // 1) Mezcla emergencias sin cita (si ya tienen cita exacta, no entran)
             AppendEmergenciasSinCita(all);
 
-            // 2) Completar IdRegistroClinico si falta
             foreach (DataRow r in all.Rows)
             {
                 if (!TryParseFechaHora(r, out DateTime fh)) continue;
@@ -203,7 +200,6 @@ namespace AniCLinic
                 }
             }
 
-            // 2.1) Completar IdCita si falta (por mascota + misma fecha)
             foreach (DataRow r in all.Rows)
             {
                 if (!TryParseFechaHora(r, out DateTime fh)) continue;
@@ -215,17 +211,14 @@ namespace AniCLinic
                 }
             }
 
-            // 2.2) Calcular columnas de UI
             foreach (DataRow r in all.Rows)
             {
                 int idCita = ToInt(r, "IdCita");
                 int idRC = ToInt(r, "IdRegistroClinico");
                 string mot = Convert.ToString(r["Motivo"])?.Trim();
 
-                // Para HOY y PRÓXIMAS (siempre IdCita)
                 r["IdCitaMostrar"] = idCita > 0 ? (object)idCita : DBNull.Value;
 
-                // Para ANTERIORES: Emergencia con registro => IdRegistroClinico; resto => IdCita
                 if (!string.IsNullOrEmpty(mot) && mot.Equals("Emergencia", StringComparison.OrdinalIgnoreCase) && idRC > 0)
                     r["IdVisible"] = idRC;
                 else
@@ -276,7 +269,6 @@ namespace AniCLinic
             if (_dtHoy.Columns.Contains("Estado")) _dtHoy.Columns.Remove("Estado");
             if (_dtAnteriores.Columns.Contains("Estado")) _dtAnteriores.Columns.Remove("Estado");
 
-            // Para el decorado “Editar / Sin registro” conservamos IdRegistroClinico
             foreach (DataRow r in _dtAnteriores.Rows)
             {
                 if (ToInt(r, "IdRegistroClinico") <= 0)
@@ -824,7 +816,7 @@ WHERE NOT EXISTS (
                 nr["Fecha"] = fh.ToString("dd/MM/yyyy");
                 nr["Hora"] = fh.ToString("HH:mm");
 
-                // IdVisible para emergencias sin cita => IdRegistroClinico
+                
                 nr["IdCitaMostrar"] = DBNull.Value;
                 nr["IdVisible"] = nr["IdRegistroClinico"];
 

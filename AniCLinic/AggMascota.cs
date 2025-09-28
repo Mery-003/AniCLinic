@@ -42,7 +42,6 @@ namespace AniCLinic
             else LimpiarNuevo();
         }
 
-        // NUEVO: permite preseleccionar un propietario por Id (para el flujo de emergencia)
         public void PreseleccionarPropietario(int idPersona)
         {
             _idPersonaSeleccionada = idPersona;
@@ -109,7 +108,6 @@ namespace AniCLinic
 
         private void CargarCombos()
         {
-            // Especie
             using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdEspecie, Especie FROM Especie ORDER BY Especie"))
             {
                 DataTable dt = new DataTable();
@@ -121,7 +119,6 @@ namespace AniCLinic
                 cmbEspecie.DataSource = dt;
             }
 
-            // Inicializar combo raza vacío
             cmbRaza.DataSource = CrearTablaPH("IdRaza");
             cmbRaza.DisplayMember = "Raza";
             cmbRaza.ValueMember = "IdRaza";

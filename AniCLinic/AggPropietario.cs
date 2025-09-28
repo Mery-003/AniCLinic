@@ -12,9 +12,8 @@ namespace AniCLinic
     {
         private readonly csCRUD _crud = new csCRUD();
         private readonly fPacientes _parent;
-        private readonly int _idPersona; 
+        private readonly int _idPersona;
 
-        // NUEVO: exponer el Id del propietario guardado
         public int IdPersonaGuardado { get; private set; } = 0;
 
         public AggPropietario(fPacientes parent, int idPersona = 0)
@@ -23,16 +22,19 @@ namespace AniCLinic
             _parent = parent;
             _idPersona = idPersona;
 
-            // Eventos UI
             btnSeleccionarFoto.Click += btnSeleccionarFoto_Click;
             btnGuardarPropietario.Click += btnGuardarPropietario_Click;
             btnCancelarPropietario.Click += (s, e) => this.Close();
 
-            // Solo números y hasta 10 dígitos
             txtCelular.KeyPress += SoloNumero_KeyPress;
             txtCedula.KeyPress += SoloNumero_KeyPress;
             txtCelular.TextChanged += Limitar10;
             txtCedula.TextChanged += Limitar10;
+
+            txtNombre.KeyPress += SoloLetras_KeyPress;
+            txtApellido.KeyPress += SoloLetras_KeyPress;
+            txtNombre.TextChanged += SoloLetras_TextChanged;
+            txtApellido.TextChanged += SoloLetras_TextChanged;
 
             if (_idPersona > 0) CargarPropietario(_idPersona);
             else Limpiar();
@@ -54,6 +56,7 @@ namespace AniCLinic
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
+
         private static void Limitar10(object sender, EventArgs e)
         {
             if (sender is TextBox tb)
@@ -79,6 +82,45 @@ namespace AniCLinic
             }
         }
 
+        private static void SoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) &&
+                !char.IsLetter(e.KeyChar) &&
+                e.KeyChar != ' ' &&
+                e.KeyChar != '-' &&
+                e.KeyChar != '\'')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private static void SoloLetras_TextChanged(object sender, EventArgs e)
+        {
+            const string patron = @"[^ \p{L}\-']+";
+
+            if (sender is TextBox tb)
+            {
+                int pos = tb.SelectionStart;
+                string limpio = Regex.Replace(tb.Text, patron, string.Empty);
+                if (limpio != tb.Text)
+                {
+                    tb.Text = limpio;
+                    tb.SelectionStart = Math.Min(pos, tb.Text.Length);
+                }
+            }
+
+            if (sender is Guna.UI2.WinForms.Guna2TextBox gtb)
+            {
+                int pos = gtb.SelectionStart;
+                string limpio = Regex.Replace(gtb.Text, patron, string.Empty);
+                if (limpio != gtb.Text)
+                {
+                    gtb.Text = limpio;
+                    gtb.SelectionStart = Math.Min(pos, gtb.Text.Length);
+                }
+            }
+        }
+
         private static byte[] ImageToBytesOrNull(Image img)
         {
             if (img == null) return null;
@@ -90,6 +132,7 @@ namespace AniCLinic
                 return ms.ToArray();
             }
         }
+
         private static Image BytesToImageOrNull(object blob)
         {
             if (blob == null || blob == DBNull.Value) return null;
@@ -142,6 +185,13 @@ FROM Persona WHERE IdPersona = " + idPersona;
             if (string.IsNullOrWhiteSpace(txtCedula.Text)) { MessageBox.Show("Ingrese la cédula."); return false; }
             if (txtCelular.Text.Trim().Length > 10) { MessageBox.Show("Celular debe tener máx. 10 dígitos."); return false; }
             if (txtCedula.Text.Trim().Length > 10) { MessageBox.Show("C.I. debe tener máx. 10 dígitos."); return false; }
+
+            if (!Regex.IsMatch(txtNombre.Text.Trim(), @"^[ \p{L}\-']+$"))
+            { MessageBox.Show("Nombre: solo letras, espacios, guion o apóstrofe."); return false; }
+
+            if (!Regex.IsMatch(txtApellido.Text.Trim(), @"^[ \p{L}\-']+$"))
+            { MessageBox.Show("Apellido: solo letras, espacios, guion o apóstrofe."); return false; }
+
             if (!string.IsNullOrWhiteSpace(txtCorreo.Text))
             {
                 if (!Regex.IsMatch(txtCorreo.Text.Trim(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
@@ -177,7 +227,6 @@ FROM Persona WHERE IdPersona = " + idPersona;
             return n > 0;
         }
 
-        // REEMPLAZADO COMPLETO (devuelve OK + IdPersonaGuardado)
         private void btnGuardarPropietario_Click(object sender, EventArgs e)
         {
             if (!Validar()) return;
@@ -229,7 +278,6 @@ FROM Persona WHERE IdPersona = " + idPersona;
                     pImg);
                 if (!ok) { MessageBox.Show("No se pudo registrar."); return; }
 
-                // Recuperar Id por cédula (única)
                 DataTable dt = _crud.cargarBDData("SELECT IdPersona FROM Persona WHERE Cedula=@ci;",
                     new SqlParameter("@ci", txtCedula.Text.Trim()));
                 if (dt != null && dt.Rows.Count > 0)

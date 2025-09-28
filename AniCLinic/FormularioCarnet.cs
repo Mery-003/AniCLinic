@@ -11,23 +11,28 @@ namespace AniCLinic
     {
         csCRUD crud = new csCRUD();
         bool botonesAgregados = false;
+
         public FormularioCarnet()
         {
             InitializeComponent();
             PrepararGrid();
             CargarDatosC();
         }
+
         private void CargarDatosC(string filtro = "")
         {
-            string sentencia = "Select M.IdMascota, M.Nombre, E.Especie, R.Raza, M.Sexo, M.FechaNacimiento " +
-                "as [Fecha de Nacimiento], M.Discapacidad, FLOOR(DATEDIFF(DAY, M.FechaNacimiento, GETDATE()) / 365.25) AS [Edad (Años)] " +
+            string sentencia =
+                "Select M.IdMascota, M.Nombre, E.Especie, R.Raza, M.Sexo, M.FechaNacimiento as [Fecha de Nacimiento], " +
+                "M.Discapacidad " + // <- QUITADA la columna Edad (Años)
                 "from Mascota M " +
                 "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie " +
                 "INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
                 "where Nombre like @filtro + '%'";
+
             dgvCarnet.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@filtro", filtro));
             ConfigurarColumnas();
         }
+
         private void PrepararGrid()
         {
             dgvCarnet.ReadOnly = true;
@@ -38,6 +43,7 @@ namespace AniCLinic
             dgvCarnet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCarnet.AutoGenerateColumns = true;
         }
+
         private void ConfigurarColumnas()
         {
             var g = dgvCarnet;
@@ -59,7 +65,6 @@ namespace AniCLinic
                     Width = 80
                 };
                 g.Columns.Add(colCarnet);
-
 
                 botonesAgregados = true;
             }
@@ -85,11 +90,13 @@ namespace AniCLinic
 
             int idMascota = Convert.ToInt32(rowView["IdMascota"]);
 
-            SqlDataReader reader = crud.EjecutarQuery("Select *, FLOOR(DATEDIFF(DAY, M.FechaNacimiento, GETDATE()) / 365.25) AS Edad from Mascota M" +
-                " INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie  " +
-                " INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
-                " Where IdMascota = " + idMascota);
-            
+            // <- QUITADA la columna Edad del SELECT del carnet
+            SqlDataReader reader = crud.EjecutarQuery(
+                "Select * from Mascota M " +
+                "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie  " +
+                "INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
+                "Where IdMascota = " + idMascota
+            );
 
             VerCarnet carnet = new VerCarnet(reader);
             carnet.ShowDialog();

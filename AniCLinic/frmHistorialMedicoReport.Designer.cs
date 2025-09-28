@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(730, 480);
             this.Controls.Add(this.rvwHistorial);
             this.Name = "frmHistorialMedicoReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmHistorialMedicoReport";
             this.Load += new System.EventHandler(this.frmHistorialMedicoReport_Load);
             this.ResumeLayout(false);

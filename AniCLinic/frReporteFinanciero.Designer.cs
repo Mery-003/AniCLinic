@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(668, 490);
             this.Controls.Add(this.rvwReporteAño);
             this.Name = "frReporteFinanciero";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frReporteFinanciero";
             this.Load += new System.EventHandler(this.frReporteFinanciero_Load);
             this.ResumeLayout(false);

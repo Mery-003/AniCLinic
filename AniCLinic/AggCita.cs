@@ -16,7 +16,6 @@ namespace AniCLinic
         private static readonly TimeSpan APERTURA = new TimeSpan(7, 0, 0);
         private static readonly TimeSpan CIERRE = new TimeSpan(17, 0, 0);
 
-        // Sugerencias opcionales
         public string MotivoSugerido { get; set; }
         public DateTime? FechaSugerida { get; set; }
 
@@ -32,7 +31,6 @@ namespace AniCLinic
                 CargarCita(_idCitaEdit.Value);
         }
 
-        // Constructor para abrir precargado desde Registro Clínico
         public AggCita(int? idCita, int idMascotaSel, string mascotaSel, string propietarioSel, string especieSel, string razaSel)
         {
             InitializeComponent();

@@ -598,6 +598,7 @@
             this.Controls.Add(this.btnGuardarPropietario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AggPropietario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AggPropietario";
             this.guna2CustomGradientPanel1.ResumeLayout(false);
             this.guna2CustomGradientPanel1.PerformLayout();

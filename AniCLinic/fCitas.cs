@@ -106,8 +106,6 @@ namespace AniCLinic
                 ReadOnly = true
             });
 
-            // IMPORTANTE: Quitamos la columna de cédula oculta, ya no se usa.
-            // (Si la quisieras de regreso, vuelve a agregarla aquí y en el SELECT).
         }
 
         private DataGridViewTextBoxColumn MkText(string header, string prop, int width) =>
@@ -126,10 +124,8 @@ namespace AniCLinic
 
         private void CargarData(string filtro = "")
         {
-            // Armamos patrón “%texto%”. Si está vacío, enviamos "" para desactivar WHERE.
             string patron = string.IsNullOrWhiteSpace(filtro) ? "" : $"%{filtro}%";
 
-            // Intento básico de separar "nombre apellido" (dos tokens) para coincidir ambos
             string a = "", b = "";
             var partes = (filtro ?? "").Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             if (partes.Length >= 2)
@@ -180,7 +176,6 @@ ORDER BY C.FechaHora DESC;";
             }
             catch (Exception)
             {
-                // Fallback mínimo si hubiera cambio de esquema: sin especie/raza en filtro.
                 dt = _crud.cargarBDData(
                     sql,
                     new SqlParameter("@Filtro", patron),

@@ -9,12 +9,11 @@ namespace AniCLinic
     {
         private readonly csCRUD _crud = new csCRUD();
 
-        // Selección
         public int IdMascotaSel { get; private set; }
         public string MascotaSel { get; private set; }
         public string EspecieSel { get; private set; }
         public string RazaSel { get; private set; }
-        public string PropietarioSel { get; private set; } // Nombre + Apellido
+        public string PropietarioSel { get; private set; } 
 
         public FRMListaMascota()
         {

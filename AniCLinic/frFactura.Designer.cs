@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(553, 450);
             this.Controls.Add(this.rvwFactura);
             this.Name = "frFactura";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frFactura";
             this.Load += new System.EventHandler(this.frFactura_Load);
             this.ResumeLayout(false);

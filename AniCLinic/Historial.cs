@@ -35,7 +35,7 @@ namespace AniCLinic
             g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             g.RowHeadersVisible = false;
             g.AllowUserToAddRows = false;
-            g.AutoGenerateColumns = true;                       
+            g.AutoGenerateColumns = true;
             g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             g.DataBindingComplete += (s, e) =>
@@ -57,7 +57,6 @@ SELECT
     E.Especie,
     R.Raza,
     M.Sexo,
-    FLOOR(DATEDIFF(DAY, M.FechaNacimiento, GETDATE()) / 365.25) AS Edad,
     M.PesoKg,
     M.Discapacidad,
     (P.Nombre + ' ' + P.Apellido) AS Propietario
@@ -86,17 +85,14 @@ ORDER BY M.IdMascota DESC;";
                 return;
             }
 
-            // Toma el Id de la mascota seleccionada en la grilla
             var drv = (DataRowView)dgvHistorial.CurrentRow.DataBoundItem;
-            int idMascota = Convert.ToInt32(drv["ID"]);   // viene de M.IdMascota AS ID
+            int idMascota = Convert.ToInt32(drv["ID"]);
 
-            // Abre el formulario que contiene el ReportViewer
             using (var frm = new frmHistorialMedicoReport(idMascota))
             {
                 frm.ShowDialog(this);
             }
         }
-
 
         private void txtMascotaNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
