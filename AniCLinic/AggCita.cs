@@ -310,7 +310,7 @@ namespace AniCLinic
                 }
 
                 MessageBox.Show("Cita guardada.");
-                DialogResult = DialogResult.OK; // el caller (Registro Clínico) abrirá Ventas si aplica
+                DialogResult = DialogResult.OK; 
             }
             catch (Exception ex)
             {

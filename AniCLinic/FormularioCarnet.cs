@@ -90,7 +90,6 @@ namespace AniCLinic
 
             int idMascota = Convert.ToInt32(rowView["IdMascota"]);
 
-            // <- QUITADA la columna Edad del SELECT del carnet
             SqlDataReader reader = crud.EjecutarQuery(
                 "Select * from Mascota M " +
                 "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie  " +
