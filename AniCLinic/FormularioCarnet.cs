@@ -23,10 +23,10 @@ namespace AniCLinic
         {
             string sentencia =
                 "Select M.IdMascota, M.Nombre, E.Especie, R.Raza, M.Sexo, M.FechaNacimiento as [Fecha de Nacimiento], " +
-                "M.Discapacidad " + // <- QUITADA la columna Edad (Años)
+                "M.Discapacidad " +
                 "from Mascota M " +
-                "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie " +
-                "INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
+                "INNER JOIN Especie E ON E.IdEspecie = M.IdEspecie " +
+                "INNER JOIN Raza R ON R.IdRaza = M.IdRaza " +
                 "where Nombre like @filtro + '%'";
 
             dgvCarnet.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@filtro", filtro));
@@ -91,9 +91,10 @@ namespace AniCLinic
             int idMascota = Convert.ToInt32(rowView["IdMascota"]);
 
             SqlDataReader reader = crud.EjecutarQuery(
-                "Select * from Mascota M " +
-                "INNER JOIN Especie   E ON E.IdEspecie = M.IdEspecie  " +
-                "INNER JOIN Raza      R ON R.IdRaza = M.IdRaza " +
+                "Select * " +
+                "from Mascota M " +
+                "INNER JOIN Especie E ON E.IdEspecie = M.IdEspecie " +
+                "INNER JOIN Raza R ON R.IdRaza = M.IdRaza " +
                 "Where IdMascota = " + idMascota
             );
 

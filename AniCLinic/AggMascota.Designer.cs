@@ -71,6 +71,11 @@
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.picMascota = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMascota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).BeginInit();
             this.SuspendLayout();
@@ -132,7 +137,7 @@
             // 
             // guna2HtmlLabel19
             // 
-            this.guna2HtmlLabel19.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel19.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel19.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel19.Location = new System.Drawing.Point(174, 494);
@@ -143,7 +148,7 @@
             // 
             // guna2HtmlLabel18
             // 
-            this.guna2HtmlLabel18.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel18.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel18.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel18.Location = new System.Drawing.Point(470, 490);
@@ -154,7 +159,7 @@
             // 
             // guna2HtmlLabel14
             // 
-            this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel14.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel14.Location = new System.Drawing.Point(470, 408);
@@ -187,7 +192,7 @@
             // 
             // guna2HtmlLabel1
             // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(75, 408);
@@ -198,7 +203,7 @@
             // 
             // guna2HtmlLabel5
             // 
-            this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel5.Location = new System.Drawing.Point(472, 324);
@@ -209,7 +214,7 @@
             // 
             // guna2HtmlLabel16
             // 
-            this.guna2HtmlLabel16.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel16.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel16.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel16.Location = new System.Drawing.Point(470, 240);
@@ -220,7 +225,7 @@
             // 
             // guna2HtmlLabel13
             // 
-            this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel13.Location = new System.Drawing.Point(470, 157);
@@ -254,6 +259,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label9.Location = new System.Drawing.Point(750, 535);
@@ -265,6 +271,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label7.Location = new System.Drawing.Point(366, 533);
@@ -276,6 +283,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(364, 451);
@@ -286,6 +294,7 @@
             // 
             // guna2Button7
             // 
+            this.guna2Button7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Button7.BorderRadius = 24;
             this.guna2Button7.CausesValidation = false;
             this.guna2Button7.DisabledState.BorderColor = System.Drawing.Color.LightGray;
@@ -414,6 +423,7 @@
             // 
             // guna2Button1
             // 
+            this.guna2Button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Button1.BorderRadius = 24;
             this.guna2Button1.CausesValidation = false;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.LightGray;
@@ -450,6 +460,7 @@
             // 
             // guna2Button6
             // 
+            this.guna2Button6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Button6.BorderRadius = 24;
             this.guna2Button6.CausesValidation = false;
             this.guna2Button6.DisabledState.BorderColor = System.Drawing.Color.LightGray;
@@ -467,6 +478,7 @@
             // 
             // guna2Button3
             // 
+            this.guna2Button3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2Button3.BorderRadius = 24;
             this.guna2Button3.CausesValidation = false;
             this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.LightGray;
@@ -503,6 +515,7 @@
             // 
             // btnSeleccionarFotoMascota
             // 
+            this.btnSeleccionarFotoMascota.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSeleccionarFotoMascota.BorderRadius = 22;
             this.btnSeleccionarFotoMascota.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSeleccionarFotoMascota.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -692,6 +705,10 @@
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.guna2CustomGradientPanel1.Controls.Add(this.label5);
+            this.guna2CustomGradientPanel1.Controls.Add(this.label4);
+            this.guna2CustomGradientPanel1.Controls.Add(this.label3);
+            this.guna2CustomGradientPanel1.Controls.Add(this.label2);
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(1, 28);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(804, 574);
@@ -724,6 +741,54 @@
             this.guna2CirclePictureBox4.TabIndex = 105;
             this.guna2CirclePictureBox4.TabStop = false;
             this.guna2CirclePictureBox4.UseTransparentBackground = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(749, 423);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(16, 20);
+            this.label2.TabIndex = 135;
+            this.label2.Text = "*";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(748, 337);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 20);
+            this.label3.TabIndex = 136;
+            this.label3.Text = "*";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(748, 248);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 20);
+            this.label4.TabIndex = 137;
+            this.label4.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(748, 163);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 20);
+            this.label5.TabIndex = 138;
+            this.label5.Text = "*";
             // 
             // AggMascota
             // 
@@ -773,6 +838,8 @@
             this.Name = "AggMascota";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AggMascota";
+            this.guna2CustomGradientPanel1.ResumeLayout(false);
+            this.guna2CustomGradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMascota)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).EndInit();
             this.ResumeLayout(false);
@@ -823,5 +890,9 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpFechaNacimiento;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }

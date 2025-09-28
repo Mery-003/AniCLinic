@@ -143,9 +143,9 @@
             this.guna2HtmlLabel7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.guna2HtmlLabel7.Location = new System.Drawing.Point(534, 238);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(37, 19);
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(118, 19);
             this.guna2HtmlLabel7.TabIndex = 54;
-            this.guna2HtmlLabel7.Text = "Edad:";
+            this.guna2HtmlLabel7.Text = "Fecha Nacimiento:";
             // 
             // guna2HtmlLabel8
             // 

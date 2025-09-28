@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AniCLinic
@@ -35,6 +36,16 @@ namespace AniCLinic
                 Control tb = s as Control;
                 if (tb != null && (e.KeyChar == '.' || e.KeyChar == ',') && tb.Text.IndexOfAny(new[] { '.', ',' }) > -1)
                     e.Handled = true;
+            };
+
+            txtMascotaNombre.KeyPress += SoloLetras_KeyPress;
+            txtMascotaNombre.TextChanged += SoloLetras_TextChanged;
+
+            dtpFechaNacimiento.MaxDate = DateTime.Today;
+            dtpFechaNacimiento.ValueChanged += (s, e) =>
+            {
+                if (dtpFechaNacimiento.Value.Date > DateTime.Today)
+                    dtpFechaNacimiento.Value = DateTime.Today;
             };
 
             CargarCombos();
@@ -91,6 +102,7 @@ namespace AniCLinic
             cmbRaza.ValueMember = "IdRaza";
             cmbRaza.SelectedIndex = -1;
 
+            dtpFechaNacimiento.MaxDate = DateTime.Today;
             dtpFechaNacimiento.Value = DateTime.Today;
         }
 
@@ -140,14 +152,14 @@ namespace AniCLinic
             using (SqlDataReader dr = _crud.EjecutarQuery("SELECT IdRaza, Raza FROM Raza WHERE IdEspecie=" + idEsp + " ORDER BY Raza"))
             {
                 DataTable dt = new DataTable();
-                if (dr != null) 
+                if (dr != null)
                     dt.Load(dr);
-                if (dr != null) 
-                    dr.Close(); 
-                try 
-                { 
-                    _crud.conexion.cerrarConexion(); 
-                } 
+                if (dr != null)
+                    dr.Close();
+                try
+                {
+                    _crud.conexion.cerrarConexion();
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -199,8 +211,16 @@ WHERE m.IdMascota = " + id;
                     else
                         cmbDiscapacidad.SelectedItem = "Ninguna";
 
+                    dtpFechaNacimiento.MaxDate = DateTime.Today;
                     if (rd["FechaNacimiento"] != DBNull.Value)
-                        dtpFechaNacimiento.Value = Convert.ToDateTime(rd["FechaNacimiento"]);
+                    {
+                        var fdb = Convert.ToDateTime(rd["FechaNacimiento"]).Date;
+                        dtpFechaNacimiento.Value = (fdb > DateTime.Today) ? DateTime.Today : fdb;
+                    }
+                    else
+                    {
+                        dtpFechaNacimiento.Value = DateTime.Today;
+                    }
 
                     if (rd["IdEspecie"] != DBNull.Value)
                     {
@@ -241,14 +261,14 @@ WHERE m.IdMascota = " + id;
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    try 
-                    { 
-                        picMascota.Image = Image.FromFile(ofd.FileName); 
-                        picMascota.SizeMode = PictureBoxSizeMode.StretchImage; 
+                    try
+                    {
+                        picMascota.Image = Image.FromFile(ofd.FileName);
+                        picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
                     }
-                    catch 
-                    { 
-                        MessageBox.Show("No se pudo cargar la imagen."); 
+                    catch
+                    {
+                        MessageBox.Show("No se pudo cargar la imagen.");
                     }
                 }
             }
@@ -256,12 +276,12 @@ WHERE m.IdMascota = " + id;
 
         private static byte[] ImgToBytes(Image img)
         {
-            if (img == null) 
+            if (img == null)
                 return null;
-            using (var ms = new MemoryStream()) 
-            { 
-                img.Save(ms, img.RawFormat); 
-                return ms.ToArray(); 
+            using (var ms = new MemoryStream())
+            {
+                img.Save(ms, img.RawFormat);
+                return ms.ToArray();
             }
         }
 
@@ -279,11 +299,18 @@ WHERE m.IdMascota = " + id;
             {
                 decimal d;
                 if (!decimal.TryParse(txtPeso.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out d))
-                { 
-                    MessageBox.Show("Peso inválido."); 
-                    return false; 
+                {
+                    MessageBox.Show("Peso inválido.");
+                    return false;
                 }
             }
+
+            if (dtpFechaNacimiento.Value.Date > DateTime.Today)
+            {
+                MessageBox.Show("La fecha de nacimiento no puede ser posterior a hoy.");
+                return false;
+            }
+
             return true;
         }
 
@@ -350,14 +377,41 @@ WHERE m.IdMascota = " + id;
                 _parent?.RefrescarMascotas();
                 _parent?.RefrescarPropietarios();
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(ex.Message); 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
+        private static void SoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) &&
+                !char.IsLetter(e.KeyChar) &&
+                e.KeyChar != ' ' &&
+                e.KeyChar != '-' &&
+                e.KeyChar != '\'')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private static void SoloLetras_TextChanged(object sender, EventArgs e)
+        {
+            const string patron = @"[^ \p{L}\-']+";
+
+            if (sender is TextBox tb)
+            {
+                int pos = tb.SelectionStart;
+                string limpio = Regex.Replace(tb.Text, patron, string.Empty);
+                if (limpio != tb.Text)
+                {
+                    tb.Text = limpio;
+                    tb.SelectionStart = Math.Min(pos, tb.Text.Length);
+                }
+            }
+        }
     }
 }
