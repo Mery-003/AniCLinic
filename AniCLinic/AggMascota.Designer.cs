@@ -69,12 +69,12 @@
             this.btnAbrirListaPropietario = new Guna.UI2.WinForms.Guna2GradientButton();
             this.dtpFechaNacimiento = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.picMascota = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMascota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox4)).BeginInit();
@@ -140,11 +140,11 @@
             this.guna2HtmlLabel19.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guna2HtmlLabel19.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel19.Location = new System.Drawing.Point(174, 494);
+            this.guna2HtmlLabel19.Location = new System.Drawing.Point(74, 462);
             this.guna2HtmlLabel19.Name = "guna2HtmlLabel19";
-            this.guna2HtmlLabel19.Size = new System.Drawing.Size(63, 19);
+            this.guna2HtmlLabel19.Size = new System.Drawing.Size(136, 19);
             this.guna2HtmlLabel19.TabIndex = 122;
-            this.guna2HtmlLabel19.Text = "Año/Mes:";
+            this.guna2HtmlLabel19.Text = "Fecha de Nacimiento:";
             // 
             // guna2HtmlLabel18
             // 
@@ -709,10 +709,59 @@
             this.guna2CustomGradientPanel1.Controls.Add(this.label4);
             this.guna2CustomGradientPanel1.Controls.Add(this.label3);
             this.guna2CustomGradientPanel1.Controls.Add(this.label2);
+            this.guna2CustomGradientPanel1.Controls.Add(this.guna2HtmlLabel19);
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(1, 28);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(804, 574);
             this.guna2CustomGradientPanel1.TabIndex = 134;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(748, 163);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 20);
+            this.label5.TabIndex = 138;
+            this.label5.Text = "*";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(748, 248);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 20);
+            this.label4.TabIndex = 137;
+            this.label4.Text = "*";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(748, 337);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 20);
+            this.label3.TabIndex = 136;
+            this.label3.Text = "*";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(749, 423);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(16, 20);
+            this.label2.TabIndex = 135;
+            this.label2.Text = "*";
             // 
             // picMascota
             // 
@@ -742,54 +791,6 @@
             this.guna2CirclePictureBox4.TabStop = false;
             this.guna2CirclePictureBox4.UseTransparentBackground = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(749, 423);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 20);
-            this.label2.TabIndex = 135;
-            this.label2.Text = "*";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(748, 337);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(16, 20);
-            this.label3.TabIndex = 136;
-            this.label3.Text = "*";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(748, 248);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(16, 20);
-            this.label4.TabIndex = 137;
-            this.label4.Text = "*";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(748, 163);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 20);
-            this.label5.TabIndex = 138;
-            this.label5.Text = "*";
-            // 
             // AggMascota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -808,7 +809,6 @@
             this.Controls.Add(this.guna2Separator2);
             this.Controls.Add(this.btnCancelarMascota);
             this.Controls.Add(this.btnGuardarMascota);
-            this.Controls.Add(this.guna2HtmlLabel19);
             this.Controls.Add(this.guna2HtmlLabel18);
             this.Controls.Add(this.guna2HtmlLabel14);
             this.Controls.Add(this.txtPeso);
