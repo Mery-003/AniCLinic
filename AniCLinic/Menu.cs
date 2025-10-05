@@ -41,9 +41,10 @@ namespace AniCLinic
                 pcbEmpleado.Image = Properties.Resources.user_fill;
             }
 
-            pcbEmpleado.SizeMode = PictureBoxSizeMode.CenterImage; 
-            if (!admin)
-                btnAdministrador.Enabled = false;
+            pcbEmpleado.SizeMode = PictureBoxSizeMode.CenterImage;
+
+            btnAdministrador.Enabled = esAdmin;
+            btnControlLaboral.Enabled = esAdmin;
         }
 
         public void AbrirEnPanel(Panel contenedor, Form hijo)
@@ -123,6 +124,11 @@ namespace AniCLinic
         private void guna2GradientButton1_Click(object sender, EventArgs e)
         {
             AbrirEnPanel(pnlMenu1, new Ventas(idEmpleado));
+        }
+
+        private void btnControlLaboral_Click(object sender, EventArgs e)
+        {
+            AbrirEnPanel(pnlMenu1, new FControlLaboral(this, pnlMenu1));
         }
     }
 

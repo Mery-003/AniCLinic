@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Guna.UI2.AnimatorNS.Animation animation3 = new Guna.UI2.AnimatorNS.Animation();
+            Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.PanelMenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnControlLaboral = new Guna.UI2.WinForms.Guna2GradientButton();
             this.panelReporteriaSubmenu = new Guna.UI2.WinForms.Guna2Panel();
             this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -77,6 +78,7 @@
             // PanelMenu
             // 
             this.PanelMenu.BackColor = System.Drawing.Color.CadetBlue;
+            this.PanelMenu.Controls.Add(this.btnControlLaboral);
             this.PanelMenu.Controls.Add(this.panelReporteriaSubmenu);
             this.PanelMenu.Controls.Add(this.btnVentas);
             this.PanelMenu.Controls.Add(this.btnAdministrador);
@@ -96,6 +98,33 @@
             this.PanelMenu.Name = "PanelMenu";
             this.PanelMenu.Size = new System.Drawing.Size(256, 693);
             this.PanelMenu.TabIndex = 0;
+            // 
+            // btnControlLaboral
+            // 
+            this.btnControlLaboral.CustomImages.Image = global::AniCLinic.Properties.Resources.folder_lock_fill;
+            this.btnControlLaboral.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnControlLaboral.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btnControlLaboral, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btnControlLaboral.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnControlLaboral.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnControlLaboral.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnControlLaboral.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnControlLaboral.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnControlLaboral.FillColor = System.Drawing.Color.Empty;
+            this.btnControlLaboral.FillColor2 = System.Drawing.Color.Empty;
+            this.btnControlLaboral.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnControlLaboral.ForeColor = System.Drawing.Color.Black;
+            this.btnControlLaboral.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btnControlLaboral.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btnControlLaboral.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnControlLaboral.Location = new System.Drawing.Point(0, 567);
+            this.btnControlLaboral.Name = "btnControlLaboral";
+            this.btnControlLaboral.Size = new System.Drawing.Size(263, 44);
+            this.btnControlLaboral.TabIndex = 15;
+            this.btnControlLaboral.Text = "Control Laboral";
+            this.btnControlLaboral.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnControlLaboral.TextOffset = new System.Drawing.Point(40, 0);
+            this.btnControlLaboral.Click += new System.EventHandler(this.btnControlLaboral_Click);
             // 
             // panelReporteriaSubmenu
             // 
@@ -263,7 +292,7 @@
             this.btnSalir.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
             this.btnSalir.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
             this.btnSalir.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(-3, 606);
+            this.btnSalir.Location = new System.Drawing.Point(-3, 628);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(263, 56);
             this.btnSalir.TabIndex = 9;
@@ -286,14 +315,14 @@
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(87, 172);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(92, 32);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(142, 47);
             this.guna2HtmlLabel2.TabIndex = 7;
             this.guna2HtmlLabel2.Text = "AniClinic";
             // 
             // guna2Separator1
             // 
             this.guna2Transition1.SetDecoration(this.guna2Separator1, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.guna2Separator1.Location = new System.Drawing.Point(-26, 570);
+            this.guna2Separator1.Location = new System.Drawing.Point(-26, 622);
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(286, 10);
             this.guna2Separator1.TabIndex = 2;
@@ -439,22 +468,22 @@
             // 
             this.guna2Transition1.AnimationType = Guna.UI2.AnimatorNS.AnimationType.HorizSlide;
             this.guna2Transition1.Cursor = null;
-            animation3.AnimateOnlyDifferences = true;
-            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
-            animation3.LeafCoeff = 0F;
-            animation3.MaxTime = 1F;
-            animation3.MinTime = 0F;
-            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
-            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
-            animation3.MosaicSize = 0;
-            animation3.Padding = new System.Windows.Forms.Padding(0);
-            animation3.RotateCoeff = 0F;
-            animation3.RotateLimit = 0F;
-            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
-            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
-            animation3.TimeCoeff = 0F;
-            animation3.TransparencyCoeff = 0F;
-            this.guna2Transition1.DefaultAnimation = animation3;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.guna2Transition1.DefaultAnimation = animation1;
             // 
             // pnlMenu1
             // 
@@ -493,7 +522,7 @@
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(505, 362);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(130, 53);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(200, 81);
             this.guna2HtmlLabel3.TabIndex = 15;
             this.guna2HtmlLabel3.Text = "AniClinic";
             // 
@@ -505,7 +534,7 @@
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(356, 152);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(432, 49);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(649, 73);
             this.guna2HtmlLabel1.TabIndex = 15;
             this.guna2HtmlLabel1.Text = "Bienvenido a Veterinaria";
             // 
@@ -528,7 +557,7 @@
             this.lblEmpleado.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpleado.Location = new System.Drawing.Point(703, 28);
             this.lblEmpleado.Name = "lblEmpleado";
-            this.lblEmpleado.Size = new System.Drawing.Size(65, 25);
+            this.lblEmpleado.Size = new System.Drawing.Size(100, 40);
             this.lblEmpleado.TabIndex = 1;
             this.lblEmpleado.Text = "label1";
             // 
@@ -588,7 +617,7 @@
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1315, 693);
@@ -649,5 +678,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         public Guna.UI2.WinForms.Guna2GradientButton btnVentas;
         public System.Windows.Forms.Panel pnlMenu1;
+        public Guna.UI2.WinForms.Guna2GradientButton btnControlLaboral;
     }
 }

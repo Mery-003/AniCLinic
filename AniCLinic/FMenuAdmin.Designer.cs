@@ -41,9 +41,10 @@
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Cooper Black", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(339, 55);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(508, 85);
+            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(383, 36);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(586, 52);
             this.guna2HtmlLabel3.TabIndex = 110;
             this.guna2HtmlLabel3.Text = "Gestión de Administrador";
             // 
@@ -51,18 +52,20 @@
             // 
             this.guna2Separator1.FillColor = System.Drawing.Color.DarkSlateGray;
             this.guna2Separator1.FillThickness = 2;
-            this.guna2Separator1.Location = new System.Drawing.Point(-6, 97);
+            this.guna2Separator1.Location = new System.Drawing.Point(-9, 149);
+            this.guna2Separator1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2Separator1.Name = "guna2Separator1";
-            this.guna2Separator1.Size = new System.Drawing.Size(1068, 10);
+            this.guna2Separator1.Size = new System.Drawing.Size(1602, 15);
             this.guna2Separator1.TabIndex = 111;
             // 
             // guna2Separator2
             // 
             this.guna2Separator2.FillColor = System.Drawing.Color.DarkSlateGray;
             this.guna2Separator2.FillThickness = 2;
-            this.guna2Separator2.Location = new System.Drawing.Point(-6, 39);
+            this.guna2Separator2.Location = new System.Drawing.Point(-9, 60);
+            this.guna2Separator2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2Separator2.Name = "guna2Separator2";
-            this.guna2Separator2.Size = new System.Drawing.Size(1068, 10);
+            this.guna2Separator2.Size = new System.Drawing.Size(1602, 15);
             this.guna2Separator2.TabIndex = 112;
             // 
             // btnDiseño
@@ -78,9 +81,10 @@
             this.btnDiseño.FillColor = System.Drawing.Color.Transparent;
             this.btnDiseño.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDiseño.ForeColor = System.Drawing.Color.White;
-            this.btnDiseño.Location = new System.Drawing.Point(687, 204);
+            this.btnDiseño.Location = new System.Drawing.Point(1030, 314);
+            this.btnDiseño.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDiseño.Name = "btnDiseño";
-            this.btnDiseño.Size = new System.Drawing.Size(253, 241);
+            this.btnDiseño.Size = new System.Drawing.Size(380, 371);
             this.btnDiseño.TabIndex = 119;
             this.btnDiseño.Click += new System.EventHandler(this.btnDiseño_Click);
             // 
@@ -97,9 +101,10 @@
             this.btnUsuarios.FillColor = System.Drawing.Color.Transparent;
             this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnUsuarios.ForeColor = System.Drawing.Color.White;
-            this.btnUsuarios.Location = new System.Drawing.Point(401, 204);
+            this.btnUsuarios.Location = new System.Drawing.Point(602, 314);
+            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(253, 241);
+            this.btnUsuarios.Size = new System.Drawing.Size(380, 371);
             this.btnUsuarios.TabIndex = 118;
             this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
@@ -116,18 +121,19 @@
             this.btnProveedores.FillColor = System.Drawing.Color.Transparent;
             this.btnProveedores.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnProveedores.ForeColor = System.Drawing.Color.White;
-            this.btnProveedores.Location = new System.Drawing.Point(108, 204);
+            this.btnProveedores.Location = new System.Drawing.Point(162, 314);
+            this.btnProveedores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnProveedores.Name = "btnProveedores";
-            this.btnProveedores.Size = new System.Drawing.Size(253, 241);
+            this.btnProveedores.Size = new System.Drawing.Size(380, 371);
             this.btnProveedores.TabIndex = 117;
             this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
             // FMenuAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1059, 614);
+            this.ClientSize = new System.Drawing.Size(1588, 945);
             this.Controls.Add(this.btnDiseño);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.btnProveedores);
@@ -135,6 +141,7 @@
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.guna2HtmlLabel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FMenuAdmin";
             this.Text = "FMenuAdmin";
             this.ResumeLayout(false);

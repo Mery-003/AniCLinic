@@ -135,6 +135,31 @@ namespace AniCLinic
             }
             return 0;
         }
-        
+
+        public int ejecutarBD(string sentencia, params SqlParameter[] parametros)
+        {
+            int filas = 0;
+            try
+            {
+                conexion = new csConexionBD();
+                conexion.abrirConexion();
+                oCom = new SqlCommand(sentencia, conexion.obtenerConexion());
+
+                if (parametros != null)
+                {
+                    foreach (var p in parametros)
+                        oCom.Parameters.Add(p);
+                }
+
+                filas = oCom.ExecuteNonQuery();
+                conexion.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return filas;
+        }
+
     }
 }

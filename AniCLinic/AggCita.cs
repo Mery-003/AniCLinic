@@ -280,37 +280,52 @@ namespace AniCLinic
             {
                 db.abrirConexion();
 
+                int idCitaAfectada;
+
                 if (_idCitaEdit.HasValue)
                 {
                     using (var cmd = new SqlCommand(@"
-                        UPDATE dbo.GestionCita
-                           SET IdMascota=@m, FechaHora=@fh, Motivo=@mo, Estado=@es
-                         WHERE IdCita=@id;", db.obtenerConexion()))
+        UPDATE dbo.GestionCita
+           SET IdMascota=@m, FechaHora=@fh, Motivo=@mo, Estado=@es
+         WHERE IdCita=@id;
+        SELECT @id;", db.obtenerConexion()))
                     {
                         cmd.Parameters.AddWithValue("@m", idMascota);
                         cmd.Parameters.AddWithValue("@fh", fechaHora);
                         cmd.Parameters.AddWithValue("@mo", txtMotivo.Text.Trim());
                         cmd.Parameters.AddWithValue("@es", ESTADO_NUEVO);
                         cmd.Parameters.AddWithValue("@id", _idCitaEdit.Value);
-                        cmd.ExecuteNonQuery();
+                        idCitaAfectada = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                    using (var cmdDel = new SqlCommand(
+                        "DELETE FROM dbo.NotificacionCita WHERE IdCita=@id AND Enviada=0;",
+                        db.obtenerConexion()))
+                    {
+                        cmdDel.Parameters.AddWithValue("@id", idCitaAfectada);
+                        cmdDel.ExecuteNonQuery();
                     }
                 }
                 else
                 {
                     using (var cmd = new SqlCommand(@"
-                        INSERT INTO dbo.GestionCita (IdMascota, FechaHora, Motivo, Estado)
-                        VALUES (@m, @fh, @mo, @es);", db.obtenerConexion()))
+        INSERT INTO dbo.GestionCita (IdMascota, FechaHora, Motivo, Estado)
+        OUTPUT INSERTED.IdCita
+        VALUES (@m, @fh, @mo, @es);", db.obtenerConexion()))
                     {
                         cmd.Parameters.AddWithValue("@m", idMascota);
                         cmd.Parameters.AddWithValue("@fh", fechaHora);
                         cmd.Parameters.AddWithValue("@mo", txtMotivo.Text.Trim());
                         cmd.Parameters.AddWithValue("@es", ESTADO_NUEVO);
-                        cmd.ExecuteNonQuery();
+                        idCitaAfectada = Convert.ToInt32(cmd.ExecuteScalar());
                     }
                 }
 
+                AppointmentNotifier.EnqueueForAppointment(idCitaAfectada, fechaHora);
+
                 MessageBox.Show("Cita guardada.");
-                DialogResult = DialogResult.OK; 
+                DialogResult = DialogResult.OK;
+
             }
             catch (Exception ex)
             {
