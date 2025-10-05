@@ -125,6 +125,11 @@
     <Compile Include="dsFactura.cs">
       <DependentUpon>dsFactura.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsFacturaEC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsFacturaEC.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsListaProductos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,6 +222,12 @@
     </Compile>
     <Compile Include="frFactura.Designer.cs">
       <DependentUpon>frFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frFacturaEC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frFacturaEC.Designer.cs">
+      <DependentUpon>frFacturaEC.cs</DependentUpon>
     </Compile>
     <Compile Include="frmHistorialMedicoReport.cs">
       <SubType>Form</SubType>
@@ -382,6 +393,9 @@
     <EmbeddedResource Include="frFactura.resx">
       <DependentUpon>frFactura.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frFacturaEC.resx">
+      <DependentUpon>frFacturaEC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHistorialMedicoReport.resx">
       <DependentUpon>frmHistorialMedicoReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -444,6 +458,7 @@
       <DependentUpon>Proveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rptFactura.rdlc" />
+    <EmbeddedResource Include="rptFacturaEC.rdlc" />
     <EmbeddedResource Include="rptListaProductos.rdlc" />
     <EmbeddedResource Include="rptOrdenCompra.rdlc" />
     <EmbeddedResource Include="rptRegistroClinico.rdlc" />
@@ -455,6 +470,17 @@
     <EmbeddedResource Include="VerCarnet.resx">
       <DependentUpon>VerCarnet.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="dsFacturaEC.xsc">
+      <DependentUpon>dsFacturaEC.xsd</DependentUpon>
+    </None>
+    <None Include="dsFacturaEC.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFacturaEC.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsFacturaEC.xss">
+      <DependentUpon>dsFacturaEC.xsd</DependentUpon>
+    </None>
     <None Include="dsListaProductos.xsc">
       <DependentUpon>dsListaProductos.xsd</DependentUpon>
     </None>
