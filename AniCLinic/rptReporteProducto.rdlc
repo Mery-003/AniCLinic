@@ -93,7 +93,12 @@
                         <Y>=Sum(Fields!Total.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
-                        <Style />
+                        <Style>
+                          <FontFamily>Arial Black</FontFamily>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
+                        <Label>#PERCENT{P0}</Label>
+                        <Visible>true</Visible>
                       </ChartDataLabel>
                       <Style />
                       <ChartMarker>
