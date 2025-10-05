@@ -22,12 +22,31 @@ namespace AniCLinic
             InitializeComponent();
             cargarDataI();
             prepararGrid();
+
+            btnCompra.Click += btnCompra_Click;
+
+            // ⬇️ nuevo
+            btnMovimiento.Click += btnMovimiento_Click;   // (usa el nombre real del botón)
         }
+
+
+        // <<< NUEVO: handler para abrir fCompras y refrescar inventario al cerrar >>>
+        private void btnCompra_Click(object sender, EventArgs e)
+        {
+            int idEmpleadoActual = 1; // cámbialo por el id real si lo tienes
+            using (var f = new fCompras(idEmpleadoActual))
+            {
+                f.ShowDialog();
+            }
+            // al cerrar compras, refresca el inventario (stock pudo aumentar)
+            cargarDataI();
+        }
+
         public void cargarDataI(string filtro = "")
         {
             string sentencia = "Select * from Inventario " +
                 "Where NombreProducto like @filtro + '%' AND IdProducto != 1";
-            dgvInventario.DataSource = crud.cargarBDData(sentencia, new SqlParameter ("@filtro", filtro));
+            dgvInventario.DataSource = crud.cargarBDData(sentencia, new SqlParameter("@filtro", filtro));
             configurarColumnas();
         }
 
@@ -47,6 +66,7 @@ namespace AniCLinic
 
         private void txtBuscarHoy_TextChanged(object sender, EventArgs e)
         {
+            // Asegúrate de que tu TextBox se llame 'txtBuscar' en el diseñador
             cargarDataI(txtBuscar.Text);
         }
 
@@ -85,6 +105,7 @@ namespace AniCLinic
                 botonesAgregados = true;
             }
         }
+
         public void prepararGrid()
         {
             dgvInventario.ReadOnly = true;
@@ -118,7 +139,7 @@ namespace AniCLinic
                 var ok = MessageBox.Show("¿Desea eliminar el producto?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (ok == DialogResult.Yes)
                 {
-                    if(crud.eliminarBD("Delete from Inventario Where IdProducto = @Id", idProd))
+                    if (crud.eliminarBD("Delete from Inventario Where IdProducto = @Id", idProd))
                     {
                         MessageBox.Show("Producto eliminado correctamente");
                         cargarDataI();
@@ -131,6 +152,21 @@ namespace AniCLinic
                 nProducto.ShowDialog();
                 cargarDataI();
             }
+
         }
+        private void btnMovimiento_Click(object sender, EventArgs e)
+        {
+            // Abre el listado de movimientos como ventana modal
+            using (var frm = new MovimientosDeCompras())
+            {
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog(this);
+            }
+            // (opcional) si quisieras refrescar inventario al volver:
+            // cargarDataI();
+        }
+
+
+
     }
 }

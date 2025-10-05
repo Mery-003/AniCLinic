@@ -122,10 +122,21 @@
     <Compile Include="csProveedor.cs" />
     <Compile Include="csUsuario.cs" />
     <Compile Include="csVenta.cs" />
+    <Compile Include="dsFactura.cs">
+      <DependentUpon>dsFactura.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsListaProductos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsListaProductos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOrdenCompra.cs">
+      <DependentUpon>DSOrdenCompra.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOrdenCompra.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOrdenCompra.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsRegistroClinico.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -164,6 +175,18 @@
     </Compile>
     <Compile Include="fCitas.Designer.cs">
       <DependentUpon>fCitas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fCompras.Designer.cs">
+      <DependentUpon>fCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FechaEmision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FechaEmision.Designer.cs">
+      <DependentUpon>FechaEmision.cs</DependentUpon>
     </Compile>
     <Compile Include="FMenuAdmin.cs">
       <SubType>Form</SubType>
@@ -207,11 +230,29 @@
     <Compile Include="FRMListaMascota.Designer.cs">
       <DependentUpon>FRMListaMascota.cs</DependentUpon>
     </Compile>
+    <Compile Include="FRMListaProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMListaProductos.Designer.cs">
+      <DependentUpon>FRMListaProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FRMListaProovedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMListaProovedor.Designer.cs">
+      <DependentUpon>FRMListaProovedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRMListaPropietario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FRMListaPropietario.Designer.cs">
       <DependentUpon>FRMListaPropietario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frOrdenCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frOrdenCompra.Designer.cs">
+      <DependentUpon>frOrdenCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="frReporteFinanciero.cs">
       <SubType>Form</SubType>
@@ -255,6 +296,12 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MovimientosDeCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovimientosDeCompras.Designer.cs">
+      <DependentUpon>MovimientosDeCompras.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuvProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,12 +337,6 @@
     <Compile Include="VerCarnet.Designer.cs">
       <DependentUpon>VerCarnet.cs</DependentUpon>
     </Compile>
-    <Compile Include="VerHistorial.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VerHistorial.Designer.cs">
-      <DependentUpon>VerHistorial.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AggCita.resx">
       <DependentUpon>AggCita.cs</DependentUpon>
     </EmbeddedResource>
@@ -320,6 +361,12 @@
     <EmbeddedResource Include="fCitas.resx">
       <DependentUpon>fCitas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fCompras.resx">
+      <DependentUpon>fCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FechaEmision.resx">
+      <DependentUpon>FechaEmision.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FMenuAdmin.resx">
       <DependentUpon>FMenuAdmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -341,8 +388,17 @@
     <EmbeddedResource Include="FRMListaMascota.resx">
       <DependentUpon>FRMListaMascota.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FRMListaProductos.resx">
+      <DependentUpon>FRMListaProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMListaProovedor.resx">
+      <DependentUpon>FRMListaProovedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FRMListaPropietario.resx">
       <DependentUpon>FRMListaPropietario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frOrdenCompra.resx">
+      <DependentUpon>frOrdenCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frReporteFinanciero.resx">
       <DependentUpon>frReporteFinanciero.cs</DependentUpon>
@@ -365,6 +421,9 @@
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MovimientosDeCompras.resx">
+      <DependentUpon>MovimientosDeCompras.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NuvProducto.resx">
       <DependentUpon>NuvProducto.cs</DependentUpon>
     </EmbeddedResource>
@@ -386,6 +445,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="rptFactura.rdlc" />
     <EmbeddedResource Include="rptListaProductos.rdlc" />
+    <EmbeddedResource Include="rptOrdenCompra.rdlc" />
     <EmbeddedResource Include="rptRegistroClinico.rdlc" />
     <EmbeddedResource Include="rptReporteAño.rdlc" />
     <EmbeddedResource Include="rptReporteProducto.rdlc" />
@@ -394,9 +454,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VerCarnet.resx">
       <DependentUpon>VerCarnet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VerHistorial.resx">
-      <DependentUpon>VerHistorial.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="dsListaProductos.xsc">
       <DependentUpon>dsListaProductos.xsd</DependentUpon>
@@ -408,6 +465,17 @@
     </None>
     <None Include="dsListaProductos.xss">
       <DependentUpon>dsListaProductos.xsd</DependentUpon>
+    </None>
+    <None Include="DSOrdenCompra.xsc">
+      <DependentUpon>DSOrdenCompra.xsd</DependentUpon>
+    </None>
+    <None Include="DSOrdenCompra.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOrdenCompra.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOrdenCompra.xss">
+      <DependentUpon>DSOrdenCompra.xsd</DependentUpon>
     </None>
     <None Include="dsRegistroClinico.xsc">
       <DependentUpon>dsRegistroClinico.xsd</DependentUpon>

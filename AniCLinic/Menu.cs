@@ -124,6 +124,10 @@ namespace AniCLinic
         {
             AbrirEnPanel(pnlMenu1, new Ventas(idEmpleado));
         }
+
+        private void btnMovimientos_Click(object sender, EventArgs e)
+        {
+        }
     }
 
 }
