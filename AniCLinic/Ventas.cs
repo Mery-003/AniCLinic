@@ -675,5 +675,13 @@ WHERE p.Activa = 1
             }
             public override string ToString() => $"{idProducto} - {nombreProducto}";
         }
+
+        private void lblVerPromo_Click(object sender, EventArgs e)
+        {
+            Promodesc promo = new Promodesc();
+            promo.ShowDialog();
+            dgvVentas.Rows.Clear();
+            actualizarPrecio();
+        }
     }
 }
