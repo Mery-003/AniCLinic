@@ -7,18 +7,20 @@ namespace AniCLinic
 {
     public partial class Ventas : Form
     {
-        csCRUD crud = new csCRUD();
-        csProducto producto;
-        csPersona persona;
-        csFactura factura;   // ya no se usa para EC, lo dejamos para no romper otras partes
-        csVenta ventaAgg;
-        SqlDataReader reader;
-        int idEmpl;
-        bool vieneCita;
+        // ======== Servicios / estado ========
+        private readonly csCRUD crud = new csCRUD();
+        private csProducto producto;
+        private csPersona persona;
+        private csVenta ventaAgg;
+        private SqlDataReader reader;
 
-        // Nueva factura EC
-        int idFacturaEC;
+        private int idEmpl;
+        private bool vieneCita;
 
+        // FacturaEC generada (válida)
+        private int idFacturaEC = 0;
+
+        // ======== CTORs ========
         public Ventas()
         {
             InitializeComponent();
@@ -27,15 +29,18 @@ namespace AniCLinic
             cargarCmb();
             btnImprimir.Enabled = false;
         }
+
         public Ventas(int id) : this()
         {
             idEmpl = id;
         }
+
         public Ventas(int id, bool vieneCita) : this(id)
         {
             try
             {
-                reader = crud.EjecutarQuery("Select * from Inventario Where IdProducto = 1");
+                // Agrega automáticamente la "cita" como producto Id=1 (si existe)
+                reader = crud.EjecutarQuery("SELECT * FROM Inventario WHERE IdProducto = 1");
                 if (reader != null && reader.Read())
                 {
                     producto = new csProducto(
@@ -48,10 +53,20 @@ namespace AniCLinic
                         Convert.ToDecimal(reader["Iva"]),
                         Convert.ToInt32(reader["CantidadDisponible"])
                     );
-
                     decimal precioTotal = Math.Round(1 * producto.PrecioUnitario * (1 + producto.Iva), 2);
-                    dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
-                                       producto.PrecioUnitario, producto.Iva, 1, precioTotal);
+
+                    // Promoción y columnas ya se crean en prepararGrid()
+                    dgvVentas.Rows.Add(
+                        producto.IdProducto,
+                        producto.NombreProducto,
+                        producto.Descripcion,
+                        producto.PrecioUnitario,
+                        producto.Iva,
+                        1,                      // Cantidad
+                        precioTotal,            // Total (con IVA)
+                        "",                     // Promoción
+                        0                       // IdPromocion
+                    );
                     actualizarPrecio();
                 }
             }
@@ -62,9 +77,8 @@ namespace AniCLinic
             this.vieneCita = vieneCita;
         }
 
-        // ==================== utilitarios UI ====================
-
-        public void prepararGrid()
+        // ======== UI helpers ========
+        private void prepararGrid()
         {
             dgvVentas.ReadOnly = true;
             dgvVentas.MultiSelect = false;
@@ -73,11 +87,13 @@ namespace AniCLinic
             dgvVentas.AllowUserToAddRows = false;
             dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvVentas.AutoGenerateColumns = true;
+
             configurarColumnas();
         }
 
-        public void configurarColumnas()
+        private void configurarColumnas()
         {
+            // Ajusta a tus nombres reales de columnas (si difieren).
             if (dgvVentas.Columns.Contains("ID"))
                 dgvVentas.Columns["ID"].Width = 60;
             if (dgvVentas.Columns.Contains("Nombre"))
@@ -86,13 +102,39 @@ namespace AniCLinic
                 dgvVentas.Columns["Descripcion"].Width = 200;
             if (dgvVentas.Columns.Contains("Precio"))
                 dgvVentas.Columns["Precio"].Width = 80;
+            if (dgvVentas.Columns.Contains("IVA"))
+                dgvVentas.Columns["IVA"].Width = 60;
             if (dgvVentas.Columns.Contains("Cantidad"))
                 dgvVentas.Columns["Cantidad"].Width = 80;
             if (dgvVentas.Columns.Contains("Total"))
-                dgvVentas.Columns["Total"].Width = 80;
+                dgvVentas.Columns["Total"].Width = 100;
+
+            // Columna visible para nombre de promoción
+            if (!dgvVentas.Columns.Contains("Promocion"))
+            {
+                var colPromo = new DataGridViewTextBoxColumn
+                {
+                    Name = "Promocion",
+                    HeaderText = "Promoción",
+                    Width = 140
+                };
+                dgvVentas.Columns.Add(colPromo);
+            }
+
+            // Columna oculta para IdPromocion
+            if (!dgvVentas.Columns.Contains("IdPromocion"))
+            {
+                var colIdPromo = new DataGridViewTextBoxColumn
+                {
+                    Name = "IdPromocion",
+                    HeaderText = "IdPromocion",
+                    Visible = false
+                };
+                dgvVentas.Columns.Add(colIdPromo);
+            }
         }
 
-        public void cargarCmb()
+        private void cargarCmb()
         {
             cmbCategoria.Items.Clear();
             cmbCategoria.Items.AddRange(new object[]
@@ -117,8 +159,10 @@ namespace AniCLinic
         {
             cmbProducto.Items.Clear();
 
-            reader = crud.EjecutarQuery(
-                "Select IdProducto, NombreProducto from Inventario Where Categoria like '" + categ + "%'");
+            // EjecutarQuery SIN parámetros
+            string sql = "SELECT IdProducto, NombreProducto FROM Inventario WHERE Categoria LIKE '"
+                         + (categ ?? "").Replace("'", "''") + "%'";
+            reader = crud.EjecutarQuery(sql);
 
             if (reader != null)
             {
@@ -137,7 +181,9 @@ namespace AniCLinic
             {
                 int idP = prodSel.idProducto;
 
-                reader = crud.EjecutarQuery("Select * from Inventario Where IdProducto = " + idP);
+                // EjecutarQuery SIN parámetros
+                reader = crud.EjecutarQuery("SELECT * FROM Inventario WHERE IdProducto = " + idP);
+
                 if (reader != null && reader.Read())
                 {
                     producto = new csProducto(
@@ -159,34 +205,122 @@ namespace AniCLinic
             return producto;
         }
 
-        private void actualizarPrecio()
+        // Aplica la mejor promoción disponible al subtotal de "cantidad" unidades del producto.
+        // Devuelve el precio con promoción (SIN IVA). Retorna datos de la promo por out.
+        private decimal aplicarPromocion(csProducto prod, decimal cantidad,
+                                         out int idPromocion, out string promoDesc, out string condicion)
         {
-            decimal venta = 0, iva = 0;
-            foreach (DataGridViewRow fila in dgvVentas.Rows)
+            idPromocion = 0;
+            promoDesc = "";
+            condicion = "";
+
+            decimal subtotal = prod.PrecioUnitario * cantidad;
+            decimal bestDiscount = 0m;
+
+            try
             {
-                if (fila.Cells["Precio"].Value != null &&
-                    fila.Cells["Cantidad"].Value != null &&
-                    fila.Cells["IVA"].Value != null)
+                // EjecutarQuery SIN parámetros
+                string sql = @"
+SELECT p.IdPromocion, p.Nombre, p.Tipo, p.Descuento, p.Condicion
+FROM Promocion p
+INNER JOIN PromocionProducto pp ON p.IdPromocion = pp.IdPromocion
+WHERE p.Activa = 1
+  AND GETDATE() BETWEEN p.FechaInicio AND p.FechaFin
+  AND pp.IdProducto = " + prod.IdProducto;
+
+                SqlDataReader promoReader = crud.EjecutarQuery(sql);
+
+                if (promoReader != null)
                 {
-                    decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
-                    int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
-                    decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+                    while (promoReader.Read())
+                    {
+                        int promoId = Convert.ToInt32(promoReader["IdPromocion"]);
+                        string tipo = promoReader["Tipo"]?.ToString() ?? "";
+                        decimal valor = promoReader["Descuento"] != DBNull.Value ? Convert.ToDecimal(promoReader["Descuento"]) : 0m;
+                        string nombrePromo = promoReader["Nombre"]?.ToString() ?? "";
+                        string cond = promoReader["Condicion"]?.ToString() ?? "";
 
-                    decimal subtotal = precio * cantidad;
-                    decimal ivaFila = subtotal * ivaPorcentaje;
+                        decimal candidateDiscount = 0m;
+                        if (tipo.Equals("Gratis", StringComparison.OrdinalIgnoreCase))
+                            candidateDiscount = subtotal;
+                        else if (tipo.Equals("Descuento", StringComparison.OrdinalIgnoreCase))
+                            candidateDiscount = subtotal * (valor / 100m);
 
-                    venta += Math.Round(subtotal, 2);
-                    iva += Math.Round(ivaFila, 2);
+                        if (candidateDiscount > bestDiscount)
+                        {
+                            bestDiscount = candidateDiscount;
+                            idPromocion = promoId;
+                            promoDesc = nombrePromo;
+                            condicion = cond;
+                        }
+                    }
+                    if (!promoReader.IsClosed) promoReader.Close();
                 }
             }
-            decimal totalVenta = Math.Round(venta + iva, 2);
-            lblTtlVenta.Text = "$ " + venta.ToString("N2");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al aplicar promoción: " + ex.Message);
+            }
+
+            decimal precioConProm = Math.Round(subtotal - bestDiscount, 2);
+            if (precioConProm < 0) precioConProm = 0;
+            return precioConProm; // sin IVA
+        }
+
+        // Helper para evitar error si lblDescuento no existe en el diseñador
+        private void SetTextIfExists(string controlName, string text)
+        {
+            var ctrl = this.Controls[controlName];
+            if (ctrl != null) ctrl.Text = text;
+        }
+
+        // Actualiza labels: Subtotal, IVA, Descuento, Total
+        private void actualizarPrecio()
+        {
+            decimal subtotal = 0m;
+            decimal iva = 0m;
+            decimal descuento = 0m;
+
+            if (dgvVentas.Rows.Count <= 0)
+            {
+                lblTtlVenta.Text = "$ 0.00";
+                lblIVA.Text = "$ 0.00";
+                SetTextIfExists("lblDescuento", "$ 0.00");
+                lblTotal.Text = "$ 0.00";
+                return;
+            }
+
+            foreach (DataGridViewRow fila in dgvVentas.Rows)
+            {
+                if (fila.Cells["Precio"].Value == null ||
+                    fila.Cells["Cantidad"].Value == null ||
+                    fila.Cells["IVA"].Value == null ||
+                    fila.Cells["Total"].Value == null) continue;
+
+                decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
+                int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+                decimal totalFilaConIVA = Convert.ToDecimal(fila.Cells["Total"].Value);
+
+                decimal subtotalFila = precio * cantidad;                          // sin IVA ni descuento
+                decimal baseConDescuento = totalFilaConIVA / (1 + ivaPorcentaje);  // sin IVA, ya con descuento aplicado
+                decimal ivaFila = totalFilaConIVA - baseConDescuento;
+                decimal descuentoFila = subtotalFila - baseConDescuento;
+
+                subtotal += subtotalFila;
+                iva += Math.Round(ivaFila, 2);
+                descuento += Math.Round(descuentoFila, 2);
+            }
+
+            decimal totalVenta = Math.Round((subtotal - descuento) + iva, 2);
+
+            lblTtlVenta.Text = "$ " + subtotal.ToString("N2");
             lblIVA.Text = "$ " + iva.ToString("N2");
+            SetTextIfExists("lblDescuento", "$ " + descuento.ToString("N2"));
             lblTotal.Text = "$ " + totalVenta.ToString("N2");
         }
 
-        // ==================== EVENTOS DEL DESIGNER ====================
-
+        // ======== EVENTOS ========
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!char.IsDigit(e.KeyChar) || txtCantidad.Text.Length >= 4) && e.KeyChar != 8)
@@ -228,24 +362,69 @@ namespace AniCLinic
                 producto = cargarProducto();
                 if (producto == null) return;
 
-                // Si el producto ya está en la grilla, sumar cantidad
+                int cantidadNueva = Convert.ToInt32(txtCantidad.Text);
+
+                // Buscar si ya está en el grid
+                DataGridViewRow filaExistente = null;
                 foreach (DataGridViewRow fila in dgvVentas.Rows)
                 {
                     if (Convert.ToInt32(fila.Cells["ID"].Value) == producto.IdProducto)
                     {
-                        int sumaRepetido = Convert.ToInt32(fila.Cells["Cantidad"].Value);
-                        fila.Cells["Cantidad"].Value = sumaRepetido + Convert.ToInt32(txtCantidad.Text);
-                        fila.Cells["Total"].Value = Math.Round(
-                            Convert.ToDecimal(fila.Cells["Cantidad"].Value) * producto.PrecioUnitario * (1 + producto.Iva), 2);
-                        actualizarPrecio();
-                        return;
+                        filaExistente = fila;
+                        break;
                     }
                 }
 
-                decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
-                decimal precioTotal = Math.Round(cantidad * producto.PrecioUnitario * (1 + producto.Iva), 2);
-                dgvVentas.Rows.Add(producto.IdProducto, producto.NombreProducto, producto.Descripcion,
-                                   producto.PrecioUnitario, producto.Iva, cantidad, precioTotal);
+                int cantidadTotal = cantidadNueva;
+                if (filaExistente != null)
+                    cantidadTotal += Convert.ToInt32(filaExistente.Cells["Cantidad"].Value);
+
+                // Política de promoción: aplicar a la primera unidad (como venías haciendo)
+                int idPromo = 0;
+                string promoDesc = "";
+                string condicionPromo = "";
+
+                decimal precioConPromoSinIVA = 0m;
+                if (cantidadTotal > 0)
+                {
+                    // 1ra unidad con promoción (si existe)
+                    decimal precioPrimeraSinIVA = aplicarPromocion(producto, 1, out int idPromoFila, out string promoDescFila, out string condFila);
+                    idPromo = idPromoFila;
+                    promoDesc = promoDescFila;
+                    condicionPromo = condFila;
+
+                    // Unidades restantes sin promoción
+                    int cantidadRestante = cantidadTotal - 1;
+                    decimal restoSinIVA = cantidadRestante * producto.PrecioUnitario;
+
+                    precioConPromoSinIVA = precioPrimeraSinIVA + restoSinIVA;
+                }
+
+                // Convertir a CON IVA
+                decimal totalConIVA = Math.Round(precioConPromoSinIVA * (1 + producto.Iva), 2);
+
+                if (filaExistente != null)
+                {
+                    filaExistente.Cells["Cantidad"].Value = cantidadTotal;
+                    filaExistente.Cells["Total"].Value = totalConIVA;
+                    filaExistente.Cells["Promocion"].Value = promoDesc;
+                    filaExistente.Cells["IdPromocion"].Value = idPromo;
+                }
+                else
+                {
+                    dgvVentas.Rows.Add(
+                        producto.IdProducto,
+                        producto.NombreProducto,
+                        producto.Descripcion,
+                        producto.PrecioUnitario,
+                        producto.Iva,
+                        cantidadTotal,
+                        totalConIVA,
+                        promoDesc,
+                        idPromo
+                    );
+                }
+
                 actualizarPrecio();
             }
             catch (Exception ex)
@@ -258,7 +437,7 @@ namespace AniCLinic
         {
             if (vieneCita && dgvVentas.SelectedRows.Count > 0)
             {
-                DataGridViewRow fila = dgvVentas.CurrentRow;
+                var fila = dgvVentas.CurrentRow;
                 if (Convert.ToInt32(fila.Cells["ID"].Value) == 1)
                 {
                     MessageBox.Show("No se puede eliminar la cita", "Advertencia", MessageBoxButtons.OK);
@@ -267,7 +446,7 @@ namespace AniCLinic
             }
             if (dgvVentas.SelectedRows.Count > 0)
             {
-                DataGridViewRow fila = dgvVentas.CurrentRow;
+                var fila = dgvVentas.CurrentRow;
                 dgvVentas.Rows.Remove(fila);
                 actualizarPrecio();
             }
@@ -279,7 +458,9 @@ namespace AniCLinic
             {
                 persona = new csPersona();
                 int id = persona.obtenerIdPorCedula(txtCedula.Text);
-                reader = crud.EjecutarQuery("Select * from Persona where IdPersona = " + id);
+
+                reader = crud.EjecutarQuery("SELECT * FROM Persona WHERE IdPersona = " + id);
+
                 if (reader != null && reader.Read())
                 {
                     byte[] foto = null;
@@ -325,8 +506,7 @@ namespace AniCLinic
             }
         }
 
-        // ==================== FINALIZAR / FACTURA EC ====================
-
+        // ======== FINALIZAR: FacturaEC ÚNICA ========
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
             try
@@ -353,63 +533,70 @@ namespace AniCLinic
                 // Validar stock
                 foreach (DataGridViewRow fila in dgvVentas.Rows)
                 {
+                    int idP = Convert.ToInt32(fila.Cells["ID"].Value);
                     SqlDataReader rInv = crud.EjecutarQuery(
-                        "Select CantidadDisponible, NombreProducto from Inventario where IdProducto = " +
-                        Convert.ToInt32(fila.Cells["ID"].Value));
+                        "SELECT CantidadDisponible, NombreProducto FROM Inventario WHERE IdProducto = " + idP);
+
                     if (rInv != null && rInv.Read())
                     {
-                        if (rInv.GetInt32(0) < Convert.ToInt32(fila.Cells["Cantidad"].Value))
-                        {
-                            if (Convert.ToInt32(fila.Cells["ID"].Value) == 1) break;
+                        int cantDisp = rInv.GetInt32(0);
+                        int cantReq = Convert.ToInt32(fila.Cells["Cantidad"].Value);
 
-                            MessageBox.Show("No tiene suficientes " + rInv.GetString(1) +
-                                            ". Disponible: " + rInv.GetInt32(0));
+                        if (cantDisp < cantReq)
+                        {
+                            if (idP == 1) { rInv.Close(); break; } // cita
+                            MessageBox.Show($"No tiene suficientes {rInv.GetString(1)}. Disponible: {cantDisp}");
                             rInv.Close();
                             return;
                         }
                     }
+                    if (rInv != null && !rInv.IsClosed) rInv.Close();
                 }
 
-                // Calcular totales (UI)
-                decimal venta = 0, iva = 0;
+                // Recalcular totales para labels (UI)
+                // (Usa el total ya calculado fila a fila)
+                decimal subtotal = 0, ivaTotal = 0, descuentoTotal = 0;
                 foreach (DataGridViewRow fila in dgvVentas.Rows)
                 {
-                    if (fila.Cells["Precio"].Value != null &&
-                        fila.Cells["Cantidad"].Value != null &&
-                        fila.Cells["IVA"].Value != null)
-                    {
-                        decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
-                        int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
-                        decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+                    if (fila.Cells["Precio"].Value == null ||
+                        fila.Cells["Cantidad"].Value == null ||
+                        fila.Cells["IVA"].Value == null ||
+                        fila.Cells["Total"].Value == null) continue;
 
-                        decimal subtotal = precio * cantidad;
-                        decimal ivaFila = subtotal * ivaPorcentaje;
+                    decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
+                    int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                    decimal ivaPorcentaje = Convert.ToDecimal(fila.Cells["IVA"].Value);
+                    decimal totalFila = Convert.ToDecimal(fila.Cells["Total"].Value);
 
-                        venta += subtotal;
-                        iva += ivaFila;
-                    }
+                    decimal subtotalFila = precio * cantidad;
+                    decimal baseConDesc = totalFila / (1 + ivaPorcentaje);
+                    decimal ivaFila = totalFila - baseConDesc;
+                    decimal descFila = subtotalFila - baseConDesc;
+
+                    subtotal += subtotalFila;
+                    ivaTotal += Math.Round(ivaFila, 2);
+                    descuentoTotal += Math.Round(descFila, 2);
                 }
-                decimal totalVenta = Math.Round(venta + iva, 2);
-                string metodoPago = cmbMetodoPago.Text;
-                lblTtlVenta.Text = "$ " + venta.ToString("N2");
-                lblIVA.Text = "$ " + iva.ToString("N2");
+                decimal totalVenta = Math.Round((subtotal - descuentoTotal) + ivaTotal, 2);
+
+                lblTtlVenta.Text = "$ " + subtotal.ToString("N2");
+                lblIVA.Text = "$ " + ivaTotal.ToString("N2");
+                SetTextIfExists("lblDescuento", "$ " + descuentoTotal.ToString("N2"));
                 lblTotal.Text = "$ " + totalVenta.ToString("N2");
+                string metodoPago = cmbMetodoPago.Text;
 
                 // Bloquear controles
                 txtCedula.ReadOnly = true;
                 txtCantidad.Text = "";
                 txtCantidad.ReadOnly = true;
-                cmbCategoria.SelectedIndex = -1;
-                cmbCategoria.Enabled = false;
-                cmbProducto.SelectedIndex = -1;
-                cmbProducto.Enabled = false;
-                cmbMetodoPago.SelectedIndex = -1;
-                cmbMetodoPago.Enabled = false;
+                cmbCategoria.SelectedIndex = -1; cmbCategoria.Enabled = false;
+                cmbProducto.SelectedIndex = -1; cmbProducto.Enabled = false;
+                cmbMetodoPago.SelectedIndex = -1; cmbMetodoPago.Enabled = false;
                 btnAgregar.Enabled = false;
                 btnEliminar.Enabled = false;
                 btnFinalizar.Enabled = false;
 
-                // 1) Cabecera EC (usar cargarBDData porque EjecutarQuery no admite parámetros)
+                // 1) Crear cabecera FacturaEC (usa cargarBDData con parámetros)
                 DataTable dtId = crud.cargarBDData(
                     "DECLARE @Id INT; " +
                     "EXEC dbo.sp_FacturaEC_Crear @IdPersona,@IdEmpleado,@FormaPago,'001','001',@Id OUTPUT; " +
@@ -422,15 +609,14 @@ namespace AniCLinic
                     throw new Exception("No se pudo crear la cabecera de la Factura EC.");
                 idFacturaEC = Convert.ToInt32(dtId.Rows[0]["Id"]);
 
-                // 2) Insertar ventas y vincular a FacturaEC
+                // 2) Insertar ventas, descontar stock y vincular a FacturaEC
                 foreach (DataGridViewRow fila in dgvVentas.Rows)
                 {
-                    ventaAgg = new csVenta(
-                        Convert.ToInt32(fila.Cells["ID"].Value),
-                        persona.IdPersona, idEmpl,
-                        Convert.ToInt32(fila.Cells["Cantidad"].Value),
-                        Convert.ToDecimal(fila.Cells["Precio"].Value)
-                    );
+                    int idP = Convert.ToInt32(fila.Cells["ID"].Value);
+                    int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                    decimal precio = Convert.ToDecimal(fila.Cells["Precio"].Value);
+
+                    ventaAgg = new csVenta(idP, persona.IdPersona, idEmpl, cantidad, precio);
                     if (!ventaAgg.agregarVenta())
                     {
                         MessageBox.Show("Error al guardar la venta");
@@ -438,23 +624,23 @@ namespace AniCLinic
                     }
 
                     // Descontar inventario
-                    SqlDataReader r2 = crud.EjecutarQuery("Select CantidadDisponible from Inventario Where IdProducto = " + ventaAgg.IdProducto);
+                    SqlDataReader r2 = crud.EjecutarQuery("SELECT CantidadDisponible FROM Inventario WHERE IdProducto = " + idP);
                     if (r2 != null && r2.Read())
                     {
-                        int cantidadRestada = r2.GetInt32(0) - ventaAgg.CantidadVendida;
-                        crud.editarBD("Update Inventario set CantidadDisponible = @Cant Where IdProducto = @IdP",
-                            new SqlParameter("@Cant", cantidadRestada),
-                            new SqlParameter("@IdP", ventaAgg.IdProducto));
+                        int cantidadRestada = r2.GetInt32(0) - cantidad;
+                        crud.editarBD("UPDATE Inventario SET CantidadDisponible = @cant WHERE IdProducto = @idp",
+                            new SqlParameter("@cant", cantidadRestada),
+                            new SqlParameter("@idp", idP));
                         r2.Close();
                     }
 
-                    // Obtener IdVenta insertado
+                    // Obtener IdVenta insertada y vincular
                     ventaAgg.obtenerId();
-
-                    // Vincular venta a FacturaEC
                     crud.editarBD("EXEC dbo.sp_FacturaEC_AgregarVenta @IdF,@IdV",
                         new SqlParameter("@IdF", idFacturaEC),
                         new SqlParameter("@IdV", ventaAgg.IdVenta));
+
+                    // (Opcional) aquí podrías acumular promos por factura, si manejas tabla extra
                 }
 
                 // 3) Recalcular totales de cabecera EC
@@ -472,21 +658,22 @@ namespace AniCLinic
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
+            // ÚNICO flujo de impresión válido
             var frm = new frFacturaEC(idFacturaEC);
             frm.ShowDialog();
         }
-    }
 
-    public class ProductoItem
-    {
-        public int idProducto { get; set; }
-        public string nombreProducto { get; set; }
-        public ProductoItem(int id, string nombre)
+        // ======== Util ========
+        public class ProductoItem
         {
-            idProducto = id;
-            nombreProducto = nombre;
+            public int idProducto { get; set; }
+            public string nombreProducto { get; set; }
+            public ProductoItem(int id, string nombre)
+            {
+                idProducto = id;
+                nombreProducto = nombre;
+            }
+            public override string ToString() => $"{idProducto} - {nombreProducto}";
         }
-        public override string ToString() => $"{idProducto} - {nombreProducto}";
-
     }
 }

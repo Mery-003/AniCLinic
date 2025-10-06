@@ -42,15 +42,36 @@ namespace AniCLinic
                 txtReceta.WordWrap = true;
             }
 
-            try { btnAceptar.Click -= BtnGuardar_Click; } catch { }
-            try { btnCancelar.Click -= BtnCancelar_Click; } catch { }
+            try
+            {
+                btnAceptar.Click -= BtnGuardar_Click;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            try
+            {
+                btnCancelar.Click -= BtnCancelar_Click;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             btnAceptar.Click += BtnGuardar_Click;
             btnCancelar.Click += BtnCancelar_Click;
 
             if (btnListaMascota != null)
             {
                 btnListaMascota.Visible = _esEmergencia;
-                try { btnListaMascota.Click -= BtnListaMascota_Click; } catch { }
+                try
+                {
+                    btnListaMascota.Click -= BtnListaMascota_Click;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 btnListaMascota.Click += BtnListaMascota_Click;
             }
 
@@ -69,6 +90,7 @@ namespace AniCLinic
             }
             else
             {
+                // Si no es edición, mantenemos "Emergencia" en el flujo de emergencia
                 if (_esEmergencia && txtMotivo != null && string.IsNullOrWhiteSpace(txtMotivo.Text))
                     txtMotivo.Text = "Emergencia";
                 else
@@ -95,6 +117,7 @@ namespace AniCLinic
             if (txtDiagnostico != null) txtDiagnostico.Clear();
             if (txtTratamiento != null) txtTratamiento.Clear();
             if (txtReceta != null) txtReceta.Clear();
+            // txtMotivo se mantiene (puede venir "Emergencia")
         }
 
         private void CargarRegistroClinicoPorCita(int? idCita, int idMascota, DateTime fechaHora)
@@ -151,6 +174,7 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             }
             else
             {
+                // En emergencia, si quedara vacío, lo aseguramos
                 if (_esEmergencia && txtMotivo != null && string.IsNullOrWhiteSpace(txtMotivo.Text))
                     txtMotivo.Text = "Emergencia";
                 else
@@ -170,39 +194,14 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             {
                 if (!ValidarCamposObligatorios())
                     return;
-
                 GuardarRegistroClinico();
-
-                int idMascota = ResolverIdMascotaRobusto(_info);
-                if (idMascota <= 0)
-                    throw new InvalidOperationException("No se pudo resolver la mascota asociada.");
-
-                var m = ConsultarInfoMascota(idMascota);
-
-                string mascota = string.IsNullOrWhiteSpace(_info.Mascota) ? (txtMascota?.Text ?? m.Mascota) : _info.Mascota;
-                string propietario = string.IsNullOrWhiteSpace(_info.Propietario) ? (txtPropietario?.Text ?? m.Propietario) : _info.Propietario;
-                string especie = string.IsNullOrWhiteSpace(_info.Especie) ? m.Especie : _info.Especie;
-                string raza = string.IsNullOrWhiteSpace(_info.Raza) ? m.Raza : _info.Raza;
-
-                using (var frmCita = new AggCita(
-                    idCita: null,
-                    idMascotaSel: idMascota,
-                    mascotaSel: mascota ?? "",
-                    propietarioSel: propietario ?? "",
-                    especieSel: especie ?? "",
-                    razaSel: raza ?? ""
-                ))
-                {
-                    var res = frmCita.ShowDialog(this);
-                    if (res == DialogResult.OK)
-                    {
-                        Menu menu = Application.OpenForms["Menu"] as Menu;
-                        if (menu != null)
-                            menu.AbrirEnPanel(menu.pnlMenu1, new Ventas(menu.idEmpleado, true));
-                    }
-                }
-
                 DialogResult = DialogResult.OK;
+                if (!_isEdit)
+                {
+                    Menu menu = Application.OpenForms["Menu"] as Menu;
+                    menu.AbrirEnPanel(menu.pnlMenu1, new Ventas(menu.idEmpleado, true));
+                    this.Close();
+                }
                 Close();
             }
             catch (SqlException ex)
@@ -219,6 +218,7 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
 
         private bool ValidarCamposObligatorios()
         {
+            // Motivo: en emergencia lo forzamos a "Emergencia" si viniera vacío, pero igual verificamos
             if (txtMotivo != null && string.IsNullOrWhiteSpace(txtMotivo.Text))
             {
                 if (_esEmergencia)
@@ -269,8 +269,10 @@ ORDER BY FechaRegistro DESC, IdRegistroClinico DESC;";
             string trat = (txtTratamiento != null) ? (txtTratamiento.Text ?? "").Trim() : "";
             string rec = (txtReceta != null) ? (txtReceta.Text ?? "").Trim() : "";
 
-            if (_esEmergencia && string.IsNullOrWhiteSpace(mot)) mot = "Emergencia";
-            if (string.IsNullOrWhiteSpace(mot)) mot = "Emergencia";
+            if (_esEmergencia && string.IsNullOrWhiteSpace(mot))
+                mot = "Emergencia";
+            if (string.IsNullOrWhiteSpace(mot))
+                mot = "Emergencia";
 
             int idMascota = ResolverIdMascotaRobusto(_info);
             if (idMascota <= 0)
@@ -311,6 +313,7 @@ VALUES
                     new SqlParameter("@fh", fechaHora)
                 );
             }
+
         }
 
         private int ResolverIdMascotaRobusto(CitaInfo info)
@@ -318,7 +321,8 @@ VALUES
             if (info.IdMascota > 0) return info.IdMascota;
 
             int id = ResolverIdMascotaPorCita(info.IdCita);
-            if (id > 0) return id;
+            if (id > 0)
+                return id;
 
             id = ResolverIdMascotaPorNombreYFecha(info.Mascota, info.FechaHora.Date);
             return id;
@@ -381,6 +385,7 @@ ORDER BY CASE WHEN c.IdCita IS NULL THEN 1 ELSE 0 END,
             {
                 if (frm.ShowDialog(this) == DialogResult.OK)
                 {
+                    // Rellenar cabecera
                     _info.IdMascota = frm.IdMascotaSel;
                     _info.Mascota = frm.MascotaSel;
                     _info.Propietario = frm.PropietarioSel;
@@ -388,51 +393,16 @@ ORDER BY CASE WHEN c.IdCita IS NULL THEN 1 ELSE 0 END,
                     if (txtPropietario != null) txtPropietario.Text = _info.Propietario ?? "";
                     if (txtMascota != null) txtMascota.Text = _info.Mascota ?? "";
 
+                    // Si el motivo está vacío, pon "Emergencia"
                     if (txtMotivo != null && string.IsNullOrWhiteSpace(txtMotivo.Text))
                         txtMotivo.Text = "Emergencia";
 
+                    // Fecha/hora por defecto ahora si viniera vacía
                     if (_info.FechaHora == default) _info.FechaHora = DateTime.Now;
                 }
             }
         }
 
-        private MascotaInfo ConsultarInfoMascota(int idMascota)
-        {
-            var info = new MascotaInfo { IdMascota = idMascota };
-            var db = new csCRUD();
-            var dt = db.cargarBDData(@"
-        SELECT m.IdMascota,
-               m.Nombre AS Mascota,
-               (p.Nombre + ' ' + p.Apellido) AS Propietario,
-               e.Especie,
-               r.Raza
-        FROM Mascota m
-        JOIN Persona p ON p.IdPersona = m.IdPersona
-        LEFT JOIN Especie e ON e.IdEspecie = m.IdEspecie
-        LEFT JOIN Raza    r ON r.IdRaza    = m.IdRaza
-        WHERE m.IdMascota = @id;",
-                new SqlParameter("@id", idMascota));
-
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                var r = dt.Rows[0];
-                info.Mascota = Convert.ToString(r["Mascota"]);
-                info.Propietario = Convert.ToString(r["Propietario"]);
-                info.Especie = Convert.ToString(r["Especie"]);
-                info.Raza = Convert.ToString(r["Raza"]);
-            }
-            return info;
-        }
-
         private void AggRegistroClinico_Load(object sender, EventArgs e) { }
-    }
-
-    public class MascotaInfo
-    {
-        public int IdMascota { get; set; }
-        public string Mascota { get; set; }
-        public string Propietario { get; set; }
-        public string Especie { get; set; }
-        public string Raza { get; set; }
     }
 }
