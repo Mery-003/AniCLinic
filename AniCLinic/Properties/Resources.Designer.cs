@@ -203,6 +203,16 @@ namespace AniCLinic.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ASISTENCIAS {
+            get {
+                object obj = ResourceManager.GetObject("ASISTENCIAS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap box_1_fill {
             get {
                 object obj = ResourceManager.GetObject("box-1-fill", resourceCulture);
@@ -486,6 +496,26 @@ namespace AniCLinic.Properties {
         internal static System.Drawing.Bitmap ojo {
             get {
                 object obj = ResourceManager.GetObject("ojo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PAGOS {
+            get {
+                object obj = ResourceManager.GetObject("PAGOS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PERMISOS {
+            get {
+                object obj = ResourceManager.GetObject("PERMISOS", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

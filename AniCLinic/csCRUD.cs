@@ -135,30 +135,31 @@ namespace AniCLinic
             }
             return 0;
         }
-        public int ejecutarSP(string spName, params SqlParameter[] parametros)
+
+        public int ejecutarBD(string sentencia, params SqlParameter[] parametros)
         {
+            int filas = 0;
             try
             {
                 conexion = new csConexionBD();
                 conexion.abrirConexion();
-                using (oCom = new SqlCommand(spName, conexion.obtenerConexion()))
-                {
-                    oCom.CommandType = CommandType.StoredProcedure;
-                    if (parametros != null && parametros.Length > 0)
-                        oCom.Parameters.AddRange(parametros);
+                oCom = new SqlCommand(sentencia, conexion.obtenerConexion());
 
-                    int filas = oCom.ExecuteNonQuery();   // los parámetros de salida quedan con valor aquí
-                    conexion.cerrarConexion();
-                    return filas;
+                if (parametros != null)
+                {
+                    foreach (var p in parametros)
+                        oCom.Parameters.Add(p);
                 }
+
+                filas = oCom.ExecuteNonQuery();
+                conexion.cerrarConexion();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al ejecutar SP: " + ex.Message);
-                return 0;
+                MessageBox.Show("Error: " + ex.Message);
             }
+            return filas;
         }
-
 
     }
 }

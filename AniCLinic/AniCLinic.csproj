@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,8 +60,8 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -66,6 +69,10 @@
     <Reference Include="Syncfusion.SfInput.WinForms, Version=30.2462.4.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Shared.Base, Version=30.2462.4.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.9.0.9\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
@@ -113,6 +120,7 @@
     <Compile Include="AggRegistroClinico.Designer.cs">
       <DependentUpon>AggRegistroClinico.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentNotifier.cs" />
     <Compile Include="CedulaUtils.cs" />
     <Compile Include="csConexionBD.cs" />
     <Compile Include="csCRUD.cs" />
@@ -175,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsFactura.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EmailService.cs" />
     <Compile Include="fCitas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +195,12 @@
     </Compile>
     <Compile Include="fCompras.Designer.cs">
       <DependentUpon>fCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FControlLaboral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FControlLaboral.Designer.cs">
+      <DependentUpon>FControlLaboral.cs</DependentUpon>
     </Compile>
     <Compile Include="FechaEmision.cs">
       <SubType>Form</SubType>
@@ -229,6 +244,12 @@
     <Compile Include="frFacturaEC.Designer.cs">
       <DependentUpon>frFacturaEC.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAsistencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAsistencia.Designer.cs">
+      <DependentUpon>FrmAsistencia.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHistorialMedicoReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +279,36 @@
     </Compile>
     <Compile Include="FRMListaPropietario.Designer.cs">
       <DependentUpon>FRMListaPropietario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPagos.Designer.cs">
+      <DependentUpon>FrmPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmParametrosPago1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmParametrosPago1.Designer.cs">
+      <DependentUpon>FrmParametrosPago1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPermiso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPermiso.Designer.cs">
+      <DependentUpon>FrmPermiso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPermisoDias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPermisoDias.Designer.cs">
+      <DependentUpon>FrmPermisoDias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPermisoEd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPermisoEd.Designer.cs">
+      <DependentUpon>FrmPermisoEd.cs</DependentUpon>
     </Compile>
     <Compile Include="frOrdenCompra.cs">
       <SubType>Form</SubType>
@@ -334,7 +385,6 @@
       <DependentUpon>Proveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="SesionActual.cs" />
-    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UxBuscarCedulaHelper.cs" />
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
@@ -635,19 +685,9 @@
     <None Include="Resources\Captura de pantalla 2025-09-13 215124.png" />
     <None Include="Resources\Captura de pantalla 2025-09-13 215228.png" />
     <None Include="Resources\istockphoto-923170288-612x6121.jpg" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Resources\ASISTENCIAS.png" />
+    <None Include="Resources\PAGOS.png" />
+    <None Include="Resources\PERMISOS.png" />
     <None Include="Resources\shopping-basket-2-fill2.png" />
     <None Include="Resources\1892641.png" />
     <None Include="Resources\4767994.png" />
@@ -668,4 +708,10 @@
     <Content Include="Resources\shake-hands-fill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
+  </Target>
 </Project>

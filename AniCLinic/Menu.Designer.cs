@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.PanelMenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnControlLaboral = new Guna.UI2.WinForms.Guna2GradientButton();
             this.panelReporteriaSubmenu = new Guna.UI2.WinForms.Guna2Panel();
             this.btncarnet = new Guna.UI2.WinForms.Guna2GradientButton();
             this.btnhisto = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -77,6 +78,7 @@
             // PanelMenu
             // 
             this.PanelMenu.BackColor = System.Drawing.Color.CadetBlue;
+            this.PanelMenu.Controls.Add(this.btnControlLaboral);
             this.PanelMenu.Controls.Add(this.panelReporteriaSubmenu);
             this.PanelMenu.Controls.Add(this.btnVentas);
             this.PanelMenu.Controls.Add(this.btnAdministrador);
@@ -97,12 +99,39 @@
             this.PanelMenu.Size = new System.Drawing.Size(256, 693);
             this.PanelMenu.TabIndex = 0;
             // 
+            // btnControlLaboral
+            // 
+            this.btnControlLaboral.CustomImages.Image = global::AniCLinic.Properties.Resources.folder_lock_fill;
+            this.btnControlLaboral.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnControlLaboral.CustomImages.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Transition1.SetDecoration(this.btnControlLaboral, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.btnControlLaboral.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnControlLaboral.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnControlLaboral.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnControlLaboral.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnControlLaboral.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnControlLaboral.FillColor = System.Drawing.Color.Empty;
+            this.btnControlLaboral.FillColor2 = System.Drawing.Color.Empty;
+            this.btnControlLaboral.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnControlLaboral.ForeColor = System.Drawing.Color.Black;
+            this.btnControlLaboral.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
+            this.btnControlLaboral.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
+            this.btnControlLaboral.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnControlLaboral.Location = new System.Drawing.Point(0, 567);
+            this.btnControlLaboral.Name = "btnControlLaboral";
+            this.btnControlLaboral.Size = new System.Drawing.Size(263, 44);
+            this.btnControlLaboral.TabIndex = 15;
+            this.btnControlLaboral.Text = "Control Laboral";
+            this.btnControlLaboral.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnControlLaboral.TextOffset = new System.Drawing.Point(40, 0);
+            this.btnControlLaboral.Click += new System.EventHandler(this.btnControlLaboral_Click);
+            // 
             // panelReporteriaSubmenu
             // 
             this.panelReporteriaSubmenu.Controls.Add(this.btncarnet);
             this.panelReporteriaSubmenu.Controls.Add(this.btnhisto);
             this.guna2Transition1.SetDecoration(this.panelReporteriaSubmenu, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.panelReporteriaSubmenu.Location = new System.Drawing.Point(0, 407);
+            this.panelReporteriaSubmenu.Location = new System.Drawing.Point(0, 420);
             this.panelReporteriaSubmenu.Name = "panelReporteriaSubmenu";
             this.panelReporteriaSubmenu.Size = new System.Drawing.Size(263, 102);
             this.panelReporteriaSubmenu.TabIndex = 14;
@@ -182,7 +211,7 @@
             this.btnVentas.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
             this.btnVentas.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
             this.btnVentas.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVentas.Location = new System.Drawing.Point(0, 468);
+            this.btnVentas.Location = new System.Drawing.Point(0, 471);
             this.btnVentas.Name = "btnVentas";
             this.btnVentas.Size = new System.Drawing.Size(263, 44);
             this.btnVentas.TabIndex = 12;
@@ -209,7 +238,7 @@
             this.btnAdministrador.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
             this.btnAdministrador.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
             this.btnAdministrador.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdministrador.Location = new System.Drawing.Point(0, 517);
+            this.btnAdministrador.Location = new System.Drawing.Point(0, 520);
             this.btnAdministrador.Name = "btnAdministrador";
             this.btnAdministrador.Size = new System.Drawing.Size(263, 44);
             this.btnAdministrador.TabIndex = 11;
@@ -263,7 +292,7 @@
             this.btnSalir.HoverState.FillColor = System.Drawing.Color.DarkSlateGray;
             this.btnSalir.HoverState.FillColor2 = System.Drawing.Color.CadetBlue;
             this.btnSalir.HoverState.Font = new System.Drawing.Font("Segoe UI Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(-5, 625);
+            this.btnSalir.Location = new System.Drawing.Point(-3, 628);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(263, 56);
             this.btnSalir.TabIndex = 9;
@@ -286,14 +315,14 @@
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(87, 172);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(92, 32);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(142, 47);
             this.guna2HtmlLabel2.TabIndex = 7;
             this.guna2HtmlLabel2.Text = "AniClinic";
             // 
             // guna2Separator1
             // 
             this.guna2Transition1.SetDecoration(this.guna2Separator1, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.guna2Separator1.Location = new System.Drawing.Point(-23, 611);
+            this.guna2Separator1.Location = new System.Drawing.Point(-26, 622);
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(286, 10);
             this.guna2Separator1.TabIndex = 2;
@@ -493,7 +522,7 @@
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(505, 362);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(130, 53);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(200, 81);
             this.guna2HtmlLabel3.TabIndex = 15;
             this.guna2HtmlLabel3.Text = "AniClinic";
             // 
@@ -505,7 +534,7 @@
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(356, 152);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(432, 49);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(649, 73);
             this.guna2HtmlLabel1.TabIndex = 15;
             this.guna2HtmlLabel1.Text = "Bienvenido a Veterinaria";
             // 
@@ -528,7 +557,7 @@
             this.lblEmpleado.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpleado.Location = new System.Drawing.Point(703, 28);
             this.lblEmpleado.Name = "lblEmpleado";
-            this.lblEmpleado.Size = new System.Drawing.Size(65, 25);
+            this.lblEmpleado.Size = new System.Drawing.Size(100, 40);
             this.lblEmpleado.TabIndex = 1;
             this.lblEmpleado.Text = "label1";
             // 
@@ -588,7 +617,7 @@
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1315, 693);
@@ -649,5 +678,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         public Guna.UI2.WinForms.Guna2GradientButton btnVentas;
         public System.Windows.Forms.Panel pnlMenu1;
+        public Guna.UI2.WinForms.Guna2GradientButton btnControlLaboral;
     }
 }

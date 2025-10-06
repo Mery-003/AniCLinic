@@ -11,13 +11,22 @@ namespace AniCLinic
     {
         private readonly csCRUD _crud = new csCRUD();
 
+        private ReminderWorker _worker;
+
         public fCitas()
         {
             InitializeComponent();
+            _worker = new ReminderWorker();
 
             PrepararGrid();
             WireEvents();
             CargarData();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            _worker?.Dispose();
+            base.OnFormClosed(e);
         }
 
         private void WireEvents()

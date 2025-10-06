@@ -21,7 +21,7 @@ namespace AniCLinic
         {
             InitializeComponent();
         }
-        public Menu(Login l, int idEmp,string nom, byte[] foto, bool admin)
+        public Menu(Login l, int idEmp, string nom, byte[] foto, bool admin)
         {
             InitializeComponent();
             login = l;
@@ -41,9 +41,10 @@ namespace AniCLinic
                 pcbEmpleado.Image = Properties.Resources.user_fill;
             }
 
-            pcbEmpleado.SizeMode = PictureBoxSizeMode.CenterImage; 
-            if (!admin)
-                btnAdministrador.Enabled = false;
+            pcbEmpleado.SizeMode = PictureBoxSizeMode.CenterImage;
+
+            btnAdministrador.Enabled = esAdmin;
+            btnControlLaboral.Enabled = esAdmin;
         }
 
         public void AbrirEnPanel(Panel contenedor, Form hijo)
@@ -53,9 +54,9 @@ namespace AniCLinic
 
             hijo.TopLevel = false;
             hijo.FormBorderStyle = FormBorderStyle.None;
-            hijo.Dock = DockStyle.Fill;   
-            hijo.AutoScroll = true;   
-            hijo.AutoScaleMode = AutoScaleMode.None; 
+            hijo.Dock = DockStyle.Fill;
+            hijo.AutoScroll = true;
+            hijo.AutoScaleMode = AutoScaleMode.None;
 
             contenedor.Controls.Add(hijo);
             hijo.BringToFront();
@@ -81,7 +82,7 @@ namespace AniCLinic
 
         private void btnhisto_Click(object sender, EventArgs e)
         {
-             AbrirEnPanel(pnlMenu1, new fRegistroClinico());
+            AbrirEnPanel(pnlMenu1, new fRegistroClinico());
         }
 
 
@@ -125,8 +126,9 @@ namespace AniCLinic
             AbrirEnPanel(pnlMenu1, new Ventas(idEmpleado));
         }
 
-        private void btnMovimientos_Click(object sender, EventArgs e)
+        private void btnControlLaboral_Click(object sender, EventArgs e)
         {
+            AbrirEnPanel(pnlMenu1, new FControlLaboral(this, pnlMenu1));
         }
     }
 
